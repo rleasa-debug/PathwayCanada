@@ -411,12 +411,8 @@
 <aside class="fixed top-0 left-0 h-screen z-50 flex flex-col bg-slate-50 dark:bg-slate-950 border-r border-slate-200/60 dark:border-slate-800 transition-all duration-300 w-16 lg:w-64">
     <!-- Logo Section -->
     <a href="index.html" class="flex items-center gap-3 px-4 py-5 border-b border-slate-200/40 dark:border-slate-800/40 hover:opacity-85 transition-opacity group">
-        <!-- Maple leaf / shield logo -->
-        <svg class="w-7 h-7 flex-shrink-0 text-primary dark:text-blue-400 transition-transform group-hover:scale-110" viewBox="0 0 32 32" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path d="M16 2L19.2 9.4L27 8.2L21.8 14.4L24 22L16 18.2L8 22L10.2 14.4L5 8.2L12.8 9.4Z" opacity="0.15"/>
-            <path d="M16 2L18 8H24L19.2 11.8L21 18L16 14.4L11 18L12.8 11.8L8 8H14Z"/>
-            <rect x="14.5" y="18" width="3" height="7" rx="1"/>
-        </svg>
+        <!-- Generic shield logo -->
+        <span class="material-symbols-outlined text-primary dark:text-blue-400 text-2xl flex-shrink-0 transition-transform group-hover:scale-110" style="font-variation-settings: 'FILL' 1;">shield</span>
         <div class="hidden lg:block overflow-hidden">
             <span class="text-base font-bold text-primary dark:text-white tracking-tight font-lexend block">Pathway Canada</span>
             <span class="text-[9px] text-slate-400 font-lexend tracking-wider uppercase">Post-Secondary Discovery</span>
@@ -951,7 +947,10 @@
         <footer class="mt-20 pt-12 border-t border-surface-container-high">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
                 <div class="col-span-1 md:col-span-2">
-                    <div class="text-xl font-bold text-primary tracking-tight mb-4 font-lexend">Pathway Canada</div>
+                    <div class="text-xl font-bold text-primary dark:text-white tracking-tight mb-4 font-lexend flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary dark:text-blue-400" style="font-variation-settings: 'FILL' 1;">shield</span>
+                        Pathway Canada
+                    </div>
                     <p class="text-sm text-on-surface-variant max-w-sm leading-relaxed mb-6">
                         Leading the future of post-secondary discovery through data-driven matching and academic portfolio management.
                     </p>
