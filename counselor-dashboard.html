@@ -10,6 +10,8 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <meta name="description" content="Canadian high school guidance counselor dashboard for managing student portfolios, auditing rosters, and tracking average grade percentages."/>
     <title>Student Roster | Pathway Canada</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/supabaseClient.js"></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
@@ -298,7 +300,21 @@
     </div>
     
     <!-- Drawer Content (Scrollable) -->
-    <div class="flex-1 overflow-y-auto p-6 space-y-8">
+    <div class="flex-1 overflow-y-auto p-6 space-y-6">
+        <!-- Admin & Counselor Direct Controls -->
+        <div id="drawer-admin-controls" class="p-4 bg-emerald-50/70 border border-emerald-200/80 rounded-2xl flex items-center justify-between">
+            <div>
+                <span class="text-[9px] font-black uppercase tracking-wider text-emerald-800 font-lexend block">Account & Role Controls</span>
+                <span id="drawer-role-badge" class="text-xs font-bold text-slate-700">Role: Student</span>
+                <span id="drawer-pro-badge" class="text-[10px] ml-2 font-black px-2 py-0.5 rounded-full bg-slate-200 text-slate-700">Free Tier</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <button id="drawer-btn-toggle-pro" onclick="adminTogglePro()" class="px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-[10px] uppercase tracking-wider rounded-lg shadow-sm transition-all font-lexend cursor-pointer">
+                    Toggle Pro
+                </button>
+            </div>
+        </div>
+
         <!-- Overview Stats -->
         <div class="grid grid-cols-2 gap-4">
             <div class="bg-slate-50 p-4 rounded-xl text-center border border-slate-100">
@@ -660,6 +676,19 @@ Dr. Mills</textarea>
         document.getElementById('drawer-loc').textContent = `${student.city}, ${student.province} • ${student.grade}`;
         document.getElementById('drawer-average').textContent = `${student.average}%`;
         
+        // Admin controls state
+        const roleEl = document.getElementById('drawer-role-badge');
+        if (roleEl) roleEl.textContent = `Role: ${(student.role || 'student').toUpperCase()}`;
+        const proEl = document.getElementById('drawer-pro-badge');
+        if (proEl) {
+            proEl.textContent = student.isPro ? '⭐ PRO TIER' : 'FREE TIER';
+            proEl.className = student.isPro 
+                ? 'text-[10px] ml-2 font-black px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-800 dark:text-amber-300 border border-amber-400/40'
+                : 'text-[10px] ml-2 font-black px-2.5 py-0.5 rounded-full bg-slate-200 text-slate-700';
+        }
+        const btnTogglePro = document.getElementById('drawer-btn-toggle-pro');
+        if (btnTogglePro) btnTogglePro.textContent = student.isPro ? 'Revoke Pro' : 'Grant Pro';
+        
         // Transcript rendering
         const transContainer = document.getElementById('drawer-transcript');
         transContainer.innerHTML = '';
@@ -836,8 +865,101 @@ Dr. Mills</textarea>
         }
     });
 
+    async function adminTogglePro() {
+        const student = STUDENTS.find(s => s.id === currentDrawerStudentId);
+        if (!student) return;
+        
+        if (student.isRealCloud && window.PathwayAuth && PathwayAuth.isConfigured()) {
+            const client = PathwayAuth.getClient();
+            const newPro = !student.isPro;
+            const { error } = await client.from('profiles').update({ is_pro: newPro }).eq('id', student.id);
+            if (!error) {
+                student.isPro = newPro;
+                student.status = newPro ? "Pro Student" : "In Progress";
+                showToast(`✓ Pro status updated to ${newPro ? 'ACTIVE' : 'INACTIVE'} for ${student.name}`);
+                openDrawer(student.id);
+                filterRoster();
+            } else {
+                alert('Error updating Pro status: ' + error.message);
+            }
+        } else {
+            // Local simulation toggle
+            student.isPro = !student.isPro;
+            student.status = student.isPro ? "Pro Student" : "In Progress";
+            showToast(`✓ Pro status toggled for demo record.`);
+            openDrawer(student.id);
+            filterRoster();
+        }
+    }
+    window.adminTogglePro = adminTogglePro;
+
+    async function loadCloudStudents() {
+        if (window.PathwayAuth && PathwayAuth.isConfigured()) {
+            const client = PathwayAuth.getClient();
+            try {
+                // Check if current user is logged in
+                const user = await PathwayAuth.getCurrentUser();
+                if (user) {
+                    const counselorEl = document.querySelector('header span.text-slate-400');
+                    if (counselorEl) {
+                        counselorEl.textContent = `${user.user_metadata?.full_name || user.email} (Administrator)`;
+                    }
+                }
+
+                const { data: profiles, error } = await client
+                    .from('profiles')
+                    .select('*, student_records(*)');
+                
+                if (!error && profiles && profiles.length > 0) {
+                    const cloudStudents = profiles.map(p => {
+                        const recs = p.student_records;
+                        const rec = Array.isArray(recs) ? (recs[0] || {}) : (recs || {});
+                        const courses = rec.courses || [];
+                        const avg = rec.calculated_average || (courses.length > 0 ? (courses.reduce((a,c) => a + (parseFloat(c.grade)||0), 0) / courses.length).toFixed(1) : 88.0);
+                        return {
+                            id: p.id,
+                            name: p.full_name || p.email.split('@')[0],
+                            email: p.email,
+                            city: "Toronto",
+                            province: rec.province || "ON",
+                            grade: "Grade 12",
+                            average: parseFloat(avg),
+                            status: p.is_pro ? "Pro Student" : "In Progress",
+                            isPro: p.is_pro || false,
+                            role: p.role || "student",
+                            isRealCloud: true,
+                            messages: [],
+                            transcript: courses.length > 0 ? courses.map(c => ({ name: c.name || c.code, grade: c.grade, icon: "school" })) : [
+                                { name: "Grade 12 English", grade: 88, icon: "history_edu" },
+                                { name: "Advanced Functions", grade: 92, icon: "calculate" }
+                            ],
+                            activities: [
+                                { title: "Registered Student", category: "Account", desc: `Registered via ${p.email}. Verified database profile.` }
+                            ],
+                            targetPrograms: rec.saved_programs || [{ name: "Computer Science", university: "University of Toronto", cutoff: 92, match: 94 }]
+                        };
+                    });
+                    
+                    cloudStudents.forEach(cs => {
+                        const idx = STUDENTS.findIndex(s => s.id === cs.id || s.email === cs.email);
+                        if (idx >= 0) {
+                            STUDENTS[idx] = cs;
+                        } else {
+                            STUDENTS.unshift(cs);
+                        }
+                    });
+                    filterRoster();
+                    showToast(`✓ Connected to CANEDU: Loaded ${cloudStudents.length} cloud user profile${cloudStudents.length > 1 ? 's' : ''}.`);
+                }
+            } catch (err) {
+                console.warn('Failed to load cloud students:', err);
+            }
+        }
+    }
+
     // Initial render
     renderRoster(STUDENTS);
+    loadCloudStudents();
 </script>
 </body>
 </html>

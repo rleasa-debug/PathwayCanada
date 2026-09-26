@@ -12,6 +12,7 @@ create table if not exists public.profiles (
   email text not null,
   full_name text,
   avatar_url text,
+  role text default 'student',
   is_pro boolean default false,
   stripe_customer_id text,
   stripe_subscription_id text,
@@ -34,6 +35,14 @@ create policy "Users can update own profile"
 create policy "Users can insert own profile" 
   on public.profiles for insert 
   with check (auth.uid() = id);
+
+create policy "Admins can view all profiles"
+  on public.profiles for select
+  using (auth.jwt() ->> 'email' = 'rleasa@gmail.com' or (select role from public.profiles where id = auth.uid()) in ('admin', 'counselor'));
+
+create policy "Admins can update profiles"
+  on public.profiles for update
+  using (auth.jwt() ->> 'email' = 'rleasa@gmail.com' or (select role from public.profiles where id = auth.uid()) in ('admin', 'counselor'));
 
 -- 3. Student Academic Records Table (Persistent Cloud Portfolio)
 create table if not exists public.student_records (
@@ -64,18 +73,30 @@ create policy "Users can update own student records"
   on public.student_records for update 
   using (auth.uid() = user_id);
 
+create policy "Admins can view all student records"
+  on public.student_records for select
+  using (auth.jwt() ->> 'email' = 'rleasa@gmail.com' or (select role from public.profiles where id = auth.uid()) in ('admin', 'counselor'));
+
+create policy "Admins can update all student records"
+  on public.student_records for update
+  using (auth.jwt() ->> 'email' = 'rleasa@gmail.com' or (select role from public.profiles where id = auth.uid()) in ('admin', 'counselor'));
+
 -- 4. Automatic Profile Creation on User Sign-Up Trigger
 create or replace function public.handle_new_user()
 returns trigger as $$
 begin
-  insert into public.profiles (id, email, full_name, avatar_url, is_pro)
+  insert into public.profiles (id, email, full_name, avatar_url, is_pro, role)
   values (
     new.id,
     new.email,
     coalesce(new.raw_user_meta_data->>'full_name', new.raw_user_meta_data->>'name', split_part(new.email, '@', 1)),
     coalesce(new.raw_user_meta_data->>'avatar_url', new.raw_user_meta_data->>'picture', ''),
-    false
-  );
+    case when new.email = 'rleasa@gmail.com' then true else false end,
+    case when new.email = 'rleasa@gmail.com' then 'admin' else 'student' end
+  )
+  on conflict (id) do update set
+    role = case when new.email = 'rleasa@gmail.com' then 'admin' else profiles.role end,
+    is_pro = case when new.email = 'rleasa@gmail.com' then true else profiles.is_pro end;
   
   insert into public.student_records (user_id, courses)
   values (new.id, '[]'::jsonb)
