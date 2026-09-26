@@ -213,7 +213,7 @@
                                 <th class="py-3.5 px-5">User</th>
                                 <th class="py-3.5 px-4">Role</th>
                                 <th class="py-3.5 px-4">Subscription</th>
-                                <th class="py-3.5 px-4">Province</th>
+                                <th class="py-3.5 px-4">Academic Profile</th>
                                 <th class="py-3.5 px-4">Target Programs</th>
                                 <th class="py-3.5 px-4">Created</th>
                                 <th class="py-3.5 px-5 text-right">Actions</th>
@@ -418,7 +418,19 @@
                     <p class="text-xs text-slate-600 dark:text-slate-400 mb-4 leading-relaxed">
                         Handles one-time student upgrades, counselor licenses, and instant customer chargebacks/refunds.
                     </p>
-                    <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center text-xs">
+                    <div class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800">
+                        <label class="block text-[11px] font-bold text-slate-700 dark:text-slate-300 mb-1 font-lexend">
+                            Live Stripe Payment Link ($29.00 CAD):
+                        </label>
+                        <div class="flex gap-2">
+                            <input id="admin-stripe-link" type="text" placeholder="https://buy.stripe.com/..." class="flex-1 text-xs px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 dark:bg-slate-800 dark:text-white font-mono focus:ring-2 focus:ring-primary outline-none">
+                            <button onclick="saveAdminStripeLink()" class="px-4 py-2 bg-primary text-white rounded-xl text-xs font-bold hover:bg-slate-900 transition-all cursor-pointer">
+                                Save Link
+                            </button>
+                        </div>
+                        <p id="stripe-save-msg" class="text-[10px] text-emerald-600 dark:text-emerald-400 mt-1 font-semibold hidden">✓ Saved! All "Upgrade to Pro" buttons across the site now route directly to your live Stripe Checkout.</p>
+                    </div>
+                    <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center text-xs mt-3">
                         <span class="text-slate-500">PCI DSS Level 1</span>
                         <a href="https://dashboard.stripe.com" target="_blank" class="text-primary dark:text-blue-400 font-semibold hover:underline">Stripe Dashboard →</a>
                     </div>
@@ -539,27 +551,20 @@
     // Load Supabase users from public.profiles
     async function loadSupabaseUsers() {
         const tbody = document.getElementById('user-table-body');
-        tbody.innerHTML = '<tr><td colspan="7" class="py-6 text-center text-slate-400">Querying Supabase CANEDU public.profiles...</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="7" class="py-6 text-center text-slate-400">Querying live Supabase CANEDU records...</td></tr>';
 
         try {
             const client = window.PathwayAuth ? window.PathwayAuth.getClient() : null;
             let profiles = [];
 
             if (client) {
-                const { data, error } = await client.from('profiles').select('*').order('created_at', { ascending: false });
+                const { data, error } = await client
+                    .from('profiles')
+                    .select('*, student_records(*)')
+                    .order('created_at', { ascending: false });
                 if (!error && data && data.length > 0) {
                     profiles = data;
                 }
-            }
-
-            // Fallback / default data if database is fresh
-            if (profiles.length === 0) {
-                profiles = [
-                    { id: "67460956-54fb-4ff3-a078-c7e101b717dd", email: "rleasa@gmail.com", full_name: "Ryan Leasa (Owner)", role: "admin", is_pro: true, province: "ON", target_programs: ["Health Sciences", "Computer Science"], created_at: "2026-09-26T17:11:15Z" },
-                    { id: "89123847-11aa-4bb5-9012-192837465abc", email: "alex.student@pathway.ca", full_name: "Alex L.", role: "student", is_pro: false, province: "ON", target_programs: ["Engineering"], created_at: "2026-09-26T12:00:00Z" },
-                    { id: "44728192-22bb-4cc6-8123-283746591def", email: "maya.lin@pathway.ca", full_name: "Maya Lin", role: "student", is_pro: true, province: "BC", target_programs: ["Biomedical"], created_at: "2026-09-25T14:30:00Z" },
-                    { id: "99812734-33cc-4dd7-7234-374658291ghi", email: "sarah.mills@counseling.ca", full_name: "Dr. Sarah Mills", role: "counselor", is_pro: true, province: "ON", target_programs: [], created_at: "2026-09-24T09:15:00Z" }
-                ];
             }
 
             cachedUsers = profiles;
@@ -581,7 +586,7 @@
     function renderUsersTable(users) {
         const tbody = document.getElementById('user-table-body');
         if (!users || users.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="7" class="py-6 text-center text-slate-400">No users found matching query.</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="7" class="py-8 text-center text-slate-400">No users found. New signups and students will appear here live.</td></tr>';
             return;
         }
 
@@ -596,9 +601,15 @@
                 ? '<span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 font-bold text-[10px]">PRO ($29)</span>'
                 : '<span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400 text-[10px]">FREE</span>';
 
+            const rec = Array.isArray(u.student_records) ? (u.student_records[0] || {}) : (u.student_records || {});
+            const coursesCount = Array.isArray(rec.courses) ? rec.courses.length : 0;
+            const avgDisplay = rec.calculated_average 
+                ? `<span class="font-bold text-emerald-600 dark:text-emerald-400 font-mono">${rec.calculated_average}% Avg</span>`
+                : (coursesCount > 0 ? `<span class="text-xs text-slate-600 dark:text-slate-400 font-medium">${coursesCount} courses</span>` : '<span class="text-slate-400 italic">No grades yet</span>');
+
             const targets = Array.isArray(u.target_programs) && u.target_programs.length > 0 
                 ? u.target_programs.join(', ') 
-                : '<span class="text-slate-400 italic">None specified</span>';
+                : (Array.isArray(rec.saved_programs) && rec.saved_programs.length > 0 ? `${rec.saved_programs.length} programs saved` : '<span class="text-slate-400 italic">None specified</span>');
 
             const dateStr = u.created_at ? new Date(u.created_at).toLocaleDateString() : 'Recent';
 
@@ -610,14 +621,14 @@
                 </td>
                 <td class="py-3 px-4">${roleBadge}</td>
                 <td class="py-3 px-4">${proBadge}</td>
-                <td class="py-3 px-4 font-semibold text-slate-600 dark:text-slate-300">${u.province || 'ON'}</td>
+                <td class="py-3 px-4">${avgDisplay}</td>
                 <td class="py-3 px-4 max-w-xs truncate text-slate-600 dark:text-slate-300">${targets}</td>
                 <td class="py-3 px-4 text-slate-400">${dateStr}</td>
                 <td class="py-3 px-5 text-right space-x-1">
-                    <button onclick="toggleUserPro('${u.id}')" title="Toggle Pro Status" class="p-1 rounded hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-500">
+                    <button onclick="toggleUserPro('${u.id}')" title="Toggle Pro Status" class="p-1 rounded hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-500 cursor-pointer">
                         <span class="material-symbols-outlined text-sm">verified</span>
                     </button>
-                    <button onclick="toggleUserRole('${u.id}')" title="Change Role" class="p-1 rounded hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-500">
+                    <button onclick="toggleUserRole('${u.id}')" title="Change Role" class="p-1 rounded hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-500 cursor-pointer">
                         <span class="material-symbols-outlined text-sm">manage_accounts</span>
                     </button>
                 </td>
@@ -860,7 +871,39 @@
         loadSupabaseUsers();
         renderTransactions();
         renderAuditLogs();
+        loadAdminStripeLink();
     });
+
+    function loadAdminStripeLink() {
+        const input = document.getElementById('admin-stripe-link');
+        if (input) {
+            const link = localStorage.getItem('canedu_stripe_link') || (window.PathwayAuth ? window.PathwayAuth.getStripePaymentLink() : '');
+            if (link && !link.includes('placeholder') && !link.includes('test_pathway_canada_pro')) {
+                input.value = link;
+            }
+        }
+    }
+
+    function saveAdminStripeLink() {
+        const input = document.getElementById('admin-stripe-link');
+        const msg = document.getElementById('stripe-save-msg');
+        if (!input) return;
+        const val = input.value.trim();
+        if (val && !val.startsWith('http')) {
+            alert('Please enter a valid URL starting with https://buy.stripe.com/...');
+            return;
+        }
+        localStorage.setItem('canedu_stripe_link', val);
+        localStorage.setItem('canedu_stripe_payment_link', val);
+        if (window.PathwayAuth && typeof window.PathwayAuth.setStripePaymentLink === 'function') {
+            window.PathwayAuth.setStripePaymentLink(val);
+        }
+        logActivity("BILLING", `Admin updated live Stripe payment endpoint to: ${val}`);
+        if (msg) {
+            msg.classList.remove('hidden');
+            setTimeout(() => msg.classList.add('hidden'), 4000);
+        }
+    }
 </script>
 </body>
 </html>

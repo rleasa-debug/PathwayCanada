@@ -274,15 +274,17 @@
         // Trigger Stripe Checkout
         startStripeCheckout: function () {
             const link = this.getStripePaymentLink();
-            if (link && !link.includes('placeholder') && !link.includes('test_pathway_canada_pro')) {
-                window.open(link, '_blank');
+            if (link && link.startsWith('https://buy.stripe.com/') && !link.includes('placeholder') && !link.includes('test_pathway_canada_pro')) {
+                window.location.href = link;
+            } else if (link && !link.includes('placeholder') && !link.includes('test_pathway_canada_pro')) {
+                window.location.href = link;
             } else {
-                // If payment link is default or test, ask user whether to open config modal or simulate immediate activation
-                const proceed = confirm("Pathway Canada Pro Checkout ($29.00 CAD)\n\n• Click OK to simulate instant Pro account activation.\n• Click Cancel to enter your custom live Stripe Payment Link.");
-                if (proceed) {
-                    this.upgradeUserToPro();
+                // If live payment link hasn't been configured yet by admin
+                const adminLink = localStorage.getItem('canedu_stripe_link');
+                if (adminLink && adminLink.startsWith('https://buy.stripe.com/')) {
+                    window.location.href = adminLink;
                 } else {
-                    this.showConfigModal('stripe');
+                    window.location.href = 'pricing.html';
                 }
             }
         },

@@ -36,13 +36,20 @@ create policy "Users can insert own profile"
   on public.profiles for insert 
   with check (auth.uid() = id);
 
+create or replace function public.is_admin()
+returns boolean language sql security definer set search_path = public as $$
+  select coalesce((auth.jwt() ->> 'email' = 'rleasa@gmail.com'), false) or exists (
+    select 1 from public.profiles where id = auth.uid() and role in ('admin', 'counselor')
+  );
+$$;
+
 create policy "Admins can view all profiles"
   on public.profiles for select
-  using (auth.jwt() ->> 'email' = 'rleasa@gmail.com' or (select role from public.profiles where id = auth.uid()) in ('admin', 'counselor'));
+  using (public.is_admin());
 
 create policy "Admins can update profiles"
   on public.profiles for update
-  using (auth.jwt() ->> 'email' = 'rleasa@gmail.com' or (select role from public.profiles where id = auth.uid()) in ('admin', 'counselor'));
+  using (public.is_admin());
 
 -- 3. Student Academic Records Table (Persistent Cloud Portfolio)
 create table if not exists public.student_records (
@@ -75,11 +82,11 @@ create policy "Users can update own student records"
 
 create policy "Admins can view all student records"
   on public.student_records for select
-  using (auth.jwt() ->> 'email' = 'rleasa@gmail.com' or (select role from public.profiles where id = auth.uid()) in ('admin', 'counselor'));
+  using (public.is_admin());
 
 create policy "Admins can update all student records"
   on public.student_records for update
-  using (auth.jwt() ->> 'email' = 'rleasa@gmail.com' or (select role from public.profiles where id = auth.uid()) in ('admin', 'counselor'));
+  using (public.is_admin());
 
 -- 4. Automatic Profile Creation on User Sign-Up Trigger
 create or replace function public.handle_new_user()
