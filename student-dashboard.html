@@ -1,0 +1,2477 @@
+<!--
+  Copyright 2026 Pathways Canada. All Rights Reserved.
+  This code is the proprietary property of Pathways Canada and is subject to Invention Assignment Agreements.
+-->
+
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta name="description" content="View your Canadian academic percentage averages, track curriculum progress, and see recommended university matches instantly on the student portal."/>
+    <title>Dashboard | Pathway Canada</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&family=Public+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#cee5ff",
+                        "secondary-container": "#b9eeab",
+                        "error-container": "#ffdad6",
+                        "outline-variant": "#c3c6ce",
+                        "on-tertiary-fixed": "#2f1500",
+                        "on-background": "#001d33",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#422000",
+                        "on-tertiary-fixed-variant": "#6e3900",
+                        "surface-bright": "#f7f9ff",
+                        "on-secondary-container": "#3f6d38",
+                        "on-secondary-fixed": "#002201",
+                        "secondary-fixed": "#bcf0ae",
+                        "inverse-on-surface": "#e8f2ff",
+                        "on-secondary": "#ffffff",
+                        "surface-dim": "#bfddfe",
+                        "tertiary-fixed-dim": "#ffb77d",
+                        "surface": "#f7f9ff",
+                        "primary-container": "#102a43",
+                        "on-surface": "#001d33",
+                        "on-secondary-fixed-variant": "#23501e",
+                        "inverse-surface": "#12334c",
+                        "surface-container-low": "#edf4ff",
+                        "surface-tint": "#49607c",
+                        "on-surface-variant": "#43474d",
+                        "on-primary-container": "#7a92b0",
+                        "on-primary": "#ffffff",
+                        "outline": "#74777e",
+                        "primary-fixed-dim": "#b0c9e8",
+                        "on-tertiary-container": "#d97705",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed": "#011d35",
+                        "secondary": "#3b6934",
+                        "primary-fixed": "#d1e4ff",
+                        "inverse-primary": "#b0c9e8",
+                        "primary": "#102a43",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed-variant": "#314863",
+                        "tertiary-fixed": "#ffdcc3",
+                        "tertiary": "#240f00",
+                        "surface-variant": "#cee5ff",
+                        "on-error-container": "#93000a",
+                        "error": "#ba1a1a",
+                        "background": "#f7f9ff",
+                        "surface-container-high": "#d8eaff",
+                        "secondary-fixed-dim": "#a1d494",
+                        "surface-container": "#e3efff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.375rem",
+                        "xl": "0.5rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Lexend"],
+                        "body": ["Public Sans"],
+                        "label": ["Public Sans"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body { font-family: 'Public Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .editorial-gradient {
+            background: linear-gradient(135deg, #102a43 0%, #001d33 100%);
+        }
+        .academic-texture {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23102a43' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2v-4h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2v-4h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        .glass-panel {
+            background: rgba(247, 249, 255, 0.85);
+            backdrop-filter: blur(20px);
+        }
+        .card-transition {
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+        }
+        .card-transition:hover {
+            transform: translateY(-6px) scale(1.02) !important;
+            cursor: pointer;
+        }
+        
+        /* Frosted Glass Lock */
+        .pro-lock-overlay {
+            backdrop-filter: blur(8px) saturate(150%);
+            -webkit-backdrop-filter: blur(8px) saturate(150%);
+            background: rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+        .pro-lock-overlay:hover {
+            backdrop-filter: blur(4px) saturate(150%);
+            -webkit-backdrop-filter: blur(4px) saturate(150%);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Shimmer Sweep Animation */
+        @keyframes shimmer {
+            0% { transform: translateX(-150%) skewX(-15deg); }
+            100% { transform: translateX(150%) skewX(-15deg); }
+        }
+        .shimmer-btn {
+            position: relative;
+            overflow: hidden;
+        }
+        .shimmer-btn::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 3.5s infinite ease-in-out;
+        }
+
+        /* Pop Zoom Modal Transition */
+        .modal-bounce-in {
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease-out !important;
+        }
+
+        /* Qualitative Trend Badges */
+        .badge-locked-in {
+            background-color: #059669 !important;
+            color: #ffffff !important;
+            border-color: #34d399 !important;
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.7);
+        }
+        @keyframes electric-pulse {
+            0%, 100% { box-shadow: 0 0 4px rgba(59, 130, 246, 0.4); }
+            50% { box-shadow: 0 0 14px rgba(59, 130, 246, 0.8); }
+        }
+        .badge-strong-contender {
+            background-color: #2563eb !important;
+            color: #ffffff !important;
+            border-color: #60a5fa !important;
+            animation: electric-pulse 1.5s infinite ease-in-out;
+        }
+        .badge-the-longshot {
+            background: linear-gradient(135deg, #f97316 0%, #ec4899 100%) !important;
+            color: #ffffff !important;
+            border: none !important;
+            box-shadow: 0 0 8px rgba(249, 115, 22, 0.4);
+            filter: saturate(110%);
+        }
+        .badge-high-climb {
+            background-color: #64748b !important;
+            color: #f1f5f9 !important;
+            border-color: #475569 !important;
+            opacity: 0.85;
+        }
+
+        .uni-logo-container {
+            width: 64px !important;
+            height: 64px !important;
+            border-radius: 14px !important; /* Rounded square — shows logos without cropping */
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            padding: 8px !important;
+            flex-shrink: 0 !important;
+            margin: 0 auto 16px auto !important;
+            overflow: hidden !important;
+            position: relative !important;
+            background: #ffffff !important;
+            border: 1.5px solid rgba(0, 0, 0, 0.07) !important;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 0 0 0.5px rgba(0,0,0,0.04) !important;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        }
+        
+        .dark .uni-logo-container {
+            background: #1e293b !important;
+            border: 1.5px solid rgba(255, 255, 255, 0.10) !important;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
+        }
+
+        .uni-logo-container:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.14) !important;
+        }
+
+        .uni-logo-img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: contain !important; /* Never crop a logo */
+            filter: none !important;
+            transform: none !important;
+            transition: transform 0.3s ease !important;
+            z-index: 2 !important;
+        }
+
+        .uni-logo-container:hover .uni-logo-img {
+            transform: scale(1.06) !important;
+        }
+        
+        /* Simple vs Detailed legend views */
+        .legend-container.simple-view .detailed-only {
+            display: none !important;
+        }
+        .legend-container:not(.simple-view) .simple-only {
+            display: none !important;
+        }
+
+        /* Shimmer Loading Skeleton */
+        @keyframes shimmer-loading {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        .skeleton-card {
+            background: rgba(255, 255, 255, 0.45);
+            border: 1px dashed rgba(0, 0, 0, 0.08);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            height: 290px;
+            backdrop-filter: blur(12px);
+        }
+        .skeleton-element {
+            background: linear-gradient(90deg, rgba(226, 232, 240, 0.6) 25%, rgba(203, 213, 225, 0.6) 50%, rgba(226, 232, 240, 0.6) 75%);
+            background-size: 200% 100%;
+            animation: shimmer-loading 1.5s infinite;
+            border-radius: 0.5rem;
+        }
+        .skeleton-logo {
+            width: 64px;
+            height: 64px;
+            border-radius: 1rem;
+            margin: 0 auto 1rem auto;
+        }
+        .skeleton-title {
+            height: 20px;
+            width: 75%;
+            margin: 0.5rem auto;
+        }
+        .skeleton-subtitle {
+            height: 14px;
+            width: 50%;
+            margin: 0.5rem auto 1rem auto;
+        }
+        .skeleton-badge {
+            height: 28px;
+            width: 100px;
+            margin: 0.5rem auto;
+            border-radius: 9999px;
+        }
+
+        /* Spring Transitions for Pagination */
+        @keyframes slideOutLeft {
+            0% { transform: translateX(0) scale(1); opacity: 1; filter: blur(0); }
+            100% { transform: translateX(-100px) scale(0.9); opacity: 0; filter: blur(4px); }
+        }
+        @keyframes springInRight {
+            0% { transform: translateX(120px) scale(0.85); opacity: 0; filter: blur(6px); }
+            70% { transform: translateX(-10px) scale(1.02); opacity: 0.9; filter: blur(0); }
+            100% { transform: translateX(0) scale(1); opacity: 1; filter: blur(0); }
+        }
+        @keyframes slideOutRight {
+            0% { transform: translateX(0) scale(1); opacity: 1; filter: blur(0); }
+            100% { transform: translateX(100px) scale(0.9); opacity: 0; filter: blur(4px); }
+        }
+        @keyframes springInLeft {
+            0% { transform: translateX(-120px) scale(0.85); opacity: 0; filter: blur(6px); }
+            70% { transform: translateX(10px) scale(1.02); opacity: 0.9; filter: blur(0); }
+            100% { transform: translateX(0) scale(1); opacity: 1; filter: blur(0); }
+        }
+
+        .slide-out-left {
+            animation: slideOutLeft 0.35s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+        .spring-in-right {
+            animation: springInRight 0.65s cubic-bezier(0.175, 0.885, 0.32, 1.15) both;
+        }
+        .slide-out-right {
+            animation: slideOutRight 0.35s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+        .spring-in-left {
+            animation: springInLeft 0.65s cubic-bezier(0.175, 0.885, 0.32, 1.15) both;
+        }
+
+        /* Brand Glow Card Layout overrides */
+        .program-card {
+            background: rgba(255, 255, 255, 0.65) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+            border: 1px solid rgba(255, 255, 255, 0.4) !important;
+            border-radius: 1.5rem !important;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, border-color 0.4s ease !important;
+        }
+        .dark .program-card {
+            background: rgba(15, 23, 42, 0.65) !important;
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        }
+        .program-card:hover {
+            transform: translateY(-6px) scale(1.02) !important;
+        }
+        /* Semantic Match Tier Hover Glows */
+        .program-card.hover-high:hover {
+            box-shadow: 0 20px 25px -5px rgba(16, 185, 129, 0.25), 0 0 24px -2px rgba(16, 185, 129, 0.25) !important;
+            border-color: rgba(16, 185, 129, 0.6) !important;
+        }
+        .program-card.hover-medium:hover {
+            box-shadow: 0 20px 25px -5px rgba(245, 158, 11, 0.2), 0 0 24px -2px rgba(245, 158, 11, 0.2) !important;
+            border-color: rgba(245, 158, 11, 0.5) !important;
+        }
+        .program-card.hover-low:hover {
+            box-shadow: 0 20px 25px -5px rgba(100, 116, 139, 0.15), 0 0 24px -2px rgba(100, 116, 139, 0.15) !important;
+            border-color: rgba(100, 116, 139, 0.4) !important;
+        }
+        .program-title {
+            font-family: 'Lexend', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.025em; /* Premium tracking-wide */
+        }
+        
+        /* Glassmorphic bento style for metrics cards */
+        .glass-bento {
+            background: rgba(255, 255, 255, 0.65) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+            border: 1px solid rgba(255, 255, 255, 0.4) !important;
+            border-radius: 1.5rem !important;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        }
+        .dark .glass-bento {
+            background: rgba(15, 23, 42, 0.65) !important;
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        }
+        .glass-bento:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 25px -10px rgba(0, 0, 0, 0.05), 0 0 15px -2px rgba(16, 42, 67, 0.05) !important;
+        }
+        .dark .glass-bento:hover {
+            box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.5), 0 0 20px -2px rgba(59, 130, 246, 0.1) !important;
+        }
+
+        /* Tactile physical click compression effect */
+        .click-compress {
+            transition: transform 0.1s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .click-compress:active {
+            transform: scale(0.96) translateY(1.5px) !important;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+        }
+
+        /* High Performance Staggered Card Fade-Lift */
+        @keyframes cardFadeLift {
+            0% {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .fade-lift-in {
+            animation: cardFadeLift 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+            opacity: 0;
+        }
+
+        /* Continuous Border & Shadow Pulsing for High Match Badge */
+        @keyframes borderPulse {
+            0%, 100% {
+                border-color: rgba(16, 185, 129, 0.3);
+                box-shadow: 0 0 4px rgba(16, 185, 129, 0.15);
+            }
+            50% {
+                border-color: rgba(16, 185, 129, 0.95);
+                box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+            }
+        }
+        .badge-high-match-pulse {
+            animation: borderPulse 2s infinite ease-in-out !important;
+        }
+
+        /* Spring scale transition for glassmorphic lock icon */
+        .lock-spring-icon {
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+
+<!-- Left SideNavBar -->
+<aside class="fixed top-0 left-0 h-screen z-50 flex flex-col bg-slate-50 dark:bg-slate-950 border-r border-slate-200/60 dark:border-slate-800 transition-all duration-300 w-16 lg:w-64">
+    <!-- Logo Section -->
+    <a href="index.html" class="flex items-center gap-3 px-4 py-5 border-b border-slate-200/40 dark:border-slate-800/40 hover:opacity-85 transition-opacity group">
+        <!-- Maple leaf / shield logo -->
+        <svg class="w-7 h-7 flex-shrink-0 text-primary dark:text-blue-400 transition-transform group-hover:scale-110" viewBox="0 0 32 32" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 2L19.2 9.4L27 8.2L21.8 14.4L24 22L16 18.2L8 22L10.2 14.4L5 8.2L12.8 9.4Z" opacity="0.15"/>
+            <path d="M16 2L18 8H24L19.2 11.8L21 18L16 14.4L11 18L12.8 11.8L8 8H14Z"/>
+            <rect x="14.5" y="18" width="3" height="7" rx="1"/>
+        </svg>
+        <div class="hidden lg:block overflow-hidden">
+            <span class="text-base font-bold text-primary dark:text-white tracking-tight font-lexend block">Pathway Canada</span>
+            <span class="text-[9px] text-slate-400 font-lexend tracking-wider uppercase">Post-Secondary Discovery</span>
+        </div>
+    </a>
+    
+    <!-- Navigation Links -->
+    <nav class="flex-1 px-2 py-4 space-y-1.5">
+        <!-- Home / Landing Page -->
+        <a href="index.html" class="flex items-center justify-center lg:justify-start gap-3.5 px-3 lg:px-4 py-3 lg:py-2.5 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all rounded-lg" id="nav-home">
+            <span class="material-symbols-outlined text-xl flex-shrink-0">home</span>
+            <span class="hidden lg:block text-sm font-lexend">Home Page</span>
+        </a>
+        <!-- Dashboard -->
+        <a href="student-dashboard.html" class="flex items-center justify-center lg:justify-start gap-3.5 px-3 lg:px-4 py-3 lg:py-2.5 text-primary dark:text-blue-200 bg-primary/8 dark:bg-blue-900/20 border-l-4 border-primary font-bold shadow-sm rounded-lg lg:rounded-none relative overflow-hidden" id="nav-dashboard">
+            <span class="absolute inset-0 bg-gradient-to-r from-primary/10 to-transparent pointer-events-none"></span>
+            <span class="material-symbols-outlined text-xl flex-shrink-0" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+            <span class="hidden lg:block text-sm font-lexend relative z-10">Dashboard</span>
+        </a>
+        <!-- Portfolio / Academic Records -->
+        <a href="academic-records.html" class="flex items-center justify-center lg:justify-start gap-3.5 px-3 lg:px-4 py-3 lg:py-2.5 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all rounded-lg" id="nav-portfolio">
+            <span class="material-symbols-outlined text-xl flex-shrink-0">folder_shared</span>
+            <span class="hidden lg:block text-sm font-lexend">My Portfolio</span>
+        </a>
+        <!-- Program Discovery -->
+        <a href="student-dashboard.html#discovery" class="flex items-center justify-center lg:justify-start gap-3.5 px-3 lg:px-4 py-3 lg:py-2.5 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all rounded-lg" id="nav-discovery">
+            <span class="material-symbols-outlined text-xl flex-shrink-0">search</span>
+            <span class="hidden lg:block text-sm font-lexend">Discovery</span>
+        </a>
+        <!-- Plans & Pricing -->
+        <a href="pricing.html" class="flex items-center justify-center lg:justify-start gap-3.5 px-3 lg:px-4 py-3 lg:py-2.5 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all rounded-lg" id="nav-pricing">
+            <span class="material-symbols-outlined text-xl flex-shrink-0">payments</span>
+            <span class="hidden lg:block text-sm font-lexend">Plans & Pricing</span>
+        </a>
+        
+        <!-- Notifications -->
+        <a href="#" class="flex items-center justify-center lg:justify-start gap-3.5 px-3 lg:px-4 py-3 lg:py-2.5 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all rounded-lg relative">
+            <span class="material-symbols-outlined text-xl flex-shrink-0">notifications</span>
+            <span class="absolute top-3.5 left-7.5 lg:left-8 w-2 h-2 bg-red-500 rounded-full"></span>
+            <span class="hidden lg:block text-sm font-lexend">Notifications</span>
+        </a>
+    </nav>
+    
+    <!-- Bottom Profile & Actions -->
+    <div class="p-3 border-t border-slate-200/40 dark:border-slate-800/40 bg-slate-100/50 dark:bg-slate-900/30 flex flex-col gap-3">
+        <!-- User profile indicator -->
+        <div class="flex items-center gap-3 px-1">
+            <div class="w-8 h-8 rounded-full bg-primary-fixed-dim flex items-center justify-center text-primary font-bold text-xs shadow-sm user-initials-display flex-shrink-0" id="sidebar-avatar">AL</div>
+            <div class="hidden lg:block overflow-hidden">
+                <p class="text-xs font-bold text-primary dark:text-white truncate" id="sidebar-name">Alex L.</p>
+                <p class="text-[9px] text-slate-500 truncate" id="sidebar-tier">Free Plan</p>
+                <div class="flex items-center gap-1 mt-1 text-[8px] text-emerald-600 dark:text-emerald-400 font-bold uppercase tracking-wider">
+                    <span class="material-symbols-outlined text-[10px]" style="font-variation-settings: 'FILL' 1;">security</span>
+                    <span>XXTEA Encrypted</span>
+                </div>
+            </div>
+
+        </div>
+        
+        <!-- Reset Button -->
+        <button onclick="resetAppState()" class="w-full flex items-center justify-center lg:justify-start gap-3.5 px-2 py-2 text-red-650 dark:text-red-400 hover:bg-red-500/10 rounded-lg text-xs font-bold transition-all" title="Reset Demo State">
+            <span class="material-symbols-outlined text-xl flex-shrink-0">logout</span>
+            <span class="hidden lg:block font-lexend">Reset Demo</span>
+        </button>
+    </div>
+</aside>
+
+<!-- Main Content Canvas -->
+<main class="pl-16 lg:pl-64 pt-8 pb-24 lg:pb-8 px-6 min-h-screen transition-all duration-300">
+    <div class="max-w-6xl mx-auto font-sans">
+        <!-- Header Section -->
+        <header class="flex flex-col md:flex-row md:items-center justify-between mb-12 gap-6 pt-6">
+            <div>
+                <h1 class="text-4xl md:text-5xl font-extrabold text-primary tracking-tight mb-2 font-lexend">Curriculum Overview</h1>
+                <p id="student-subheader" class="text-on-surface-variant max-w-xl text-sm md:text-base leading-relaxed">
+                    Grade 12 Student | Your academic average is currently trending towards competitive programs across Canada.
+                </p>
+            </div>
+            <div class="flex-shrink-0">
+                <a href="academic-records.html" id="enter-marks-btn" class="shimmer-btn flex items-center gap-2 px-6 py-3.5 bg-primary text-white font-bold text-sm rounded-2xl shadow-lg hover:shadow-primary/30 hover:scale-[1.03] active:scale-98 transition-all duration-200 font-lexend">
+                    <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">edit_note</span>
+                    Enter / Update My Marks
+                </a>
+            </div>
+        </header>
+
+        <!-- No-Courses CTA Banner -->
+        <div id="no-courses-banner" class="hidden mb-8 p-5 bg-amber-500/10 border border-amber-400/40 rounded-2xl flex items-center gap-4">
+            <span class="material-symbols-outlined text-amber-600 text-3xl flex-shrink-0" style="font-variation-settings: 'FILL' 1;">school</span>
+            <div class="flex-1 min-w-0">
+                <p class="font-bold text-amber-800 font-lexend text-sm">📚 Start by entering your marks!</p>
+                <p class="text-xs text-amber-700 mt-0.5">We need your course grades to calculate your academic average and generate personalized program matches.</p>
+            </div>
+            <a href="academic-records.html" class="flex-shrink-0 px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white text-xs font-black rounded-xl transition-all font-lexend">Add Courses →</a>
+        </div>
+
+        <!-- Standardized Metrics Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <!-- Academic Average Card -->
+            <div class="glass-bento p-6 rounded-2xl relative overflow-hidden flex flex-col justify-between group cursor-default shadow-sm min-h-[170px]">
+                <div class="absolute top-0 right-0 p-4 opacity-[0.03] dark:opacity-[0.05]">
+                    <span class="material-symbols-outlined text-8xl text-primary">school</span>
+                </div>
+                <div>
+                    <p id="student-average" class="text-5xl font-extrabold text-primary dark:text-white tracking-tighter font-lexend mb-1">91.7%</p>
+                    <h3 class="text-slate-400 dark:text-slate-500 text-[10px] font-bold uppercase tracking-[0.2em] font-lexend">Academic Average</h3>
+                </div>
+                <div class="mt-4">
+                    <div class="h-1.5 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden mb-2">
+                        <div id="average-bar" class="h-full bg-secondary transition-all duration-500" style="width: 91.7%"></div>
+                    </div>
+                    <div class="flex justify-between items-center text-[10px] text-slate-400 dark:text-slate-500 font-bold font-lexend">
+                        <span id="curriculum-standard-badge">Ontario Curriculum (2026-27)</span>
+                        <a href="academic-records.html" class="text-primary hover:underline flex items-center gap-0.5">Edit Marks <span class="material-symbols-outlined text-xs">arrow_forward</span></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Applications Card (dynamic) -->
+            <div class="glass-bento p-6 rounded-2xl relative overflow-hidden flex flex-col justify-between group cursor-default shadow-sm min-h-[170px]">
+                <div class="absolute top-0 right-0 p-4 opacity-[0.03] dark:opacity-[0.05]">
+                    <span class="material-symbols-outlined text-8xl text-primary">description</span>
+                </div>
+                <div>
+                    <p id="eligible-programs-count" class="text-5xl font-extrabold text-primary dark:text-white tracking-tighter font-lexend mb-1">— Programs</p>
+                    <h3 class="text-slate-400 dark:text-slate-500 text-[10px] font-bold uppercase tracking-[0.2em] font-lexend">You Currently Qualify For</h3>
+                </div>
+                <div class="mt-4 flex items-center justify-between text-[10px] font-bold font-lexend">
+                    <span id="eligible-tier-label" class="text-slate-450 dark:text-slate-500 uppercase tracking-wider">Computing...</span>
+                    <a href="academic-records.html" class="text-primary hover:underline flex items-center gap-0.5">
+                        Edit Records <span class="material-symbols-outlined text-xs">arrow_forward</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Application Optimization Card (dynamic) -->
+            <div class="glass-bento p-6 rounded-2xl relative overflow-hidden flex flex-col justify-between group cursor-default shadow-sm min-h-[170px]">
+                <div class="absolute top-0 right-0 p-4 opacity-[0.03] dark:opacity-[0.05]">
+                    <span class="material-symbols-outlined text-8xl text-primary">payments</span>
+                </div>
+                <div>
+                    <p id="savings-amount" class="text-5xl font-extrabold text-secondary dark:text-emerald-450 tracking-tighter font-lexend mb-1">$— Saved</p>
+                    <h3 class="text-slate-400 dark:text-slate-500 text-[10px] font-bold uppercase tracking-[0.2em] font-lexend">Application Fee Savings</h3>
+                </div>
+                <div class="mt-4 flex justify-between items-center text-[10px] text-slate-450 dark:text-slate-500 font-bold font-lexend">
+                    <span id="savings-subtitle" class="uppercase tracking-wider">Calculating...</span>
+                    <span class="text-emerald-600 dark:text-emerald-450">Active Optimization</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Two Column Main Body Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-12">
+            <!-- Left Column: Dynamic Data (col-span-9) -->
+            <div class="lg:col-span-9 space-y-8">
+                <!-- Unified Sticky Filter Bar -->
+                <div class="sticky top-4 z-30 bg-surface-container-low/95 dark:bg-slate-900/95 backdrop-blur-md p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col sm:flex-row gap-4 items-center justify-between">
+                    <!-- Search Input -->
+                    <div class="flex-1 w-full relative">
+                        <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-450 text-base">search</span>
+                        <input type="text" id="unified-search" placeholder="Search by program, school, or location..." class="w-full pl-9 pr-4 py-2.5 bg-slate-50 dark:bg-slate-805 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-primary dark:text-white placeholder-slate-450 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all font-body" oninput="runUnifiedFilter()"/>
+                    </div>
+                    <!-- Filter Controls -->
+                    <div class="flex flex-wrap items-center gap-3 w-full sm:w-auto">
+                        <!-- Province Multiselect -->
+                        <div class="relative w-full sm:w-44" id="province-multiselect-container">
+                            <button type="button" id="province-multiselect-btn" class="w-full flex items-center justify-between px-3 py-2 bg-slate-50 dark:bg-slate-805 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-primary dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all font-lexend text-left cursor-pointer" onclick="toggleProvinceDropdown(event)">
+                                <span id="province-btn-text">Filter Provinces</span>
+                                <span class="material-symbols-outlined text-xs">keyboard_arrow_down</span>
+                            </button>
+                            <div id="province-multiselect-options" class="absolute right-0 left-0 mt-2 bg-white dark:bg-slate-850 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg z-50 p-4 space-y-2.5 hidden max-h-60 overflow-y-auto">
+                                <label for="prov-cb-on" class="flex items-center gap-2.5 text-xs text-slate-750 dark:text-slate-200 font-lexend cursor-pointer">
+                                    <input id="prov-cb-on" aria-label="Ontario" type="checkbox" value="ON" checked class="province-checkbox rounded text-primary focus:ring-primary/20" onchange="handleProvinceCheckboxChange()"/> Ontario (ON)
+                                </label>
+                                <label for="prov-cb-bc" class="flex items-center gap-2.5 text-xs text-slate-750 dark:text-slate-200 font-lexend cursor-pointer">
+                                    <input id="prov-cb-bc" aria-label="British Columbia" type="checkbox" value="BC" checked class="province-checkbox rounded text-primary focus:ring-primary/20" onchange="handleProvinceCheckboxChange()"/> British Columbia (BC)
+                                </label>
+                                <label for="prov-cb-ab" class="flex items-center gap-2.5 text-xs text-slate-750 dark:text-slate-200 font-lexend cursor-pointer">
+                                    <input id="prov-cb-ab" aria-label="Alberta" type="checkbox" value="AB" checked class="province-checkbox rounded text-primary focus:ring-primary/20" onchange="handleProvinceCheckboxChange()"/> Alberta (AB)
+                                </label>
+                                <label for="prov-cb-qc" class="flex items-center gap-2.5 text-xs text-slate-750 dark:text-slate-200 font-lexend cursor-pointer">
+                                    <input id="prov-cb-qc" aria-label="Quebec" type="checkbox" value="QC" checked class="province-checkbox rounded text-primary focus:ring-primary/20" onchange="handleProvinceCheckboxChange()"/> Quebec (QC)
+                                </label>
+                                <label for="prov-cb-ns" class="flex items-center gap-2.5 text-xs text-slate-750 dark:text-slate-200 font-lexend cursor-pointer">
+                                    <input id="prov-cb-ns" aria-label="Nova Scotia" type="checkbox" value="NS" checked class="province-checkbox rounded text-primary focus:ring-primary/20" onchange="handleProvinceCheckboxChange()"/> Nova Scotia (NS)
+                                </label>
+                                <label for="prov-cb-mb" class="flex items-center gap-2.5 text-xs text-slate-750 dark:text-slate-200 font-lexend cursor-pointer">
+                                    <input id="prov-cb-mb" aria-label="Manitoba" type="checkbox" value="MB" checked class="province-checkbox rounded text-primary focus:ring-primary/20" onchange="handleProvinceCheckboxChange()"/> Manitoba (MB)
+                                </label>
+                                <label for="prov-cb-sk" class="flex items-center gap-2.5 text-xs text-slate-750 dark:text-slate-200 font-lexend cursor-pointer">
+                                    <input id="prov-cb-sk" aria-label="Saskatchewan" type="checkbox" value="SK" checked class="province-checkbox rounded text-primary focus:ring-primary/20" onchange="handleProvinceCheckboxChange()"/> Saskatchewan (SK)
+                                </label>
+                                <label for="prov-cb-nb" class="flex items-center gap-2.5 text-xs text-slate-750 dark:text-slate-200 font-lexend cursor-pointer">
+                                    <input id="prov-cb-nb" aria-label="New Brunswick" type="checkbox" value="NB" checked class="province-checkbox rounded text-primary focus:ring-primary/20" onchange="handleProvinceCheckboxChange()"/> New Brunswick (NB)
+                                </label>
+                                <label for="prov-cb-nl" class="flex items-center gap-2.5 text-xs text-slate-750 dark:text-slate-200 font-lexend cursor-pointer">
+                                    <input id="prov-cb-nl" aria-label="Newfoundland" type="checkbox" value="NL" checked class="province-checkbox rounded text-primary focus:ring-primary/20" onchange="handleProvinceCheckboxChange()"/> Newfoundland (NL)
+                                </label>
+                                <label for="prov-cb-pe" class="flex items-center gap-2.5 text-xs text-slate-750 dark:text-slate-200 font-lexend cursor-pointer">
+                                    <input id="prov-cb-pe" aria-label="Prince Edward Island" type="checkbox" value="PE" checked class="province-checkbox rounded text-primary focus:ring-primary/20" onchange="handleProvinceCheckboxChange()"/> Prince Edward Island (PE)
+                                </label>
+                                <label for="prov-cb-yt" class="flex items-center gap-2.5 text-xs text-slate-750 dark:text-slate-200 font-lexend cursor-pointer">
+                                    <input id="prov-cb-yt" aria-label="Yukon" type="checkbox" value="YT" checked class="province-checkbox rounded text-primary focus:ring-primary/20" onchange="handleProvinceCheckboxChange()"/> Yukon (YT)
+                                </label>
+                                <label for="prov-cb-nt" class="flex items-center gap-2.5 text-xs text-slate-750 dark:text-slate-200 font-lexend cursor-pointer">
+                                    <input id="prov-cb-nt" aria-label="Northwest Territories" type="checkbox" value="NT" checked class="province-checkbox rounded text-primary focus:ring-primary/20" onchange="handleProvinceCheckboxChange()"/> Northwest Territories (NT)
+                                </label>
+                                <label for="prov-cb-nu" class="flex items-center gap-2.5 text-xs text-slate-750 dark:text-slate-200 font-lexend cursor-pointer">
+                                    <input id="prov-cb-nu" aria-label="Nunavut" type="checkbox" value="NU" checked class="province-checkbox rounded text-primary focus:ring-primary/20" onchange="handleProvinceCheckboxChange()"/> Nunavut (NU)
+                                </label>
+                            </div>
+                        </div>
+                        <!-- Type Filter -->
+                        <div class="w-full sm:w-32">
+                            <select id="explorer-type" aria-label="Filter programs by institution type" class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-855 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-primary dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all font-lexend cursor-pointer" onchange="runUnifiedFilter()">
+                                <option value="ALL">All Types</option>
+                                <option value="University">Universities</option>
+                                <option value="College">Colleges</option>
+                            </select>
+                        </div>
+                        <!-- Min Grade Range Filter -->
+                        <div class="w-full sm:w-32">
+                            <select id="grade-filter" aria-label="Filter by minimum target grade range" class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-855 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-primary dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all font-lexend cursor-pointer" onchange="runUnifiedFilter()">
+                                <option value="ALL">All Grades</option>
+                                <option value="&lt;75">Under 75%</option>
+                                <option value="75-85">75% - 85%</option>
+                                <option value="&gt;85">Above 85%</option>
+                            </select>
+                        </div>
+                        <!-- Alignment Filter (Target/Stretch/Premium) -->
+                        <div class="w-full sm:w-40">
+                            <select id="alignment-filter" aria-label="Filter by match type alignment" class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-855 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-primary dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all font-lexend cursor-pointer" onchange="runUnifiedFilter()">
+                                <option value="ALL">All Alignments</option>
+                                <option value="TARGET">Target Matches (75-89%)</option>
+                                <option value="STRETCH">Stretch Targets (&lt;75%)</option>
+                                <option value="PREMIUM">Premium Analytics (90%+)</option>
+                            </select>
+                        </div>
+                        <!-- Co-op Availability Toggle -->
+                        <label for="coop-filter" class="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400 font-lexend cursor-pointer py-2">
+                            <input id="coop-filter" type="checkbox" class="rounded text-primary focus:ring-primary/20 bg-slate-50 dark:bg-slate-805 border-slate-200 dark:border-slate-700" onchange="runUnifiedFilter()"/>
+                            <span>Co-op Only</span>
+                        </label>
+
+                        <!-- Advanced Search Toggle Button -->
+                        <button id="advanced-filters-toggle" class="flex items-center gap-1 text-xs font-bold text-primary dark:text-white uppercase tracking-wider hover:opacity-80 transition-opacity font-lexend cursor-pointer ml-auto" onclick="toggleAdvancedFilters()">
+                            <span class="material-symbols-outlined text-sm" id="adv-toggle-icon">expand_more</span>
+                            Advanced Search
+                        </button>
+                    </div>
+
+                    <!-- Collapsible Advanced Search Panel -->
+                    <div id="advanced-filters-panel" class="hidden border-t border-slate-200/40 dark:border-slate-800/40 mt-4 pt-4 transition-all duration-300">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                            <!-- Campus Environment -->
+                            <div>
+                                <label for="filter-environment" class="text-[10px] font-bold uppercase tracking-wider text-slate-500 block mb-1.5 font-lexend">Campus Environment</label>
+                                <select id="filter-environment" class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-855 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-primary dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all font-lexend cursor-pointer" onchange="runUnifiedFilter()">
+                                    <option value="ALL">All Environments</option>
+                                    <option value="Urban">Urban</option>
+                                    <option value="Suburban">Suburban</option>
+                                    <option value="Rural">Rural</option>
+                                </select>
+                            </div>
+                            <!-- Student Population / Campus Size -->
+                            <div>
+                                <label for="filter-size" class="text-[10px] font-bold uppercase tracking-wider text-slate-500 block mb-1.5 font-lexend">Campus Size</label>
+                                <select id="filter-size" class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-855 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-primary dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all font-lexend cursor-pointer" onchange="runUnifiedFilter()">
+                                    <option value="ALL">All Sizes</option>
+                                    <option value="Under 5000">Under 5,000 students</option>
+                                    <option value="5000-20000">5,000 - 20,000 students</option>
+                                    <option value="Over 20000">Over 20,000 students</option>
+                                </select>
+                            </div>
+                            <!-- Program Specialization & Pathways -->
+                            <div>
+                                <label for="filter-pathway" class="text-[10px] font-bold uppercase tracking-wider text-slate-500 block mb-1.5 font-lexend">Program Pathway</label>
+                                <select id="filter-pathway" class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-855 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-primary dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all font-lexend cursor-pointer" onchange="runUnifiedFilter()">
+                                    <option value="ALL">All Pathways</option>
+                                    <option value="Co-op">Co-op Programs</option>
+                                    <option value="Joint">Joint / Dual Degree</option>
+                                    <option value="Experiential">Experiential Learning</option>
+                                </select>
+                            </div>
+                            <!-- Job Growth / Future Outlook -->
+                            <div>
+                                <label for="filter-outlook" class="text-[10px] font-bold uppercase tracking-wider text-slate-500 block mb-1.5 font-lexend">Job Outlook (Growth)</label>
+                                <select id="filter-outlook" class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-855 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-primary dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all font-lexend cursor-pointer" onchange="runUnifiedFilter()">
+                                    <option value="ALL">All Outlooks</option>
+                                    <option value="High Growth">High Growth</option>
+                                    <option value="Stable">Stable</option>
+                                    <option value="Emerging">Emerging</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Smart Match Section -->
+                <section id="discovery" class="space-y-6">
+                    <div class="flex items-center justify-between px-2">
+                        <h2 class="text-2xl font-bold text-primary tracking-tight font-lexend">Smart Match Recommendations</h2>
+                        <span class="text-xs text-slate-500 font-medium font-lexend">Calculations occur locally and securely.</span>
+                    </div>
+
+                    <!-- Premium Inline Banner -->
+                    <div data-sponsor-slot="hero" class="mb-2"></div>
+                    
+                    <div id="matches-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-6 min-h-[600px] content-start">
+                        <!-- Dynamically loaded cards (matches >= 75%) -->
+                    </div>
+
+                    <!-- Minimalist Pagination Bar -->
+                    <div id="matches-pagination" class="flex items-center justify-between bg-surface-container-low/60 border border-slate-200/40 p-4 rounded-2xl shadow-sm">
+                        <button id="btn-prev-page" class="px-4 py-2.5 bg-primary text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all duration-200 hover:scale-[1.05] active:scale-95 disabled:opacity-50 disabled:pointer-events-none cursor-pointer flex items-center gap-1 shadow-sm" onclick="changeMatchPage(-1)">
+                            <span class="material-symbols-outlined text-sm font-bold">arrow_back</span>
+                            Prev 6 Programs
+                        </button>
+                        <span id="match-page-indicator" class="font-lexend font-black text-xs text-slate-600 dark:text-slate-400 select-none">
+                            Page 1 of 1
+                        </span>
+                        <button id="btn-next-page" class="px-4 py-2.5 bg-primary text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all duration-200 hover:scale-[1.05] active:scale-95 disabled:opacity-50 disabled:pointer-events-none cursor-pointer flex items-center gap-1 shadow-sm" onclick="changeMatchPage(1)">
+                            Next 6 Programs
+                            <span class="material-symbols-outlined text-sm font-bold">arrow_forward</span>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Near-Miss Section: Programs within 5% reach -->
+                <section id="near-miss" class="space-y-4 border-t border-slate-100 dark:border-slate-800 pt-8">
+                    <div class="flex items-center justify-between px-2">
+                        <div>
+                            <h2 class="text-2xl font-bold text-primary tracking-tight font-lexend flex items-center gap-2">
+                                <span class="material-symbols-outlined text-amber-500 text-2xl" style="font-variation-settings: 'FILL' 1;">trending_up</span>
+                                You're Almost There!
+                            </h2>
+                            <p class="text-xs text-slate-500 mt-1 font-body">Programs where you're within 5% of the admission cutoff. A small grade boost could unlock these.</p>
+                        </div>
+                    </div>
+                    <div id="near-miss-list" class="space-y-3"></div>
+                    <div id="near-miss-empty" class="hidden text-center py-8 text-xs text-slate-400 font-body">No near-miss programs found. You either qualify for everything or need a bigger grade boost.</div>
+                </section>
+
+                <section id="explorer" class="space-y-6 border-t border-slate-100 dark:border-slate-800 pt-8">
+                    <div class="px-2">
+                        <h2 class="text-2xl font-bold text-primary tracking-tight font-lexend">Canadian Post-Secondary Explorer</h2>
+                        <p class="text-xs text-slate-500 mt-1 font-body">Browse and search admission probabilities across every accredited university and college in Canada.</p>
+                    </div>
+
+                    <!-- Filters are handled via the unified sticky top filter bar -->
+
+                    <!-- Explorer Grid -->
+                    <div class="relative min-h-[400px]">
+                        <div id="explorer-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <!-- Populated dynamically -->
+                        </div>
+                        <div id="explorer-empty" class="hidden absolute inset-0 flex flex-col items-center justify-center text-center p-8 bg-slate-50 dark:bg-slate-900/40 rounded-3xl border border-dashed border-slate-200 dark:border-slate-800 transition-all duration-300">
+                            <div class="w-20 h-20 mb-4 text-slate-350 dark:text-slate-600 flex items-center justify-center select-none">
+                                <svg class="w-full h-full animate-pulse" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M30 40H70M30 50H55M30 60H65" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                                    <rect x="20" y="20" width="60" height="60" rx="6" stroke="currentColor" stroke-width="2" />
+                                    <circle cx="70" cy="70" r="12" fill="currentColor" opacity="0.1" />
+                                    <circle cx="70" cy="70" r="12" stroke="currentColor" stroke-width="2" />
+                                    <path d="M78 78L88 88" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                                </svg>
+                            </div>
+                            <h4 class="font-lexend font-black text-slate-700 dark:text-slate-300 text-base mb-1">No Programs Found</h4>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 max-w-sm mb-6 font-body">No institutions or programs match your current search filters. Try adjusting your query or filters.</p>
+                            <button onclick="clearUnifiedFilters()" class="px-5 py-2.5 bg-primary hover:bg-primary/95 text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all duration-200 shadow-sm cursor-pointer flex items-center gap-1.5 hover:scale-[1.02] active:scale-98">
+                                <span class="material-symbols-outlined text-sm">filter_alt_off</span>
+                                Reset Search Filters
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Explorer Pagination Controls -->
+                    <div id="explorer-pagination" class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-slate-100 dark:border-slate-800">
+                        <p id="explorer-count-label" class="text-xs text-slate-500 dark:text-slate-400 font-medium font-body">Showing 1–12 of 550 programs</p>
+                        <div class="flex items-center gap-2">
+                            <button id="btn-prev-explorer" onclick="changeExplorerPage(-1)" class="px-4 py-2 text-xs font-bold font-lexend rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-750 disabled:opacity-40 disabled:cursor-not-allowed transition-all flex items-center gap-1 shadow-sm cursor-pointer">
+                                <span class="material-symbols-outlined text-sm">chevron_left</span> Previous
+                            </button>
+                            <span id="explorer-page-indicator" class="text-xs font-bold text-slate-650 dark:text-slate-350 font-lexend px-3 py-1.5 bg-slate-100 dark:bg-slate-800 rounded-lg">Page 1 of 46</span>
+                            <button id="btn-next-explorer" onclick="changeExplorerPage(1)" class="px-4 py-2 text-xs font-bold font-lexend rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-750 disabled:opacity-40 disabled:cursor-not-allowed transition-all flex items-center gap-1 shadow-sm cursor-pointer">
+                                Next <span class="material-symbols-outlined text-sm">chevron_right</span>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Success Stories / Testimonials -->
+                <section class="py-12 border-t border-slate-100 dark:border-slate-800">
+                    <h3 class="text-xl font-bold text-primary mb-6 font-lexend">Success Stories</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-surface-container-low p-6 rounded-xl relative">
+                            <p class="text-sm italic text-slate-700 leading-relaxed mb-4">
+                                "I was worried about matching the engineering requirements at Waterloo. Pathway Canada let me plan out my courses and focus my effort where it mattered."
+                            </p>
+                            <p class="text-xs font-bold text-primary font-lexend">— Maya R., UWaterloo '28</p>
+                        </div>
+                        <div class="bg-surface-container-low p-6 rounded-xl relative">
+                            <p class="text-sm italic text-slate-700 leading-relaxed mb-4">
+                                "The precision average calculations allowed me to avoid wasting money on applications where I didn't meet the cutoff."
+                            </p>
+                            <p class="text-xs font-bold text-primary font-lexend">— Julian K., Toronto Metropolitan</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Right Sidebar Column: Static resources & legend (col-span-3, sticky) -->
+            <aside class="lg:col-span-3 space-y-6 lg:sticky lg:top-20">
+                <!-- Confidence Legend Card -->
+                <div id="legend-sidebar" class="legend-container bg-surface-container-low p-5 rounded-2xl border border-slate-200/60 dark:border-slate-800 shadow-sm flex flex-col gap-4">
+                    <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-2">
+                        <h3 class="font-lexend font-bold text-xs text-primary dark:text-white flex items-center gap-1.5">
+                            <span class="material-symbols-outlined text-primary text-lg">balance</span>
+                            Confidence Legend
+                        </h3>
+                        <button id="legend-toggle-btn" class="px-2 py-0.5 text-[8px] font-black uppercase tracking-wider bg-slate-200/50 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 rounded border border-slate-300/40 dark:border-slate-700 cursor-pointer transition-colors" onclick="toggleLegendView()">
+                            Simple View
+                        </button>
+                    </div>
+                    
+                    <!-- Confidence Levels -->
+                    <div class="space-y-3.5">
+                        <!-- High Confidence -->
+                        <div class="flex flex-col gap-1 p-2 rounded-xl transition-all duration-300 hover:bg-white/50 dark:hover:bg-slate-900/30">
+                            <div class="flex items-center justify-between">
+                                <span class="px-2 py-0.5 text-[8px] font-black uppercase tracking-wider border rounded bg-emerald-50 text-emerald-700 border-emerald-100 dark:bg-emerald-950/20 dark:text-emerald-400 dark:border-emerald-900/30">
+                                    High Match
+                                </span>
+                                <span class="detailed-only text-[10px] font-bold text-emerald-600 dark:text-emerald-400 font-lexend">&gt;90% Match</span>
+                                <span class="simple-only text-[10px] font-bold text-emerald-600 dark:text-emerald-400 font-lexend">Excellent</span>
+                            </div>
+                            <p class="detailed-only text-[10px] text-slate-500 dark:text-slate-400 leading-normal mt-0.5">
+                                Your average exceeds typical cutoffs. High likelihood of admission.
+                            </p>
+                        </div>
+
+                        <!-- Target Match -->
+                        <div class="flex flex-col gap-1 p-2 rounded-xl transition-all duration-300 hover:bg-white/50 dark:hover:bg-slate-900/30">
+                            <div class="flex items-center justify-between">
+                                <span class="px-2 py-0.5 text-[8px] font-black uppercase tracking-wider border rounded bg-blue-50 text-blue-705 border-blue-100 dark:bg-blue-950/20 dark:text-blue-400 dark:border-blue-900/30">
+                                    Target Match
+                                </span>
+                                <span class="detailed-only text-[10px] font-bold text-blue-600 dark:text-blue-400 font-lexend">75–89% Match</span>
+                                <span class="simple-only text-[10px] font-bold text-blue-600 dark:text-blue-400 font-lexend">Good Match</span>
+                            </div>
+                            <p class="detailed-only text-[10px] text-slate-500 dark:text-slate-400 leading-normal mt-0.5">
+                                Your average is competitive and meets target admission expectations.
+                            </p>
+                        </div>
+
+                        <!-- Stretch Match -->
+                        <div class="flex flex-col gap-1 p-2 rounded-xl transition-all duration-300 hover:bg-white/50 dark:hover:bg-slate-900/30">
+                            <div class="flex items-center justify-between">
+                                <span class="px-2 py-0.5 text-[8px] font-black uppercase tracking-wider border rounded bg-amber-50 text-amber-705 border-amber-100 dark:bg-amber-950/20 dark:text-amber-400 dark:border-amber-900/30">
+                                    Stretch Match
+                                </span>
+                                <span class="detailed-only text-[10px] font-bold text-amber-600 dark:text-amber-555 font-lexend">60–74% Match</span>
+                                <span class="simple-only text-[10px] font-bold text-amber-600 dark:text-amber-555 font-lexend">Stretch</span>
+                            </div>
+                            <p class="detailed-only text-[10px] text-slate-500 dark:text-slate-400 leading-normal mt-0.5">
+                                Admission cutoffs higher than your average. Raising grades recommended.
+                            </p>
+                        </div>
+
+                        <!-- Reach Match -->
+                        <div class="flex flex-col gap-1 p-2 rounded-xl transition-all duration-300 hover:bg-white/50 dark:hover:bg-slate-900/30">
+                            <div class="flex items-center justify-between">
+                                <span class="px-2 py-0.5 text-[8px] font-black uppercase tracking-wider border rounded bg-slate-50 text-slate-500 border-slate-200 dark:bg-slate-950/20 dark:text-slate-400 dark:border-slate-900/30">
+                                    Reach Match
+                                </span>
+                                <span class="detailed-only text-[10px] font-bold text-slate-500 dark:text-slate-450 font-lexend">&lt;60% Match</span>
+                                <span class="simple-only text-[10px] font-bold text-slate-500 dark:text-slate-450 font-lexend">Reach</span>
+                            </div>
+                            <p class="detailed-only text-[10px] text-slate-500 dark:text-slate-400 leading-normal mt-0.5">
+                                Significantly below historical cutoffs, or missing required courses.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Provincial Application Portals Card -->
+                <div class="bg-surface-container-low p-5 rounded-2xl border border-slate-200/60 dark:border-slate-800 shadow-sm space-y-4">
+                    <h3 class="font-lexend font-bold text-xs text-primary dark:text-white flex items-center gap-1.5">
+                        <span class="material-symbols-outlined text-primary text-lg">open_in_new</span>
+                        Provincial Portals
+                    </h3>
+                    <p class="text-[10px] text-slate-500 dark:text-slate-400 leading-relaxed">
+                        Official external portals to submit your applications.
+                    </p>
+                    <div class="space-y-3 pt-1">
+                        <!-- OUAC -->
+                        <a href="https://www.ouac.on.ca" target="_blank" rel="noopener noreferrer" class="group flex flex-col p-3 bg-white hover:bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-xl hover:shadow-sm transition-all">
+                            <span class="text-[8px] font-black uppercase text-primary tracking-wider font-lexend">Ontario (OUAC)</span>
+                            <span class="font-lexend font-bold text-[11px] text-slate-900 dark:text-white mt-0.5 group-hover:text-primary transition-colors flex items-center justify-between">
+                                OUAC Application Hub
+                                <span class="material-symbols-outlined text-xs">open_in_new</span>
+                            </span>
+                        </a>
+                        <!-- BC -->
+                        <a href="https://www.educationplannerbc.ca" target="_blank" rel="noopener noreferrer" class="group flex flex-col p-3 bg-white hover:bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-xl hover:shadow-sm transition-all">
+                            <span class="text-[8px] font-black uppercase text-primary tracking-wider font-lexend">British Columbia</span>
+                            <span class="font-lexend font-bold text-[11px] text-slate-900 dark:text-white mt-0.5 group-hover:text-primary transition-colors flex items-center justify-between">
+                                EducationPlannerBC
+                                <span class="material-symbols-outlined text-xs">open_in_new</span>
+                            </span>
+                        </a>
+                        <!-- Alberta -->
+                        <a href="https://www.applyalberta.ca" target="_blank" rel="noopener noreferrer" class="group flex flex-col p-3 bg-white hover:bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-xl hover:shadow-sm transition-all">
+                            <span class="text-[8px] font-black uppercase text-primary tracking-wider font-lexend">Alberta</span>
+                            <span class="font-lexend font-bold text-[11px] text-slate-900 dark:text-white mt-0.5 group-hover:text-primary transition-colors flex items-center justify-between">
+                                ApplyAlberta System
+                                <span class="material-symbols-outlined text-xs">open_in_new</span>
+                            </span>
+                        </a>
+                        <!-- OSAP & Aid -->
+                        <a href="https://www.ontario.ca/page/osap-ontario-student-assistance-program" target="_blank" rel="noopener noreferrer" class="group flex flex-col p-3 bg-white hover:bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-xl hover:shadow-sm transition-all">
+                            <span class="text-[8px] font-black uppercase text-secondary tracking-wider font-lexend">Financial Aid</span>
+                            <span class="font-lexend font-bold text-[11px] text-slate-900 dark:text-white mt-0.5 group-hover:text-primary transition-colors flex items-center justify-between">
+                                OSAP & Provincial Aid
+                                <span class="material-symbols-outlined text-xs">open_in_new</span>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-20 pt-12 border-t border-surface-container-high">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="text-xl font-bold text-primary tracking-tight mb-4 font-lexend">Pathway Canada</div>
+                    <p class="text-sm text-on-surface-variant max-w-sm leading-relaxed mb-6">
+                        Leading the future of post-secondary discovery through data-driven matching and academic portfolio management.
+                    </p>
+                    <div class="flex gap-4">
+                        <span class="flex items-center gap-1.5 text-xs text-primary font-bold font-lexend">
+                            <span class="material-symbols-outlined text-sm">verified_user</span> ISO/IEC 27001
+                        </span>
+                        <span class="flex items-center gap-1.5 text-xs text-secondary font-bold font-lexend">
+                            <span class="material-symbols-outlined text-sm">shield</span> PCI Compliant
+                        </span>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold text-primary mb-4 text-sm font-lexend">Legal & Policy</h4>
+                    <ul class="space-y-3 text-xs text-on-surface-variant font-bold font-lexend">
+                        <li><a class="hover:text-primary" href="#">Terms of Service</a></li>
+                        <li><a class="hover:text-primary" href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-primary mb-4 text-sm font-lexend">Portals</h4>
+                    <ul class="space-y-3 text-xs text-on-surface-variant font-bold font-lexend">
+                        <li><a class="hover:text-primary" href="counselor-dashboard.html">Counselor Dashboard</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="py-8 border-t border-outline-variant/20 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-on-surface-variant uppercase font-bold tracking-wider font-lexend">
+                <div>© 2026 Pathway Canada. All rights reserved.</div>
+                <div>Proprietary Matching Algorithm</div>
+            </div>
+        </footer>
+    </div>
+</main>
+
+<!-- Mobile Bottom Navigation Bar (hidden on lg+) -->
+<nav class="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 dark:bg-slate-950/95 backdrop-blur-xl border-t border-slate-200/60 dark:border-slate-800 flex items-center justify-around px-2 py-2 shadow-2xl">
+    <a href="index.html" class="flex flex-col items-center gap-0.5 px-3 py-2 text-slate-400 hover:text-primary transition-colors rounded-xl hover:bg-slate-50">
+        <span class="material-symbols-outlined text-xl">home</span>
+        <span class="text-[9px] font-bold font-lexend uppercase tracking-wider">Home</span>
+    </a>
+    <a href="student-dashboard.html" class="flex flex-col items-center gap-0.5 px-3 py-2 text-primary bg-primary/8 rounded-xl transition-colors">
+        <span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+        <span class="text-[9px] font-black font-lexend uppercase tracking-wider text-primary">Dashboard</span>
+    </a>
+    <a href="academic-records.html" class="flex flex-col items-center gap-0.5 px-3 py-2 text-slate-400 hover:text-primary transition-colors rounded-xl hover:bg-slate-50">
+        <span class="material-symbols-outlined text-xl">folder_shared</span>
+        <span class="text-[9px] font-bold font-lexend uppercase tracking-wider">Marks</span>
+    </a>
+    <a href="student-dashboard.html#discovery" class="flex flex-col items-center gap-0.5 px-3 py-2 text-slate-400 hover:text-primary transition-colors rounded-xl hover:bg-slate-50">
+        <span class="material-symbols-outlined text-xl">search</span>
+        <span class="text-[9px] font-bold font-lexend uppercase tracking-wider">Explore</span>
+    </a>
+    <a href="pricing.html" class="flex flex-col items-center gap-0.5 px-3 py-2 text-slate-400 hover:text-primary transition-colors rounded-xl hover:bg-slate-50">
+        <span class="material-symbols-outlined text-xl">payments</span>
+        <span class="text-[9px] font-bold font-lexend uppercase tracking-wider">Pricing</span>
+    </a>
+</nav>
+
+<!-- Match Explainer Modal (Glassmorphism) -->
+<div id="explainer-modal" role="dialog" aria-modal="true" aria-labelledby="explainer-prog" class="fixed inset-0 z-[100] flex items-center justify-center hidden">
+    <div class="fixed inset-0 bg-slate-950/40 backdrop-blur-sm" onclick="closeExplainer()"></div>
+    <div class="relative bg-white/90 dark:bg-slate-900/90 backdrop-blur-md rounded-2xl border border-outline-variant/30 max-w-lg w-full p-8 shadow-2xl mx-4 transform scale-95 opacity-0 modal-bounce-in" id="explainer-content">
+        <div class="flex justify-between items-start mb-6">
+            <div>
+                <span id="explainer-uni" class="text-xs uppercase tracking-wider text-slate-500 font-bold font-lexend">University of Toronto</span>
+                <h3 id="explainer-prog" class="text-2xl font-extrabold text-primary leading-tight mt-1 font-lexend">MSc Computer Science</h3>
+            </div>
+            <div id="explainer-match-badge" class="px-3 py-1.5 bg-secondary-container text-on-secondary-container rounded-lg text-sm font-black uppercase font-lexend">
+                98% Match
+            </div>
+        </div>
+        
+        <!-- Breakdown Content -->
+        <div class="space-y-6 text-sm">
+            <div class="flex items-start gap-3">
+                <span class="material-symbols-outlined text-secondary mt-0.5" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                <div>
+                    <h4 class="font-bold text-primary font-lexend">Academic Criteria</h4>
+                    <p id="explainer-academic" class="text-on-surface-variant mt-1 leading-relaxed font-body"></p>
+                </div>
+            </div>
+            <div class="flex items-start gap-3">
+                <span class="material-symbols-outlined text-secondary mt-0.5" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                <div>
+                    <h4 class="font-bold text-primary font-lexend">Extracurricular Boosts</h4>
+                    <p id="explainer-extracurricular" class="text-on-surface-variant mt-1 leading-relaxed font-body"></p>
+                </div>
+            </div>
+            <div class="relative overflow-hidden rounded-xl" id="explainer-teaser-wrapper">
+                <div class="flex items-start gap-3 bg-primary-container/10 p-4 rounded-xl border border-primary/10 transition-all duration-300" id="explainer-counselor-section">
+                    <span class="material-symbols-outlined text-primary mt-0.5" style="font-variation-settings: 'FILL' 1;">info</span>
+                    <div>
+                        <h4 class="font-bold text-primary font-lexend">Counselor Recommendation</h4>
+                        <p id="explainer-recommendation" class="text-on-surface-variant mt-1 leading-relaxed font-body"></p>
+                    </div>
+                </div>
+                <!-- Teaser Paywall Overlay -->
+                <div id="explainer-paywall-overlay" class="absolute inset-0 bg-slate-950/60 backdrop-blur-sm flex flex-col items-center justify-center rounded-xl border border-dashed border-primary/30 text-center p-3 cursor-pointer hidden" onclick="openUpgradeModal(event)">
+                    <span class="material-symbols-outlined text-white text-base" style="font-variation-settings: 'FILL' 1;">lock</span>
+                    <span class="text-xs font-bold text-white font-lexend mt-1">Unlock Recommendation & Critical Gaps</span>
+                    <p class="text-[9px] text-slate-200 mt-0.5 leading-snug">Upgrade to Pro to view counselor insights and critical gaps analysis.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-8 flex justify-end">
+            <button class="px-6 py-3 bg-primary text-white rounded-lg font-bold text-sm hover:opacity-90 transition-opacity font-lexend" onclick="closeExplainer()">
+                Close Analysis
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Upgrade to Pro Modal (Accessible Grandma-Proof High-Contrast) -->
+<div id="upgrade-modal" role="dialog" aria-modal="true" aria-labelledby="upgrade-title" class="fixed inset-0 z-[110] flex items-center justify-center hidden">
+    <div class="fixed inset-0 bg-slate-950/60 backdrop-blur-md" onclick="closeUpgradeModal()"></div>
+    <div class="relative bg-white/95 dark:bg-slate-900/95 backdrop-blur-md rounded-3xl border-2 border-primary/50 max-w-md w-full max-h-[90vh] overflow-y-auto p-8 shadow-2xl mx-4 transform scale-95 opacity-0 modal-bounce-in" id="upgrade-content">
+        <div class="text-center mb-6">
+            <span class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary/10 text-primary mb-3">
+                <span class="material-symbols-outlined text-3xl">verified_user</span>
+            </span>
+            <h3 id="upgrade-title" class="text-3xl font-extrabold text-primary font-lexend tracking-tight">Upgrade to Smart Match Pro</h3>
+            <p class="text-sm text-on-surface-variant mt-2 leading-relaxed font-body font-medium">Your 91.7% academic average is competitive. Upgrade to activate your Deep-Dive Analytics Dashboard for predictive grade coaching.</p>
+        </div>
+        
+        <div class="space-y-4 mb-6">
+            <div class="flex items-start gap-4 p-4 bg-slate-50 dark:bg-slate-800/30 rounded-2xl border border-slate-200/50">
+                <span class="material-symbols-outlined text-emerald-600 mt-0.5 text-2xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                <div>
+                    <h4 class="text-base font-bold text-primary dark:text-white font-lexend">Predictive Grade Coaching</h4>
+                    <p class="text-xs text-on-surface-variant mt-1 leading-relaxed">Access real-time grade targets and cohort tracking to optimize your average for elite admissions.</p>
+                </div>
+            </div>
+            <div class="flex items-start gap-4 p-4 bg-slate-50 dark:bg-slate-800/30 rounded-2xl border border-slate-200/50">
+                <span class="material-symbols-outlined text-emerald-600 mt-0.5 text-2xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                <div>
+                    <h4 class="text-base font-bold text-primary dark:text-white font-lexend">Prerequisite Compatibility</h4>
+                    <p class="text-xs text-on-surface-variant mt-1 leading-relaxed">Unlock proprietary course combination analysis and strict cutoff tracking for competitive programs.</p>
+                </div>
+            </div>
+            <div class="flex items-start gap-4 p-4 bg-slate-50 dark:bg-slate-800/30 rounded-2xl border border-slate-200/50">
+                <span class="material-symbols-outlined text-emerald-600 mt-0.5 text-2xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                <div>
+                    <h4 class="text-base font-bold text-primary dark:text-white font-lexend">99% Precision Matching</h4>
+                    <p class="text-xs text-on-surface-variant mt-1 leading-relaxed">Compare your exact alignment percentage against historical cohort outcomes instead of generic rating tiers.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Financial Value Hook -->
+        <div class="bg-amber-500/10 dark:bg-amber-500/5 border border-amber-500/20 rounded-2xl p-4 text-left text-xs mb-6 text-slate-700 dark:text-slate-350 font-body">
+            <span class="font-bold text-amber-800 dark:text-amber-400 block mb-1">💡 Save on Application Fees</span>
+            The average Canadian family spends over <strong class="text-slate-900 dark:text-white">$550</strong> in trial-and-error application fees. Pro acts as an optimization tool using a <strong>99% precision matching algorithm</strong> to guarantee data currency and prevent costly, low-probability submissions.
+        </div>
+
+        <div class="bg-primary/5 dark:bg-white/5 border border-primary/20 rounded-2xl p-4 text-center mb-6">
+            <div class="text-3xl font-black text-primary font-lexend">$29.00 <span class="text-sm font-normal text-on-surface-variant">/ year</span></div>
+            <p class="text-xs text-on-surface-variant mt-1.5 font-bold">Billed annually. Cancel anytime.</p>
+        </div>
+        
+        <div class="flex flex-col gap-3">
+            <a href="student-dashboard.html?payment=success" class="block w-full text-center py-4 bg-primary hover:bg-slate-900 text-white rounded-2xl font-lexend font-bold text-lg border-2 border-slate-700 hover:border-black shadow-lg transition-all focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-primary">
+                Upgrade Now
+            </a>
+            <button class="w-full text-center py-3 bg-white hover:bg-slate-50 text-slate-700 rounded-2xl font-lexend font-bold text-base border-2 border-slate-300 hover:border-slate-400 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-slate-500 transition-all" onclick="closeUpgradeModal()">
+                Continue on Free Version
+            </button>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<script type="module" src="shared.js"></script>
+<script type="module">
+    // Initialize state
+    let state = getAppState();
+    
+    // Check if we just upgraded
+    let shouldAnimate = false;
+    if (sessionStorage.getItem('just_upgraded') === 'true') {
+        shouldAnimate = true;
+        sessionStorage.removeItem('just_upgraded');
+        // Trigger confetti reward
+        setTimeout(() => {
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 150,
+                    spread: 85,
+                    origin: { y: 0.6 }
+                });
+            }
+        }, 300);
+    }
+
+    function animateValue(obj, start, end, duration) {
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            const val = Math.floor(progress * (end - start) + start);
+            obj.textContent = val + "% Match";
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            }
+        };
+        window.requestAnimationFrame(step);
+    }
+    
+    function animateValueFloat(obj, start, end, duration) {
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            const val = (progress * (end - start) + start).toFixed(1);
+            obj.textContent = val + "%";
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            }
+        };
+        window.requestAnimationFrame(step);
+    }
+
+    function toggleLegendView() {
+        const container = document.getElementById('legend-sidebar');
+        const btn = document.getElementById('legend-toggle-btn');
+        if (container.classList.contains('simple-view')) {
+            container.classList.remove('simple-view');
+            btn.textContent = 'Simple View';
+        } else {
+            container.classList.add('simple-view');
+            btn.textContent = 'Detailed View';
+        }
+    }
+    window.toggleLegendView = toggleLegendView;
+
+    function getQualitativeBadge(match) {
+        if (match > 90) {
+            return `<span class="px-2.5 py-1 border border-emerald-300 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-950/60 rounded-full text-[9px] font-black uppercase tracking-wider font-lexend shadow-sm badge-high-match-pulse">High Match</span>`;
+        } else if (match >= 75) {
+            return `<span class="px-2.5 py-1 border border-amber-300 dark:border-amber-800 text-amber-800 dark:text-amber-300 bg-amber-100 dark:bg-amber-950/60 rounded-full text-[9px] font-black uppercase tracking-wider font-lexend shadow-sm">Medium Match</span>`;
+        } else {
+            return `<span class="px-2.5 py-1 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-400 bg-slate-100 dark:bg-slate-800/60 rounded-full text-[9px] font-black uppercase tracking-wider font-lexend shadow-sm">Low Match</span>`;
+        }
+    }
+
+    function getMatchDotIndicator(match) {
+        let colorClass = "text-rose-500";
+        if (match > 90) {
+            colorClass = "text-emerald-500";
+        } else if (match >= 75) {
+            colorClass = "text-indigo-500";
+        } else if (match >= 60) {
+            colorClass = "text-amber-500";
+        }
+        return `<span class="${colorClass} select-none flex-shrink-0">●</span>`;
+    }
+
+    function getLayoutBadges(item, isCentered = false) {
+        let badges = [];
+        if (item.isPartTime) {
+            badges.push(`<span class="px-2 py-0.5 bg-slate-100 dark:bg-slate-850 text-slate-600 dark:text-slate-350 rounded text-[9px] font-bold font-lexend uppercase tracking-wider">Part-Time</span>`);
+        }
+        if (item.isUndergrad) {
+            badges.push(`<span class="px-2 py-0.5 bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 border border-blue-100/40 dark:border-blue-900/30 rounded text-[9px] font-bold font-lexend uppercase tracking-wider">Undergrad</span>`);
+        }
+        if (item.isGraduate) {
+            badges.push(`<span class="px-2 py-0.5 bg-purple-50 dark:bg-purple-950/40 text-purple-600 dark:text-purple-400 border border-purple-100/40 dark:border-purple-900/30 rounded text-[9px] font-bold font-lexend uppercase tracking-wider">Graduate</span>`);
+        }
+        if (badges.length === 0) return '';
+        return `<div class="flex flex-wrap items-center gap-1.5 mt-1.5 ${isCentered ? 'justify-center' : 'justify-start'}">${badges.join('')}</div>`;
+    }
+
+    function renderDashboard() {
+        state = getAppState();
+        
+        // Update user identity initials dynamically
+        const userName = state.userName || "Alex";
+        const userInitials = userName.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+        document.querySelectorAll('.user-initials-display').forEach(el => {
+            el.textContent = userInitials;
+        });
+        // Update sidebar name & tier
+        const sidebarName = document.getElementById('sidebar-name');
+        const sidebarTier = document.getElementById('sidebar-tier');
+        if (sidebarName) sidebarName.textContent = userName;
+        if (sidebarTier) sidebarTier.textContent = state.isPro ? '⭐ Smart Match Pro' : 'Free Plan';
+
+
+        // Update subheader copy dynamically using state.homeProvince
+        const subheaderEl = document.getElementById('student-subheader');
+        if (subheaderEl) {
+            const homeProv = state.homeProvince || 'ON';
+            const provNames = {
+                'ON': 'Ontario',
+                'BC': 'British Columbia',
+                'QC': 'Quebec',
+                'AB': 'Alberta',
+                'NS': 'Nova Scotia',
+                'NB': 'New Brunswick',
+                'PE': 'Prince Edward Island',
+                'NL': 'Newfoundland and Labrador',
+                'SK': 'Saskatchewan',
+                'MB': 'Manitoba',
+                'YT': 'Yukon',
+                'NT': 'Northwest Territories',
+                'NU': 'Nunavut'
+            };
+            const activeProvinceName = provNames[homeProv] || 'Ontario';
+            if (state.isPro) {
+                subheaderEl.textContent = `Grade 12 Student | Your academic average of ${state.average}% is unlocked. Deep-dive analytics, prerequisite compatibility, and predictive grade coaching are active for all top-tier programs.`;
+            } else {
+                subheaderEl.textContent = `Grade 12 Student | Your academic average of ${state.average}% is competitive, but exact prerequisite compatibility and admission probability calculations for top-tier programs are locked. Upgrade to your deep-dive analytics dashboard for predictive grade coaching.`;
+            }
+        }
+
+        const curBadge = document.getElementById('curriculum-standard-badge');
+        if (curBadge) {
+            const homeProv = state.homeProvince || 'ON';
+            const provMap = {
+                'ON': 'Ontario', 'BC': 'British Columbia', 'QC': 'Quebec CEGEP', 'AB': 'Alberta',
+                'NS': 'Nova Scotia', 'NB': 'New Brunswick', 'PE': 'Prince Edward Island',
+                'NL': 'Newfoundland & Labrador', 'SK': 'Saskatchewan', 'MB': 'Manitoba',
+                'YT': 'Yukon', 'NT': 'Northwest Territories', 'NU': 'Nunavut'
+            };
+            const pLabel = provMap[homeProv] || 'Ontario';
+            curBadge.textContent = `${pLabel} Curriculum (2026-27)`;
+        }
+        
+        // Show/hide no-courses CTA banner
+        const noCoursesBanner = document.getElementById('no-courses-banner');
+        if (noCoursesBanner) {
+            if (!state.courses || state.courses.length === 0) {
+                noCoursesBanner.classList.remove('hidden');
+            } else {
+                noCoursesBanner.classList.add('hidden');
+            }
+        }
+
+        // Render Academic Average
+        if (shouldAnimate) {
+            const avgVal = parseFloat(state.average);
+            const avgEl = document.getElementById('student-average');
+            if (avgEl) {
+                animateValueFloat(avgEl, 0, avgVal, 1500);
+            }
+        } else {
+            const avgEl = document.getElementById('student-average');
+            if (avgEl) {
+                avgEl.textContent = state.average + '%';
+            }
+        }
+        
+        const avgBar = document.getElementById('average-bar');
+        if (avgBar) {
+            avgBar.style.width = state.average + '%';
+        }
+
+        // Dynamic: Count programs student qualifies for
+        const studentAvg = parseFloat(state.average);
+        const eligibleCount = state.matches.filter(m => studentAvg >= m.cutoff).length;
+        const eligibleEl = document.getElementById('eligible-programs-count');
+        if (eligibleEl) eligibleEl.textContent = `${eligibleCount} Programs`;
+        const tierEl = document.getElementById('eligible-tier-label');
+        if (tierEl) {
+            if (studentAvg >= 90) tierEl.textContent = 'Elite Tier — Excellent Standing';
+            else if (studentAvg >= 80) tierEl.textContent = 'Strong Standing';
+            else tierEl.textContent = 'Building Eligibility';
+        }
+
+        // Dynamic: Calculate realistic fee savings
+        // Canadian applicants submit 3-6 applications ($150 avg fee + supplementals).
+        // Precision matching prevents 1-3 low-probability "lottery" applications.
+        let avoidedCount = 0;
+        if (state.courses && state.courses.length > 0 && studentAvg > 0) {
+            const favIds = state.favorites || [];
+            const lowProbFavorites = state.matches.filter(m => favIds.includes(m.id) && (m.cutoff > studentAvg + 2 || m.match < 70)).length;
+            
+            if (lowProbFavorites > 0) {
+                avoidedCount = Math.min(lowProbFavorites, 3);
+            } else {
+                // Realistic benchmark: students typically avoid 1-3 reach applications based on competitive standing
+                if (studentAvg >= 92) {
+                    avoidedCount = 1;
+                } else if (studentAvg >= 82) {
+                    avoidedCount = 2;
+                } else {
+                    avoidedCount = 3;
+                }
+            }
+        }
+        
+        const feePerApp = 150; // Average Canadian application + supplemental fee
+        const savingsAmount = avoidedCount * feePerApp;
+        const savingsEl = document.getElementById('savings-amount');
+        if (savingsEl) {
+            savingsEl.textContent = `$${savingsAmount.toLocaleString()} Saved`;
+        }
+        const savingsSubEl = document.getElementById('savings-subtitle');
+        if (savingsSubEl) {
+            savingsSubEl.textContent = avoidedCount > 0 
+                ? `${avoidedCount} Low-Prob. App${avoidedCount > 1 ? 's' : ''} Avoided ($${feePerApp}/ea)`
+                : `0 Low-Prob. Apps Avoided`;
+        }
+        
+        // Sync checkboxes in dropdown with state.provinces
+        const checkboxes = document.querySelectorAll('.province-checkbox');
+        checkboxes.forEach(cb => {
+            if (state.isPro) {
+                cb.checked = state.provinces && state.provinces.includes(cb.value);
+            } else {
+                cb.checked = true;
+            }
+        });
+        updateProvinceBtnText();
+        
+        // Render Smart Matches (Top 6 eligible, paginated)
+        renderPrograms(currentPageIndex);
+        
+        // Render Explorer
+        filterExplorer();
+
+        // Animate count-up values if flag is active
+        if (shouldAnimate) {
+            setTimeout(() => {
+                document.querySelectorAll('.match-count-up').forEach(el => {
+                    const target = parseInt(el.getAttribute('data-target'));
+                    animateValue(el, 0, target, 1500);
+                });
+                // Reset shouldAnimate so we don't count up again on search/sort
+                shouldAnimate = false;
+            }, 100);
+        }
+    }
+
+    let currentPageIndex = 0;
+
+    function renderPrograms(pageIndex, direction = 0) {
+        currentPageIndex = pageIndex;
+        const matchesGrid = document.getElementById('matches-grid');
+        if (!matchesGrid) return;
+        
+        // 1. Filter matches: only display programs where the user meets the minimum GPA requirement
+        const studentAvg = parseFloat(state.average);
+        let eligibleMatches = state.matches.filter(item => studentAvg >= item.cutoff);
+        
+        // Apply unified top-level filters
+        eligibleMatches = getFilteredData(eligibleMatches);
+        
+        // 2. Sort all eligible programs by favorites first, then by match percentage descending
+        eligibleMatches.sort((a, b) => {
+            const aFav = state.favorites && state.favorites.includes(a.id) ? 1 : 0;
+            const bFav = state.favorites && state.favorites.includes(b.id) ? 1 : 0;
+            if (aFav !== bFav) return bFav - aFav;
+            return b.match - a.match;
+        });
+
+        const pageItems = eligibleMatches.slice(0, 6);
+        const totalItems = pageItems.length;
+        const totalPages = 1;
+        currentPageIndex = 0;
+
+        // Update Pagination Controls UI
+        const btnPrev = document.getElementById('btn-prev-page');
+        const btnNext = document.getElementById('btn-next-page');
+        const indicator = document.getElementById('match-page-indicator');
+
+        if (btnPrev) btnPrev.disabled = true;
+        if (btnNext) btnNext.disabled = true;
+        if (indicator) indicator.textContent = `Page 1 of 1`;
+
+        const paginationContainer = document.getElementById('matches-pagination');
+        if (paginationContainer) {
+            paginationContainer.classList.add('hidden');
+        }
+
+        // Helper to render final cards with animations
+        const renderCards = () => {
+            matchesGrid.innerHTML = '';
+            
+            if (pageItems.length === 0) {
+                matchesGrid.innerHTML = `
+                    <div class="col-span-full flex flex-col items-center justify-center py-16 px-6 bg-slate-50 dark:bg-slate-900/40 rounded-3xl border border-dashed border-slate-200 dark:border-slate-800 text-center transition-all duration-300 w-full">
+                        <div class="w-20 h-20 mb-4 text-slate-350 dark:text-slate-600 flex items-center justify-center select-none">
+                            <svg class="w-full h-full animate-pulse" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="50" cy="50" r="30" stroke="currentColor" stroke-width="2" stroke-dasharray="4 4" />
+                                <circle cx="50" cy="50" r="20" stroke="currentColor" stroke-width="2" />
+                                <path d="M65 65L80 80" stroke="currentColor" stroke-width="4" stroke-linecap="round" />
+                                <circle cx="50" cy="50" r="6" fill="currentColor" />
+                            </svg>
+                        </div>
+                        <h4 class="font-lexend font-black text-slate-700 dark:text-slate-300 text-base mb-1">No Matches Found</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 max-w-sm mb-6 font-body">We couldn't find any match recommendations matching your current criteria. Raise your academic average or clear filters to see more choices.</p>
+                        <button onclick="clearUnifiedFilters()" class="px-5 py-2.5 bg-primary hover:bg-primary/95 text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all duration-200 shadow-sm cursor-pointer flex items-center gap-1.5 hover:scale-[1.02] active:scale-98">
+                            <span class="material-symbols-outlined text-sm">filter_alt_off</span>
+                            Reset Search Filters
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            pageItems.forEach((item, index) => {
+                // Native Feed Injection (Sponsor Card)
+                if (index === 2 && currentPageIndex === 0) {
+                    const sponsorCard = document.createElement('div');
+                    sponsorCard.className = 'program-card group p-5 rounded-3xl border border-amber-300/40 relative flex flex-col h-full hover:shadow-lg transform-gpu fade-lift-in bg-slate-50 dark:bg-slate-900 overflow-hidden';
+                    sponsorCard.style.setProperty('--card-index', index);
+                    
+                    let sponsorHtml = `
+                        <!-- Top Header Zone for Match Tag -->
+                        <div class="absolute top-4 left-4 z-30 pointer-events-none">
+                            <span class="px-2.5 py-1 bg-amber-500 text-slate-950 border border-amber-400 rounded-full text-[9px] font-black uppercase tracking-wider font-lexend">
+                                🌟 Featured Partner
+                            </span>
+                        </div>
+
+                        <!-- Primary Campus Image -->
+                        <div class="w-full h-48 bg-slate-200 overflow-hidden relative shadow-inner cursor-pointer rounded-2xl mb-4">
+                            <img alt="Acme Student Loans" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" src="campuses/sponsor.png" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent pointer-events-none"></div>
+                        </div>
+
+                        <div class="flex flex-col items-center text-center flex-1 relative z-20 px-4 cursor-pointer">
+                            <h4 class="program-title font-black text-sm text-primary dark:text-white leading-tight mb-1 w-full flex items-center justify-center min-w-0">
+                                <span class="truncate">Acme Student Line of Credit</span>
+                            </h4>
+                            <p class="text-xs text-slate-400 dark:text-slate-500 font-semibold font-lexend truncate w-full mb-3">Finance your post-secondary dream</p>
+                            
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mb-4 px-2 leading-relaxed font-body">Flexible repayment options tailored for Canadian university students. Apply in minutes with zero upfront fees.</p>
+
+                            <button class="mt-auto px-5 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-black uppercase tracking-wider rounded-xl transition-all duration-200 shadow-sm w-full font-lexend">
+                                Learn More
+                            </button>
+                        </div>
+                    `;
+                    
+                    if (currentViewMode === 'list') {
+                         sponsorHtml = `
+                            <div class="flex flex-row h-full gap-5">
+                                <div class="w-1/3 relative overflow-hidden rounded-xl bg-slate-200 cursor-pointer group-hover:shadow-md transition-shadow">
+                                    <img alt="Acme Student Loans" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" src="campuses/sponsor.png" />
+                                    <div class="absolute top-3 left-3 z-30 pointer-events-none">
+                                        <span class="px-2.5 py-1 bg-amber-500 text-slate-950 rounded-full text-[9px] font-black uppercase tracking-wider font-lexend shadow-sm">
+                                            🌟 Featured
+                                        </span>
+                                    </div>
+                                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent pointer-events-none"></div>
+                                </div>
+                                <div class="w-2/3 flex flex-col justify-center py-2 pr-4 relative z-20 cursor-pointer">
+                                    <h4 class="program-title font-black text-base text-primary dark:text-white leading-tight mb-1">
+                                        Acme Student Line of Credit
+                                    </h4>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 font-semibold font-lexend mb-3">Finance your post-secondary dream</p>
+                                    <p class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed mb-4 max-w-md">Flexible repayment options tailored for Canadian university students. Apply in minutes with zero upfront fees.</p>
+                                    <button class="mt-auto px-5 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 text-[10px] font-black uppercase tracking-wider rounded-lg transition-all shadow-sm w-fit font-lexend">
+                                        Learn More
+                                    </button>
+                                </div>
+                            </div>
+                         `;
+                    }
+                    
+                    sponsorCard.innerHTML = sponsorHtml;
+                    matchesGrid.appendChild(sponsorCard);
+                }
+
+                const card = document.createElement('div');
+                let hoverClass = 'hover-low';
+                if (item.match > 90) {
+                    hoverClass = 'hover-high';
+                } else if (item.match >= 75) {
+                    hoverClass = 'hover-medium';
+                }
+                card.className = `program-card group p-5 rounded-3xl border relative flex flex-col h-full hover:shadow-lg transform-gpu fade-lift-in ${hoverClass}`;
+                
+                // Staggered entry animation delay
+                card.style.setProperty('--card-index', index + (index >= 2 && currentPageIndex === 0 ? 1 : 0));
+                
+                // Custom brand hover glow variables
+                const brandColor = (item.logoStyle && item.logoStyle.brandColor) || '#2563eb';
+                card.style.setProperty('--brand-glow-color', brandColor);
+                
+                let badgeHTML = '';
+                let teaserMatchHTML = '';
+                let proSectionHTML = '';
+                
+                if (item.proLocked) {
+                    badgeHTML = `
+                        <div class="z-20 relative cursor-pointer pointer-events-auto" onclick="openUpgradeModal(event)">
+                            <span class="px-2.5 py-1 bg-amber-500 text-slate-950 border border-amber-400 rounded-full text-[9px] font-black uppercase tracking-wider font-lexend">
+                                🔒 Data Wall
+                            </span>
+                        </div>
+                    `;
+                    teaserMatchHTML = `
+                        <span class="text-amber-600 dark:text-amber-400 text-xs font-black tracking-tight font-lexend select-none">
+                            [${item.match}% Match Locked]
+                        </span>
+                    `;
+                    
+                    let prereqPreview = "ENG4U, MHF4U, MCV4U, +2 more [Locked]";
+                    if (item.type === 'College' || item.program.toLowerCase().includes('nursing') || item.program.toLowerCase().includes('health')) {
+                        prereqPreview = "ENG4U, SBI4U, SCH4U, +1 more [Locked]";
+                    }
+                    
+                    proSectionHTML = `
+                        <div class="mt-3 p-3 bg-red-500/5 dark:bg-red-500/10 rounded-xl border border-red-500/20 text-left cursor-pointer z-20 relative overflow-hidden group/lock" onclick="openUpgradeModal(event)">
+                            <!-- Inner Content that is blurred -->
+                            <div class="text-[10px] space-y-1.5 text-slate-650 dark:text-slate-350 font-body transition duration-300 filter blur-[2.5px] select-none">
+                                <div>
+                                    <div class="flex items-center justify-between font-semibold">
+                                        <span>Target Cutoff:</span>
+                                        <span class="text-slate-800 dark:text-slate-200">${item.cutoff}%</span>
+                                    </div>
+                                    <div class="text-[8.5px] text-slate-500 italic mt-0.5 leading-tight">
+                                        Strict cutoff tracking is exclusive to Pro.
+                                    </div>
+                                </div>
+                                <div class="h-px bg-slate-100 dark:bg-slate-800 my-1"></div>
+                                <div>
+                                    <div class="flex items-center justify-between font-semibold">
+                                        <span>Prerequisites:</span>
+                                        <span class="text-slate-800 dark:text-slate-200">${prereqPreview}</span>
+                                    </div>
+                                    <div class="text-[8.5px] text-slate-500 italic mt-0.5 leading-tight">
+                                        Specific course combination analysis is exclusive to Pro.
+                                    </div>
+                                </div>
+                                <div class="h-px bg-slate-100 dark:bg-slate-800 my-1"></div>
+                                <div>
+                                    <div class="flex items-center justify-between font-semibold">
+                                        <span>Cohort Standing:</span>
+                                        <span class="text-slate-800 dark:text-slate-200">Top 15% Standing</span>
+                                    </div>
+                                    <div class="text-[8.5px] text-slate-500 italic mt-0.5 leading-tight">
+                                        Historical cohort standings are exclusive to Pro.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Glassmorphic Blur Overlay -->
+                            <div class="absolute inset-0 bg-slate-900/10 dark:bg-black/10 backdrop-blur-[6px] transition-all duration-300 group-hover/lock:backdrop-blur-[2px] flex flex-col items-center justify-center gap-1 z-10">
+                                <div class="w-8 h-8 rounded-full bg-white/95 dark:bg-slate-900/95 shadow-md flex items-center justify-center transition-all duration-500 transform group-hover/lock:scale-110 active:scale-95 text-amber-500 lock-spring-icon">
+                                    <span class="material-symbols-outlined text-lg">lock</span>
+                                </div>
+                                <span class="text-[8px] font-black uppercase text-slate-700 dark:text-slate-300 tracking-wider font-lexend bg-white/90 dark:bg-slate-900/90 px-2 py-0.5 rounded shadow-sm">
+                                    Unlock Analytics
+                                </span>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    if (state.isPro) {
+                        const pulseClass = item.match > 90 ? 'badge-high-match-pulse' : '';
+                        badgeHTML = `
+                            <span class="px-2.5 py-1 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20 rounded-full text-[9px] font-black uppercase tracking-wider font-lexend ${pulseClass}">
+                                ${item.match}% Match
+                            </span>
+                        `;
+                        
+                        const isCompetitive = item.id === 'university-of-waterloo' || item.id === 'university-of-toronto' || item.id === 'mcgill-university' || item.id === 'mcmaster-university';
+                        if (isCompetitive) {
+                            proSectionHTML = `
+                                <div class="mt-3 p-3 bg-emerald-500/5 dark:bg-emerald-950/10 rounded-xl border border-emerald-500/10 text-left">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <span class="text-[9px] font-black uppercase text-emerald-600 dark:text-emerald-450 tracking-wider font-lexend">Pro Analytics</span>
+                                        <span class="material-symbols-outlined text-[12px] text-emerald-500">verified</span>
+                                    </div>
+                                    <div class="text-[10px] space-y-1 text-slate-650 dark:text-slate-350 font-body">
+                                        <div>Target Cutoff: <strong class="text-slate-900 dark:text-white">${item.cutoff}%</strong></div>
+                                        <div>Prereqs: <span class="font-semibold text-slate-800 dark:text-slate-200">ENG4U, MHF4U, MCV4U</span></div>
+                                        <div>Admission Probability: <span class="font-bold text-emerald-600 dark:text-emerald-400">${item.match}%</span></div>
+                                    </div>
+                                </div>
+                            `;
+                        }
+                    } else {
+                        badgeHTML = getQualitativeBadge(item.match);
+                    }
+                }
+                
+                const isPinned = state.favorites && state.favorites.includes(item.id);
+                
+                // Campus Image-Centric Layout
+                card.innerHTML = `
+                    <!-- Top Header Zone for Match Tag -->
+                    <div class="absolute top-4 left-4 z-30 pointer-events-none">
+                        ${badgeHTML}
+                    </div>
+
+                    <!-- Primary Campus Image -->
+                    <div class="w-full h-48 bg-slate-200 overflow-hidden relative shadow-inner cursor-pointer" onclick="${item.proLocked ? 'openUpgradeModal(event)' : ''}">
+                        ${item.image ? `
+                        <img alt="${item.university}" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" src="${item.image}" onerror="handleImageError(this, '${item.id}')"/>
+                        ` : ''}
+                        <div class="${item.image ? 'hidden' : ''} absolute inset-0 flex flex-col items-center justify-center text-white font-bold" style="background: ${item.logoStyle.bg}; color: ${item.logoStyle.color || '#ffffff'}">
+                            <span class="text-4xl font-black tracking-tight">${item.logoStyle.initials}</span>
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none"></div>
+                        
+                        <!-- Restored Logo Overlaid -->
+                        <div class="absolute bottom-3 left-1/2 -translate-x-1/2 w-14 h-14 rounded-full border-2 border-white/20 overflow-hidden bg-white shadow-lg z-30" ${item.proLocked ? `title="Official ${item.university} Admissions Data available for Pro users."` : ''}>
+                            <img class="w-full h-full object-contain p-0.5" src="${item.logoUrl}" alt="${item.university} Logo" onerror="handleLogoError(this, '${item.crestSvg}');"/>
+                            <div class="hidden absolute inset-0 items-center justify-center bg-white">
+                                <img src="${item.crestSvg}" alt="${item.university} crest" class="w-full h-full object-contain p-1" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col items-center text-center flex-1 relative z-20 mt-4 px-4" onclick="${item.proLocked ? 'openUpgradeModal(event)' : ''}">
+                        <!-- Program and University with distinct weights -->
+                        <h4 class="program-title font-black text-sm text-primary dark:text-white leading-tight mb-1 w-full flex items-center justify-center gap-1.5 min-w-0">
+                            ${getMatchDotIndicator(item.match)}
+                            <span class="truncate">${item.program}</span>
+                        </h4>
+                        <p class="text-xs text-slate-400 dark:text-slate-500 font-semibold font-lexend truncate w-full mb-2">${item.university}</p>
+                        
+                        <!-- Type and Layout Badges -->
+                        <div class="text-[9px] text-slate-450 dark:text-slate-500 font-bold uppercase tracking-wider mb-2 flex items-center justify-center gap-1 select-none">
+                            <span>${item.type}</span>
+                            ${getLayoutBadges(item, true)}
+                        </div>
+
+                        <!-- Critical Metadata Badges -->
+                        <div class="flex flex-wrap gap-1.5 mt-1.5 justify-center mb-4">
+                            <span class="px-2.5 py-0.5 bg-primary/5 text-primary dark:bg-primary/10 dark:text-blue-300 text-[9px] font-extrabold rounded-full uppercase tracking-wider select-none">
+                                Min. Avg: ${item.cutoff}%
+                            </span>
+                            <span class="px-2.5 py-0.5 bg-slate-100 dark:bg-slate-800 text-slate-650 dark:text-slate-350 text-[9px] font-extrabold rounded-full uppercase tracking-wider select-none">
+                                📍 ${item.city}, ${item.province}
+                            </span>
+                            ${item.ranking ? `
+                            <span class="px-2.5 py-0.5 bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/20 text-[9px] font-extrabold rounded-full uppercase tracking-wider flex items-center gap-1 select-none">
+                                <span class="material-symbols-outlined text-[10px] leading-none">leaderboard</span>
+                                Maclean's: #${item.ranking.rank} ${item.ranking.category}
+                            </span>
+                            ` : ''}
+                        </div>
+                    </div>
+
+                    <div class="relative flex-1 flex flex-col z-10">
+                        <!-- Removed secondary campus image -->
+
+                        ${proSectionHTML}
+
+                        <!-- Action Buttons -->
+                        <div class="mt-4 mb-2 flex flex-col gap-2 w-full relative z-20">
+                            <a href="${item.proLocked ? '#' : item.applyUrl}" 
+                               target="${item.proLocked ? '_self' : '_blank'}" 
+                               rel="noopener noreferrer" 
+                               onclick="${item.proLocked ? 'openUpgradeModal(event)' : 'event.stopPropagation();'}" 
+                               class="w-full text-center py-3 ${item.proLocked ? 'bg-amber-500 hover:bg-amber-600 text-slate-950 font-black' : 'bg-primary hover:bg-primary/95 text-white'} text-xs font-black uppercase tracking-wider rounded-xl transition-all duration-200 shadow-sm cursor-pointer hover:scale-[1.02] active:scale-98 flex items-center justify-center gap-1">
+                                ${item.proLocked ? 'Unlock Predictive Analytics' : 'How to Apply'}
+                                <span class="material-symbols-outlined text-[14px]">${item.proLocked ? 'lock_open' : 'arrow_outward'}</span>
+                            </a>
+                            <a href="${item.proLocked ? '#' : item.websiteUrl}" 
+                               target="${item.proLocked ? '_self' : '_blank'}" 
+                               rel="noopener noreferrer" 
+                               onclick="${item.proLocked ? 'openUpgradeModal(event)' : 'event.stopPropagation();'}" 
+                               class="w-full text-center py-3 bg-slate-55 bg-slate-50 hover:bg-slate-100 dark:bg-slate-805 dark:hover:bg-slate-800 border border-slate-200/60 dark:border-slate-700 text-slate-650 dark:text-slate-350 hover:text-primary dark:hover:text-white text-[10px] font-black uppercase tracking-wider rounded-xl transition-all duration-200 cursor-pointer">
+                                ${item.proLocked ? 'Compare Premium Benefits' : 'View Program Website'}
+                            </a>
+                        </div>
+
+                        <!-- Card Footer -->
+                        <div class="flex items-center justify-between mt-auto pt-3 border-t border-slate-100/60 dark:border-slate-800/60">
+                            <div class="flex items-center gap-2">
+                                ${teaserMatchHTML}
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <button class="material-symbols-outlined ${isPinned ? 'text-primary' : 'text-slate-400 hover:text-primary opacity-0 group-hover:opacity-100'} text-lg cursor-pointer transition-all duration-300" onclick="toggleFavorite('${item.id}', event)" style="${isPinned ? "font-variation-settings: 'FILL' 1;" : ""}">
+                                    push_pin
+                                </button>
+                                <button class="material-symbols-outlined text-slate-400 hover:text-primary text-lg cursor-pointer opacity-0 group-hover:opacity-100 transition-all duration-300" onclick="openExplainer('${item.id}', event)">
+                                    info
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                matchesGrid.appendChild(card);
+            });
+        };
+
+        // Render skeleton shimmer loaders for 250ms during transitions
+        matchesGrid.innerHTML = '';
+        const shimmerCount = Math.min(6, pageItems.length || 6);
+        for (let i = 0; i < shimmerCount; i++) {
+            const skeleton = document.createElement('div');
+            skeleton.className = 'skeleton-card';
+            skeleton.innerHTML = `
+                <div class="skeleton-element skeleton-logo text-center"></div>
+                <div class="skeleton-element skeleton-title"></div>
+                <div class="skeleton-element skeleton-subtitle"></div>
+                <div class="skeleton-element skeleton-badge" style="margin-top: auto;"></div>
+            `;
+            matchesGrid.appendChild(skeleton);
+        }
+
+        setTimeout(renderCards, 250);
+    }
+
+    function changeMatchPage(direction) {
+        const matchesGrid = document.getElementById('matches-grid');
+        if (!matchesGrid) return;
+        
+        // Add slide-out class to existing cards
+        const cards = matchesGrid.querySelectorAll('.program-card');
+        const slideClass = direction > 0 ? 'slide-out-left' : 'slide-out-right';
+        cards.forEach(card => {
+            card.classList.remove('spring-in-left', 'spring-in-right', 'fade-lift-in');
+            card.classList.add(slideClass);
+        });
+
+        // Update page index after slide-out completes
+        setTimeout(() => {
+            renderPrograms(currentPageIndex + direction, direction);
+        }, 250);
+    }
+
+    function getFilteredData(dataList) {
+        const queryEl = document.getElementById('unified-search');
+        const query = queryEl ? queryEl.value.toLowerCase().trim() : '';
+        
+        const coopEl = document.getElementById('coop-filter');
+        const coopOnly = coopEl ? coopEl.checked : false;
+        
+        const gradeEl = document.getElementById('grade-filter');
+        const gradeRange = gradeEl ? gradeEl.value : 'ALL';
+        
+        const typeEl = document.getElementById('explorer-type');
+        const typeFilter = typeEl ? typeEl.value : 'ALL';
+
+        const alignmentEl = document.getElementById('alignment-filter');
+        const alignmentFilter = alignmentEl ? alignmentEl.value : 'ALL';
+
+        // Advanced Search filters
+        const envEl = document.getElementById('filter-environment');
+        const envFilter = envEl ? envEl.value : 'ALL';
+
+        const sizeEl = document.getElementById('filter-size');
+        const sizeFilter = sizeEl ? sizeEl.value : 'ALL';
+
+        const pathwayEl = document.getElementById('filter-pathway');
+        const pathwayFilter = pathwayEl ? pathwayEl.value : 'ALL';
+
+        const outlookEl = document.getElementById('filter-outlook');
+        const outlookFilter = outlookEl ? outlookEl.value : 'ALL';
+        
+        let activeProvinces = [];
+        const checkboxes = document.querySelectorAll('.province-checkbox');
+        if (state.isPro) {
+            activeProvinces = Array.from(checkboxes).filter(cb => cb.checked).map(cb => cb.value);
+        } else {
+            activeProvinces = Array.from(checkboxes).map(cb => cb.value);
+        }
+        
+        return dataList.filter(item => {
+            const matchesQuery = !query || 
+                item.program.toLowerCase().includes(query) || 
+                item.university.toLowerCase().includes(query) || 
+                item.city.toLowerCase().includes(query) || 
+                item.province.toLowerCase().includes(query);
+                
+            const matchesCoop = !coopOnly || 
+                item.program.toLowerCase().includes('co-op') || 
+                item.program.toLowerCase().includes('coop');
+                
+            let matchesGrade = true;
+            if (gradeRange === '<75') {
+                matchesGrade = item.cutoff < 75;
+            } else if (gradeRange === '75-85') {
+                matchesGrade = item.cutoff >= 75 && item.cutoff <= 85;
+            } else if (gradeRange === '>85') {
+                matchesGrade = item.cutoff > 85;
+            }
+            
+            const matchesProv = activeProvinces.includes(item.province);
+            const matchesType = typeFilter === 'ALL' || item.type === typeFilter;
+
+            let matchesAlignment = true;
+            if (alignmentFilter === 'TARGET') {
+                matchesAlignment = item.match >= 75 && item.match < 90;
+            } else if (alignmentFilter === 'STRETCH') {
+                matchesAlignment = item.match < 75;
+            } else if (alignmentFilter === 'PREMIUM') {
+                matchesAlignment = item.match >= 90;
+            }
+
+            const matchesEnv = envFilter === 'ALL' || item.environment === envFilter;
+            const matchesSize = sizeFilter === 'ALL' || item.size === sizeFilter;
+            
+            let matchesPathway = true;
+            if (pathwayFilter !== 'ALL') {
+                if (pathwayFilter === 'Co-op') {
+                    matchesPathway = item.pathways && item.pathways.includes('Co-op');
+                } else if (pathwayFilter === 'Joint') {
+                    matchesPathway = item.pathways && item.pathways.includes('Joint Programs');
+                } else if (pathwayFilter === 'Experiential') {
+                    matchesPathway = item.pathways && item.pathways.includes('Experiential Learning');
+                }
+            }
+            
+            const matchesOutlook = outlookFilter === 'ALL' || item.outlook === outlookFilter;
+            
+            return matchesQuery && matchesCoop && matchesGrade && matchesProv && matchesType && matchesAlignment && matchesEnv && matchesSize && matchesPathway && matchesOutlook;
+        });
+    }
+
+    function runUnifiedFilter() {
+        renderPrograms(0);
+        filterExplorer(true);
+    }
+
+    function clearUnifiedFilters() {
+        const queryEl = document.getElementById('unified-search');
+        if (queryEl) queryEl.value = '';
+        
+        const coopEl = document.getElementById('coop-filter');
+        if (coopEl) coopEl.checked = false;
+        
+        const gradeEl = document.getElementById('grade-filter');
+        if (gradeEl) gradeEl.value = 'ALL';
+        
+        const typeEl = document.getElementById('explorer-type');
+        if (typeEl) typeEl.value = 'ALL';
+
+        const alignmentEl = document.getElementById('alignment-filter');
+        if (alignmentEl) alignmentEl.value = 'ALL';
+
+        const envEl = document.getElementById('filter-environment');
+        if (envEl) envEl.value = 'ALL';
+
+        const sizeEl = document.getElementById('filter-size');
+        if (sizeEl) sizeEl.value = 'ALL';
+
+        const pathwayEl = document.getElementById('filter-pathway');
+        if (pathwayEl) pathwayEl.value = 'ALL';
+
+        const outlookEl = document.getElementById('filter-outlook');
+        if (outlookEl) outlookEl.value = 'ALL';
+        
+        document.querySelectorAll('.province-checkbox').forEach(cb => {
+            cb.checked = true;
+        });
+        
+        updateProvinceBtnText();
+        runUnifiedFilter();
+    }
+
+    let currentExplorerPage = 0;
+    const EXPLORER_PAGE_SIZE = 12;
+
+    function changeExplorerPage(delta) {
+        const filtered = getFilteredData(state.matches);
+        const totalPages = Math.ceil(filtered.length / EXPLORER_PAGE_SIZE) || 1;
+        const newPage = currentExplorerPage + delta;
+        if (newPage >= 0 && newPage < totalPages) {
+            currentExplorerPage = newPage;
+            filterExplorer(false);
+            const explorerEl = document.getElementById('explorer');
+            if (explorerEl) {
+                explorerEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+    }
+
+    function filterExplorer(resetPage = false) {
+        if (resetPage) {
+            currentExplorerPage = 0;
+        }
+        const grid = document.getElementById('explorer-grid');
+        const empty = document.getElementById('explorer-empty');
+        const pagination = document.getElementById('explorer-pagination');
+        const countLabel = document.getElementById('explorer-count-label');
+        const pageIndicator = document.getElementById('explorer-page-indicator');
+        const btnPrev = document.getElementById('btn-prev-explorer');
+        const btnNext = document.getElementById('btn-next-explorer');
+        if (!grid) return;
+        
+        grid.innerHTML = '';
+        const filtered = getFilteredData(state.matches);
+        
+        // Sort matches alphabetically by university name, then by program name to function as a directory catalog
+        filtered.sort((a, b) => {
+            const uniCompare = a.university.localeCompare(b.university);
+            if (uniCompare !== 0) return uniCompare;
+            return a.program.localeCompare(b.program);
+        });
+
+        const totalCount = filtered.length;
+        const totalPages = Math.ceil(totalCount / EXPLORER_PAGE_SIZE) || 1;
+
+        if (currentExplorerPage >= totalPages) {
+            currentExplorerPage = Math.max(0, totalPages - 1);
+        }
+        
+        if (totalCount === 0) {
+            empty.classList.remove('hidden');
+            if (pagination) pagination.classList.add('hidden');
+        } else {
+            empty.classList.add('hidden');
+            if (pagination) pagination.classList.remove('hidden');
+
+            const startIdx = currentExplorerPage * EXPLORER_PAGE_SIZE;
+            const endIdx = Math.min(startIdx + EXPLORER_PAGE_SIZE, totalCount);
+            const pageItems = filtered.slice(startIdx, endIdx);
+
+            if (countLabel) {
+                countLabel.textContent = `Showing ${startIdx + 1}–${endIdx} of ${totalCount} programs`;
+            }
+            if (pageIndicator) {
+                pageIndicator.textContent = `Page ${currentExplorerPage + 1} of ${totalPages}`;
+            }
+            if (btnPrev) {
+                btnPrev.disabled = currentExplorerPage === 0;
+            }
+            if (btnNext) {
+                btnNext.disabled = currentExplorerPage >= totalPages - 1;
+            }
+
+            pageItems.forEach((item, index) => {
+                const card = document.createElement('div');
+                let hoverClass = 'hover-low';
+                if (item.match > 90) {
+                    hoverClass = 'hover-high';
+                } else if (item.match >= 75) {
+                    hoverClass = 'hover-medium';
+                }
+                card.className = `program-card group p-6 rounded-3xl border border-slate-100 dark:border-slate-850 bg-white dark:bg-slate-900 shadow-sm relative flex flex-col h-full hover:shadow-lg transform-gpu fade-lift-in ${hoverClass}`;
+                
+                // Staggered entry animation delay
+                card.style.setProperty('--card-index', index);
+                
+                let badgeHTML = '';
+                let teaserMatchHTML = '';
+                let proSectionHTML = '';
+                
+                if (item.proLocked) {
+                    badgeHTML = `
+                        <div class="z-20 relative cursor-pointer pointer-events-auto" onclick="openUpgradeModal(event)">
+                            <span class="px-2.5 py-1 bg-amber-500 text-slate-950 border border-amber-400 rounded-full text-[9px] font-black uppercase tracking-wider font-lexend">
+                                🔒 Data Wall
+                            </span>
+                        </div>
+                    `;
+                    teaserMatchHTML = `
+                        <span class="text-amber-600 dark:text-amber-400 text-xs font-black tracking-tight font-lexend mr-2 select-none">
+                            [${item.match}% Match Locked]
+                        </span>
+                    `;
+                    
+                    let prereqPreview = "ENG4U, MHF4U, MCV4U, +2 more [Locked]";
+                    if (item.type === 'College' || item.program.toLowerCase().includes('nursing') || item.program.toLowerCase().includes('health')) {
+                        prereqPreview = "ENG4U, SBI4U, SCH4U, +1 more [Locked]";
+                    }
+                    
+                    proSectionHTML = `
+                        <div class="mt-3 p-3 bg-red-500/5 dark:bg-red-500/10 rounded-xl border border-red-500/20 text-left cursor-pointer z-20 relative overflow-hidden group/lock" onclick="openUpgradeModal(event)">
+                            <!-- Inner Content that is blurred -->
+                            <div class="text-[10px] space-y-1.5 text-slate-650 dark:text-slate-350 font-body transition duration-300 filter blur-[2.5px] select-none">
+                                <div>
+                                    <div class="flex items-center justify-between font-semibold">
+                                        <span>Target Cutoff:</span>
+                                        <span class="text-slate-800 dark:text-slate-200">${item.cutoff}%</span>
+                                    </div>
+                                    <div class="text-[8.5px] text-slate-500 italic mt-0.5 leading-tight">
+                                        Strict cutoff tracking is exclusive to Pro.
+                                    </div>
+                                </div>
+                                <div class="h-px bg-slate-100 dark:bg-slate-800 my-1"></div>
+                                <div>
+                                    <div class="flex items-center justify-between font-semibold">
+                                        <span>Prerequisites:</span>
+                                        <span class="text-slate-800 dark:text-slate-200">${prereqPreview}</span>
+                                    </div>
+                                    <div class="text-[8.5px] text-slate-500 italic mt-0.5 leading-tight">
+                                        Specific course combination analysis is exclusive to Pro.
+                                    </div>
+                                </div>
+                                <div class="h-px bg-slate-100 dark:bg-slate-800 my-1"></div>
+                                <div>
+                                    <div class="flex items-center justify-between font-semibold">
+                                        <span>Cohort Standing:</span>
+                                        <span class="text-slate-800 dark:text-slate-200">Top 15% Standing</span>
+                                    </div>
+                                    <div class="text-[8.5px] text-slate-500 italic mt-0.5 leading-tight">
+                                        Historical cohort standings are exclusive to Pro.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Glassmorphic Blur Overlay -->
+                            <div class="absolute inset-0 bg-slate-900/10 dark:bg-black/10 backdrop-blur-[6px] transition-all duration-300 group-hover/lock:backdrop-blur-[2px] flex flex-col items-center justify-center gap-1 z-10">
+                                <div class="w-8 h-8 rounded-full bg-white/95 dark:bg-slate-900/95 shadow-md flex items-center justify-center transition-all duration-500 transform group-hover/lock:scale-110 active:scale-95 text-amber-500 lock-spring-icon">
+                                    <span class="material-symbols-outlined text-lg">lock</span>
+                                </div>
+                                <span class="text-[8px] font-black uppercase text-slate-700 dark:text-slate-350 tracking-wider font-lexend bg-white/90 dark:bg-slate-900/90 px-2 py-0.5 rounded shadow-sm">
+                                    Unlock Analytics
+                                </span>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    if (state.isPro) {
+                        const pulseClass = item.match > 90 ? 'badge-high-match-pulse' : '';
+                        badgeHTML = `
+                            <span class="px-2.5 py-1 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20 rounded-full text-[9px] font-black uppercase tracking-wider font-lexend ${pulseClass}">
+                                ${item.match}% Match
+                            </span>
+                        `;
+                        
+                        const isCompetitive = item.id === 'university-of-waterloo' || item.id === 'university-of-toronto' || item.id === 'mcgill-university' || item.id === 'mcmaster-university';
+                        if (isCompetitive) {
+                            proSectionHTML = `
+                                <div class="mt-3 p-3 bg-emerald-500/5 dark:bg-emerald-950/10 rounded-xl border border-emerald-500/10 text-left">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <span class="text-[9px] font-black uppercase text-emerald-600 dark:text-emerald-450 tracking-wider font-lexend">Pro Analytics</span>
+                                        <span class="material-symbols-outlined text-[12px] text-emerald-500">verified</span>
+                                    </div>
+                                    <div class="text-[10px] space-y-1 text-slate-650 dark:text-slate-350 font-body">
+                                        <div>Target Cutoff: <strong class="text-slate-900 dark:text-white">${item.cutoff}%</strong></div>
+                                        <div>Prereqs: <span class="font-semibold text-slate-800 dark:text-slate-200">ENG4U, MHF4U, MCV4U</span></div>
+                                        <div>Admission Probability: <span class="font-bold text-emerald-600 dark:text-emerald-400">${item.match}%</span></div>
+                                    </div>
+                                </div>
+                            `;
+                        }
+                    } else {
+                        badgeHTML = getQualitativeBadge(item.match);
+                    }
+                }
+                
+                const isPinned = state.favorites && state.favorites.includes(item.id);
+                
+                card.innerHTML = `
+                    <!-- Top Header Zone for Match Tag -->
+                    <div class="absolute top-4 right-4 z-30 pointer-events-none">
+                        ${badgeHTML}
+                    </div>
+
+                    <div class="flex-1 min-w-0 text-left mb-4 z-20 relative cursor-pointer" onclick="${item.proLocked ? 'openUpgradeModal(event)' : ''}">
+                        <h4 class="font-black text-sm text-primary dark:text-white leading-tight mb-0.5 font-lexend flex items-center gap-1.5 min-w-0">
+                            ${getMatchDotIndicator(item.match)}
+                            <span class="truncate">${item.program}</span>
+                        </h4>
+                        <p class="text-xs text-slate-400 dark:text-slate-500 font-semibold font-lexend truncate">${item.university}</p>
+                    </div>
+                    
+                    <div class="relative flex-1 flex flex-col">
+                        <div class="w-full h-32 bg-slate-200 mb-3 rounded-xl overflow-hidden relative shadow-inner cursor-pointer" onclick="${item.proLocked ? 'openUpgradeModal(event)' : ''}">
+                            ${item.image ? `
+                            <img alt="${item.university}" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" src="${item.image}" loading="lazy" decoding="async" onerror="handleImageError(this, '${item.id}')"/>
+                            ` : ''}
+                            <div class="${item.image ? 'hidden' : ''} absolute inset-0 flex flex-col items-center justify-center text-white font-bold" style="background: ${item.logoStyle.bg}; color: ${item.logoStyle.color || '#ffffff'}">
+                                <span class="text-2xl font-black tracking-tight">${item.logoStyle.initials}</span>
+                            </div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none"></div>
+                            
+                            <!-- Restored Logo Overlaid -->
+                            <div class="absolute bottom-3 left-4 w-12 h-12 rounded-full border border-white/20 overflow-hidden bg-white shadow-lg z-30" ${item.proLocked ? `title="Official ${item.university} Admissions Data available for Pro users."` : ''}>
+                                <img class="w-full h-full object-contain p-0.5" src="${item.logoUrl}" alt="${item.university} Logo" loading="lazy" decoding="async" onerror="handleLogoError(this, '${item.crestSvg}');"/>
+                            </div>
+                        </div>
+
+                        <!-- Critical Metadata Badges -->
+                        <div class="flex flex-wrap gap-1.5 mt-1.5 justify-start mb-3 select-none">
+                            <span class="px-2.5 py-0.5 bg-primary/5 text-primary dark:bg-primary/10 dark:text-blue-300 text-[9px] font-extrabold rounded-full uppercase tracking-wider">
+                                Min. Avg: ${item.cutoff}%
+                            </span>
+                            <span class="px-2.5 py-0.5 bg-slate-100 dark:bg-slate-805 text-slate-650 dark:text-slate-350 text-[9px] font-extrabold rounded-full uppercase tracking-wider">
+                                📍 ${item.city}, ${item.province}
+                            </span>
+                            <span class="px-2.5 py-0.5 bg-slate-100 dark:bg-slate-805 text-slate-650 dark:text-slate-350 text-[9px] font-extrabold rounded-full uppercase tracking-wider">
+                                ${item.type}
+                            </span>
+                            ${getLayoutBadges(item, false)}
+                            ${item.ranking ? `
+                            <span class="px-2.5 py-0.5 bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/20 text-[9px] font-extrabold rounded-full uppercase tracking-wider flex items-center gap-1">
+                                <span class="material-symbols-outlined text-[10px] leading-none">leaderboard</span>
+                                Maclean's: #${item.ranking.rank} ${item.ranking.category}
+                            </span>
+                            ` : ''}
+                        </div>
+
+                        <!-- Fit Indicator Bar -->
+                        ${(() => {
+                            const avg = parseFloat(state.average);
+                            const gap = avg - item.cutoff;
+                            const pct = Math.min(100, Math.max(0, (avg / item.cutoff) * 100));
+                            let barColor = 'bg-emerald-500';
+                            let fitLabel = 'Well Above Cutoff';
+                            let fitTextColor = 'text-emerald-600';
+                            if (gap < 0) { barColor = 'bg-rose-400'; fitLabel = `${Math.abs(gap).toFixed(1)}% Below Cutoff`; fitTextColor = 'text-rose-500'; }
+                            else if (gap < 5) { barColor = 'bg-amber-400'; fitLabel = `${gap.toFixed(1)}% Above Cutoff`; fitTextColor = 'text-amber-600'; }
+                            return `
+                            <div class="mb-3">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="text-[9px] font-bold uppercase tracking-wider text-slate-400 font-lexend">Your Fit</span>
+                                    <span class="text-[9px] font-black ${fitTextColor} font-lexend">${fitLabel}</span>
+                                </div>
+                                <div class="h-1.5 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                                    <div class="h-full ${barColor} rounded-full transition-all duration-500" style="width: ${Math.min(100, pct)}%"></div>
+                                </div>
+                                <div class="flex justify-between text-[8px] text-slate-400 mt-0.5 font-lexend">
+                                    <span>Your avg: ${avg}%</span>
+                                    <span>Cutoff: ${item.cutoff}%</span>
+                                </div>
+                            </div>`;
+                        })()}
+
+                        ${proSectionHTML}
+
+                        <!-- Action Buttons -->
+                        <div class="mt-4 mb-2 flex flex-col gap-2 w-full relative z-20">
+                            <a href="${item.proLocked ? '#' : item.applyUrl}" 
+                               target="${item.proLocked ? '_self' : '_blank'}" 
+                               rel="noopener noreferrer" 
+                               onclick="${item.proLocked ? 'openUpgradeModal(event)' : 'event.stopPropagation();'}" 
+                               class="w-full text-center py-3 ${item.proLocked ? 'bg-amber-500 hover:bg-amber-600 text-slate-950 font-black' : 'bg-primary hover:bg-primary/95 text-white'} text-xs font-black uppercase tracking-wider rounded-xl transition-all duration-200 shadow-sm cursor-pointer hover:scale-[1.02] active:scale-98 flex items-center justify-center gap-1">
+                                ${item.proLocked ? 'Unlock Predictive Analytics' : 'How to Apply'}
+                                <span class="material-symbols-outlined text-[14px]">${item.proLocked ? 'lock_open' : 'arrow_outward'}</span>
+                            </a>
+                            <a href="${item.proLocked ? '#' : item.websiteUrl}" 
+                               target="${item.proLocked ? '_self' : '_blank'}" 
+                               rel="noopener noreferrer" 
+                               onclick="${item.proLocked ? 'openUpgradeModal(event)' : 'event.stopPropagation();'}" 
+                               class="w-full text-center py-3 bg-slate-55 bg-slate-50 hover:bg-slate-100 dark:bg-slate-805 dark:hover:bg-slate-800 border border-slate-200/60 dark:border-slate-700 text-slate-650 dark:text-slate-350 hover:text-primary dark:hover:text-white text-[10px] font-black uppercase tracking-wider rounded-xl transition-all duration-200 cursor-pointer">
+                                ${item.proLocked ? 'Compare Premium Benefits' : 'View Program Website'}
+                            </a>
+                        </div>
+
+                        <!-- Card Footer -->
+                        <div class="flex items-center justify-between mt-auto pt-3 border-t border-slate-100/60 dark:border-slate-800/60">
+                            <div class="flex items-center gap-2">
+                                ${teaserMatchHTML}
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <button class="material-symbols-outlined ${isPinned ? 'text-primary' : 'text-slate-400 hover:text-primary opacity-0 group-hover:opacity-100'} text-lg cursor-pointer transition-all duration-300" onclick="toggleFavorite('${item.id}', event)" style="${isPinned ? "font-variation-settings: 'FILL' 1;" : ""}">
+                                    push_pin
+                                </button>
+                                <button class="material-symbols-outlined text-slate-400 hover:text-primary text-lg cursor-pointer opacity-0 group-hover:opacity-100 transition-all duration-300" onclick="openExplainer('${item.id}', event)">
+                                    info
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+    }
+
+    // Modal Functions
+    function openExplainer(id, event) {
+        if (event) event.stopPropagation();
+        const item = state.matches.find(m => m.id === id);
+        if (!item) return;
+        
+        if (item.proLocked) {
+            openUpgradeModal(event);
+            return;
+        }
+        
+        document.getElementById('explainer-uni').textContent = item.university;
+        document.getElementById('explainer-prog').textContent = item.program;
+        
+        const badge = document.getElementById('explainer-match-badge');
+        if (state.isPro) {
+            badge.textContent = `${item.match}% Match`;
+            badge.className = "px-3 py-1.5 bg-secondary-container text-on-secondary-container rounded-lg text-sm font-black uppercase font-lexend shadow-sm";
+        } else {
+            let qualText = "High Climb";
+            let badgeClass = "badge-high-climb";
+            if (item.match > 90) {
+                qualText = "Locked In";
+                badgeClass = "badge-locked-in";
+            } else if (item.match >= 75) {
+                qualText = "Strong Contender";
+                badgeClass = "badge-strong-contender";
+            } else if (item.match >= 60) {
+                qualText = "The Longshot";
+                badgeClass = "badge-the-longshot";
+            }
+            badge.textContent = qualText;
+            badge.className = `px-3 py-1.5 border rounded-lg text-sm font-black uppercase font-lexend shadow-sm ${badgeClass}`;
+        }
+        
+        // Personalized academic breakdown using actual student courses
+        const studentAvgNum = parseFloat(state.average);
+        const courseList = (state.courses || []).map(c => `${c.code || c.name} (${c.grade}%)`).join(', ');
+        const isAbove = studentAvgNum >= item.cutoff;
+        const gapText = isAbove
+            ? `Your average of ${state.average}% is ${(studentAvgNum - item.cutoff).toFixed(1)}% above the ${item.cutoff}% cutoff.`
+            : `Your average of ${state.average}% is ${(item.cutoff - studentAvgNum).toFixed(1)}% below the ${item.cutoff}% target cutoff.`;
+        const academicText = `${gapText} Courses on record: ${courseList || 'None entered yet'}.`;
+        document.getElementById('explainer-academic').textContent = academicText;
+        document.getElementById('explainer-extracurricular').textContent = item.breakdown.extracurriculars;
+        document.getElementById('explainer-recommendation').textContent = item.breakdown.recommendation;
+        
+        const teaserOverlay = document.getElementById('explainer-paywall-overlay');
+        const counselorSec = document.getElementById('explainer-counselor-section');
+        if (state.isPro) {
+            teaserOverlay.classList.add('hidden');
+            counselorSec.classList.remove('blur-sm');
+        } else {
+            teaserOverlay.classList.remove('hidden');
+            counselorSec.classList.add('blur-sm');
+        }
+        
+        const modal = document.getElementById('explainer-modal');
+        modal.classList.remove('hidden');
+        setTimeout(() => {
+            const content = document.getElementById('explainer-content');
+            content.classList.remove('scale-95', 'opacity-0');
+            content.classList.add('scale-100', 'opacity-100');
+        }, 10);
+    }
+    
+    function closeExplainer() {
+        const content = document.getElementById('explainer-content');
+        content.classList.remove('scale-100', 'opacity-100');
+        content.classList.add('scale-95', 'opacity-0');
+        setTimeout(() => {
+            document.getElementById('explainer-modal').classList.add('hidden');
+        }, 300);
+    }
+
+    function openUpgradeModal(event) {
+        if (event) event.stopPropagation();
+        const modal = document.getElementById('upgrade-modal');
+        modal.classList.remove('hidden');
+        setTimeout(() => {
+            const content = document.getElementById('upgrade-content');
+            content.classList.remove('scale-95', 'opacity-0');
+            content.classList.add('scale-100', 'opacity-100');
+        }, 10);
+    }
+    
+    function closeUpgradeModal() {
+        const content = document.getElementById('upgrade-content');
+        content.classList.remove('scale-100', 'opacity-100');
+        content.classList.add('scale-95', 'opacity-0');
+        setTimeout(() => {
+            document.getElementById('upgrade-modal').classList.add('hidden');
+        }, 300);
+    }
+
+    function toggleProvinceDropdown(event) {
+        if (event) event.stopPropagation();
+        if (!state.isPro) {
+            openUpgradeModal(event);
+            return;
+        }
+        const options = document.getElementById('province-multiselect-options');
+        if (options) {
+            options.classList.toggle('hidden');
+        }
+    }
+
+    function handleProvinceCheckboxChange() {
+        if (!state.isPro) {
+            document.querySelectorAll('.province-checkbox').forEach(cb => {
+                cb.checked = true;
+            });
+            openUpgradeModal();
+            return;
+        }
+        const checkboxes = document.querySelectorAll('.province-checkbox');
+        state.provinces = Array.from(checkboxes).filter(cb => cb.checked).map(cb => cb.value);
+        saveAppState(state);
+        renderDashboard();
+    }
+
+    function updateProvinceBtnText() {
+        const btnText = document.getElementById('province-btn-text');
+        if (!btnText) return;
+        
+        if (!state.isPro) {
+            btnText.textContent = "Filter Provinces";
+            return;
+        }
+        
+        const selectedCount = state.provinces ? state.provinces.length : 0;
+        const totalCount = document.querySelectorAll('.province-checkbox').length;
+        
+        if (selectedCount === 0) {
+            btnText.textContent = "No Provinces";
+        } else if (selectedCount === totalCount) {
+            btnText.textContent = "All Provinces";
+        } else {
+            btnText.textContent = `${selectedCount} Province${selectedCount > 1 ? 's' : ''}`;
+        }
+    }
+
+    function toggleFavorite(id, event) {
+        if (event) event.stopPropagation();
+        if (!state.isPro) {
+            openUpgradeModal(event);
+            return;
+        }
+        if (!state.favorites) {
+            state.favorites = [];
+        }
+        const idx = state.favorites.indexOf(id);
+        if (idx > -1) {
+            state.favorites.splice(idx, 1);
+        } else {
+            state.favorites.push(id);
+        }
+        saveAppState(state);
+        renderDashboard();
+    }
+
+    // Close dropdown on click outside
+    document.addEventListener('click', (e) => {
+        const container = document.getElementById('province-multiselect-container');
+        const options = document.getElementById('province-multiselect-options');
+        if (container && options && !container.contains(e.target)) {
+            options.classList.add('hidden');
+        }
+    });
+
+    function toggleAdvancedFilters() {
+        const panel = document.getElementById('advanced-filters-panel');
+        const icon = document.getElementById('adv-toggle-icon');
+        if (panel) {
+            if (panel.classList.contains('hidden')) {
+                panel.classList.remove('hidden');
+                if (icon) icon.textContent = 'expand_less';
+            } else {
+                panel.classList.add('hidden');
+                if (icon) icon.textContent = 'expand_more';
+            }
+        }
+    }
+
+    // Expose functions globally for HTML event handlers
+    window.openExplainer = openExplainer;
+    window.closeExplainer = closeExplainer;
+    window.openUpgradeModal = openUpgradeModal;
+    window.closeUpgradeModal = closeUpgradeModal;
+    window.filterExplorer = filterExplorer;
+    window.toggleProvinceDropdown = toggleProvinceDropdown;
+    window.handleProvinceCheckboxChange = handleProvinceCheckboxChange;
+    window.toggleFavorite = toggleFavorite;
+    window.changeMatchPage = changeMatchPage;
+    window.changeExplorerPage = changeExplorerPage;
+    window.renderPrograms = renderPrograms;
+    window.toggleAdvancedFilters = toggleAdvancedFilters;
+
+    // Global keyboard handler for closing modals on Escape key
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeExplainer();
+            closeUpgradeModal();
+        }
+    });
+
+    function renderNearMiss() {
+        state = getAppState();
+        const studentAvg = parseFloat(state.average);
+        const list = document.getElementById('near-miss-list');
+        const empty = document.getElementById('near-miss-empty');
+        if (!list) return;
+
+        // Find programs where student is 0.1–5% below the cutoff
+        const nearMissItems = state.matches
+            .filter(m => m.cutoff > studentAvg && m.cutoff - studentAvg <= 5)
+            .sort((a, b) => (a.cutoff - studentAvg) - (b.cutoff - studentAvg))
+            .slice(0, 5);
+
+        list.innerHTML = '';
+        if (nearMissItems.length === 0) {
+            empty.classList.remove('hidden');
+        } else {
+            empty.classList.add('hidden');
+            nearMissItems.forEach(item => {
+                const gap = (item.cutoff - studentAvg).toFixed(1);
+                const pct = (studentAvg / item.cutoff * 100).toFixed(0);
+                const row = document.createElement('div');
+                row.className = 'flex items-center gap-4 p-4 bg-amber-500/5 border border-amber-400/30 rounded-2xl hover:bg-amber-500/10 transition-all group cursor-default';
+                row.innerHTML = `
+                    <div class="w-10 h-10 rounded-xl overflow-hidden flex-shrink-0 bg-slate-100">
+                        <img src="${item.image}" alt="${item.university}" class="w-full h-full object-cover" onerror="this.style.display='none'">
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="font-black text-sm text-primary font-lexend truncate">${item.program}</p>
+                        <p class="text-xs text-slate-500 font-semibold truncate">${item.university} &bull; ${item.city}, ${item.province}</p>
+                        <div class="mt-2">
+                            <div class="flex justify-between text-[9px] text-slate-500 font-lexend mb-1">
+                                <span>Your avg: <strong>${studentAvg}%</strong></span>
+                                <span class="text-amber-600 font-black">Need: ${item.cutoff}%</span>
+                            </div>
+                            <div class="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-amber-400 to-amber-500 rounded-full transition-all" style="width: ${pct}%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex-shrink-0 text-right">
+                        <span class="block text-lg font-black text-amber-600 font-lexend">${gap}%</span>
+                        <span class="text-[9px] text-slate-400 font-lexend uppercase tracking-wider">away</span>
+                    </div>
+                `;
+                list.appendChild(row);
+            });
+        }
+    }
+    window.renderNearMiss = renderNearMiss;
+
+    // Load initial views
+    renderDashboard();
+    renderNearMiss();
+    
+    // Sync storage events
+    window.addEventListener('storage', () => {
+        renderDashboard();
+        renderNearMiss();
+    });
+</script>
+<script src="/auth.js"></script>
+<script src="/adManager.js"></script>
+</body>
+</html>

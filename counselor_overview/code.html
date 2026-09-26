@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Counselor Overview Dashboard | Academic Canada</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&amp;family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-bright": "#f7f9ff",
+                      "on-background": "#001d33",
+                      "surface-container-high": "#d8eaff",
+                      "tertiary-container": "#422000",
+                      "secondary-fixed": "#bcf0ae",
+                      "tertiary-fixed": "#ffdcc3",
+                      "on-primary-container": "#7a92b0",
+                      "on-error-container": "#93000a",
+                      "surface-container-lowest": "#ffffff",
+                      "surface": "#f7f9ff",
+                      "on-primary": "#ffffff",
+                      "background": "#f7f9ff",
+                      "surface-container-highest": "#cee5ff",
+                      "primary-container": "#102a43",
+                      "on-tertiary-container": "#d97705",
+                      "surface-variant": "#cee5ff",
+                      "on-tertiary-fixed-variant": "#6e3900",
+                      "surface-container": "#e3efff",
+                      "on-tertiary-fixed": "#2f1500",
+                      "tertiary": "#240f00",
+                      "surface-tint": "#49607c",
+                      "primary": "#00152a",
+                      "on-primary-fixed": "#011d35",
+                      "surface-dim": "#bfddfe",
+                      "primary-fixed-dim": "#b0c9e8",
+                      "on-primary-fixed-variant": "#314863",
+                      "on-secondary-fixed-variant": "#23501e",
+                      "tertiary-fixed-dim": "#ffb77d",
+                      "on-secondary-fixed": "#002201",
+                      "secondary-fixed-dim": "#a1d494",
+                      "on-surface-variant": "#43474d",
+                      "error": "#ba1a1a",
+                      "outline": "#74777e",
+                      "primary-fixed": "#d1e4ff",
+                      "inverse-surface": "#12334c",
+                      "secondary-container": "#b9eeab",
+                      "inverse-on-surface": "#e8f2ff",
+                      "on-secondary": "#ffffff",
+                      "on-tertiary": "#ffffff",
+                      "on-surface": "#001d33",
+                      "on-error": "#ffffff",
+                      "inverse-primary": "#b0c9e8",
+                      "error-container": "#ffdad6",
+                      "secondary": "#3b6934",
+                      "outline-variant": "#c3c6ce",
+                      "on-secondary-container": "#3f6d38",
+                      "surface-container-low": "#edf4ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "fontFamily": {
+                      "headline": ["Lexend"],
+                      "body": ["Public Sans"],
+                      "label": ["Public Sans"]
+              }
+            },
+          }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Public Sans', sans-serif; }
+        h1, h2, h3, h4 { font-family: 'Lexend', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar -->
+<header class="bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-xl shadow-sm dark:shadow-none docked full-width top-0 sticky z-40">
+<div class="flex justify-between items-center w-full px-6 py-3">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold text-slate-900 dark:text-white tracking-tighter font-lexend tracking-tight">Academic Canada</span>
+<nav class="hidden md:flex gap-6">
+<a class="text-blue-900 dark:text-blue-400 font-semibold border-b-2 border-blue-900 dark:border-blue-400 font-lexend tracking-tight" href="#">Dashboard</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-colors font-lexend tracking-tight" href="#">Quick Reports</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors rounded-full">
+<span class="material-symbols-outlined text-slate-900 dark:text-slate-100">notifications</span>
+</button>
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors rounded-full">
+<span class="material-symbols-outlined text-slate-900 dark:text-slate-100">help_outline</span>
+</button>
+<div class="h-8 w-px bg-slate-200/50 dark:bg-slate-800/50 mx-2"></div>
+<div class="flex items-center gap-3">
+<img alt="Counselor Profile" class="w-8 h-8 rounded-full border border-outline-variant" data-alt="professional portrait of a school counselor in a modern office setting with warm natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_55IhIW-RQVVqs9g5MUN_2yOnPBL39qXS785KZDt1WYS2cAdiW_deyMDzXHRYYYxqrHZuT3S38IVzan_zKQssbLqvzaA_7hmkBOWr888YOCHGe6u8LCXvKvzdxBI55WgYKnMg7l0nCwS0L2Y97DBGHExAzk2SUoo2GYkcZon1RSLFtulmQcia-zrIaQkCtUlum-Rm73xMBfD-WkINriawGyeTfmZSfkUMX_wWP9qgA28C0ArEiSMSVgXBo_H4a_nuI8_KJuz7AakG"/>
+<span class="text-sm font-medium text-slate-900 dark:text-slate-100">Support</span>
+</div>
+</div>
+</div>
+<div class="bg-slate-200/50 dark:bg-slate-800/50 h-px w-full"></div>
+</header>
+<div class="flex">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 flex flex-col bg-slate-100 dark:bg-slate-900 pt-20 border-r border-transparent">
+<div class="flex flex-col h-full py-6 space-y-2">
+<div class="px-6 mb-8">
+<h2 class="text-lg font-black text-blue-950 dark:text-blue-200 font-lexend">Counselor Hub</h2>
+<p class="text-xs text-slate-500 font-medium">Academic Canada</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 mx-2 my-1 px-4 py-3 rounded-lg flex items-center gap-3 transition-all duration-200 hover:translate-x-1 font-lexend font-medium text-sm" href="#">
+<span class="material-symbols-outlined">group</span>
+<span>Student Roster</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 mx-2 my-1 px-4 py-3 rounded-lg flex items-center gap-3 transition-all duration-200 hover:translate-x-1 font-lexend font-medium text-sm" href="#">
+<span class="material-symbols-outlined">description</span>
+<span>Applications</span>
+</a>
+<a class="bg-white dark:bg-slate-800 text-blue-900 dark:text-blue-400 shadow-sm rounded-lg mx-2 my-1 px-4 py-3 font-bold flex items-center gap-3 font-lexend text-sm" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span>Analytics</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 mx-2 my-1 px-4 py-3 rounded-lg flex items-center gap-3 transition-all duration-200 hover:translate-x-1 font-lexend font-medium text-sm" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span>Resource Library</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 mx-2 my-1 px-4 py-3 rounded-lg flex items-center gap-3 transition-all duration-200 hover:translate-x-1 font-lexend font-medium text-sm" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+<div class="px-4 py-4 mt-auto">
+<button class="w-full bg-gradient-to-br from-primary to-primary-container text-white py-3 px-4 rounded-xl font-semibold flex items-center justify-center gap-2 shadow-lg shadow-primary/10 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined">add</span>
+<span>New Application</span>
+</button>
+</div>
+<div class="px-4 pt-4 border-t border-slate-200 dark:border-slate-800">
+<a class="flex items-center gap-3 px-4 py-2 text-xs text-slate-500 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">policy</span>
+<span>Privacy Policy</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-xs text-slate-500 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">contact_support</span>
+<span>Contact Support</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="ml-64 flex-1 min-h-screen p-8 bg-surface">
+<!-- Header Section -->
+<div class="mb-10 flex justify-between items-end">
+<div>
+<h1 class="text-4xl font-extrabold tracking-tight text-on-background mb-2">Counselor Overview</h1>
+<p class="text-on-surface-variant max-w-2xl body-md">Monitor real-time application progress and student success metrics across the Academic Canada network.</p>
+</div>
+<div class="flex gap-4">
+<button class="px-5 py-2.5 rounded-lg bg-surface-container-high text-primary font-semibold text-sm hover:bg-surface-container-highest transition-colors">
+                        Export Full Report
+                    </button>
+<button class="px-5 py-2.5 rounded-lg bg-primary text-white font-semibold text-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+                        Schedule Review
+                    </button>
+</div>
+</div>
+<!-- Bento Grid Metrics -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+<!-- Total Students -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm flex flex-col justify-between relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1 h-full bg-primary-fixed-dim"></div>
+<div class="flex justify-between items-start">
+<div>
+<p class="text-sm font-semibold text-on-surface-variant uppercase tracking-wider mb-1">Total Students</p>
+<h3 class="text-4xl font-extrabold text-primary">1,240</h3>
+</div>
+<div class="bg-surface-container-low p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary">group</span>
+</div>
+</div>
+<div class="mt-4 flex items-center gap-2 text-secondary text-sm font-medium">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span>12% from last month</span>
+</div>
+</div>
+<!-- Applications in Progress -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm flex flex-col justify-between relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-tertiary-fixed"></div>
+<div class="flex justify-between items-start">
+<div>
+<p class="text-sm font-semibold text-on-surface-variant uppercase tracking-wider mb-1">Applications in Progress</p>
+<h3 class="text-4xl font-extrabold text-primary">842</h3>
+</div>
+<div class="bg-tertiary-fixed/30 p-2 rounded-lg text-tertiary-fixed-dim">
+<span class="material-symbols-outlined text-on-tertiary-fixed-variant" data-weight="fill">pending_actions</span>
+</div>
+</div>
+<div class="mt-4 flex items-center gap-2 text-on-tertiary-container text-sm font-medium">
+<span class="material-symbols-outlined text-sm">timer</span>
+<span>42 requiring urgent review</span>
+</div>
+</div>
+<!-- Successful Placements -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm flex flex-col justify-between relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-secondary-fixed"></div>
+<div class="flex justify-between items-start">
+<div>
+<p class="text-sm font-semibold text-on-surface-variant uppercase tracking-wider mb-1">Successful Placements</p>
+<h3 class="text-4xl font-extrabold text-primary">156</h3>
+</div>
+<div class="bg-secondary-container p-2 rounded-lg text-secondary">
+<span class="material-symbols-outlined" data-weight="fill">verified</span>
+</div>
+</div>
+<div class="mt-4 flex items-center gap-2 text-secondary text-sm font-medium">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+<span>94% success rate this term</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Application Breakdown Visualization -->
+<div class="lg:col-span-8 bg-surface-container-lowest rounded-xl p-8 shadow-sm">
+<div class="flex justify-between items-center mb-8">
+<div>
+<h2 class="text-xl font-bold text-primary">Application Journey Tracking</h2>
+<p class="text-sm text-on-surface-variant">Real-time status of current application pool</p>
+</div>
+<div class="flex gap-2">
+<span class="inline-flex items-center gap-1.5 text-xs font-medium text-on-surface-variant">
+<span class="w-2 h-2 rounded-full bg-primary"></span> Review
+                            </span>
+<span class="inline-flex items-center gap-1.5 text-xs font-medium text-on-surface-variant">
+<span class="w-2 h-2 rounded-full bg-secondary"></span> Approved
+                            </span>
+<span class="inline-flex items-center gap-1.5 text-xs font-medium text-on-surface-variant">
+<span class="w-2 h-2 rounded-full bg-tertiary-fixed-dim"></span> Pending
+                            </span>
+</div>
+</div>
+<div class="space-y-8">
+<div>
+<div class="flex justify-between text-sm font-medium mb-2">
+<span>Undergraduate Programs</span>
+<span class="text-primary">64% Completed</span>
+</div>
+<div class="w-full h-4 bg-surface-container rounded-full overflow-hidden flex">
+<div class="h-full bg-primary" style="width: 45%"></div>
+<div class="h-full bg-secondary" style="width: 19%"></div>
+<div class="h-full bg-tertiary-fixed-dim" style="width: 12%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-sm font-medium mb-2">
+<span>Graduate Admissions</span>
+<span class="text-primary">82% Completed</span>
+</div>
+<div class="w-full h-4 bg-surface-container rounded-full overflow-hidden flex">
+<div class="h-full bg-primary" style="width: 60%"></div>
+<div class="h-full bg-secondary" style="width: 22%"></div>
+<div class="h-full bg-tertiary-fixed-dim" style="width: 5%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-sm font-medium mb-2">
+<span>Scholarship Applications</span>
+<span class="text-primary">31% Completed</span>
+</div>
+<div class="w-full h-4 bg-surface-container rounded-full overflow-hidden flex">
+<div class="h-full bg-primary" style="width: 20%"></div>
+<div class="h-full bg-secondary" style="width: 11%"></div>
+<div class="h-full bg-tertiary-fixed-dim" style="width: 40%"></div>
+</div>
+</div>
+</div>
+<div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="p-4 bg-surface rounded-lg">
+<span class="text-xs text-on-surface-variant uppercase font-bold tracking-widest block mb-1">New</span>
+<span class="text-xl font-bold text-primary">124</span>
+</div>
+<div class="p-4 bg-surface rounded-lg">
+<span class="text-xs text-on-surface-variant uppercase font-bold tracking-widest block mb-1">Vetting</span>
+<span class="text-xl font-bold text-primary">289</span>
+</div>
+<div class="p-4 bg-surface rounded-lg">
+<span class="text-xs text-on-surface-variant uppercase font-bold tracking-widest block mb-1">Interview</span>
+<span class="text-xl font-bold text-primary">84</span>
+</div>
+<div class="p-4 bg-surface rounded-lg">
+<span class="text-xs text-on-surface-variant uppercase font-bold tracking-widest block mb-1">Decision</span>
+<span class="text-xl font-bold text-primary">345</span>
+</div>
+</div>
+</div>
+<!-- Urgent Alerts / Activity Feed -->
+<div class="lg:col-span-4 space-y-6">
+<!-- Urgent Alerts Section -->
+<div class="bg-surface-container-highest/50 backdrop-blur-md rounded-xl p-6 shadow-sm border border-white/20">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-error">warning</span>
+<h2 class="text-lg font-bold text-primary">Urgent Alerts</h2>
+</div>
+<div class="space-y-4">
+<div class="flex gap-4 p-3 bg-error-container/30 rounded-lg">
+<div class="mt-1">
+<span class="material-symbols-outlined text-error text-lg" data-weight="fill">error</span>
+</div>
+<div>
+<p class="text-sm font-bold text-on-error-container">Deadline Missed</p>
+<p class="text-xs text-on-surface-variant">3 students missed scholarship deadlines for Ontario Universities.</p>
+</div>
+</div>
+<div class="flex gap-4 p-3 bg-secondary-container/30 rounded-lg">
+<div class="mt-1">
+<span class="material-symbols-outlined text-secondary text-lg" data-weight="fill">campaign</span>
+</div>
+<div>
+<p class="text-sm font-bold text-on-secondary-container">New Offers</p>
+<p class="text-xs text-on-surface-variant">New admission offers received for 12 students in the BC region.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Activity -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm">
+<div class="flex justify-between items-center mb-6">
+<h2 class="text-lg font-bold text-primary">Recent Activity</h2>
+<button class="text-primary text-xs font-semibold hover:underline">View All</button>
+</div>
+<div class="space-y-6">
+<div class="flex items-start gap-4">
+<div class="w-2 h-2 rounded-full bg-primary mt-2"></div>
+<div>
+<p class="text-sm text-on-surface"><span class="font-bold">Sarah Jenkins</span> submitted a final transcript for McGill University.</p>
+<span class="text-xs text-on-surface-variant">14 minutes ago</span>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="w-2 h-2 rounded-full bg-secondary mt-2"></div>
+<div>
+<p class="text-sm text-on-surface">Application status changed to <span class="font-bold">Approved</span> for Marcus V.</p>
+<span class="text-xs text-on-surface-variant">2 hours ago</span>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="w-2 h-2 rounded-full bg-tertiary-fixed-dim mt-2"></div>
+<div>
+<p class="text-sm text-on-surface"><span class="font-bold">System Update</span>: All SAT scores for Cohort B have been uploaded.</p>
+<span class="text-xs text-on-surface-variant">5 hours ago</span>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="w-2 h-2 rounded-full bg-primary mt-2"></div>
+<div>
+<p class="text-sm text-on-surface">Counselor <span class="font-bold">Dr. Aris</span> added a note to David Kim's file.</p>
+<span class="text-xs text-on-surface-variant">Yesterday at 4:30 PM</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer marginalia -->
+<footer class="mt-20 pt-10 border-t border-surface-container flex justify-between items-center opacity-60">
+<div class="text-xs font-medium text-on-surface-variant">
+                    © 2024 Academic Canada Administrative Network. Confidential Data.
+                </div>
+<div class="flex gap-8 text-xs font-medium text-on-surface-variant">
+<a class="hover:text-primary transition-colors" href="#">Operational Status</a>
+<a class="hover:text-primary transition-colors" href="#">Documentation</a>
+<a class="hover:text-primary transition-colors" href="#">Counselor Handbook</a>
+</div>
+</footer>
+</main>
+</div>
+</body></html>

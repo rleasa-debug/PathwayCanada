@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dashboard | Academic Canada</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&amp;family=Public+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#cee5ff",
+                        "secondary-container": "#b9eeab",
+                        "error-container": "#ffdad6",
+                        "outline-variant": "#c3c6ce",
+                        "on-tertiary-fixed": "#2f1500",
+                        "on-background": "#001d33",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#422000",
+                        "on-tertiary-fixed-variant": "#6e3900",
+                        "surface-bright": "#f7f9ff",
+                        "on-secondary-container": "#3f6d38",
+                        "on-secondary-fixed": "#002201",
+                        "secondary-fixed": "#bcf0ae",
+                        "inverse-on-surface": "#e8f2ff",
+                        "on-secondary": "#ffffff",
+                        "surface-dim": "#bfddfe",
+                        "tertiary-fixed-dim": "#ffb77d",
+                        "surface": "#f7f9ff",
+                        "primary-container": "#102a43",
+                        "on-surface": "#001d33",
+                        "on-secondary-fixed-variant": "#23501e",
+                        "inverse-surface": "#12334c",
+                        "surface-container-low": "#edf4ff",
+                        "surface-tint": "#49607c",
+                        "on-surface-variant": "#43474d",
+                        "on-primary-container": "#7a92b0",
+                        "on-primary": "#ffffff",
+                        "outline": "#74777e",
+                        "primary-fixed-dim": "#b0c9e8",
+                        "on-tertiary-container": "#d97705",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed": "#011d35",
+                        "secondary": "#3b6934",
+                        "primary-fixed": "#d1e4ff",
+                        "inverse-primary": "#b0c9e8",
+                        "primary": "#00152a",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed-variant": "#314863",
+                        "tertiary-fixed": "#ffdcc3",
+                        "tertiary": "#240f00",
+                        "surface-variant": "#cee5ff",
+                        "on-error-container": "#93000a",
+                        "error": "#ba1a1a",
+                        "background": "#f7f9ff",
+                        "surface-container-high": "#d8eaff",
+                        "secondary-fixed-dim": "#a1d494",
+                        "surface-container": "#e3efff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Lexend"],
+                        "body": ["Public Sans"],
+                        "label": ["Public Sans"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Public Sans', sans-serif; }
+        h1, h2, h3, h4, .font-lexend { font-family: 'Lexend', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .editorial-gradient {
+            background: linear-gradient(135deg, #00152a 0%, #102a43 100%);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- TopAppBar (from COMPONENTS_32) -->
+<nav class="fixed top-0 w-full z-50 bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-lg">
+<div class="flex justify-between items-center px-6 py-4 max-w-full mx-auto font-lexend tracking-tight">
+<div class="text-xl font-bold text-blue-950 dark:text-white">Academic Canada</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-blue-900 dark:text-blue-100 font-semibold border-b-2 border-blue-900 pb-1" href="#">Dashboard</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-blue-800 dark:hover:text-blue-200 transition-colors" href="#">Applications</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-blue-800 dark:hover:text-blue-200 transition-colors" href="#">Discovery</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-blue-800 dark:hover:text-blue-200 transition-colors" href="#">Library</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-600 dark:text-slate-400 hover:text-blue-800 dark:hover:text-blue-200 transition-all scale-95 duration-150 ease-in-out">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-slate-600 dark:text-slate-400 hover:text-blue-800 dark:hover:text-blue-200 transition-all scale-95 duration-150 ease-in-out">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+<div class="bg-slate-200/50 dark:bg-slate-800/50 h-[1px]"></div>
+</nav>
+<!-- SideNavBar (from COMPONENTS_32) -->
+<aside class="hidden lg:flex flex-col gap-2 p-4 h-screen w-64 fixed left-0 top-0 bg-slate-50 dark:bg-slate-950 pt-20">
+<div class="mb-8 px-2">
+<p class="text-lg font-bold text-blue-900 dark:text-blue-50 font-lexend">Student Portal</p>
+<p class="text-xs text-slate-500 uppercase tracking-widest font-lexend">Post-Secondary Discovery</p>
+</div>
+<nav class="flex flex-col gap-1 font-lexend text-sm">
+<a class="flex items-center gap-3 p-3 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all hover:translate-x-1 duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">search</span>
+                National Search
+            </a>
+<a class="flex items-center gap-3 p-3 bg-white dark:bg-blue-900/30 text-blue-900 dark:text-blue-200 border-l-4 border-blue-900 font-bold transition-all hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined">folder_shared</span>
+                My Portfolio
+            </a>
+<a class="flex items-center gap-3 p-3 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all hover:translate-x-1 duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">library_books</span>
+                Resources
+            </a>
+<a class="flex items-center gap-3 p-3 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all hover:translate-x-1 duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">assignment_turned_in</span>
+                Applications
+            </a>
+</nav>
+<div class="mt-auto pt-4 border-t border-slate-100 dark:border-slate-900">
+<button class="w-full editorial-gradient text-white py-3 rounded-lg text-sm font-lexend font-bold shadow-sm hover:opacity-90 transition-opacity">
+                Find Programs
+            </button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="lg:pl-64 pt-20 pb-24 lg:pb-8 px-6 min-h-screen">
+<div class="max-w-6xl mx-auto">
+<!-- Header Section with Audio Overview -->
+<header class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+<div>
+<h1 class="text-4xl md:text-5xl font-extrabold text-primary tracking-tight mb-2">Curriculum Overview</h1>
+<p class="text-on-surface-variant max-w-xl body-md">Your academic trajectory is currently trending towards advanced research opportunities in Southern Ontario.</p>
+</div>
+<button class="flex items-center gap-2 px-4 py-2 bg-surface-container-high rounded-full text-primary hover:bg-surface-container-highest transition-all duration-200 group">
+<span class="material-symbols-outlined text-xl group-active:scale-90 duration-150">record_voice_over</span>
+<span class="text-sm font-bold font-lexend">Listen to Overview (Charlotte)</span>
+</button>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 mb-12">
+<!-- GPA Card (Large Primary) -->
+<div class="md:col-span-4 bg-surface-container-lowest p-8 rounded-xl relative overflow-hidden flex flex-col justify-between group cursor-default">
+<div class="absolute top-0 left-0 h-full w-1.5 bg-primary-fixed-dim"></div>
+<div>
+<h3 class="text-on-surface-variant font-lexend text-xs uppercase tracking-widest mb-1">National GPA Equivalent</h3>
+<p class="text-6xl font-extrabold text-primary tracking-tighter">3.88</p>
+</div>
+<div class="mt-6">
+<div class="flex justify-between items-center text-xs mb-2">
+<span class="text-secondary font-bold">Top 5% Nationally</span>
+<span class="text-on-surface-variant">Last update: 2h ago</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-low rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[88%]"></div>
+</div>
+</div>
+</div>
+<!-- Stats Summary + Savings Insight Widget -->
+<div class="md:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
+<div class="bg-surface-container-low p-6 rounded-xl border-l-4 border-primary">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg editorial-gradient flex items-center justify-center text-white">
+<span class="material-symbols-outlined">description</span>
+</div>
+<div>
+<p class="text-2xl font-bold text-primary">3 Applications</p>
+<p class="text-sm text-on-surface-variant">Currently in Review</p>
+</div>
+</div>
+</div>
+<!-- New Savings Insight Widget (Replacing Deadlines/Counselor items) -->
+<div class="bg-surface-container-low p-6 rounded-xl border-l-4 border-secondary">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<div>
+<p class="text-2xl font-bold text-primary">$4,200 Saved</p>
+<p class="text-sm text-on-surface-variant">Match-based savings insight</p>
+</div>
+</div>
+<div class="mt-4 p-3 bg-white/50 dark:bg-slate-900/50 rounded-lg">
+<p class="text-[10px] font-bold text-secondary uppercase tracking-widest mb-1">Efficiency Metric</p>
+<p class="text-xs text-on-surface-variant">Focusing on your <span class="font-bold text-primary">90%+ match</span> profile saves an average of 12h per application.</p>
+</div>
+</div>
+</div>
+<!-- Smart Match Section (Asymmetric Balance) -->
+<section class="md:col-span-8">
+<div class="flex items-center justify-between mb-6 px-2">
+<h2 class="text-2xl font-bold text-primary font-lexend tracking-tight">Smart Match recommendations</h2>
+<a class="text-primary text-sm font-bold flex items-center gap-1 hover:underline" href="#">
+                            View algorithm profile <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+<!-- Match 1 -->
+<div class="bg-surface-container-lowest p-5 rounded-xl transition-all duration-300 hover:translate-y-[-4px] group border border-transparent hover:border-slate-200 dark:hover:border-slate-800">
+<div class="w-full h-32 bg-surface-container mb-4 rounded-lg overflow-hidden">
+<img alt="University of Toronto campus" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhpUpZx1UjceXZWID5tPiUSSnOwKSrCiGuoHPAeomSg-2AB2D5ES2yihfJISJ9C8L1kCn6DA_BGHzwsmoxitZFZ5SkmInO2H5ByUvodnxRlyUoV8WcsBRG12DvM-_kRnTIYEDvgMg4MhFebopmCyOmfA25KxiVEwh5nsmCs1f1P68INVMOq3PW4tvusyOem-1WFuA-_k82dtdoiulG4ygdGSxxpSp7f_BbEYdlvzyr4m3a574vr89d9FxoAYXB7y77ijF2seSgNZ9K"/>
+</div>
+<span class="inline-block px-2 py-1 bg-secondary-container text-on-secondary-container rounded-full text-[10px] font-bold uppercase mb-2">98% Match</span>
+<h4 class="font-lexend font-bold text-sm text-primary leading-tight mb-1">MSc Computer Science</h4>
+<p class="text-xs text-on-surface-variant">University of Toronto</p>
+</div>
+<!-- Match 2 -->
+<div class="bg-surface-container-lowest p-5 rounded-xl transition-all duration-300 hover:translate-y-[-4px] group border border-transparent hover:border-slate-200 dark:hover:border-slate-800">
+<div class="w-full h-32 bg-surface-container mb-4 rounded-lg overflow-hidden">
+<img alt="McGill University" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAk2oco0GgayrJ7vJ-Ii78vc-1Xxb8YfvzuynoUZEN7JcUZOARmUDKyu6GKzvri0iO1FNpeaYUPSPAYPDk-iqqcRF_HZ1oBbquSVItSVsD5b00vt699e9ibmwypxzKq-r-FFx3dfF1Bwtd-27_kjVRtkIBx8Cw8q_nSt-mhFiPk3qFfG1CRYfQsqHUW4WUb814CfKqbx_UvhhaBbnfnAb53sRTT-Nex94ULe_2PEFk3mOp1zCAyfPuWK875I2DERftykGGC-sZrvEkD"/>
+</div>
+<span class="inline-block px-2 py-1 bg-secondary-container text-on-secondary-container rounded-full text-[10px] font-bold uppercase mb-2">94% Match</span>
+<h4 class="font-lexend font-bold text-sm text-primary leading-tight mb-1">Software Engineering</h4>
+<p class="text-xs text-on-surface-variant">McGill University</p>
+</div>
+<!-- Match 3 -->
+<div class="bg-surface-container-lowest p-5 rounded-xl transition-all duration-300 hover:translate-y-[-4px] group border border-transparent hover:border-slate-200 dark:hover:border-slate-800">
+<div class="w-full h-32 bg-surface-container mb-4 rounded-lg overflow-hidden">
+<img alt="UBC Campus" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuByEQqtKd4a4UIyYY0DZ8aKhqmFBGPdPVzbqpVQlQUMOyw2IP4PRaZdPElh0LjXqmnjQM3oHWExDxJ1a38zbthga3Sa6jo3utyzGUfGbgqQ-ZOoObriQSlQXRuu41khyy1Mnw_6Tc4-eI0CraOmlPB2GstSlPHpOZvPwQiBRJaqIgCB8a_qF6TyZpeWNUHImPfk7jzS_JEr7lfgvh8Da5qdzSTax8g1izreRMjpBYH7XhXkdas-tSJWo3CVP2nxWSkbAgHdH9nroleM"/>
+</div>
+<span class="inline-block px-2 py-1 bg-secondary-container text-on-secondary-container rounded-full text-[10px] font-bold uppercase mb-2">91% Match</span>
+<h4 class="font-lexend font-bold text-sm text-primary leading-tight mb-1">Data Intelligence</h4>
+<p class="text-xs text-on-surface-variant">UBC Vancouver</p>
+</div>
+</div>
+</section>
+<!-- Activity Feed -->
+<aside class="md:col-span-4 flex flex-col">
+<h2 class="text-2xl font-bold text-primary font-lexend tracking-tight mb-6 px-2">Recent Activity</h2>
+<div class="flex-1 space-y-6">
+<div class="relative pl-6 pb-6 border-l border-outline-variant/30">
+<div class="absolute -left-1.5 top-0 w-3 h-3 rounded-full bg-secondary"></div>
+<p class="text-xs font-bold text-secondary uppercase tracking-widest mb-1">Today, 09:12 AM</p>
+<p class="text-sm font-bold text-primary">Transcript verified</p>
+<p class="text-xs text-on-surface-variant">Academic Canada has officially verified your Year 3 transcripts.</p>
+</div>
+<div class="relative pl-6 pb-6 border-l border-outline-variant/30">
+<div class="absolute -left-1.5 top-0 w-3 h-3 rounded-full bg-primary"></div>
+<p class="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-1">Yesterday</p>
+<p class="text-sm font-bold text-primary">New program match found</p>
+<p class="text-xs text-on-surface-variant">A new match for 'Quantum Computing' at Waterloo is available.</p>
+</div>
+<div class="relative pl-6 border-l border-outline-variant/30">
+<div class="absolute -left-1.5 top-0 w-3 h-3 rounded-full bg-outline-variant"></div>
+<p class="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-1">2 days ago</p>
+<p class="text-sm font-bold text-primary">Profile updated</p>
+<p class="text-xs text-on-surface-variant">Your extracurricular activities were updated successfully.</p>
+</div>
+</div>
+</aside>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (from COMPONENTS_32 - Mobile Only) -->
+<nav class="lg:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-3 pb-safe bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl border-t border-slate-100 dark:border-slate-800 shadow-[0_-4px_20px_rgba(0,29,51,0.05)] z-50 rounded-t-2xl">
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 px-4 py-1 active:bg-slate-100 dark:active:bg-slate-800 transition-all scale-90 duration-200" href="#">
+<span class="material-symbols-outlined">search</span>
+<span class="font-lexend text-[10px] font-medium uppercase tracking-wider">Search</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-blue-50 dark:bg-blue-900/40 text-blue-900 dark:text-blue-100 rounded-xl px-4 py-1 active:bg-slate-100 dark:active:bg-slate-800 transition-all scale-90 duration-200" href="#">
+<span class="material-symbols-outlined">account_box</span>
+<span class="font-lexend text-[10px] font-medium uppercase tracking-wider">Portfolio</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 px-4 py-1 active:bg-slate-100 dark:active:bg-slate-800 transition-all scale-90 duration-200" href="#">
+<span class="material-symbols-outlined">auto_stories</span>
+<span class="font-lexend text-[10px] font-medium uppercase tracking-wider">Library</span>
+</a>
+</nav>
+</body></html>

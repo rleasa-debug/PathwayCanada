@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OntarioPathways - Course Input</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&amp;family=Public+Sans:ital,wght@0..100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-container": "#3f6d38",
+                    "surface-bright": "#f7f9ff",
+                    "on-tertiary-fixed-variant": "#6e3900",
+                    "tertiary-container": "#422000",
+                    "on-error": "#ffffff",
+                    "on-background": "#001d33",
+                    "on-tertiary-fixed": "#2f1500",
+                    "outline-variant": "#c3c6ce",
+                    "error-container": "#ffdad6",
+                    "secondary-container": "#b9eeab",
+                    "surface-container-highest": "#cee5ff",
+                    "surface-tint": "#49607c",
+                    "surface-container-low": "#edf4ff",
+                    "on-secondary-fixed-variant": "#23501e",
+                    "inverse-surface": "#12334c",
+                    "tertiary-fixed-dim": "#ffb77d",
+                    "on-surface": "#001d33",
+                    "surface": "#f7f9ff",
+                    "primary-container": "#102a43",
+                    "surface-dim": "#bfddfe",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed": "#bcf0ae",
+                    "inverse-on-surface": "#e8f2ff",
+                    "on-secondary-fixed": "#002201",
+                    "secondary": "#3b6934",
+                    "primary-fixed": "#d1e4ff",
+                    "on-primary-fixed": "#011d35",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-container": "#d97705",
+                    "primary-fixed-dim": "#b0c9e8",
+                    "outline": "#74777e",
+                    "on-primary-container": "#7a92b0",
+                    "on-primary": "#ffffff",
+                    "on-surface-variant": "#43474d",
+                    "surface-container": "#e3efff",
+                    "secondary-fixed-dim": "#a1d494",
+                    "surface-container-high": "#d8eaff",
+                    "error": "#ba1a1a",
+                    "on-error-container": "#93000a",
+                    "background": "#f7f9ff",
+                    "surface-variant": "#cee5ff",
+                    "tertiary": "#240f00",
+                    "tertiary-fixed": "#ffdcc3",
+                    "on-primary-fixed-variant": "#314863",
+                    "on-tertiary": "#ffffff",
+                    "primary": "#00152a",
+                    "inverse-primary": "#b0c9e8"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Lexend"],
+                    "body": ["Public Sans"],
+                    "label": ["Public Sans"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Public Sans', sans-serif; }
+        h1, h2, h3, h4 { font-family: 'Lexend', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+<nav class="fixed top-0 w-full z-50 bg-slate-50/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center max-w-7xl mx-auto px-6 h-16">
+<div class="text-xl font-bold text-blue-950 dark:text-blue-50 font-headline tracking-tight">OntarioPathways</div>
+<div class="hidden md:flex items-center space-x-8 font-lexend tracking-tight text-sm font-medium">
+<a class="text-slate-600 dark:text-slate-400 hover:text-blue-800 dark:hover:text-blue-100 transition-colors" href="#">Explore</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-blue-800 dark:hover:text-blue-100 transition-colors" href="#">Dashboard</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-blue-800 dark:hover:text-blue-100 transition-colors" href="#">Resources</a>
+</div>
+<div class="flex items-center space-x-4">
+<img alt="Student profile" class="w-8 h-8 rounded-full border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDA0aMZGHMcK6-opTnFS2ajV_rrMWbc-29X1mYUgOCvcPST34rmvsxYtvp85kEsAw3MRjvv2NkJCMaH2KEzyI7Uk_xW37UhgGsjRbXjy6vViVAkDT8lAPwVhlpd3EYyx2f9TxY2xlDhU29zVkLDvoXKIbVXzqc6SohWuPHvkfULCRi7Kmp6eSsSatf9JMm5Y5Qrsb16rooPAnVEtz70ElTkk8stWLvoykdY613wPEBBtMr2H8I--zGG0GFwgerhrhgopwdcvzyPna7j"/>
+</div>
+</div>
+<div class="bg-slate-200/50 dark:bg-slate-800/50 h-px w-full"></div>
+</nav>
+<div class="flex min-h-screen pt-16">
+<aside class="hidden lg:flex flex-col p-4 space-y-2 h-[calc(100vh-64px)] w-64 border-r border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 font-lexend font-normal">
+<div class="px-4 py-6">
+<div class="flex items-center space-x-3 mb-1">
+<span class="material-symbols-outlined text-primary text-2xl">school</span>
+<span class="text-lg font-black text-blue-950 dark:text-white">Program Tracker</span>
+</div>
+<p class="text-xs text-slate-500 font-medium tracking-wide">Academic Year 2026-27</p>
+</div>
+<div class="space-y-1">
+<a class="flex items-center space-x-3 px-4 py-3 bg-blue-50 dark:bg-blue-900/30 text-blue-900 dark:text-blue-100 rounded-lg font-semibold transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined">edit_note</span>
+<span>Course Input</span>
+</a>
+<a class="flex items-center space-x-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-lg transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined">verified</span>
+<span>Eligibility</span>
+</a>
+<a class="flex items-center space-x-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-lg transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined">bookmark</span>
+<span>My Saves</span>
+</a>
+<a class="flex items-center space-x-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-lg transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined">school</span>
+<span>Counselor</span>
+</a>
+</div>
+<div class="mt-auto pt-6 border-t border-slate-200 dark:border-slate-800">
+<button class="w-full py-3 px-4 bg-gradient-to-br from-primary to-primary-container text-white rounded-xl text-sm font-semibold shadow-lg shadow-primary/10 active:scale-95 transition-all">
+                    Calculate Average
+                </button>
+</div>
+<div class="pt-4 space-y-1">
+<a class="flex items-center space-x-3 px-4 py-2 text-slate-500 text-sm hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-xl">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center space-x-3 px-4 py-2 text-slate-500 text-sm hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-xl">help_outline</span>
+<span>Support</span>
+</a>
+</div>
+</aside>
+<main class="flex-1 bg-surface-container-low overflow-y-auto">
+<div class="max-w-5xl mx-auto px-8 py-12">
+<header class="mb-12">
+<h1 class="text-4xl font-extrabold text-on-surface tracking-tight mb-4">Academic Portfolio</h1>
+<p class="text-body-md text-on-surface-variant max-w-2xl leading-relaxed">
+                        Input your Grade 11 and Grade 12 results below. Ensure your course codes include the standard U, M, or C designations for accurate eligibility calculations.
+                    </p>
+</header>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<section class="lg:col-span-8 space-y-10">
+<div class="bg-surface-container-lowest p-8 rounded-xl relative">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary-fixed-dim rounded-l-xl"></div>
+<div class="flex justify-between items-end mb-8">
+<div>
+<h2 class="text-2xl font-bold text-primary mb-1">Grade 12 (4U/4M)</h2>
+<p class="text-sm text-on-surface-variant">Primary focus for University Admissions</p>
+</div>
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Active</span>
+</div>
+<div class="space-y-8">
+<div>
+<h3 class="text-sm font-semibold text-primary uppercase tracking-widest mb-6 flex items-center">
+<span class="material-symbols-outlined mr-2 text-lg">star</span>
+                                        Required Courses
+                                    </h3>
+<div class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-1">
+<label class="text-xs font-bold text-on-surface-variant uppercase tracking-tighter">English (ENG4U)</label>
+<div class="bg-surface-container-low border-b border-outline-variant focus-within:border-primary transition-colors">
+<input class="w-full bg-transparent border-none focus:ring-0 text-lg font-bold py-3 px-1 text-primary placeholder:text-outline-variant/50" placeholder="Grade %" type="number"/>
+</div>
+</div>
+<div class="space-y-1 opacity-60">
+<label class="text-xs font-bold text-on-surface-variant uppercase tracking-tighter">Calculus &amp; Vectors (MCV4U)</label>
+<div class="bg-surface-container-low border-b border-outline-variant">
+<input class="w-full bg-transparent border-none focus:ring-0 text-lg font-bold py-3 px-1" placeholder="Grade %" type="number"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div>
+<h3 class="text-sm font-semibold text-primary uppercase tracking-widest mb-6 flex items-center">
+<span class="material-symbols-outlined mr-2 text-lg">list_alt</span>
+                                        Elective Courses
+                                    </h3>
+<div class="space-y-4">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-end">
+<div class="md:col-span-8 space-y-1">
+<label class="text-xs font-bold text-on-surface-variant uppercase">Course Name &amp; Code</label>
+<div class="bg-surface-container-low border-b border-outline-variant">
+<input class="w-full bg-transparent border-none focus:ring-0 py-3 px-1 text-on-surface" placeholder="e.g. Biology - SBI4U" type="text"/>
+</div>
+</div>
+<div class="md:col-span-3 space-y-1">
+<label class="text-xs font-bold text-on-surface-variant uppercase">Grade</label>
+<div class="bg-surface-container-low border-b border-outline-variant">
+<input class="w-full bg-transparent border-none focus:ring-0 py-3 px-1 font-bold text-primary" placeholder="%" type="number"/>
+</div>
+</div>
+<div class="md:col-span-1 pb-1">
+<button class="p-2 text-error hover:bg-error-container/20 rounded-lg transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</div>
+<button class="flex items-center text-sm font-bold text-secondary hover:text-on-secondary-container transition-colors mt-4">
+<span class="material-symbols-outlined mr-1">add_circle</span>
+                                            Add Another Elective
+                                        </button>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low/50 border border-outline-variant/10 p-8 rounded-xl">
+<div class="flex justify-between items-center mb-6">
+<h2 class="text-2xl font-bold text-on-surface-variant opacity-80">Grade 11 (3U/3M)</h2>
+<span class="bg-surface-container-highest text-on-surface-variant px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Completed</span>
+</div>
+<div class="flex items-center space-x-4">
+<div class="h-10 w-10 bg-surface-container-highest rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<p class="text-sm text-on-surface-variant italic">8 courses entered. Average: <span class="font-bold text-primary">88.5%</span></p>
+<button class="ml-auto text-xs font-bold text-primary uppercase underline tracking-widest">Edit Grades</button>
+</div>
+</div>
+</section>
+<aside class="lg:col-span-4 space-y-6">
+<div class="bg-primary p-8 rounded-xl text-white shadow-xl shadow-primary/20 sticky top-24 overflow-hidden group">
+<div class="absolute -right-4 -top-4 opacity-10 transform rotate-12 transition-transform group-hover:scale-110">
+<span class="material-symbols-outlined text-9xl">school</span>
+</div>
+<h3 class="text-xl font-bold mb-4 relative z-10">Pathway Summary</h3>
+<div class="space-y-4 relative z-10">
+<div class="flex justify-between items-center pb-3 border-b border-white/10">
+<span class="text-white/60 text-sm">Courses Entered</span>
+<span class="font-bold">6 / 6</span>
+</div>
+<div class="flex justify-between items-center pb-3 border-b border-white/10">
+<span class="text-white/60 text-sm">Top 6 Average</span>
+<span class="font-bold text-2xl text-secondary-fixed">91.2%</span>
+</div>
+<div class="pt-4">
+<div class="flex items-center space-x-2 text-tertiary-fixed mb-4">
+<span class="material-symbols-outlined text-sm">info</span>
+<span class="text-xs uppercase tracking-widest font-bold">Eligibility Check</span>
+</div>
+<p class="text-sm text-white/80 leading-relaxed mb-6">
+                                        Based on your current grades, you are eligible for <span class="text-white font-bold">42 programs</span> in Ontario.
+                                    </p>
+<button class="w-full bg-white text-primary py-4 rounded-lg font-bold text-sm tracking-widest uppercase hover:bg-primary-fixed transition-colors">
+                                        See Matches
+                                    </button>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-highest/30 p-6 rounded-xl border border-outline-variant/20">
+<h4 class="text-xs font-bold text-primary uppercase tracking-widest mb-4">Quick Tips</h4>
+<ul class="space-y-3">
+<li class="flex items-start space-x-3 text-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-secondary text-sm">tips_and_updates</span>
+<span>Midterm grades are accepted for initial calculations.</span>
+</li>
+<li class="flex items-start space-x-3 text-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-secondary text-sm">tips_and_updates</span>
+<span>Repeat courses will use the highest mark in most cases.</span>
+</li>
+</ul>
+</div>
+</aside>
+</div>
+</div>
+<footer class="w-full py-12 bg-blue-950 dark:bg-black mt-20">
+<div class="flex flex-col md:flex-row justify-between items-center px-8 max-w-7xl mx-auto space-y-6 md:space-y-0">
+<div class="font-lexend font-bold text-white text-lg">Ontario Academic Portal</div>
+<div class="flex flex-wrap justify-center gap-6 font-sans text-xs uppercase tracking-widest text-blue-200/70 dark:text-slate-500">
+<a class="hover:text-white transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-white transition-colors" href="#">OUAC Guide</a>
+<a class="hover:text-white transition-colors" href="#">OCAS Portal</a>
+<a class="hover:text-white transition-colors" href="#">Accessibility</a>
+</div>
+<p class="text-blue-200/50 text-[10px] uppercase tracking-[0.2em]">© 2024 Ontario Academic Portal. All rights reserved.</p>
+</div>
+</footer>
+</main>
+</div>
+<nav class="md:hidden fixed bottom-0 w-full bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 z-50 px-6 py-3 flex justify-between items-center">
+<div class="flex flex-col items-center text-blue-900 dark:text-blue-100">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">edit_note</span>
+<span class="text-[10px] font-bold mt-1">Courses</span>
+</div>
+<div class="flex flex-col items-center text-slate-500">
+<span class="material-symbols-outlined">explore</span>
+<span class="text-[10px] mt-1">Explore</span>
+</div>
+<div class="flex flex-col items-center text-slate-500">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px] mt-1">Stats</span>
+</div>
+<div class="flex flex-col items-center text-slate-500">
+<span class="material-symbols-outlined">account_circle</span>
+<span class="text-[10px] mt-1">Profile</span>
+</div>
+</nav>
+</body></html>

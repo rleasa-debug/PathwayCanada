@@ -1,0 +1,358 @@
+<!--
+  Copyright 2026 Pathways Canada. All Rights Reserved.
+  This code is the proprietary property of Pathways Canada and is subject to Invention Assignment Agreements.
+-->
+
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta name="description" content="Pathway Canada is now 100% free for all Canadian high school students to ensure equal access to post-secondary admissions planning."/>
+    <title>Plans & Access | Pathway Canada</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#102A43",
+                        "secondary": "#3b6934",
+                        "background": "#f7f9ff",
+                        "on-surface": "#001d33",
+                        "surface-container-lowest": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Lexend"],
+                        "lexend": ["Lexend"],
+                        "body": ["Public Sans"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body { font-family: 'Public Sans', sans-serif; background-color: #f7f9ff; }
+        h1, h2, h3, h4, .font-lexend { font-family: 'Lexend', sans-serif; }
+        .editorial-shadow {
+            box-shadow: 0 20px 40px -6px rgba(0, 29, 51, 0.08)
+        }
+        .litho-gradient {
+            background: linear-gradient(135deg, #102A43 0%, #001d33 100%)
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface flex flex-col min-h-screen">
+
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-slate-50/80 backdrop-blur-lg border-b border-slate-200/20">
+    <div class="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto">
+        <a class="text-xl font-bold text-primary font-lexend tracking-tight flex items-center gap-2" href="index.html">
+            <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">shield</span>
+            Pathway Canada
+        </a>
+        <div class="hidden md:flex items-center space-x-8 font-lexend tracking-tight text-sm font-medium">
+            <a class="text-slate-600 hover:text-primary transition-colors" href="student-dashboard.html">Dashboard</a>
+            <a class="text-slate-600 hover:text-primary transition-colors" href="academic-records.html">My Portfolio</a>
+            <a class="text-slate-600 hover:text-primary transition-colors" href="student-dashboard.html#discovery">Discovery</a>
+        </div>
+        <div class="flex items-center gap-4">
+            <div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center text-primary font-bold text-xs shadow-sm user-initials-display">AL</div>
+        </div>
+    </div>
+</nav>
+
+<main class="flex-grow flex items-center justify-center pt-24 pb-12 px-6 flex-col">
+    <!-- Seamless Sponsor Injector -->
+    <div data-sponsor-slot="hero" class="w-full max-w-[1200px] mb-8"></div>
+    <div class="max-w-4xl w-full flex flex-col gap-8">
+        <div class="text-center">
+            <div class="inline-flex items-center gap-1.5 bg-emerald-500/10 text-emerald-700 border border-emerald-500/25 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider mb-4 font-lexend">
+                <span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">verified</span> Data Updated for the 2026-2027 Admissions Cycle
+            </div>
+            <h1 class="text-4xl font-headline font-black text-primary mb-2 tracking-tight">Flexible Plans for Every Journey</h1>
+            <p class="text-on-surface-variant max-w-lg mx-auto text-sm md:text-base">Compare our standard free package and premium insights tier designed to support Canadian secondary graduates.</p>
+        </div>
+
+        <!-- Financial Optimization Callout -->
+        <div class="bg-amber-500/10 border border-amber-500/25 rounded-3xl p-6 text-slate-700 dark:text-slate-350 shadow-sm flex flex-col sm:flex-row items-center gap-4 text-left">
+            <span class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-700 shrink-0">
+                <span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">monetization_on</span>
+            </span>
+            <div>
+                <h3 class="text-sm font-black uppercase text-amber-800 tracking-wider font-lexend mb-1">Financial Optimization Check</h3>
+                <p class="text-xs leading-relaxed font-body">
+                    The traditional trial-and-error post-secondary application process costs families upwards of <strong class="text-slate-900">$550</strong> in non-refundable submission fees. Smart Match Pro acts as an optimization tool using a <strong>99% precision matching algorithm</strong> to ensure active data currency, steering you away from costly, low-probability admissions bids.
+                </p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Free Card -->
+            <div class="bg-white rounded-3xl p-8 md:p-10 border border-slate-100/80 flex flex-col justify-between shadow-sm relative overflow-hidden">
+                <div>
+                    <span class="bg-slate-100 text-slate-700 text-[10px] px-2.5 py-1 rounded font-bold uppercase tracking-wider font-lexend">Standard Plan</span>
+                    <h3 class="text-2xl font-headline font-bold text-primary mt-4">Basic Explorer</h3>
+                    <div class="my-4">
+                        <span class="text-4xl font-black text-primary font-lexend">$0</span>
+                        <span class="text-xs text-on-surface-variant">/ forever</span>
+                    </div>
+                    <p class="text-xs text-on-surface-variant mb-6 font-body leading-relaxed">Perfect for general post-secondary browsing and calculating average percentages.</p>
+                    
+                    <div class="h-px bg-slate-100 mb-6"></div>
+                    
+                    <ul class="space-y-3.5 text-xs text-slate-700 font-body mb-8">
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-emerald-600 text-lg" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            Search & filter all 150 universities and colleges.
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-emerald-600 text-lg" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            Top 6 Admission Average calculation.
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-emerald-600 text-lg" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            Qualitative matching indicators.
+                        </li>
+                        <li class="flex items-start gap-2.5 text-slate-400">
+                            <span class="material-symbols-outlined text-slate-350 text-lg">cancel</span>
+                            99% Precision Match Probability (e.g. 94% Match).
+                        </li>
+
+                        <li class="flex items-start gap-2.5 text-slate-400">
+                            <span class="material-symbols-outlined text-slate-350 text-lg">cancel</span>
+                            Predictive Grade Coaching Dashboard.
+                        </li>
+                        <li class="flex items-start gap-2.5 text-slate-400">
+                            <span class="material-symbols-outlined text-slate-350 text-lg">cancel</span>
+                            Prerequisite Audits & strict cutoff tracking.
+                        </li>
+                        <li class="flex items-start gap-2.5 text-slate-400">
+                            <span class="material-symbols-outlined text-slate-350 text-lg">cancel</span>
+                            Download Certified Admissions Portfolio (PDF).
+                        </li>
+                    </ul>
+                </div>
+                
+                <a href="student-dashboard.html" class="block w-full text-center py-3 bg-slate-100 hover:bg-slate-200 text-primary rounded-xl font-headline font-bold text-sm transition-all hover:scale-[1.01] active:scale-95 shadow-sm">
+                    Access Dashboard
+                </a>
+            </div>
+
+            <!-- Pro Card -->
+            <div class="bg-white rounded-3xl p-8 md:p-10 border-2 border-amber-500 ring-4 ring-amber-500/20 flex flex-col justify-between shadow-xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-4 bg-amber-500 text-slate-950 text-[9px] font-black uppercase tracking-wider rounded-bl-xl font-lexend shadow-sm">
+                    Recommended
+                </div>
+                <div>
+                    <span class="bg-secondary-container text-on-secondary-container text-[10px] px-2.5 py-1 rounded font-bold uppercase tracking-wider font-lexend">Premium Access</span>
+                    <h3 class="text-2xl font-headline font-bold text-primary mt-4">Smart Match Pro</h3>
+                    <div class="my-4">
+                        <span class="text-4xl font-black text-primary font-lexend" id="pro-price-display">$29</span>
+                        <span class="text-xs text-on-surface-variant font-bold" id="pro-price-suffix">/ one-time seasonal pass</span>
+                        <span class="block text-[10px] text-slate-500 font-medium mt-1">Single-year non-renewing subscription (expires after admissions cycle)</span>
+                        
+                        <!-- Social Promo Widget -->
+                        <div id="social-promo-container" class="mt-4 p-3 bg-indigo-50 border border-indigo-100 rounded-xl flex items-center justify-between transition-all">
+                            <div class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-indigo-500 text-lg">share</span>
+                                <div class="flex flex-col">
+                                    <span class="text-[10px] font-bold text-indigo-900 uppercase tracking-wider font-lexend">Unlock 50% Off</span>
+                                    <span class="text-[9px] text-indigo-700">Share with friends to get a promo code.</span>
+                                </div>
+                            </div>
+                            <button onclick="handleSocialShare()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-[10px] font-bold px-3 py-1.5 rounded-lg transition-colors">
+                                Share
+                            </button>
+                        </div>
+                        <div id="promo-revealed-container" class="hidden mt-4 p-3 bg-emerald-50 border border-emerald-100 rounded-xl flex-col items-center justify-center text-center transition-all animate-pulse-once">
+                            <span class="text-[10px] font-bold text-emerald-800 uppercase tracking-wider font-lexend mb-1">Success! Your Code:</span>
+                            <span class="text-lg font-black text-emerald-600 tracking-widest font-mono">SHARE50</span>
+                            <span class="text-[9px] text-emerald-700 mt-1">Use this at checkout for 50% off!</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-on-surface-variant mb-6 font-body leading-relaxed">Full analytics, prerequisite checkers, and certified dashboard reports.</p>
+                    
+                    <div class="h-px bg-slate-100 mb-6"></div>
+                    
+                    <ul class="space-y-3.5 text-xs text-slate-700 font-body mb-8">
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-emerald-600 text-lg" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            <strong>99% Precision Match Probability</strong> (e.g. 94% Match).
+                        </li>
+
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-emerald-600 text-lg" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            <strong>Predictive Grade Coaching Dashboard</strong>.
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-emerald-600 text-lg" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            <strong>Prerequisite Audits</strong> & strict cutoff tracking.
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="material-symbols-outlined text-emerald-600 text-lg" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            Download Certified Admissions Portfolio (PDF).
+                        </li>
+                    </ul>
+                </div>
+                
+                <a href="student-dashboard.html?payment=success" class="block w-full text-center py-3.5 bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-slate-950 rounded-xl font-headline font-extrabold text-sm hover:opacity-95 transition-all hover:scale-[1.01] active:scale-95 shadow-lg shadow-amber-500/10">
+                    Upgrade to Pro Now
+                </a>
+            </div>
+        </div>
+
+        <!-- Methodology Rating Chart Section -->
+        <div class="bg-white rounded-3xl p-8 md:p-10 border border-slate-100/80 shadow-sm mt-8">
+            <h3 class="text-2xl font-headline font-bold text-primary mb-2 flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings: 'FILL' 1;">bar_chart</span>
+                Our Program Rating System
+            </h3>
+            <p class="text-on-surface-variant text-xs md:text-sm mb-6 leading-relaxed">
+                Pathway Canada uses an advanced calculation metric to assess your academic profile compatibility. We classify program alignments into four major tiers:
+            </p>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8 text-left">
+                <!-- Locked In -->
+                <div class="border border-emerald-500/20 bg-emerald-50/20 rounded-2xl p-5 flex flex-col justify-between">
+                    <div>
+                        <span class="inline-flex items-center justify-center px-3 py-1 bg-emerald-600 text-white text-[9px] font-black uppercase tracking-wider rounded-full font-lexend shadow-sm">
+                            Locked In
+                        </span>
+                        <h4 class="font-headline font-bold text-sm text-slate-800 mt-3">Safety Fit</h4>
+                        <p class="text-[11px] text-slate-600 mt-1.5 leading-normal">
+                            Your Top 6 average exceeds the program's target cutoff margin by **+3.0% or more**, with all prerequisite credits fully finalized.
+                        </p>
+                    </div>
+                    <span class="text-[10px] font-lexend font-bold text-emerald-600 mt-4 flex items-center gap-1">
+                        <span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">verified</span> High Likelihood
+                    </span>
+                </div>
+                <!-- Strong Contender -->
+                <div class="border border-blue-500/20 bg-blue-50/20 rounded-2xl p-5 flex flex-col justify-between">
+                    <div>
+                        <span class="inline-flex items-center justify-center px-3 py-1 bg-blue-600 text-white text-[9px] font-black uppercase tracking-wider rounded-full font-lexend shadow-sm">
+                            Strong Contender
+                        </span>
+                        <h4 class="font-headline font-bold text-sm text-slate-800 mt-3">Match Fit</h4>
+                        <p class="text-[11px] text-slate-600 mt-1.5 leading-normal">
+                            Your admission average meets or falls within **-2.0% to +3.0%** of the program cutoff, and prerequisites are fully met.
+                        </p>
+                    </div>
+                    <span class="text-[10px] font-lexend font-bold text-blue-600 mt-4 flex items-center gap-1">
+                        <span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">bolt</span> Steady Alignment
+                    </span>
+                </div>
+                <!-- The Longshot -->
+                <div class="border border-amber-500/20 bg-amber-50/20 rounded-2xl p-5 flex flex-col justify-between">
+                    <div>
+                        <span class="inline-flex items-center justify-center px-3 py-1 bg-gradient-to-r from-orange-500 to-pink-500 text-white text-[9px] font-black uppercase tracking-wider rounded-full font-lexend shadow-sm">
+                            The Longshot
+                        </span>
+                        <h4 class="font-headline font-bold text-sm text-slate-800 mt-3">Reach Fit</h4>
+                        <p class="text-[11px] text-slate-600 mt-1.5 leading-normal">
+                            Your average is **2.0% to 5.0% below** target cutoff. Admission is highly competitive but possible with portfolio weighting.
+                        </p>
+                    </div>
+                    <span class="text-[10px] font-lexend font-bold text-orange-600 mt-4 flex items-center gap-1">
+                        <span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">sailing</span> Stretch Target
+                    </span>
+                </div>
+                <!-- High Climb -->
+                <div class="border border-slate-500/20 bg-slate-50/20 rounded-2xl p-5 flex flex-col justify-between">
+                    <div>
+                        <span class="inline-flex items-center justify-center px-3 py-1 bg-slate-500 text-white text-[9px] font-black uppercase tracking-wider rounded-full font-lexend shadow-sm">
+                            High Climb
+                        </span>
+                        <h4 class="font-headline font-bold text-sm text-slate-800 mt-3">Unlikely Fit</h4>
+                        <p class="text-[11px] text-slate-600 mt-1.5 leading-normal">
+                            Your average is **more than 5.0% below** target cutoff, OR you are currently missing core senior prerequisite courses.
+                        </p>
+                    </div>
+                    <span class="text-[10px] font-lexend font-bold text-slate-600 mt-4 flex items-center gap-1">
+                        <span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">lock</span> Prereqs Missing / Gap
+                    </span>
+                </div>
+            </div>
+
+            <!-- Disclaimer -->
+            <div class="bg-slate-50/80 dark:bg-slate-900/40 p-6 rounded-2xl border border-slate-200/50 dark:border-slate-800 text-left mt-8">
+                <h4 class="text-xs font-black text-slate-800 uppercase tracking-wider mb-2.5 flex items-center gap-1.5 font-lexend">
+                    <span class="material-symbols-outlined text-sm text-slate-600">gavel</span>
+                    Legal & Algorithmic Disclaimer
+                </h4>
+                <p class="text-[10px] text-slate-500 leading-relaxed font-body">
+                    <strong>Notice:</strong> Pathway Canada's matchmaking percentages and classification labels (Locked In, Strong Contender, The Longshot, High Climb) are advisory estimations generated by our proprietary calculations. While our models incorporate public admissions historical databases, prerequisite validation frameworks, and domestic applicant statistics, they do not guarantee admission. Final entry decisions are at the sole discretion of respective university registrars. Pathway Canada is an independent service and does not represent, contract for, or associate officially with any Canadian post-secondary institution.
+                </p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="bg-primary text-blue-50 w-full py-12 border-t border-primary-container">
+    <div class="flex flex-col md:flex-row justify-between items-center px-8 max-w-7xl mx-auto">
+        <div class="mb-8 md:mb-0">
+            <div class="font-headline font-bold text-white text-lg mb-2">Pathway Canada</div>
+            <p class="font-sans text-xs uppercase tracking-widest text-blue-200/70">© 2026 Pathway Canada Portal. All rights reserved.</p>
+        </div>
+        <div class="flex flex-wrap justify-center gap-8 font-sans text-xs uppercase tracking-widest">
+            <a class="text-blue-200/70 hover:text-white transition-colors" href="privacy-policy.html">Privacy Hub</a>
+            <a class="text-blue-200/70 hover:text-white transition-colors" href="pricing.html">Methodology</a>
+            <a class="text-blue-200/70 hover:text-white transition-colors" href="student-dashboard.html">Dashboard</a>
+            <a class="text-blue-200/70 hover:text-white transition-colors" href="counselor-dashboard.html">Counselor Access</a>
+        </div>
+    </div>
+</footer>
+
+<script type="module" src="shared.js"></script>
+<script type="module">
+    try {
+        const state = getAppState();
+        const userName = state.userName || "Alex";
+        const initials = userName.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+        document.querySelectorAll('.user-initials-display').forEach(el => el.textContent = initials);
+    } catch(e) {
+        console.error(e);
+    }
+
+    function handleSocialShare() {
+        // Simulate a native share intent or fallback to clipboard
+        if (navigator.share) {
+            navigator.share({
+                title: 'Pathway Canada Pro',
+                text: 'Check out Pathway Canada to optimize your university applications!',
+                url: window.location.href,
+            }).then(() => revealPromo()).catch(console.error);
+        } else {
+            // Fallback for desktop/unsupported browsers
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                alert('Link copied to clipboard! Share it with your friends!');
+                revealPromo();
+            });
+        }
+    }
+
+    function revealPromo() {
+        document.getElementById('social-promo-container').classList.add('hidden');
+        document.getElementById('promo-revealed-container').classList.remove('hidden');
+        document.getElementById('promo-revealed-container').classList.add('flex');
+        
+        // Dynamically update the price display for visual satisfaction
+        const priceDisplay = document.getElementById('pro-price-display');
+        const priceSuffix = document.getElementById('pro-price-suffix');
+        priceDisplay.innerHTML = `<span class="line-through text-slate-400 text-2xl mr-2">$29</span><span class="text-emerald-600">$14.50</span>`;
+    }
+</script>
+<script src="/auth.js"></script>
+<script src="/adManager.js"></script>
+</body>
+</html>

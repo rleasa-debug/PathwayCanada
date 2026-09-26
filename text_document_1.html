@@ -1,0 +1,27 @@
+<!--
+  Copyright 2026 Pathways Canada. All Rights Reserved.
+  This code is the proprietary property of Pathways Canada and is subject to Invention Assignment Agreements.
+-->
+
+# Technical Handoff: Chat & Stripe Integration Requirements
+
+To move from these high-fidelity designs to a fully functional live site, you will need to provide or configure the following:
+
+## 1. Stripe (Payments)
+*   **API Keys:** Once your Stripe account is active, you'll need to provide your **Publishable Key** for the frontend and keep your **Secret Key** for your backend server.
+*   **Price ID:** Create the 'Pathway Canada Pro' product in your Stripe Dashboard and provide the **Price ID** (e.g., `price_1P...`).
+*   **Webhook Secret:** If you want the site to automatically update student status after payment, you'll need to configure a webhook and provide the secret.
+
+## 2. Chat Integration
+*   **Service Provider:** Let me know which service you'd like to use (e.g., Intercom, Zendesk, Crisp, or a custom LLM solution).
+*   **Integration Snippet/Key:** Most services provide a small JavaScript snippet or an **App ID/API Key**. Once you have that, I can 'embed' it into the designs.
+
+## 3. ElevenLabs (Speech)
+*   **API Key:** To enable the "Charlotte" voice and other audio features, you'll need to provide your **ElevenLabs API Key**. 
+*   **Voice ID:** If you have a specific custom voice ID for "Charlotte," please provide that as well.
+
+## 4. Domain & Hosting
+*   **Target URL:** Once you've decided on a domain (e.g., pathwaycanada.ca), let me know so I can ensure all internal links and security headers are correctly mapped.
+
+**Next Steps:**
+I have already integrated the *visual* elements for these. Once you have these keys/details, I can show you exactly where they go in the code!

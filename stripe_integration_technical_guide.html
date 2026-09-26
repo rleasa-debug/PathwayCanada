@@ -1,0 +1,38 @@
+<!--
+  Copyright 2026 Pathways Canada. All Rights Reserved.
+  This code is the proprietary property of Pathways Canada and is subject to Invention Assignment Agreements.
+-->
+
+# Stripe Integration Guide for Pathway Canada
+
+To fully activate the payment flow I've designed, you'll need to complete these steps in your Stripe Dashboard.
+
+## 1. Stripe Account Setup
+1.  **Create/Login:** Go to [Stripe.com](https://stripe.com) and sign up or log in.
+2.  **Activate Account:** Complete your business profile to start accepting live payments.
+
+## 2. API Keys
+You will need two keys to connect the site:
+*   **Publishable Key (pk_test/...):** Used on the front-end (the designs I'm creating).
+*   **Secret Key (sk_test/...):** Used on your back-end server. **Never share this key.**
+
+## 3. Product Configuration
+1.  Go to the **Product Catalog** in Stripe.
+2.  Add a new product: **Pathway Canada Pro**.
+3.  Set the price to **$29.00**.
+4.  Select **Recurring** (Yearly) or **One-time** based on your preference.
+5.  Copy the **Price ID** (e.g., `price_1P...`).
+
+## 4. Frontend Integration (Stripe Checkout)
+The "Get Full Access Now" buttons in the designs are intended to trigger a **Stripe Checkout Session**.
+*   When a user clicks the button, your server calls Stripe's API using the Secret Key and the Price ID.
+*   Stripe returns a URL, and you redirect the user to Stripe's secure hosted payment page.
+
+## 5. Webhooks
+To ensure the student's dashboard updates immediately after payment:
+1.  Set up a **Webhook** in Stripe to listen for `checkout.session.completed`.
+2.  When Stripe sends this event, your database should mark that student as a "Pro" user.
+
+## 6. Security & Compliance
+*   The designs already include "Secure Stripe Connect" badges and PCI compliance signals to build trust.
+*   Stripe handles all sensitive card data, so your server never touches the actual credit card numbers.

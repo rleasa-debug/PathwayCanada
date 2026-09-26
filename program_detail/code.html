@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-container": "#3f6d38",
+                        "surface-bright": "#f7f9ff",
+                        "on-tertiary-fixed-variant": "#6e3900",
+                        "tertiary-container": "#422000",
+                        "on-error": "#ffffff",
+                        "on-background": "#001d33",
+                        "on-tertiary-fixed": "#2f1500",
+                        "outline-variant": "#c3c6ce",
+                        "error-container": "#ffdad6",
+                        "secondary-container": "#b9eeab",
+                        "surface-container-highest": "#cee5ff",
+                        "surface-tint": "#49607c",
+                        "surface-container-low": "#edf4ff",
+                        "on-secondary-fixed-variant": "#23501e",
+                        "inverse-surface": "#12334c",
+                        "tertiary-fixed-dim": "#ffb77d",
+                        "on-surface": "#001d33",
+                        "surface": "#f7f9ff",
+                        "primary-container": "#102a43",
+                        "surface-dim": "#bfddfe",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#bcf0ae",
+                        "inverse-on-surface": "#e8f2ff",
+                        "on-secondary-fixed": "#002201",
+                        "secondary": "#3b6934",
+                        "primary-fixed": "#d1e4ff",
+                        "on-primary-fixed": "#011d35",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-container": "#d97705",
+                        "primary-fixed-dim": "#b0c9e8",
+                        "outline": "#74777e",
+                        "on-primary-container": "#7a92b0",
+                        "on-primary": "#ffffff",
+                        "on-surface-variant": "#43474d",
+                        "surface-container": "#e3efff",
+                        "secondary-fixed-dim": "#a1d494",
+                        "surface-container-high": "#d8eaff",
+                        "error": "#ba1a1a",
+                        "on-error-container": "#93000a",
+                        "background": "#f7f9ff",
+                        "surface-variant": "#cee5ff",
+                        "tertiary": "#240f00",
+                        "tertiary-fixed": "#ffdcc3",
+                        "on-primary-fixed-variant": "#314863",
+                        "on-tertiary": "#ffffff",
+                        "primary": "#00152a",
+                        "inverse-primary": "#b0c9e8"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Lexend"],
+                        "body": ["Public Sans"],
+                        "label": ["Public Sans"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Public Sans', sans-serif; }
+        h1, h2, h3, h4 { font-family: 'Lexend', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary-fixed-dim">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-slate-50/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center max-w-7xl mx-auto px-6 h-16">
+<div class="text-xl font-bold text-blue-950 dark:text-blue-50 font-lexend tracking-tight">OntarioPathways</div>
+<div class="hidden md:flex space-x-8 items-center">
+<a class="text-blue-900 dark:text-blue-200 border-b-2 border-blue-900 dark:border-blue-200 pb-1 font-lexend tracking-tight text-sm font-medium hover:text-blue-800 transition-colors" href="#">Explore</a>
+<a class="text-slate-600 dark:text-slate-400 font-lexend tracking-tight text-sm font-medium hover:text-blue-800 transition-colors active:scale-95 duration-200" href="#">Dashboard</a>
+<a class="text-slate-600 dark:text-slate-400 font-lexend tracking-tight text-sm font-medium hover:text-blue-800 transition-colors active:scale-95 duration-200" href="#">Resources</a>
+<button class="bg-primary text-on-primary px-5 py-2 rounded-lg font-lexend text-sm font-medium hover:opacity-90 active:scale-95 duration-200">Sign In</button>
+</div>
+<div class="md:hidden flex items-center">
+<span class="material-symbols-outlined text-on-surface">menu</span>
+</div>
+</div>
+<div class="bg-slate-200/50 dark:bg-slate-800/50 h-px w-full"></div>
+</nav>
+<div class="flex pt-16">
+<!-- SideNavBar (Desktop) -->
+<aside class="hidden lg:flex flex-col p-4 space-y-2 h-screen w-64 border-r border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 sticky top-16">
+<div class="px-4 py-6 mb-4">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-primary text-3xl" data-weight="fill">school</span>
+<span class="text-lg font-black text-blue-950 dark:text-white font-lexend">Program Tracker</span>
+</div>
+<p class="text-xs text-slate-500 font-lexend">Academic Year 2026-27</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all duration-150 rounded-lg" href="#">
+<span class="material-symbols-outlined">edit_note</span>
+<span class="font-lexend">Course Input</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-blue-50 dark:bg-blue-900/30 text-blue-900 dark:text-blue-100 rounded-lg font-semibold transition-all duration-150" href="#">
+<span class="material-symbols-outlined">verified</span>
+<span class="font-lexend">Eligibility</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all duration-150 rounded-lg" href="#">
+<span class="material-symbols-outlined">bookmark</span>
+<span class="font-lexend">My Saves</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all duration-150 rounded-lg" href="#">
+<span class="material-symbols-outlined">school</span>
+<span class="font-lexend">Counselor</span>
+</a>
+</nav>
+<button class="w-full py-3 mt-4 bg-primary text-on-primary rounded-lg font-lexend font-bold text-sm shadow-sm active:scale-95 transition-transform">
+                Calculate Average
+            </button>
+<div class="pt-4 mt-4 border-t border-slate-200 dark:border-slate-800 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-100 rounded-lg" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-lexend">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-100 rounded-lg" href="#">
+<span class="material-symbols-outlined">help_outline</span>
+<span class="font-lexend">Support</span>
+</a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 min-h-screen bg-background p-6 md:p-12">
+<!-- Hero Section -->
+<section class="max-w-6xl mx-auto mb-16">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+<div class="lg:col-span-7">
+<div class="flex items-center gap-2 mb-6">
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-xs font-bold uppercase tracking-widest font-label">Highly Competitive</span>
+<span class="px-3 py-1 bg-surface-container-high text-on-surface-variant rounded-full text-xs font-bold uppercase tracking-widest font-label">OUAC: MH</span>
+</div>
+<h1 class="text-5xl md:text-6xl font-black text-primary leading-tight mb-4 tracking-tight">
+                            Bachelor of Health Sciences (Honours)
+                        </h1>
+<p class="text-xl text-on-surface-variant font-light mb-8 max-w-2xl leading-relaxed">
+                            A unique, interdisciplinary program at McMaster University renowned for its inquiry-based learning and focus on the biological and social determinants of health.
+                        </p>
+<div class="flex flex-wrap gap-4">
+<button class="px-8 py-4 bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-lg font-bold text-lg shadow-lg hover:shadow-xl transition-all active:scale-95">
+                                Start Application
+                            </button>
+<button class="px-8 py-4 bg-surface-container-highest text-primary rounded-lg font-bold text-lg hover:bg-surface-dim transition-all">
+                                Download Brochure
+                            </button>
+</div>
+</div>
+<div class="lg:col-span-5 relative">
+<div class="rounded-2xl overflow-hidden shadow-2xl aspect-[4/5] relative">
+<img alt="University Campus Building" class="w-full h-full object-cover" data-alt="stately stone university building with large windows and lush green ivy crawling up the walls under a clear blue sky" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8YxR7VHZDmRbGMQwwfXZpcijbQpRiEVwXYLHImHsO066PCkrn9ZNU-QhQ35ykWwOuzKUuhfHddTj8Rhg8jCXdP2WEYl9eIZ3FqFfxVXekcxINMYQ7o6lI3NeyKrqpn0mBT7GvSpGO9WnSMdOY5eev7E6KqI7oIVDuqgxS0Y-JP71720B0-hmkI0XaeHpntQ8LrHLCJ5m710XVft-BAA0fVTtwhpNA8XYqF0xqqcMaRFY--dEghx7cgKkr5SJa6Zd_oiIohSLbWbM6"/>
+<div class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-primary/80 to-transparent">
+<div class="flex items-center gap-2 text-white">
+<span class="material-symbols-outlined">location_on</span>
+<span class="font-medium">Hamilton, Ontario</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Quick Stats Bento Grid -->
+<section class="max-w-6xl mx-auto mb-20">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<div class="bg-surface-container-lowest p-8 rounded-xl border-l-4 border-primary shadow-sm hover:shadow-md transition-all">
+<p class="text-sm font-bold uppercase tracking-widest text-on-surface-variant mb-2">Admission Average</p>
+<h3 class="text-4xl font-black text-primary mb-1">90%+</h3>
+<p class="text-xs text-on-surface-variant">Recommended for competitive entry</p>
+</div>
+<div class="bg-surface-container-lowest p-8 rounded-xl border-l-4 border-secondary shadow-sm hover:shadow-md transition-all">
+<p class="text-sm font-bold uppercase tracking-widest text-on-surface-variant mb-2">Program Length</p>
+<h3 class="text-4xl font-black text-secondary mb-1">4 Years</h3>
+<p class="text-xs text-on-surface-variant">Full-time undergraduate degree</p>
+</div>
+<div class="bg-surface-container-lowest p-8 rounded-xl border-l-4 border-tertiary-fixed-dim shadow-sm hover:shadow-md transition-all">
+<p class="text-sm font-bold uppercase tracking-widest text-on-surface-variant mb-2">Enrolment</p>
+<h3 class="text-4xl font-black text-tertiary mb-1">240</h3>
+<p class="text-xs text-on-surface-variant">Seats available for Fall 2025</p>
+</div>
+<div class="bg-surface-container-lowest p-8 rounded-xl border-l-4 border-primary-fixed-dim shadow-sm hover:shadow-md transition-all">
+<p class="text-sm font-bold uppercase tracking-widest text-on-surface-variant mb-2">Credential</p>
+<h3 class="text-4xl font-black text-primary mb-1">B.H.Sc.</h3>
+<p class="text-xs text-on-surface-variant">Honours Undergraduate Degree</p>
+</div>
+</div>
+</section>
+<!-- Detailed Content Split -->
+<section class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 mb-20">
+<!-- Left: Prerequisites & Academic Requirements -->
+<div class="lg:col-span-8 space-y-12">
+<div>
+<h2 class="text-3xl font-bold text-primary mb-8 flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary text-4xl">checklist</span>
+                            Admission Prerequisites
+                        </h2>
+<div class="space-y-4">
+<div class="bg-surface-container-low p-6 rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-primary font-bold">1</div>
+<div>
+<h4 class="font-bold text-primary">English (ENG4U)</h4>
+<p class="text-sm text-on-surface-variant">Grade 12 University Preparation</p>
+</div>
+</div>
+<span class="text-primary font-bold">Min 80%</span>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-primary font-bold">2</div>
+<div>
+<h4 class="font-bold text-primary">Biology (SBI4U)</h4>
+<p class="text-sm text-on-surface-variant">Grade 12 University Preparation</p>
+</div>
+</div>
+<span class="text-primary font-bold">Min 80%</span>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-primary font-bold">3</div>
+<div>
+<h4 class="font-bold text-primary">Chemistry (SCH4U)</h4>
+<p class="text-sm text-on-surface-variant">Grade 12 University Preparation</p>
+</div>
+</div>
+<span class="text-primary font-bold">Min 80%</span>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-primary font-bold">4</div>
+<div>
+<h4 class="font-bold text-primary">One of Grade 12 Math (4U)</h4>
+<p class="text-sm text-on-surface-variant">Calculus &amp; Vectors, Advanced Functions, or Data Management</p>
+</div>
+</div>
+<span class="text-primary font-bold">Min 80%</span>
+</div>
+</div>
+</div>
+<div>
+<h2 class="text-3xl font-bold text-primary mb-8 flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary text-4xl">history_edu</span>
+                            The Supplementary Application
+                        </h2>
+<div class="bg-surface-container-lowest p-8 rounded-2xl shadow-sm relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-secondary-container/20 rounded-bl-full -mr-10 -mt-10"></div>
+<p class="text-on-surface leading-relaxed mb-6">
+                                Admissions at BHSc are not based on grades alone. A mandatory supplementary application is required, consisting of two short written responses that demonstrate critical thinking, collaboration, and inquiry skills.
+                            </p>
+<div class="flex items-center gap-4 p-4 bg-tertiary-fixed rounded-lg text-on-tertiary-fixed">
+<span class="material-symbols-outlined">warning</span>
+<span class="text-sm font-bold">Deadline: February 1st, 2025</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right: Application Guide & Marginalia -->
+<div class="lg:col-span-4 space-y-8">
+<div class="bg-primary p-8 rounded-2xl text-on-primary shadow-xl">
+<h3 class="text-2xl font-bold mb-6">How to Apply</h3>
+<ol class="space-y-6">
+<li class="flex gap-4">
+<span class="text-primary-fixed font-black text-2xl opacity-50">01</span>
+<div>
+<p class="font-bold">Register with OUAC</p>
+<p class="text-sm text-on-primary-container">Create your account on the Ontario Universities' Application Centre.</p>
+</div>
+</li>
+<li class="flex gap-4">
+<span class="text-primary-fixed font-black text-2xl opacity-50">02</span>
+<div>
+<p class="font-bold">Select Program</p>
+<p class="text-sm text-on-primary-container">Use code <span class="underline">MH</span> for Health Sciences at McMaster.</p>
+</div>
+</li>
+<li class="flex gap-4">
+<span class="text-primary-fixed font-black text-2xl opacity-50">03</span>
+<div>
+<p class="font-bold">Complete Supp-App</p>
+<p class="text-sm text-on-primary-container">Log in to the McMaster portal to submit your written prompts.</p>
+</div>
+</li>
+</ol>
+<button class="w-full mt-8 py-3 bg-white text-primary rounded-lg font-bold hover:bg-primary-fixed transition-colors">
+                            Visit OUAC Portal
+                        </button>
+</div>
+<div class="bg-surface-container-high p-8 rounded-2xl">
+<h3 class="text-xl font-bold text-primary mb-4">Campus Information</h3>
+<div class="rounded-xl overflow-hidden mb-4 border border-outline-variant">
+<img alt="Map Placeholder" class="w-full h-32 object-cover" data-alt="a minimalist stylized map of an urban university campus with green parks and modern white buildings" data-location="Hamilton, Ontario" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARrRALx5oMMU64ywN1pAXTEx8np3LOP8JF3upmfoYlH1WfwBwrX5HlJpeVtCzL3LOE8nKUqMFhMJdUZh1r4j1_f8nhdHuvI-mzaaga0v3xnWeRdevEix3m5pypzVdKU7VBu-ksPaZqSJPuaYoeapZAT7RJA79EsYlGyYnHaLz0_aw8Nb3IJGo87kN_kERbx9huR34rtio3JorqxOS3yj-wo6UbX15KxXc9MviQvDyk_Vrm47nvkqWaVmJkNEYI0hyzsMkE46MWZwdV"/>
+</div>
+<p class="text-sm text-on-surface-variant font-medium mb-2">Main Campus, Hamilton</p>
+<p class="text-xs text-on-surface-variant leading-loose">
+                            MDCL Building, 1280 Main St W,<br/>
+                            Hamilton, ON L8S 4L8
+                        </p>
+<div class="mt-6 flex gap-2">
+<span class="material-symbols-outlined text-secondary">verified_user</span>
+<span class="text-xs font-bold text-secondary uppercase tracking-tighter">Ranked #1 in Canada for Health Research</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+<!-- Footer -->
+<footer class="bg-blue-950 dark:bg-black w-full py-12 border-t border-blue-900 dark:border-slate-800">
+<div class="flex flex-col md:flex-row justify-between items-center px-8 max-w-7xl mx-auto">
+<div class="mb-8 md:mb-0">
+<div class="font-lexend font-bold text-white text-2xl mb-2">OntarioPathways</div>
+<p class="font-sans text-xs uppercase tracking-widest text-blue-200/70 dark:text-slate-500">© 2024 Ontario Academic Portal. All rights reserved.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="font-sans text-xs uppercase tracking-widest text-blue-200/70 dark:text-slate-500 hover:text-white transition-colors opacity-100 hover:opacity-80" href="#">Privacy Policy</a>
+<a class="font-sans text-xs uppercase tracking-widest text-blue-200/70 dark:text-slate-500 hover:text-white transition-colors opacity-100 hover:opacity-80" href="#">OUAC Guide</a>
+<a class="font-sans text-xs uppercase tracking-widest text-blue-200/70 dark:text-slate-500 hover:text-white transition-colors opacity-100 hover:opacity-80 text-white underline" href="#">OCAS Portal</a>
+<a class="font-sans text-xs uppercase tracking-widest text-blue-200/70 dark:text-slate-500 hover:text-white transition-colors opacity-100 hover:opacity-80" href="#">Accessibility</a>
+</div>
+</div>
+</footer>
+</body></html>

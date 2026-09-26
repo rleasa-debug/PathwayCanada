@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Student Deep Dive - Alex Chen | Academic Canada</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-bright": "#f7f9ff",
+                    "on-background": "#001d33",
+                    "surface-container-high": "#d8eaff",
+                    "tertiary-container": "#422000",
+                    "secondary-fixed": "#bcf0ae",
+                    "tertiary-fixed": "#ffdcc3",
+                    "on-primary-container": "#7a92b0",
+                    "on-error-container": "#93000a",
+                    "surface-container-lowest": "#ffffff",
+                    "surface": "#f7f9ff",
+                    "on-primary": "#ffffff",
+                    "background": "#f7f9ff",
+                    "surface-container-highest": "#cee5ff",
+                    "primary-container": "#102a43",
+                    "on-tertiary-container": "#d97705",
+                    "surface-variant": "#cee5ff",
+                    "on-tertiary-fixed-variant": "#6e3900",
+                    "surface-container": "#e3efff",
+                    "on-tertiary-fixed": "#2f1500",
+                    "tertiary": "#240f00",
+                    "surface-tint": "#49607c",
+                    "primary": "#00152a",
+                    "on-primary-fixed": "#011d35",
+                    "surface-dim": "#bfddfe",
+                    "primary-fixed-dim": "#b0c9e8",
+                    "on-primary-fixed-variant": "#314863",
+                    "on-secondary-fixed-variant": "#23501e",
+                    "tertiary-fixed-dim": "#ffb77d",
+                    "on-secondary-fixed": "#002201",
+                    "secondary-fixed-dim": "#a1d494",
+                    "on-surface-variant": "#43474d",
+                    "error": "#ba1a1a",
+                    "outline": "#74777e",
+                    "primary-fixed": "#d1e4ff",
+                    "inverse-surface": "#12334c",
+                    "secondary-container": "#b9eeab",
+                    "inverse-on-surface": "#e8f2ff",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "on-surface": "#001d33",
+                    "on-error": "#ffffff",
+                    "inverse-primary": "#b0c9e8",
+                    "error-container": "#ffdad6",
+                    "secondary": "#3b6934",
+                    "outline-variant": "#c3c6ce",
+                    "on-secondary-container": "#3f6d38",
+                    "surface-container-low": "#edf4ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Lexend"],
+                    "body": ["Public Sans"],
+                    "label": ["Public Sans"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .editorial-gradient {
+            background: linear-gradient(135deg, #00152a 0%, #102a43 100%);
+        }
+        .glass-panel {
+            background: rgba(206, 229, 255, 0.8);
+            backdrop-filter: blur(16px);
+        }
+        body { font-family: 'Public Sans', sans-serif; }
+        h1, h2, h3, h4 { font-family: 'Lexend', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface-bright text-on-surface selection:bg-primary-fixed-dim">
+<!-- TopNavBar -->
+<header class="bg-slate-50/80 backdrop-blur-xl shadow-sm fixed top-0 w-full z-40">
+<div class="flex justify-between items-center w-full px-6 py-3">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold text-slate-900 tracking-tighter font-lexend">Academic Canada</span>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="text-slate-500 hover:text-slate-800 transition-colors font-lexend tracking-tight" href="#">Dashboard</a>
+<a class="text-slate-500 hover:text-slate-800 transition-colors font-lexend tracking-tight" href="#">Quick Reports</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-slate-100 transition-colors rounded-full">
+<span class="material-symbols-outlined text-slate-900" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 hover:bg-slate-100 transition-colors rounded-full">
+<span class="material-symbols-outlined text-slate-900" data-icon="help_outline">help_outline</span>
+</button>
+<div class="h-8 w-px bg-slate-200"></div>
+<div class="flex items-center gap-3 pl-2">
+<span class="text-sm font-medium text-slate-900 font-lexend">Counselor Hub</span>
+<img alt="Counselor Profile" class="w-8 h-8 rounded-full object-cover" data-alt="professional portrait of a confident female academic counselor in a bright office setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6aLb5IkNGSweNQCe7NUAk0R7fuBx62jH3OaNhXff_FioZ_qd_7iX2NnAJh9OLKLxPa3Bmow05pMjUk3xhyoTu6CLUgOJjsLWa1Zeh38MWntA-TNV5t6h2zwfOsIccPnAA99jBBJkSOitb5uT5ZMKco6K1hjRP9O3B2jH_tVcj3yr5K7MtcNTub8LuWOBJrIC1If6I0XC27xkX2SOa1NLmLaOxmYgJHfyYCCBnnraOyUI2dyw_g5YlpqJSf4fx1-hSbwR21nM34D90"/>
+</div>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 flex flex-col bg-slate-100 py-6 space-y-2 pt-20 border-r border-transparent">
+<div class="px-6 mb-6">
+<h2 class="text-lg font-black text-blue-950 tracking-tight font-lexend">Counselor Hub</h2>
+<p class="text-xs text-slate-500 font-lexend">Academic Canada</p>
+</div>
+<nav class="flex-1 flex flex-col px-2 gap-1">
+<a class="bg-white text-blue-900 shadow-sm rounded-lg px-4 py-3 font-bold flex items-center gap-3 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-lexend text-sm">Student Roster</span>
+</a>
+<a class="text-slate-600 hover:bg-slate-200 hover:translate-x-1 rounded-lg px-4 py-3 flex items-center gap-3 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span class="font-lexend text-sm">Applications</span>
+</a>
+<a class="text-slate-600 hover:bg-slate-200 hover:translate-x-1 rounded-lg px-4 py-3 flex items-center gap-3 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-lexend text-sm">Analytics</span>
+</a>
+<a class="text-slate-600 hover:bg-slate-200 hover:translate-x-1 rounded-lg px-4 py-3 flex items-center gap-3 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-lexend text-sm">Resource Library</span>
+</a>
+<a class="text-slate-600 hover:bg-slate-200 hover:translate-x-1 rounded-lg px-4 py-3 flex items-center gap-3 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-lexend text-sm">Settings</span>
+</a>
+</nav>
+<div class="px-4 mt-auto">
+<button class="editorial-gradient text-white w-full py-3 rounded-lg font-lexend text-sm font-semibold shadow-lg hover:opacity-90 transition-opacity">
+                New Application
+            </button>
+</div>
+<div class="mt-6 px-4 space-y-1">
+<a class="text-slate-500 text-xs flex items-center gap-2 px-2 py-1 hover:text-blue-900 transition-colors" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="policy">policy</span>
+                Privacy Policy
+            </a>
+<a class="text-slate-500 text-xs flex items-center gap-2 px-2 py-1 hover:text-blue-900 transition-colors" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="contact_support">contact_support</span>
+                Contact Support
+            </a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="ml-64 pt-20 p-8 min-h-screen">
+<!-- Hero Header -->
+<header class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div class="flex items-center gap-6">
+<div class="relative">
+<img alt="Student Profile" class="w-32 h-32 rounded-xl object-cover shadow-xl border-4 border-white" data-alt="Close up portrait of a young male student with thoughtful expression against a blurred library background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOMuX6cPCo5EeF3XELkSBA6PxUW2XSNu89BFzrmYLz1M2SeLBmiW254IlUqTQCG1govQWpfHDYYA13_gCn4ap4I-KDjr_t4MjNuPsubLzJU7CI_BCJW9OgtRCCKrstBfbHketBlX0p7qBsRxrP3SZNI369lejKPdAlOOwmXIc9n0JTF7NtMifAwvWrMUJw3EmrMRaP2sBqkySHJTEfSrnh9x4rKhuBlN-CdtOeCn-JJntdBiBGis-2-7cpN65wNF79suRC8MaRXe3L"/>
+<div class="absolute -bottom-2 -right-2 bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-xs font-bold shadow-md">
+                        Active Profile
+                    </div>
+</div>
+<div>
+<nav class="flex items-center gap-2 text-slate-400 text-sm mb-2">
+<span>Students</span>
+<span class="material-symbols-outlined text-xs" data-icon="chevron_right">chevron_right</span>
+<span>Ontario Secondary</span>
+<span class="material-symbols-outlined text-xs" data-icon="chevron_right">chevron_right</span>
+<span class="text-primary font-medium">Deep Dive</span>
+</nav>
+<h1 class="text-5xl font-black text-primary tracking-tighter">Alex Chen</h1>
+<div class="flex items-center gap-4 mt-2">
+<span class="flex items-center gap-1 text-on-surface-variant font-medium">
+<span class="material-symbols-outlined text-sm" data-icon="school">school</span>
+                            Bayview Secondary School
+                        </span>
+<span class="text-slate-300">•</span>
+<span class="flex items-center gap-1 text-on-surface-variant font-medium">
+<span class="material-symbols-outlined text-sm" data-icon="calendar_today">calendar_today</span>
+                            Class of 2024
+                        </span>
+</div>
+</div>
+</div>
+<div class="flex gap-3">
+<button class="bg-surface-container-highest text-primary px-6 py-2 rounded-md font-lexend text-sm font-semibold hover:bg-surface-dim transition-colors">
+                    Export PDF
+                </button>
+<button class="editorial-gradient text-white px-8 py-2 rounded-md font-lexend text-sm font-semibold hover:opacity-90 transition-opacity">
+                    Edit Portfolio
+                </button>
+</div>
+</header>
+<!-- Bento Layout -->
+<div class="grid grid-cols-12 gap-8">
+<!-- Academic Performance (Left Column - Large) -->
+<section class="col-span-12 lg:col-span-8 space-y-8">
+<!-- Summary Metrics -->
+<div class="grid grid-cols-3 gap-6">
+<div class="bg-surface-container-lowest p-6 rounded-xl border-l-4 border-primary">
+<p class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Cumulative GPA</p>
+<h3 class="text-4xl font-black text-primary">3.92</h3>
+<p class="text-xs text-secondary font-medium mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="trending_up">trending_up</span>
+                            Top 5% of Cohort
+                        </p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border-l-4 border-secondary">
+<p class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Credits Earned</p>
+<h3 class="text-4xl font-black text-primary">28 / 30</h3>
+<p class="text-xs text-slate-500 mt-2">On track for June grad</p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border-l-4 border-tertiary-fixed-dim">
+<p class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Core Average</p>
+<h3 class="text-4xl font-black text-primary">94.5%</h3>
+<p class="text-xs text-slate-500 mt-2">STEM Focused</p>
+</div>
+</div>
+<!-- Academic Strengths & Gaps -->
+<div class="bg-surface-container-low rounded-2xl overflow-hidden">
+<div class="p-8">
+<h2 class="text-2xl font-bold text-primary mb-6">Academic Insight</h2>
+<div class="grid grid-cols-2 gap-8">
+<div>
+<h4 class="text-xs font-black text-secondary uppercase tracking-widest mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="verified">verified</span>
+                                    Core Strengths
+                                </h4>
+<ul class="space-y-4">
+<li class="bg-surface-container-lowest p-4 rounded-lg">
+<div class="flex justify-between items-center mb-1">
+<span class="font-bold text-primary">Advanced Functions (MHF4U)</span>
+<span class="text-secondary font-black">98%</span>
+</div>
+<p class="text-sm text-slate-600">Exceptional analytical skills and complex problem solving.</p>
+</li>
+<li class="bg-surface-container-lowest p-4 rounded-lg">
+<div class="flex justify-between items-center mb-1">
+<span class="font-bold text-primary">Physics (SPH4U)</span>
+<span class="text-secondary font-black">95%</span>
+</div>
+<p class="text-sm text-slate-600">Demonstrates mastery in thermodynamics and mechanics.</p>
+</li>
+</ul>
+</div>
+<div>
+<h4 class="text-xs font-black text-tertiary-fixed-dim uppercase tracking-widest mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="warning">warning</span>
+                                    Potential Gaps
+                                </h4>
+<ul class="space-y-4">
+<li class="bg-surface-container-lowest p-4 rounded-lg border-l-4 border-tertiary-fixed-dim">
+<div class="flex justify-between items-center mb-1">
+<span class="font-bold text-primary">Chemistry (SCH4U)</span>
+<span class="text-tertiary-fixed-dim font-black">82%</span>
+</div>
+<p class="text-sm text-slate-600">Currently below median for competitive Life Science programs.</p>
+</li>
+<li class="bg-surface-container-lowest p-4 rounded-lg border-l-4 border-tertiary-fixed-dim">
+<div class="flex justify-between items-center mb-1">
+<span class="font-bold text-primary">Prerequisite Status</span>
+<span class="text-tertiary-fixed-dim font-black">Pending</span>
+</div>
+<p class="text-sm text-slate-600">Missing 'English Literature 4U' final transcript for UBC application.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Recommended Programs (Bento Card Wide) -->
+<div class="bg-surface-container-lowest rounded-2xl shadow-sm overflow-hidden">
+<div class="p-8">
+<div class="flex justify-between items-center mb-8">
+<h2 class="text-2xl font-bold text-primary">Recommended Programs</h2>
+<span class="text-sm text-slate-500 italic">Based on academic profile and goals</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="group relative bg-surface-container-low p-6 rounded-xl hover:bg-surface-container transition-colors cursor-pointer">
+<div class="flex items-start justify-between">
+<div>
+<h4 class="font-black text-lg text-primary">University of Waterloo</h4>
+<p class="text-on-surface-variant font-medium">Software Engineering (CO-OP)</p>
+</div>
+<span class="bg-secondary-container text-on-secondary-container px-2 py-1 rounded text-[10px] font-black uppercase">94% Match</span>
+</div>
+<div class="mt-4 flex gap-2">
+<span class="px-2 py-1 bg-white rounded text-[10px] text-slate-600">STEM Focus</span>
+<span class="px-2 py-1 bg-white rounded text-[10px] text-slate-600">High Employment</span>
+</div>
+</div>
+<div class="group relative bg-surface-container-low p-6 rounded-xl hover:bg-surface-container transition-colors cursor-pointer">
+<div class="flex items-start justify-between">
+<div>
+<h4 class="font-black text-lg text-primary">University of Toronto</h4>
+<p class="text-on-surface-variant font-medium">Engineering Science (Rotman)</p>
+</div>
+<span class="bg-secondary-container text-on-secondary-container px-2 py-1 rounded text-[10px] font-black uppercase">89% Match</span>
+</div>
+<div class="mt-4 flex gap-2">
+<span class="px-2 py-1 bg-white rounded text-[10px] text-slate-600">Research Focus</span>
+<span class="px-2 py-1 bg-white rounded text-[10px] text-slate-600">Global Ranking</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Sidebar Interaction (Right Column - Small) -->
+<section class="col-span-12 lg:col-span-4 space-y-8">
+<!-- Counselor Notes -->
+<div class="bg-surface-container-high rounded-2xl p-8">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-xl font-bold text-primary flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="edit_note">edit_note</span>
+                            Counselor Notes
+                        </h3>
+<button class="text-primary hover:bg-white/50 p-1 rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+</div>
+<div class="space-y-6">
+<div class="relative pl-6 border-l-2 border-primary/20">
+<span class="text-[10px] font-black text-primary/50 uppercase tracking-widest">Oct 12, 2023</span>
+<p class="text-sm text-on-surface mt-1">Student expressed high interest in AI research. Suggested Waterloo Engineering and UofT CompSci.</p>
+</div>
+<div class="relative pl-6 border-l-2 border-primary/20">
+<span class="text-[10px] font-black text-primary/50 uppercase tracking-widest">Sept 28, 2023</span>
+<p class="text-sm text-on-surface mt-1">Advised increasing extra-curricular depth. Alex joined the Robotics Team (Lead Programmer).</p>
+</div>
+<div class="mt-4">
+<textarea class="w-full bg-white/50 border-none rounded-lg text-sm placeholder:text-slate-400 focus:ring-2 focus:ring-primary h-24" placeholder="Add a new private note..."></textarea>
+</div>
+</div>
+</div>
+<!-- Application History -->
+<div class="bg-surface-container-lowest rounded-2xl p-8 border border-surface-container">
+<h3 class="text-xl font-bold text-primary mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+                        Action Timeline
+                    </h3>
+<div class="space-y-8">
+<div class="flex gap-4">
+<div class="flex-none w-8 h-8 rounded-full editorial-gradient flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-sm" data-icon="send">send</span>
+</div>
+<div>
+<h5 class="text-sm font-bold text-primary">Application Submitted</h5>
+<p class="text-xs text-slate-500">University of Waterloo - SE</p>
+<p class="text-[10px] text-slate-400 mt-1">2 days ago • By Student</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex-none w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-sm" data-icon="attachment">attachment</span>
+</div>
+<div>
+<h5 class="text-sm font-bold text-primary">Transcript Uploaded</h5>
+<p class="text-xs text-slate-500">Final Grade 11 Marks</p>
+<p class="text-[10px] text-slate-400 mt-1">Oct 15 • Verified</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex-none w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-sm" data-icon="check_circle">check_circle</span>
+</div>
+<div>
+<h5 class="text-sm font-bold text-primary">Profile Audit Complete</h5>
+<p class="text-xs text-slate-500">All prerequisite 12U codes confirmed.</p>
+<p class="text-[10px] text-slate-400 mt-1">Sept 30 • By System</p>
+</div>
+</div>
+</div>
+<button class="w-full mt-8 py-3 text-sm font-bold text-primary bg-surface-container hover:bg-surface-container-high transition-colors rounded-lg">
+                        View Full History
+                    </button>
+</div>
+<!-- Student Vitals -->
+<div class="bg-primary text-white rounded-2xl p-8 shadow-xl overflow-hidden relative">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined text-8xl" data-icon="id_card">id_card</span>
+</div>
+<h3 class="text-lg font-bold mb-4 relative z-10">Student Vitals</h3>
+<div class="grid grid-cols-2 gap-4 relative z-10">
+<div>
+<p class="text-[10px] font-black text-blue-200 uppercase tracking-widest">Student ID</p>
+<p class="text-sm font-medium">#AC-992104</p>
+</div>
+<div>
+<p class="text-[10px] font-black text-blue-200 uppercase tracking-widest">DOB</p>
+<p class="text-sm font-medium">May 14, 2006</p>
+</div>
+<div class="col-span-2">
+<p class="text-[10px] font-black text-blue-200 uppercase tracking-widest">Email</p>
+<p class="text-sm font-medium">alex.chen@student.ac.ca</p>
+</div>
+<div class="col-span-2">
+<p class="text-[10px] font-black text-blue-200 uppercase tracking-widest">Citizenship</p>
+<p class="text-sm font-medium">Canadian (PR)</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Contextual FAB -->
+<div class="fixed bottom-8 right-8 flex flex-col gap-3">
+<button class="bg-white text-primary shadow-2xl p-4 rounded-full hover:scale-105 transition-transform flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+</button>
+<button class="editorial-gradient text-white shadow-2xl p-4 rounded-full hover:scale-105 transition-transform flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="add_task">add_task</span>
+</button>
+</div>
+</body></html>

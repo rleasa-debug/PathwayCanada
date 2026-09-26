@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Analytics &amp; Reports | Academic Canada</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&amp;family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<!-- Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-bright": "#f7f9ff",
+                    "on-background": "#001d33",
+                    "surface-container-high": "#d8eaff",
+                    "tertiary-container": "#422000",
+                    "secondary-fixed": "#bcf0ae",
+                    "tertiary-fixed": "#ffdcc3",
+                    "on-primary-container": "#7a92b0",
+                    "on-error-container": "#93000a",
+                    "surface-container-lowest": "#ffffff",
+                    "surface": "#f7f9ff",
+                    "on-primary": "#ffffff",
+                    "background": "#f7f9ff",
+                    "surface-container-highest": "#cee5ff",
+                    "primary-container": "#102a43",
+                    "on-tertiary-container": "#d97705",
+                    "surface-variant": "#cee5ff",
+                    "on-tertiary-fixed-variant": "#6e3900",
+                    "surface-container": "#e3efff",
+                    "on-tertiary-fixed": "#2f1500",
+                    "tertiary": "#240f00",
+                    "surface-tint": "#49607c",
+                    "primary": "#00152a",
+                    "on-primary-fixed": "#011d35",
+                    "surface-dim": "#bfddfe",
+                    "primary-fixed-dim": "#b0c9e8",
+                    "on-primary-fixed-variant": "#314863",
+                    "on-secondary-fixed-variant": "#23501e",
+                    "tertiary-fixed-dim": "#ffb77d",
+                    "on-secondary-fixed": "#002201",
+                    "secondary-fixed-dim": "#a1d494",
+                    "on-surface-variant": "#43474d",
+                    "error": "#ba1a1a",
+                    "outline": "#74777e",
+                    "primary-fixed": "#d1e4ff",
+                    "inverse-surface": "#12334c",
+                    "secondary-container": "#b9eeab",
+                    "inverse-on-surface": "#e8f2ff",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "on-surface": "#001d33",
+                    "on-error": "#ffffff",
+                    "inverse-primary": "#b0c9e8",
+                    "error-container": "#ffdad6",
+                    "secondary": "#3b6934",
+                    "outline-variant": "#c3c6ce",
+                    "on-secondary-container": "#3f6d38",
+                    "surface-container-low": "#edf4ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Lexend"],
+                    "body": ["Public Sans"],
+                    "label": ["Public Sans"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body {
+            font-family: 'Public Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Lexend', sans-serif;
+        }
+        .asymmetric-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 2rem;
+        }
+        @media (max-width: 1024px) {
+            .asymmetric-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .editorial-gradient {
+            background: linear-gradient(135deg, #00152a 0%, #102a43 100%);
+        }
+        .glass-panel {
+            background: rgba(206, 229, 255, 0.8);
+            backdrop-filter: blur(16px);
+        }
+        .chart-bar-primary {
+            background: linear-gradient(to top, #00152a, #49607c);
+        }
+        .chart-bar-secondary {
+            background: linear-gradient(to top, #3b6934, #a1d494);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- Side Navigation Bar (Anchored Component) -->
+<aside class="h-screen w-64 fixed left-0 top-0 flex flex-col bg-slate-100 dark:bg-slate-900 z-50 overflow-y-auto">
+<div class="flex flex-col h-full py-6 space-y-2">
+<!-- Header Identity -->
+<div class="px-6 mb-8 flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg editorial-gradient flex items-center justify-center text-white font-black text-xl">AC</div>
+<div>
+<h2 class="text-lg font-black text-blue-950 dark:text-blue-200 leading-tight">Counselor Hub</h2>
+<p class="text-xs font-lexend font-medium text-slate-500">Academic Canada</p>
+</div>
+</div>
+<!-- Nav Items -->
+<nav class="flex-1 px-2 space-y-1">
+<a class="text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 mx-2 my-1 px-4 py-3 rounded-lg flex items-center gap-3 transition-all duration-200 hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-lexend font-medium text-sm">Student Roster</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 mx-2 my-1 px-4 py-3 rounded-lg flex items-center gap-3 transition-all duration-200 hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-lexend font-medium text-sm">Applications</span>
+</a>
+<!-- Active Tab: Analytics -->
+<a class="bg-white dark:bg-slate-800 text-blue-900 dark:text-blue-400 shadow-sm rounded-lg mx-2 my-1 px-4 py-3 font-bold flex items-center gap-3" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<span class="font-lexend font-medium text-sm">Analytics</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 mx-2 my-1 px-4 py-3 rounded-lg flex items-center gap-3 transition-all duration-200 hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-lexend font-medium text-sm">Resource Library</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 mx-2 my-1 px-4 py-3 rounded-lg flex items-center gap-3 transition-all duration-200 hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-lexend font-medium text-sm">Settings</span>
+</a>
+</nav>
+<!-- CTA -->
+<div class="px-4 py-6">
+<button class="w-full py-3 editorial-gradient text-white rounded-lg font-lexend text-sm font-semibold shadow-lg hover:opacity-90 transition-opacity">
+                    New Application
+                </button>
+</div>
+<!-- Footer Links -->
+<div class="px-6 pt-4 border-t border-slate-200 dark:border-slate-800 space-y-4">
+<a class="flex items-center gap-2 text-xs text-slate-500 hover:text-blue-900 transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">policy</span>
+                    Privacy Policy
+                </a>
+<a class="flex items-center gap-2 text-xs text-slate-500 hover:text-blue-900 transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">contact_support</span>
+                    Contact Support
+                </a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 p-8 min-h-screen">
+<!-- Top Nav Bar (Anchored Component Context) -->
+<header class="flex justify-between items-center w-full px-6 py-3 bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-xl shadow-sm rounded-2xl mb-8">
+<div class="flex items-center gap-8">
+<h1 class="text-xl font-bold text-slate-900 dark:text-white tracking-tighter">Academic Canada</h1>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-slate-500 hover:text-slate-800 font-lexend text-sm transition-colors" href="#">Dashboard</a>
+<a class="text-blue-900 font-semibold border-b-2 border-blue-900 font-lexend text-sm" href="#">Quick Reports</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 hover:bg-slate-100 rounded-full transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="px-4 py-1.5 text-sm font-medium text-slate-700 bg-slate-200/50 rounded-full hover:bg-slate-200 transition-colors">
+                    Support
+                </button>
+<img alt="Counselor Profile" class="w-10 h-10 rounded-full object-cover ring-2 ring-primary-container/10" data-alt="Professional portrait of a female academic counselor in a modern office with soft natural lighting and scholarly background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqVJWUOQ4CQil11-9jpKfzcnABiazdpv7FGAf0s55cmt5vtUsER3uBSbFq1IGE8wuh7ZXCW6DnEI5Lt22dAmJMeMdYGVeNvYB7vDyA0x6zdaxOIQib45SMqnut3Uk8m-7qZN7P-x9Y-qU5IwE4xGrPpOgycJTEVGj04fzjP_gg12LdE11m0v2MIJN6qtoMDEl1rUypv4chifD2HG_KWYxpyez2LQcIGDYiQmGpy_KCNl7svJkqJrxPMjGFq3cMJUkZKLvPcgXveck7"/>
+</div>
+</header>
+<!-- Page Content: Scholarly Insight Report -->
+<section class="max-w-7xl mx-auto">
+<!-- Hero Title Section -->
+<div class="mb-12">
+<span class="text-sm font-bold tracking-widest text-on-tertiary-container bg-tertiary-fixed px-3 py-1 rounded-full uppercase mb-4 inline-block">Institutional Report 2024</span>
+<h2 class="text-5xl font-extrabold text-on-background tracking-tighter mb-4">Academic Performance &amp; <br/>Institutional Trends</h2>
+<p class="text-lg text-on-surface-variant max-w-2xl font-light leading-relaxed"> An analytical overview of student trajectory, program demand, and geographical success markers across the Academic Canada network. </p>
+</div>
+<!-- Stats Overview (Asymmetric) -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+<div class="bg-surface-container-lowest p-6 rounded-xl border-l-4 border-primary shadow-sm">
+<p class="text-sm font-medium text-on-surface-variant mb-1">Total Applicants</p>
+<h3 class="text-3xl font-bold text-primary">12,840</h3>
+<p class="text-xs text-secondary font-medium mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">trending_up</span> +14.2% from LY
+                    </p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border-l-4 border-secondary shadow-sm">
+<p class="text-sm font-medium text-on-surface-variant mb-1">Success Rate</p>
+<h3 class="text-3xl font-bold text-secondary">78.5%</h3>
+<p class="text-xs text-secondary font-medium mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">check_circle</span> Industry Leading
+                    </p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border-l-4 border-on-tertiary-container shadow-sm">
+<p class="text-sm font-medium text-on-surface-variant mb-1">Avg. Grade Index</p>
+<h3 class="text-3xl font-bold text-on-background">3.82</h3>
+<p class="text-xs text-on-surface-variant font-medium mt-2">Scale: 4.0 weighted</p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border-l-4 border-primary-fixed-dim shadow-sm">
+<p class="text-sm font-medium text-on-surface-variant mb-1">Active Partners</p>
+<h3 class="text-3xl font-bold text-on-background">412</h3>
+<p class="text-xs text-on-surface-variant font-medium mt-2">Across 10 Provinces</p>
+</div>
+</div>
+<div class="asymmetric-grid">
+<!-- Main Trend: Average Grade Trends (Editorial Style Line Chart) -->
+<div class="bg-surface-container-lowest p-8 rounded-2xl shadow-sm flex flex-col justify-between h-[500px]">
+<div>
+<div class="flex justify-between items-start mb-8">
+<div>
+<h4 class="text-2xl font-bold text-primary tracking-tight">Average Grade Trends</h4>
+<p class="text-sm text-on-surface-variant">Aggregate student performance over time (2020 - 2024)</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant opacity-40 text-4xl">monitoring</span>
+</div>
+<!-- Simplified Visual Chart -->
+<div class="relative h-64 w-full mt-4 flex items-end justify-between gap-4 px-4">
+<!-- Background Grid -->
+<div class="absolute inset-0 flex flex-col justify-between py-2 border-l border-b border-outline-variant/30">
+<div class="w-full h-px bg-outline-variant/10"></div>
+<div class="w-full h-px bg-outline-variant/10"></div>
+<div class="w-full h-px bg-outline-variant/10"></div>
+<div class="w-full h-px bg-outline-variant/10"></div>
+</div>
+<!-- Editorial Line Chart Simulation -->
+<svg class="absolute inset-0 h-full w-full" preserveaspectratio="none" viewbox="0 0 400 200">
+<path d="M0,160 Q50,140 100,110 T200,80 T300,60 T400,45" fill="none" stroke="#00152a" stroke-linecap="round" stroke-width="3"></path>
+<path d="M0,160 Q50,140 100,110 T200,80 T300,60 T400,45 L400,200 L0,200 Z" fill="url(#grad1)" opacity="0.1"></path>
+<defs>
+<lineargradient id="grad1" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color:#00152a;stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:#00152a;stop-opacity:0"></stop>
+</lineargradient>
+</defs>
+</svg>
+<!-- Legend / X-Axis -->
+<div class="absolute bottom-[-32px] w-full flex justify-between text-[10px] font-bold text-on-surface-variant tracking-widest uppercase">
+<span>2020</span>
+<span>2021</span>
+<span>2022</span>
+<span>2023</span>
+<span>2024</span>
+</div>
+</div>
+</div>
+<div class="pt-8 border-t border-surface-container mt-auto">
+<div class="flex items-center gap-4">
+<div class="flex-1">
+<p class="text-xs font-bold text-secondary uppercase tracking-wider mb-1">Key Insight</p>
+<p class="text-sm text-on-background leading-relaxed">Grade averages have normalized upward by 12% following the 2022 curriculum adjustment.</p>
+</div>
+<button class="text-primary text-sm font-bold flex items-center gap-1 hover:underline">
+                                Full Dataset <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Vertical Block: Most Popular Programs -->
+<div class="bg-surface-container-low p-8 rounded-2xl flex flex-col h-[500px]">
+<h4 class="text-2xl font-bold text-primary tracking-tight mb-2">Most Popular Programs</h4>
+<p class="text-sm text-on-surface-variant mb-8">Enrollment distribution by faculty</p>
+<div class="space-y-6 flex-1 overflow-y-auto">
+<!-- Program Row -->
+<div class="group">
+<div class="flex justify-between items-end mb-2">
+<span class="text-sm font-semibold text-on-background">Computer Science</span>
+<span class="text-xs font-bold text-on-surface-variant">3,420 Enrolled</span>
+</div>
+<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full chart-bar-primary rounded-full transition-all duration-1000" style="width: 85%"></div>
+</div>
+</div>
+<!-- Program Row -->
+<div class="group">
+<div class="flex justify-between items-end mb-2">
+<span class="text-sm font-semibold text-on-background">Health Sciences</span>
+<span class="text-xs font-bold text-on-surface-variant">2,890 Enrolled</span>
+</div>
+<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full chart-bar-primary rounded-full" style="width: 72%"></div>
+</div>
+</div>
+<!-- Program Row -->
+<div class="group">
+<div class="flex justify-between items-end mb-2">
+<span class="text-sm font-semibold text-on-background">Business Administration</span>
+<span class="text-xs font-bold text-on-surface-variant">2,105 Enrolled</span>
+</div>
+<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full chart-bar-primary rounded-full" style="width: 58%"></div>
+</div>
+</div>
+<!-- Program Row -->
+<div class="group">
+<div class="flex justify-between items-end mb-2">
+<span class="text-sm font-semibold text-on-background">Mechanical Engineering</span>
+<span class="text-xs font-bold text-on-surface-variant">1,840 Enrolled</span>
+</div>
+<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full chart-bar-primary rounded-full" style="width: 45%"></div>
+</div>
+</div>
+<!-- Program Row -->
+<div class="group">
+<div class="flex justify-between items-end mb-2">
+<span class="text-sm font-semibold text-on-background">Digital Media Arts</span>
+<span class="text-xs font-bold text-on-surface-variant">1,210 Enrolled</span>
+</div>
+<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full chart-bar-primary rounded-full" style="width: 32%"></div>
+</div>
+</div>
+</div>
+<div class="mt-8 bg-surface-container-highest/50 p-4 rounded-xl border-l-2 border-primary">
+<p class="text-xs text-on-background italic">"STEM programs continue to see aggressive growth, outpacing Arts faculties by 3:1 in new applications."</p>
+</div>
+</div>
+</div>
+<!-- Bottom Section: Admission Success by Province (Bento Style) -->
+<div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="md:col-span-2 bg-surface-container-lowest p-8 rounded-2xl shadow-sm border border-outline-variant/10">
+<div class="flex justify-between items-center mb-8">
+<div>
+<h4 class="text-2xl font-bold text-primary tracking-tight">Admission Success Rates</h4>
+<p class="text-sm text-on-surface-variant">Regional performance metrics across Canada</p>
+</div>
+<div class="flex gap-2">
+<div class="flex items-center gap-1">
+<div class="w-3 h-3 rounded-full bg-primary"></div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Direct</span>
+</div>
+<div class="flex items-center gap-1">
+<div class="w-3 h-3 rounded-full bg-secondary"></div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Transfer</span>
+</div>
+</div>
+</div>
+<!-- Provincial Comparison -->
+<div class="space-y-4">
+<div class="flex items-center gap-6">
+<span class="w-12 text-xs font-bold text-on-surface-variant">ON</span>
+<div class="flex-1 flex gap-1">
+<div class="h-4 bg-primary rounded-l-sm" style="width: 65%"></div>
+<div class="h-4 bg-secondary rounded-r-sm" style="width: 25%"></div>
+</div>
+<span class="w-10 text-xs font-bold text-on-background text-right">90%</span>
+</div>
+<div class="flex items-center gap-6">
+<span class="w-12 text-xs font-bold text-on-surface-variant">BC</span>
+<div class="flex-1 flex gap-1">
+<div class="h-4 bg-primary rounded-l-sm" style="width: 58%"></div>
+<div class="h-4 bg-secondary rounded-r-sm" style="width: 28%"></div>
+</div>
+<span class="w-10 text-xs font-bold text-on-background text-right">86%</span>
+</div>
+<div class="flex items-center gap-6">
+<span class="w-12 text-xs font-bold text-on-surface-variant">QC</span>
+<div class="flex-1 flex gap-1">
+<div class="h-4 bg-primary rounded-l-sm" style="width: 45%"></div>
+<div class="h-4 bg-secondary rounded-r-sm" style="width: 35%"></div>
+</div>
+<span class="w-10 text-xs font-bold text-on-background text-right">80%</span>
+</div>
+<div class="flex items-center gap-6">
+<span class="w-12 text-xs font-bold text-on-surface-variant">AB</span>
+<div class="flex-1 flex gap-1">
+<div class="h-4 bg-primary rounded-l-sm" style="width: 50%"></div>
+<div class="h-4 bg-secondary rounded-r-sm" style="width: 25%"></div>
+</div>
+<span class="w-10 text-xs font-bold text-on-background text-right">75%</span>
+</div>
+</div>
+</div>
+<!-- Geographic Focus Card -->
+<div class="bg-primary p-8 rounded-2xl relative overflow-hidden group">
+<img alt="Academic Building" class="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:scale-105 transition-transform duration-700" data-alt="Monochromatic dark blue architectural shot of a modern glass university building reflecting the sky at night with sophisticated lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCx28Rra2yTmgZBnQ8i26HFMf3466ZsD9Qi7HhSDvRe8rPxD86ECi3dKcpBITxSv0rDQ_jtmaadGrZRveQ044OwptGvBKLcjJGJAbbLzLomFI7x2RoGJL2tP6MbdBTtJosAhoFRK-fnenus3UU32VJRop84VkJxC5g0O6GV8R87BLpg4aTMr1sI9iNhrnUpiOnS9t6gGeUO0MRv5fi8V-P3eWyLJLSiFjZGkm3N55TVqecGG99RulgvKGZBuwbtiBHVMOs-3U_82Fcy"/>
+<div class="relative z-10 flex flex-col h-full">
+<h4 class="text-white text-xl font-bold mb-4">Regional Leader: Ontario</h4>
+<div class="mt-auto">
+<div class="text-5xl font-extrabold text-secondary-fixed mb-2">90%</div>
+<p class="text-primary-fixed text-sm font-medium leading-relaxed">Ontario maintains the highest success rate due to its density of institutional partners and streamlined credit transfer protocols.</p>
+<button class="mt-6 py-2 px-6 border border-primary-fixed/30 text-primary-fixed text-xs font-bold rounded-full hover:bg-white/10 transition-colors uppercase tracking-widest">View Map</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Contextual Support FAB (Hidden on Reports as per suppression rules) -->
+</main>
+<!-- Footer Decoration -->
+<footer class="ml-64 p-8 flex justify-between items-center text-on-surface-variant/40 border-t border-surface-container-high mx-8">
+<p class="text-xs font-medium">© 2024 Academic Canada Institutional Reporting System</p>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-sm">verified</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Data Verified: Oct 2024</span>
+</div>
+</footer>
+</body></html>

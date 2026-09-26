@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&amp;family=Public+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline": "#74777e",
+                    "on-secondary-fixed": "#002201",
+                    "primary": "#00152a",
+                    "surface-container-highest": "#cee5ff",
+                    "on-primary-fixed": "#011d35",
+                    "surface-container-low": "#edf4ff",
+                    "on-surface-variant": "#43474d",
+                    "tertiary-container": "#422000",
+                    "on-error-container": "#93000a",
+                    "secondary-fixed": "#bcf0ae",
+                    "outline-variant": "#c3c6ce",
+                    "on-primary": "#ffffff",
+                    "on-secondary-fixed-variant": "#23501e",
+                    "inverse-surface": "#12334c",
+                    "surface-variant": "#cee5ff",
+                    "surface-container-high": "#d8eaff",
+                    "inverse-primary": "#b0c9e8",
+                    "on-tertiary-container": "#d97705",
+                    "on-primary-fixed-variant": "#314863",
+                    "background": "#f7f9ff",
+                    "tertiary-fixed-dim": "#ffb77d",
+                    "tertiary": "#240f00",
+                    "on-surface": "#001d33",
+                    "on-tertiary-fixed": "#2f1500",
+                    "on-error": "#ffffff",
+                    "surface": "#f7f9ff",
+                    "on-background": "#001d33",
+                    "primary-fixed": "#d1e4ff",
+                    "tertiary-fixed": "#ffdcc3",
+                    "surface-bright": "#f7f9ff",
+                    "surface-tint": "#49607c",
+                    "surface-container": "#e3efff",
+                    "secondary-fixed-dim": "#a1d494",
+                    "on-primary-container": "#7a92b0",
+                    "secondary": "#3b6934",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed-dim": "#b0c9e8",
+                    "primary-container": "#102a43",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-container": "#b9eeab",
+                    "on-tertiary-fixed-variant": "#6e3900",
+                    "inverse-on-surface": "#e8f2ff",
+                    "error": "#ba1a1a",
+                    "on-secondary-container": "#3f6d38",
+                    "error-container": "#ffdad6",
+                    "surface-dim": "#bfddfe",
+                    "on-secondary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Lexend"],
+                    "body": ["Public Sans"],
+                    "label": ["Public Sans"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Public Sans', sans-serif; }
+        h1, h2, h3, h4 { font-family: 'Lexend', sans-serif; }
+        .editorial-gradient {
+            background: linear-gradient(135deg, #00152a 0%, #102a43 100%);
+        }
+        .glass-header {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface antialiased">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex items-center justify-between px-6 h-16 bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-xl">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full overflow-hidden">
+<img alt="Student Profile Photo" class="w-full h-full object-cover" data-alt="close-up portrait of a diverse university student smiling warmly in a bright academic setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIiu7ypYE_cCU9GtIO8NYG0TzRHLeRloH8Nb755xmrflk4fir0YlPIFvRrXmFxiRCfKBk2Fo3Z_fkUuAOHCoV8Y3RFZcgKMsbXmsuapTkZ_xsI_Q2tlncK_4CAo2unCiEH50NruQ6YSDAmZgrEtHQFCmKlbxIrM5IUMAxxMYfzYx-IPG9-qe_QN_gybPcGIYfJLEZHRcn5XDvT9W3QcJaDdEmbhp-gNpynaiSNf-5W3e_vgHzdvQU76XoIUkTbamOQSlL0K6OBAQ9W"/>
+</div>
+<span class="text-lg font-bold tracking-tight text-slate-900 dark:text-slate-100 uppercase">ACADEMIC CANADA</span>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-200/50 transition-colors duration-150 ease-in-out">
+<span class="material-symbols-outlined text-slate-900 dark:text-slate-50" data-icon="settings">settings</span>
+</button>
+</header>
+<main class="pt-20 pb-24 px-6 space-y-12">
+<!-- Hero Section -->
+<section class="space-y-6">
+<div class="inline-flex items-center px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container">
+<span class="material-symbols-outlined text-sm mr-2" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="text-[10px] font-bold uppercase tracking-wider font-label">30+ Years Expert Heritage</span>
+</div>
+<h1 class="text-4xl font-extrabold tracking-tight leading-[1.1] text-primary">
+                Designed by Canadian Educators.
+            </h1>
+<p class="text-lg text-on-surface-variant leading-relaxed">
+                Unlock your academic future with the guidance of veterans who have spent <span class="font-bold text-primary">30+ years</span> shaping the Canadian education landscape.
+            </p>
+<div class="editorial-gradient p-8 rounded-xl text-on-primary shadow-lg relative overflow-hidden">
+<div class="relative z-10 space-y-4">
+<h2 class="text-2xl font-bold">Apply with certainty, Save with precision.</h2>
+<div class="flex items-baseline gap-2">
+<span class="text-5xl font-extrabold">$325</span>
+<span class="text-sm opacity-80 uppercase tracking-widest">Average Savings</span>
+</div>
+<div class="h-px bg-white/20"></div>
+<p class="text-sm opacity-90 italic">
+                        Standard application cost: $105. Our precision tool helps you target only the schools you'll thrive in.
+                    </p>
+</div>
+<div class="absolute -right-12 -bottom-12 w-48 h-48 bg-white/10 rounded-full blur-3xl"></div>
+</div>
+</section>
+<!-- The 1-2-3 Process (Vertical Stack) -->
+<section class="space-y-8">
+<h3 class="text-xs font-bold uppercase tracking-[0.2em] text-on-primary-container">The Strategic Pathway</h3>
+<div class="space-y-4">
+<!-- Step 1 -->
+<div class="flex gap-6 p-6 rounded-xl bg-surface-container-low relative">
+<div class="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full bg-primary text-on-primary text-xl font-bold">1</div>
+<div class="space-y-2">
+<h4 class="text-xl font-bold text-primary">Curated Profile</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed">We distill your achievements into a scholar-grade digital portfolio recognized by top-tier institutions.</p>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="flex gap-6 p-6 rounded-xl bg-surface-container text-on-surface relative">
+<div class="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full bg-primary text-on-primary text-xl font-bold">2</div>
+<div class="space-y-2">
+<h4 class="text-xl font-bold text-primary">Precision Match</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed">Our educator-built algorithm matches you with programs where your acceptance probability is highest.</p>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="flex gap-6 p-6 rounded-xl bg-surface-container-high relative">
+<div class="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full bg-primary text-on-primary text-xl font-bold">3</div>
+<div class="space-y-2">
+<h4 class="text-xl font-bold text-primary">Verified Launch</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed">Submit your application with 100% data integrity, backed by the ACADEMIC CANADA seal of trust.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Asymmetric Bento-style Card -->
+<section class="grid grid-cols-1 gap-4">
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border-l-4 border-primary">
+<span class="material-symbols-outlined text-secondary mb-4" data-icon="shield">shield</span>
+<h4 class="text-lg font-bold mb-2">Secure Institutional Data</h4>
+<p class="text-sm text-on-surface-variant">Your records are protected by Canadian encryption standards, ensuring privacy across all 13 provinces and territories.</p>
+</div>
+<div class="relative rounded-xl overflow-hidden h-48">
+<img alt="University Library Architecture" class="w-full h-full object-cover" data-alt="abstract view of modern architectural lines in a Canadian university library with warm wooden textures and soft morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqpkfYy9CNbfXGbv3LhYxlyidl2-dbi7pKlfYS7xCHzqkx7P6bksSdyRDpTWN11bwt5Ch3YBLANZrylL2eCFpOqaeVXv-N2GxiWRI5E74Sx-2Gi3D5tEmbP9fPFA-eX04FyE7jvO7sXQI9qWnzCuXoGPCbOY7X8sfTvkgckLdEedgjcvANhU_6IiQ2quBRJdSAcT_RuLUZr0DxTIhAqlAQs7mjIrJtkToXOlRayy5H7_uylUy_Hv5DA6X1MilIyFpRItMWhzPDNjnQ"/>
+<div class="absolute inset-0 bg-primary/40 flex items-center justify-center p-6">
+<p class="text-white text-center font-headline font-bold text-xl leading-tight">Empowering 10k+ Students Annually</p>
+</div>
+</div>
+</section>
+<!-- Final CTA -->
+<section class="py-6">
+<button class="w-full editorial-gradient text-on-primary py-4 rounded-xl font-bold tracking-wide text-lg shadow-xl shadow-primary/20 active:scale-95 transition-transform">
+                Start Your Evaluation
+            </button>
+<p class="text-center text-[10px] uppercase tracking-widest text-on-surface-variant mt-4 font-medium">
+                Official Canadian Academic Standard
+            </p>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-white/90 dark:bg-slate-900/90 backdrop-blur-lg shadow-[0_-4px_20px_rgba(0,29,51,0.05)] rounded-t-2xl">
+<!-- Discovery Tab (Active for landing/home intent) -->
+<div class="flex flex-col items-center justify-center text-blue-900 dark:text-blue-200 bg-blue-50/50 dark:bg-blue-900/30 rounded-xl px-3 py-1">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="text-[10px] font-bold mt-0.5 font-label">Discovery</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:text-blue-700 dark:hover:text-blue-200 transition-colors">
+<span class="material-symbols-outlined" data-icon="import_contacts">import_contacts</span>
+<span class="text-[10px] font-bold mt-0.5 font-label">Portfolio</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:text-blue-700 dark:hover:text-blue-200 transition-colors">
+<span class="material-symbols-outlined" data-icon="mic_none">mic_none</span>
+<span class="text-[10px] font-bold mt-0.5 font-label">Voice</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:text-blue-700 dark:hover:text-blue-200 transition-colors">
+<span class="material-symbols-outlined" data-icon="auto_stories">auto_stories</span>
+<span class="text-[10px] font-bold mt-0.5 font-label">Library</span>
+</div>
+</nav>
+</body></html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error-container": "#93000a",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-on-surface": "#e8f2ff",
+                    "tertiary-fixed": "#ffdcc3",
+                    "on-background": "#001d33",
+                    "outline-variant": "#c3c6ce",
+                    "on-primary-fixed-variant": "#314863",
+                    "surface-tint": "#49607c",
+                    "tertiary-fixed-dim": "#ffb77d",
+                    "on-tertiary-fixed-variant": "#6e3900",
+                    "surface-container-low": "#edf4ff",
+                    "primary-fixed-dim": "#b0c9e8",
+                    "secondary-fixed": "#bcf0ae",
+                    "primary": "#00152a",
+                    "on-secondary-fixed-variant": "#23501e",
+                    "surface-container-high": "#d8eaff",
+                    "surface-container": "#e3efff",
+                    "on-tertiary": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "surface-bright": "#f7f9ff",
+                    "on-surface": "#001d33",
+                    "on-surface-variant": "#43474d",
+                    "primary-fixed": "#d1e4ff",
+                    "error": "#ba1a1a",
+                    "tertiary-container": "#422000",
+                    "secondary-fixed-dim": "#a1d494",
+                    "on-primary-container": "#7a92b0",
+                    "surface-dim": "#bfddfe",
+                    "inverse-primary": "#b0c9e8",
+                    "background": "#f7f9ff",
+                    "tertiary": "#240f00",
+                    "secondary-container": "#b9eeab",
+                    "surface": "#f7f9ff",
+                    "inverse-surface": "#12334c",
+                    "on-secondary-fixed": "#002201",
+                    "surface-container-highest": "#cee5ff",
+                    "on-tertiary-fixed": "#2f1500",
+                    "primary-container": "#102a43",
+                    "on-primary-fixed": "#011d35",
+                    "on-secondary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "on-tertiary-container": "#d97705",
+                    "secondary": "#3b6934",
+                    "on-secondary-container": "#3f6d38",
+                    "surface-variant": "#cee5ff",
+                    "outline": "#74777e",
+                    "on-primary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Lexend"],
+                    "body": ["Public Sans"],
+                    "label": ["Public Sans"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        body { font-family: 'Public Sans', sans-serif; }
+        h1, h2, h3, h4 { font-family: 'Lexend', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-xl shadow-sm dark:shadow-none flex justify-between items-center px-6 py-3 w-full">
+<div class="flex items-center gap-4">
+<span class="text-xl font-bold text-blue-950 dark:text-white font-['Lexend'] tracking-tight">Pathway Canada</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex gap-4">
+<span class="text-blue-900 dark:text-blue-400 font-semibold font-['Lexend'] tracking-tight">Dashboard</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors active:scale-95 duration-200 rounded-full">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
+<img alt="Student profile avatar" data-alt="Close-up portrait of a young professional student smiling warmly with soft natural studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCy4vd0kaVcdk-LJL64IUtVqts5LODwaJNC5H8c2S1ykxD1SfNoi9PM5lOXG6qEGjJp9a_nZUlGPx49Zwva9BoZo3Y30qYxXQi_mJkYwimK7R365hSYG2yI5fwjUI6bYGzwd6mpW-Ye6decOH6kYU7p9NggwA2JseZgpyCFyNkzHQP5NfZvcKjGn_ZPZ6c8JtGeRGlh9SSUcIozOKN-Y1EffHHAOIe2Y2OL1LSreCSgCRiNeihinbGtqb7YqpfqtkEVPK1eoTeIht8q"/>
+</div>
+</div>
+</div>
+</nav>
+<!-- Separation Logic -->
+<div class="h-[1px] bg-slate-200/50 dark:bg-slate-800/50 fixed top-[56px] w-full z-50"></div>
+<!-- Layout Container -->
+<div class="flex flex-1 pt-[57px]">
+<!-- SideNavBar (Desktop Only) -->
+<aside class="fixed left-0 top-0 h-full flex flex-col pt-20 px-4 h-screen w-64 hidden lg:flex bg-slate-50 dark:bg-slate-950 font-['Lexend'] font-medium">
+<div class="mb-8 px-2">
+<h2 class="text-lg font-black text-blue-900 dark:text-blue-100">Academic Portal</h2>
+<p class="text-xs text-slate-500 dark:text-slate-400">Scholarly Curator</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-blue-900 dark:text-blue-300 border-l-4 border-blue-900 dark:border-blue-500 bg-slate-100 dark:bg-slate-900 transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 dark:text-slate-400 hover:text-blue-800 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+<span>My Portfolio</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 dark:text-slate-400 hover:text-blue-800 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span>Discovery</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 dark:text-slate-400 hover:text-blue-800 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="local_library">local_library</span>
+<span>Library</span>
+</a>
+</nav>
+<div class="pb-8 space-y-1">
+<div class="h-[1px] bg-slate-100 dark:bg-slate-900 my-4"></div>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 dark:text-slate-400 hover:text-blue-800 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 dark:text-slate-400 hover:text-blue-800 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span>Help Center</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 lg:ml-64 p-6 md:p-12 lg:p-16 max-w-7xl mx-auto w-full">
+<!-- Hero Welcome Section -->
+<section class="mb-16">
+<div class="max-w-3xl">
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container text-xs font-bold mb-6 tracking-wider uppercase">New Beginning</span>
+<h1 class="text-5xl md:text-6xl font-extrabold text-primary mb-6 leading-[1.1] tracking-tight">Welcome to your journey</h1>
+<p class="text-xl text-on-surface-variant mb-10 leading-relaxed font-body">Your academic path is a unique narrative waiting to be told. To begin visualizing your future in Canada, we need to understand where you've excelled.</p>
+<div class="flex flex-col sm:flex-row gap-4">
+<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-8 py-4 rounded-md font-['Public_Sans'] font-semibold text-lg shadow-xl hover:shadow-2xl transition-all active:scale-95 flex items-center justify-center gap-2">
+<span>Input My Grades</span>
+<span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<button class="bg-surface-container-highest text-primary px-8 py-4 rounded-md font-['Public_Sans'] font-semibold text-lg hover:bg-surface-container-high transition-colors flex items-center justify-center gap-2">
+<span>Take a Tour</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Bento Grid of Expertise -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+<!-- Large Card: Experience -->
+<div class="md:col-span-2 relative overflow-hidden rounded-xl bg-surface-container-lowest p-8 flex flex-col justify-between group shadow-sm border border-outline-variant/15">
+<div class="absolute -right-12 -top-12 w-64 h-64 bg-primary-fixed opacity-10 rounded-full blur-3xl group-hover:opacity-20 transition-opacity"></div>
+<div>
+<div class="w-12 h-12 bg-primary-container text-primary-fixed-dim rounded-lg flex items-center justify-center mb-6">
+<span class="material-symbols-outlined" data-icon="history_edu">history_edu</span>
+</div>
+<h3 class="text-2xl font-bold text-primary mb-4">30+ Years of Dedication</h3>
+<p class="text-on-surface-variant leading-relaxed max-w-md">Our algorithm isn't just code—it's the digital embodiment of three decades of Canadian admissions expertise. We understand the nuances that standard calculators miss.</p>
+</div>
+<div class="mt-8 flex items-center gap-4">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-surface-container-lowest overflow-hidden">
+<img alt="Educator profile" data-alt="Professional portrait of a mature female educator with a knowledgeable and friendly expression" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGEKAEigK4xWLAR7_2sOIANDiK_AjjTkEFSRYe2bOKpWciWUBAmIJeGPpY9PYkH0uEFpUJJWhHmzOKDFxd898YGkdQ0STxW1n-kEsGLHINiZzi7oh2mzQulPXHRmW12uu_vbwW1U63SFvMlMMixGWubGdo9i-aFWhGdZyV6swaQcbctXZ2umHr-4aqBS2epSgr2VPgrtsxb-XoLg3rvnVbaIcnuVhNCAoh2Kzu5ve2GKvgxCEufoymDj1Etw3lAgzxG6kttJ5i75ui"/>
+</div>
+<div class="w-8 h-8 rounded-full border-2 border-surface-container-lowest overflow-hidden">
+<img alt="Educator profile" data-alt="Confident male academic professional in a suit with a warm and approachable look" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEroq4wEfulQvfKsDYVWyBzgElglrbDubEoXtATH1Yippsfhu1EHn5d7eFJ_PWva2QXz4qjyZ20fMeEH5u2NyfKUURaumvbMxhsD4vteSIzWZOk4NgttyrJRbIbqvllaZ-V3mvx7XZWneruOdz1EeopJNq-BCNKue8qe-6PRbZdtJ50HdLAYQ-geLkyNUJ_vKzjrUsVDwQ_Sl7ZNei6SKEhC1gCjy5V0YtXax9rdvO2lq5w1cWeY0xRSYJ9qotPthp0aMq6zr7A9E4"/>
+</div>
+</div>
+<span class="text-sm font-medium text-primary">Guided by top Canadian consultants</span>
+</div>
+</div>
+<!-- Small Card: Success Rate -->
+<div class="rounded-xl bg-primary-container text-on-primary-fixed p-8 flex flex-col justify-between shadow-sm">
+<div class="text-secondary-fixed text-4xl mb-4 font-black">94%</div>
+<div>
+<h4 class="text-lg font-bold text-white mb-2">Pathway Accuracy</h4>
+<p class="text-primary-fixed-dim text-sm leading-relaxed">Our projections align with final admission results with remarkable precision, giving you confidence in your applications.</p>
+</div>
+</div>
+<!-- Small Card: Institutions -->
+<div class="rounded-xl bg-surface-container-low p-8 flex flex-col justify-between border border-outline-variant/10 shadow-sm">
+<div class="text-primary text-4xl mb-4">
+<span class="material-symbols-outlined" data-icon="account_balance" style="font-size: 48px;">account_balance</span>
+</div>
+<div>
+<h4 class="text-lg font-bold text-primary mb-2">Top Institutions</h4>
+<p class="text-on-surface-variant text-sm leading-relaxed">Direct partnerships and data-sharing with Canada's leading universities and colleges.</p>
+</div>
+</div>
+<!-- Medium Card: Personalized Insights -->
+<div class="md:col-span-2 rounded-xl bg-white p-8 flex flex-col md:flex-row gap-8 items-center border border-outline-variant/15 shadow-sm">
+<div class="flex-1">
+<h3 class="text-2xl font-bold text-primary mb-4">Curated Success Strategy</h3>
+<p class="text-on-surface-variant leading-relaxed mb-6">Beyond grades, we analyze extracurriculars and intent to match you with the institution that fits your life goals, not just your transcript.</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-tertiary-fixed text-on-tertiary-fixed rounded-full text-xs font-bold">Holistic Review</span>
+<span class="px-3 py-1 bg-secondary-fixed text-on-secondary-fixed-variant rounded-full text-xs font-bold">Growth Tracking</span>
+</div>
+</div>
+<div class="w-full md:w-48 h-48 rounded-lg overflow-hidden bg-slate-100">
+<img alt="Students studying" class="w-full h-full object-cover" data-alt="Diverse group of university students collaborating on a project in a bright modern library space" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnNqurcGfV0WGG7RWPCYfMhtt9WUcKG1C8KprKcW15QwM4lHaVoncs_gVgBu9pAM7x1CUZkWz6srhxoAMAk02NxoS4H-iTGK3CsaApx8lfQsLnAPy1JH2SxQXOQGdes2n586qQLKBhktZLq8dK7ci4CP0TL_L0JLRkrAOFh1djG0cPDDwiYO4HB0twLv3YMFmktGKtyCFMt2nYXgyWP3dZ5Mvb3zWFRsOC7fKMtTCvRyd4Qo6nQ9Wn4YpYcJJJ32EFIL6k0tgrJ1CN"/>
+</div>
+</div>
+</section>
+<!-- Bottom CTA Section -->
+<section class="bg-surface-container rounded-2xl p-10 text-center relative overflow-hidden">
+<div class="relative z-10 max-w-2xl mx-auto">
+<h2 class="text-3xl font-bold text-primary mb-4">Ready to see your potential?</h2>
+<p class="text-on-surface-variant mb-8">It takes less than 5 minutes to input your latest academic results and unlock your custom dashboard.</p>
+<button class="bg-primary text-white px-10 py-4 rounded-md font-semibold hover:bg-primary-container transition-all active:scale-95 shadow-lg">
+                        Get Started Now
+                    </button>
+</div>
+<!-- Decorative element -->
+<div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-secondary to-primary opacity-20"></div>
+</section>
+</main>
+</div>
+<!-- Footer -->
+<footer class="w-full py-8 px-6 mt-auto flex flex-col md:flex-row justify-between items-center bg-slate-50 dark:bg-slate-950 font-['Lexend'] text-sm">
+<div class="mb-4 md:mb-0">
+<span class="text-md font-bold text-slate-900 dark:text-slate-100">Pathway Canada</span>
+<p class="text-slate-500 dark:text-slate-400 mt-1">© 2024 Pathway Canada. All rights reserved.</p>
+</div>
+<div class="flex gap-6 opacity-80 hover:opacity-100 transition-opacity">
+<a class="text-slate-500 dark:text-slate-400 hover:text-blue-900 dark:hover:text-blue-200" href="#">Legal</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-blue-900 dark:hover:text-blue-200" href="#">Privacy Policy</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-blue-900 dark:hover:text-blue-200" href="#">Support</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-blue-900 dark:hover:text-blue-200" href="#">Institutional Access</a>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pathway Canada | Precision Admissions &amp; Cost Savings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-container": "#3f6d38",
+                        "surface-bright": "#f7f9ff",
+                        "on-tertiary-fixed-variant": "#6e3900",
+                        "tertiary-container": "#422000",
+                        "on-error": "#ffffff",
+                        "on-background": "#001d33",
+                        "on-tertiary-fixed": "#2f1500",
+                        "outline-variant": "#c3c6ce",
+                        "error-container": "#ffdad6",
+                        "secondary-container": "#b9eeab",
+                        "surface-container-highest": "#cee5ff",
+                        "surface-tint": "#49607c",
+                        "surface-container-low": "#edf4ff",
+                        "on-secondary-fixed-variant": "#23501e",
+                        "inverse-surface": "#12334c",
+                        "tertiary-fixed-dim": "#ffb77d",
+                        "on-surface": "#001d33",
+                        "surface": "#f7f9ff",
+                        "primary-container": "#102a43",
+                        "surface-dim": "#bfddfe",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#bcf0ae",
+                        "inverse-on-surface": "#e8f2ff",
+                        "on-secondary-fixed": "#002201",
+                        "secondary": "#3b6934",
+                        "primary-fixed": "#d1e4ff",
+                        "on-primary-fixed": "#011d35",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-container": "#d97705",
+                        "primary-fixed-dim": "#b0c9e8",
+                        "outline": "#74777e",
+                        "on-primary-container": "#7a92b0",
+                        "on-primary": "#ffffff",
+                        "on-surface-variant": "#43474d",
+                        "surface-container": "#e3efff",
+                        "secondary-fixed-dim": "#a1d494",
+                        "surface-container-high": "#d8eaff",
+                        "error": "#ba1a1a",
+                        "on-error-container": "#93000a",
+                        "background": "#f7f9ff",
+                        "surface-variant": "#cee5ff",
+                        "tertiary": "#240f00",
+                        "tertiary-fixed": "#ffdcc3",
+                        "on-primary-fixed-variant": "#314863",
+                        "on-tertiary": "#ffffff",
+                        "primary": "#00152a",
+                        "inverse-primary": "#b0c9e8"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Lexend"],
+                        "body": ["Public Sans"],
+                        "label": ["Public Sans"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Public Sans', sans-serif; }
+        h1, h2, h3, h4, .font-lexend { font-family: 'Lexend', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .academic-gradient { background: linear-gradient(135deg, #00152a 0%, #102a43 100%); }
+        .glass-nav { background: rgba(247, 249, 255, 0.8); backdrop-filter: blur(12px); }
+        .ghost-border { outline: 1px solid rgba(195, 198, 206, 0.15); }
+        
+        .watermark-bg {
+            position: relative;
+        }
+        .watermark-bg::before {
+            content: "OFFICIAL ACADEMIC CANADA DATA • CONFIDENTIAL • OFFICIAL ACADEMIC CANADA DATA • CONFIDENTIAL";
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-30deg);
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: rgba(0, 21, 42, 0.03);
+            white-space: nowrap;
+            z-index: -1;
+            pointer-events: none;
+            width: 200%;
+            display: block;
+            line-height: 4;
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed watermark-bg">
+<!-- Secure Login Banner -->
+<div class="bg-primary text-on-primary py-2 px-6 flex items-center justify-center space-x-4 text-[10px] font-bold uppercase tracking-[0.25em] relative z-[60]">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">lock</span>
+<span>Secure 256-bit Encrypted Session Active</span>
+<span class="hidden sm:inline border-l border-on-primary/20 h-3 ml-2 pl-4 text-on-primary/60">Verification Status: Confirmed Academic Institution</span>
+</div>
+<!-- TopAppBar Component - Internal App Style -->
+<header class="sticky top-0 w-full z-50 bg-white border-b border-outline-variant/30">
+<div class="flex justify-between items-center px-6 py-3 max-w-full mx-auto">
+<div class="flex items-center gap-8">
+<div class="text-xl font-extrabold text-primary font-lexend tracking-tight flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">shield</span>
+                    Pathway Canada
+                </div>
+<nav class="hidden md:flex items-center space-x-1">
+<a class="px-4 py-2 rounded-lg text-sm font-semibold text-primary bg-surface-container-low transition-colors" href="#">National Search</a>
+<a class="px-4 py-2 rounded-lg text-sm font-medium text-on-surface-variant hover:bg-surface-container transition-colors" href="#">My Portfolio</a>
+<a class="px-4 py-2 rounded-lg text-sm font-medium text-on-surface-variant hover:bg-surface-container transition-colors" href="#">Resources</a>
+</nav>
+</div>
+<div class="flex items-center space-x-4">
+<div class="relative hidden lg:block">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined text-lg">search</span>
+</span>
+<input class="bg-surface-container-low border border-outline-variant/50 rounded-full py-1.5 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-on-surface-variant/50 w-64" placeholder="Search programs..." type="text"/>
+</div>
+<div class="h-8 w-px bg-outline-variant/30 mx-2 hidden lg:block"></div>
+<button class="flex items-center space-x-2 text-primary active:scale-95 duration-150 ease-in-out bg-white px-4 py-2 rounded-lg border border-primary font-bold shadow-sm hover:bg-surface-container-lowest transition-all">
+<span class="material-symbols-outlined text-xl">account_circle</span>
+<span class="text-sm">Secure Sign In</span>
+</button>
+</div>
+</div>
+</header>
+<main>
+<!-- Privacy Protocol Prominent Box -->
+<div class="max-w-7xl mx-auto px-6 pt-8">
+<div class="bg-secondary-container/30 border-2 border-secondary p-4 rounded-xl flex flex-col md:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-4">
+<div class="bg-secondary text-on-secondary p-2 rounded-lg">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">policy</span>
+</div>
+<div>
+<h3 class="font-bold text-primary text-sm uppercase tracking-wider">Privacy Protocol v4.2 Active</h3>
+<p class="text-on-surface-variant text-xs">Your grade data is anonymized and never sold. Data processing occurs on local encrypted instances.</p>
+</div>
+</div>
+<button class="text-secondary font-bold text-xs uppercase border-b border-secondary hover:opacity-70 transition-opacity whitespace-nowrap">Review Protocol Details</button>
+</div>
+</div>
+<!-- Hero Section -->
+<section class="relative overflow-hidden pt-12 pb-32">
+<div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<div class="lg:col-span-7 z-10">
+<div class="inline-flex items-center space-x-2 bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full mb-6">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="text-xs font-bold tracking-wider uppercase">Official 2026-27 Curriculum Data</span>
+</div>
+<h1 class="text-5xl md:text-7xl font-extrabold tracking-tight text-primary leading-[1.1] mb-8">
+                        The definitive map for your academic journey.
+                    </h1>
+<p class="text-lg md:text-xl text-on-surface-variant max-w-2xl mb-10 font-body leading-relaxed">
+                        Navigate Canada’s post-secondary landscape with precision. Input your current grades to instantly discover programs where you meet the threshold.
+                    </p>
+<div class="flex flex-col sm:flex-row gap-4">
+<button class="academic-gradient text-on-primary px-8 py-4 rounded-lg font-lexend font-bold text-lg shadow-xl shadow-primary/10 hover:opacity-90 active:scale-95 transition-all">
+                            Check Your Eligibility
+                        </button>
+<button class="bg-surface-container-highest text-primary px-8 py-4 rounded-lg font-lexend font-bold text-lg hover:bg-surface-dim transition-all">
+                            Browse All Programs
+                        </button>
+</div>
+</div>
+<div class="lg:col-span-5 relative">
+<div class="aspect-square rounded-2xl bg-surface-container-high relative overflow-hidden ghost-border">
+<img alt="Academic Setting" class="w-full h-full object-cover mix-blend-multiply opacity-80" data-alt="Modern library architecture with floor to ceiling windows and students studying at clean wooden tables in soft natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBr8SiHNsuodwnxZRdSl2v9icwJq69CttGRxCMZ6fXe6elcD-D4VJQ5dHARf15kSTkZhxWy_w2Yq-EJd3GxmMplPIJU4-Ny9u2KA9iKDsZNWgT-bXcO22Fdz3LUyDbTV6ZXtfuYVLua4iidsEQS5FI2dG9YQkxQJqpB0MeoDwsvDLBc3aBnf_gQisD-52lVUWK9uO0JLTdbM7UoR_gCAw5OJNgjThsn6PDWmzzFya-St_0LbY3YDV5QP1w1XDdCxzDtDACnybLuCKB"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-high via-transparent to-transparent"></div>
+<!-- Floating Card -->
+<div class="absolute bottom-6 left-6 right-6 bg-surface-container-lowest p-6 rounded-xl shadow-2xl">
+<div class="flex items-center space-x-4 mb-3">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-container">school</span>
+</div>
+<div>
+<div class="text-sm font-bold text-primary">McMaster University</div>
+<div class="text-xs text-on-surface-variant">Health Sciences I</div>
+</div>
+</div>
+<div class="h-2 w-full bg-surface-container-low rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[92%]"></div>
+</div>
+<div class="mt-2 text-[10px] font-bold text-secondary text-right">92% MATCH CONFIRMED</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Cost Savings Section -->
+<section class="py-24 bg-white border-y border-slate-100 relative overflow-hidden">
+<div class="max-w-7xl mx-auto px-6 relative z-10">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div>
+<div class="text-primary font-lexend font-bold uppercase tracking-widest text-sm mb-4">Financial Impact</div>
+<h2 class="text-4xl md:text-5xl font-extrabold text-primary mb-6 leading-tight">Apply with certainty.<br/>Save with precision.</h2>
+<p class="text-on-surface-variant text-lg mb-8 leading-relaxed">
+                            The average Canadian student applies to 3-5 programs, with total application costs ranging from <span class="font-bold text-primary">$250 to $600 per year</span>. Most of this is lost to "reach" schools where admission criteria aren't met.
+                        </p>
+<div class="space-y-6">
+<div class="flex gap-4 items-start">
+<div class="bg-secondary-container p-2 rounded-lg mt-1">
+<span class="material-symbols-outlined text-on-secondary-container">savings</span>
+</div>
+<div>
+<h4 class="font-bold text-primary text-xl">Average $325 Saved</h4>
+<p class="text-on-surface-variant">Pathway Canada reduces 'trial-and-error' applications that don't lead to offers by using high-fidelity algorithm matching.</p>
+</div>
+</div>
+<div class="flex gap-4 items-start">
+<div class="bg-secondary-container p-2 rounded-lg mt-1">
+<span class="material-symbols-outlined text-on-secondary-container">target</span>
+</div>
+<div>
+<h4 class="font-bold text-primary text-xl">99% Precision Matching</h4>
+<p class="text-on-surface-variant">Pathway Canada reduces 'trial-and-error' applications that don't lead to offers by using high-fidelity algorithm matching.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low p-10 rounded-3xl relative overflow-hidden">
+<div class="relative z-10">
+<div class="text-6xl font-black text-primary mb-2">$325</div>
+<div class="text-sm font-bold text-on-surface-variant uppercase tracking-widest mb-8">Average Household Savings</div>
+<div class="space-y-4">
+<div class="bg-surface-container-lowest p-4 rounded-xl border border-slate-200">
+<div class="flex justify-between items-center mb-2">
+<span class="text-sm font-medium">Standard Application Path</span>
+<span class="text-sm font-bold text-error">$550+</span>
+</div>
+<div class="h-1.5 w-full bg-slate-100 rounded-full">
+<div class="h-full bg-error w-full"></div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl border-2 border-secondary">
+<div class="flex justify-between items-center mb-2">
+<span class="text-sm font-bold text-secondary">Pathway Canada Path</span>
+<span class="text-sm font-bold text-secondary">$225</span>
+</div>
+<div class="h-1.5 w-full bg-slate-100 rounded-full">
+<div class="h-full bg-secondary w-[40%]"></div>
+</div>
+</div>
+</div>
+<p class="mt-8 text-xs text-on-surface-variant font-medium italic">*Based on internal study of 2,400 Ontario applicants using precision matching versus traditional multi-target applications.</p>
+</div>
+<div class="absolute -right-20 -bottom-20 w-64 h-64 bg-secondary/5 rounded-full"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Designed by Canadian Educators Section -->
+<section class="py-24 bg-surface-container-high/30 border-b border-outline-variant/30 relative">
+<div class="max-w-7xl mx-auto px-6 text-center">
+<div class="inline-flex items-center space-x-3 mb-6">
+<div class="h-px w-8 bg-secondary/40"></div>
+<span class="text-primary font-lexend font-bold uppercase tracking-[0.2em] text-xs">Expertise Spotlight</span>
+<div class="h-px w-8 bg-secondary/40"></div>
+</div>
+<h2 class="text-4xl md:text-5xl font-extrabold text-primary mb-6 font-lexend leading-tight">
+                    Designed by Canadian Educators.
+                </h2>
+<p class="text-xl md:text-2xl text-on-surface-variant max-w-4xl mx-auto font-body leading-relaxed mb-8">
+                    Over <span class="text-primary font-bold">30 years of experience</span> in post-secondary applications and student success, built directly into our matching algorithms.
+                </p>
+<div class="flex flex-col items-center gap-6">
+<button class="group flex items-center gap-3 bg-white px-6 py-3 rounded-full border border-outline-variant hover:border-primary transition-all duration-300 shadow-sm hover:shadow-md">
+<span class="text-primary font-bold text-sm tracking-wide">Learn how our data model works</span>
+<span class="material-symbols-outlined text-primary group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<div class="flex justify-center mt-4">
+<div class="flex -space-x-2">
+<div class="w-12 h-12 rounded-full border-2 border-white bg-secondary-container flex items-center justify-center" title="Curriculum Expertise">
+<span class="material-symbols-outlined text-on-secondary-container text-xl">history_edu</span>
+</div>
+<div class="w-12 h-12 rounded-full border-2 border-white bg-primary flex items-center justify-center" title="University Admissions">
+<span class="material-symbols-outlined text-on-primary text-xl">school</span>
+</div>
+<div class="w-12 h-12 rounded-full border-2 border-white bg-surface-tint flex items-center justify-center" title="Certified Accuracy">
+<span class="material-symbols-outlined text-on-primary text-xl">verified</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Bento Grid -->
+<section class="bg-surface-container-low py-24">
+<div class="max-w-7xl mx-auto px-6">
+<div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+<div class="max-w-xl">
+<h2 class="text-3xl md:text-5xl font-extrabold tracking-tight text-primary mb-4">
+                            Engineered for Clarity.
+                        </h2>
+<p class="text-on-surface-variant font-body">
+                            Our algorithm cross-references your current academic standing against admission requirements for every major university in Canada.
+                        </p>
+</div>
+<div class="hidden md:block text-right">
+<div class="text-xs font-bold text-primary/40 uppercase tracking-widest mb-2">Data Integrity Score</div>
+<div class="flex gap-1">
+<div class="w-8 h-1 bg-primary"></div>
+<div class="w-8 h-1 bg-primary"></div>
+<div class="w-8 h-1 bg-primary"></div>
+<div class="w-8 h-1 bg-primary"></div>
+<div class="w-8 h-1 bg-primary/20"></div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Step 1 -->
+<div class="bg-surface-container-lowest p-8 rounded-xl ghost-border flex flex-col h-full">
+<div class="text-primary-fixed-dim font-black text-6xl mb-6 select-none opacity-20">01</div>
+<h3 class="text-2xl font-bold text-primary mb-4">Input Grades</h3>
+<p class="text-on-surface-variant flex-grow leading-relaxed">
+                            Upload your transcript or manually enter your Grade 11 and 12 courses. We handle the weighted average calculations automatically.
+                        </p>
+<div class="mt-8 flex items-center text-primary font-bold space-x-2">
+<span>Get Started</span>
+<span class="material-symbols-outlined">chevron_right</span>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="bg-surface-container-lowest p-8 rounded-xl ghost-border flex flex-col h-full relative overflow-hidden">
+<div class="text-primary-fixed-dim font-black text-6xl mb-6 select-none opacity-20">02</div>
+<h3 class="text-2xl font-bold text-primary mb-4">Select Interests</h3>
+<p class="text-on-surface-variant flex-grow leading-relaxed">
+                            Filter by field of study, campus lifestyle, and geographic preference to narrow down your perfect fit.
+                        </p>
+<div class="mt-8 flex gap-2 flex-wrap">
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-xs font-medium">STEM</span>
+<span class="bg-surface-container-high text-primary px-3 py-1 rounded-full text-xs font-medium">Urban Campus</span>
+<span class="bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-medium">Co-op</span>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="academic-gradient p-8 rounded-xl text-on-primary flex flex-col h-full">
+<div class="text-on-primary/20 font-black text-6xl mb-6 select-none">03</div>
+<h3 class="text-2xl font-bold mb-4">See Programs</h3>
+<p class="text-on-primary/80 flex-grow leading-relaxed">Receive a personalized report showing your probability of acceptance, suggested safety schools, and high-reaching targets.</p>
+<div class="mt-8">
+<div class="w-full bg-white/10 rounded-lg p-3 border border-white/5 flex items-center justify-between">
+<span class="text-sm font-medium">View Report</span>
+<span class="material-symbols-outlined">trending_up</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonials -->
+<section class="py-24 overflow-hidden">
+<div class="max-w-7xl mx-auto px-6">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+<div class="lg:col-span-4 lg:sticky lg:top-32 h-fit">
+<div class="w-12 h-1 bg-secondary mb-8"></div>
+<h2 class="text-4xl font-bold text-primary mb-6 leading-tight">Voices of Success.</h2>
+<p class="text-on-surface-variant text-lg">
+                            Join thousands of students who traded anxiety for strategy. Real outcomes from across the province.
+                        </p>
+</div>
+<div class="lg:col-span-8 space-y-12">
+<div class="flex flex-col md:flex-row items-start gap-8 bg-surface-container-low p-10 rounded-2xl">
+<img class="w-20 h-20 rounded-full object-cover flex-shrink-0 grayscale" data-alt="Candid portrait of a smiling female student with glasses wearing a denim jacket on a college campus" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAb0_bsRoDgy8xf18uH15tl2cFDV7jCJmwtZ2dzDamqL3RfHTEx7L-7pYuVHmiuYUMRBaJh_z6eS24LjUCDO2HXgwn8vsFIkO9xqTlnXkx8Y1Hti4j6Oj3fE9K8_J9PgslExBkpWX2BstH8ArocFdUFgk40UGb0bq0mGRHNc3aopj7ln6hGmVPU3Y4ZgmP2zaW_bq-HchZTgcn0sGy_K083EW4gcpIFn31y8EcV1a44BiKsw_oeURF_5atJU1YbPSph9969zPCU6Sb9"/>
+<div>
+<p class="text-2xl font-medium text-primary mb-6 leading-relaxed italic">"I was terrified about missing the cutoff for Waterloo Eng. Pathway Canada showed me exactly which courses I needed to boost. I just got my offer today."</p>
+<div class="font-lexend font-bold text-primary uppercase tracking-widest text-sm">Maya R. — <span class="text-secondary">UWaterloo '28</span></div>
+</div>
+</div>
+<div class="flex flex-col md:flex-row-reverse items-start gap-8 bg-surface-container-lowest p-10 rounded-2xl border-l-4 border-primary shadow-sm">
+<img class="w-20 h-20 rounded-full object-cover flex-shrink-0 grayscale" data-alt="Young man with a focused expression looking at a laptop in a bright modern workspace" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8fX0J45VcTbxIuAgqna9e93oazjkNdV7iCQOg8RDG6hlEuKGTpTgRk7Ipo84h60Bwgca17NVxWQ_ca2IRbT2UF9hNFfAyrvXWNMHKIeMFsgL03YUhgeY6GgJH3FoLgoYv4_V9yPvtEviwkbkeTi-nIQwbXn3RaZ4ad2vHWmUOO94fyvBrXn0QoDdm0Q9lFV0Be5CRZv9poeaDV340iCBI3PqT8brx3rZvZH5MM192bzUY4MdvGUgSoFrMgslBAi5CeZkOCak2-Cgk"/>
+<div>
+<p class="text-2xl font-medium text-primary mb-6 leading-relaxed italic">
+                                    "The interface is so much better than standard portals. It felt like I was using a premium tool designed for my future."
+                                </p>
+<div class="font-lexend font-bold text-primary uppercase tracking-widest text-sm">Julian K. — <span class="text-secondary">Toronto Metropolitan</span></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Final CTA -->
+<section class="max-w-7xl mx-auto px-6 mb-24">
+<div class="academic-gradient rounded-3xl p-12 md:p-20 text-center relative overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+<div class="absolute bottom-0 left-0 w-32 h-32 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+<h2 class="text-4xl md:text-6xl font-extrabold text-on-primary mb-8 leading-tight">Your future is a map.<br/>Let’s read it.</h2>
+<button class="bg-white text-primary px-10 py-5 rounded-lg font-lexend font-black text-xl hover:bg-surface-container-low transition-all active:scale-95 shadow-2xl">
+                    Calculate My Average Now
+                </button>
+<p class="mt-8 text-on-primary/60 font-body text-sm tracking-widest uppercase">Free for all Canadian High School Students</p>
+</div>
+</section>
+</main>
+<!-- Footer Component -->
+<footer class="bg-blue-950 dark:bg-black w-full py-16 border-t border-blue-900 dark:border-slate-800 relative z-10">
+<div class="max-w-7xl mx-auto px-8">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+<div class="col-span-1 md:col-span-2">
+<div class="font-lexend font-bold text-white text-2xl mb-4">Pathway Canada</div>
+<p class="text-blue-200/50 dark:text-slate-500 text-sm max-w-sm mb-6">Canada's premier high-fidelity admission matching engine. Designed to reduce application costs and increase success rates for domestic students.</p>
+<div class="flex items-center space-x-4 text-blue-200/40 text-xs">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs">security</span> Data Encryption Active</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs">verified_user</span> ISO/IEC 27001 Certified</span>
+</div>
+</div>
+<div>
+<h5 class="text-white font-bold text-sm uppercase tracking-widest mb-6">Security &amp; Legal</h5>
+<ul class="space-y-4">
+<li><a class="text-blue-200/70 dark:text-slate-500 hover:text-white transition-colors text-xs uppercase tracking-widest" href="#">Privacy Protocol</a></li>
+<li><a class="text-blue-200/70 dark:text-slate-500 hover:text-white transition-colors text-xs uppercase tracking-widest" href="#">Terms of Service</a></li>
+<li><a class="text-blue-200/70 dark:text-slate-500 hover:text-white transition-colors text-xs uppercase tracking-widest" href="#">IP Protection</a></li>
+<li><a class="text-blue-200/70 dark:text-slate-500 hover:text-white transition-colors text-xs uppercase tracking-widest" href="#">Data Handling FAQ</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-white font-bold text-sm uppercase tracking-widest mb-6">Portals</h5>
+<ul class="space-y-4">
+<li><a class="text-blue-200/70 dark:text-slate-500 hover:text-white transition-colors text-xs uppercase tracking-widest" href="#">OUAC Guide</a></li>
+<li><a class="text-blue-200/70 dark:text-slate-500 hover:text-white transition-colors text-xs uppercase tracking-widest" href="#">OCAS Portal</a></li>
+<li><a class="text-blue-200/70 dark:text-slate-500 hover:text-white transition-colors text-xs uppercase tracking-widest" href="#">Student Dashboard</a></li>
+<li><a class="text-blue-200/70 dark:text-slate-500 hover:text-white transition-colors text-xs uppercase tracking-widest" href="#">Counselor Access</a></li>
+</ul>
+</div>
+</div>
+<div class="pt-8 border-t border-blue-900/50 dark:border-slate-800/50 flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="text-blue-200/30 dark:text-slate-600 font-sans text-[10px] uppercase tracking-[0.3em]">© 2024 Pathway Canada Portal. All rights reserved. Reproduction of matching data is prohibited.</div>
+<div class="flex space-x-6">
+<a class="text-blue-200/50 hover:text-white transition-colors" href="#"><span class="material-symbols-outlined text-lg">share</span></a>
+<a class="text-blue-200/50 hover:text-white transition-colors" href="#"><span class="material-symbols-outlined text-lg">mail</span></a>
+<a class="text-blue-200/50 hover:text-white transition-colors" href="#"><span class="material-symbols-outlined text-lg">info</span></a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

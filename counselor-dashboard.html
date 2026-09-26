@@ -1,0 +1,843 @@
+<!--
+  Copyright 2026 Pathways Canada. All Rights Reserved.
+  This code is the proprietary property of Pathways Canada and is subject to Invention Assignment Agreements.
+-->
+
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta name="description" content="Canadian high school guidance counselor dashboard for managing student portfolios, auditing rosters, and tracking average grade percentages."/>
+    <title>Student Roster | Pathway Canada</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#f7f9ff",
+                        "on-background": "#001d33",
+                        "surface-container-high": "#d8eaff",
+                        "tertiary-container": "#422000",
+                        "secondary-fixed": "#bcf0ae",
+                        "tertiary-fixed": "#ffdcc3",
+                        "on-primary-container": "#7a92b0",
+                        "on-error-container": "#93000a",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#f7f9ff",
+                        "on-primary": "#ffffff",
+                        "background": "#f7f9ff",
+                        "surface-container-highest": "#cee5ff",
+                        "primary-container": "#102a43",
+                        "on-tertiary-container": "#d97705",
+                        "surface-variant": "#cee5ff",
+                        "on-tertiary-fixed-variant": "#6e3900",
+                        "surface-container": "#e3efff",
+                        "on-tertiary-fixed": "#2f1500",
+                        "tertiary": "#240f00",
+                        "surface-tint": "#49607c",
+                        "primary": "#00152a",
+                        "on-primary-fixed": "#011d35",
+                        "surface-dim": "#bfddfe",
+                        "primary-fixed-dim": "#b0c9e8",
+                        "on-primary-fixed-variant": "#314863",
+                        "on-secondary-fixed-variant": "#23501e",
+                        "tertiary-fixed-dim": "#ffb77d",
+                        "on-secondary-fixed": "#002201",
+                        "secondary-fixed-dim": "#a1d494",
+                        "on-surface-variant": "#43474d",
+                        "error": "#ba1a1a",
+                        "outline": "#74777e",
+                        "primary-fixed": "#d1e4ff",
+                        "inverse-surface": "#12334c",
+                        "secondary-container": "#b9eeab",
+                        "inverse-on-surface": "#e8f2ff",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-surface": "#001d33",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#b0c9e8",
+                        "error-container": "#ffdad6",
+                        "secondary": "#3b6934",
+                        "outline-variant": "#c3c6ce",
+                        "on-secondary-container": "#3f6d38",
+                        "surface-container-low": "#edf4ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Lexend"],
+                        "body": ["Public Sans"],
+                        "label": ["Public Sans"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body { font-family: 'Public Sans', sans-serif; }
+        h1, h2, h3, h4 { font-family: 'Lexend', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .scholarly-shadow {
+            box-shadow: 0 12px 32px -4px rgba(0, 29, 51, 0.08);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex">
+
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 flex flex-col bg-slate-100 dark:bg-slate-900 font-lexend font-medium text-sm z-40 border-r border-slate-200/50">
+    <div class="flex flex-col h-full py-6">
+        <div class="px-6 mb-8 flex items-center space-x-3">
+            <div class="w-10 h-10 bg-primary-container rounded-lg flex items-center justify-center">
+                <span class="material-symbols-outlined text-white">school</span>
+            </div>
+            <div>
+                <div class="text-lg font-black text-blue-950 dark:text-blue-200 tracking-tighter">Counselor Hub</div>
+                <div class="text-[10px] uppercase tracking-widest text-slate-500">Pathway Canada</div>
+            </div>
+        </div>
+        <nav class="flex-1 space-y-1">
+            <a class="bg-white dark:bg-slate-800 text-blue-900 dark:text-blue-400 shadow-sm rounded-lg mx-2 my-1 px-4 py-3 font-bold flex items-center gap-3" href="counselor-dashboard.html">
+                <span class="material-symbols-outlined">group</span>
+                <span>Student Roster</span>
+            </a>
+            <a class="text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 mx-2 my-1 px-4 py-3 rounded-lg flex items-center gap-3 transition-all" href="student-dashboard.html">
+                <span class="material-symbols-outlined">school</span>
+                <span>Student Portal</span>
+            </a>
+        </nav>
+        <div class="px-4 mt-auto">
+            <button class="w-full bg-primary-container text-white py-3 rounded-xl font-bold mb-6 hover:opacity-90 transition-opacity flex items-center justify-center gap-2 cursor-not-allowed opacity-60">
+                <span class="material-symbols-outlined text-sm">add</span>
+                New Application
+            </button>
+        </div>
+    </div>
+</aside>
+
+<!-- Main Canvas -->
+<main class="ml-64 flex-1 min-h-screen relative overflow-x-hidden">
+    <!-- TopAppBar -->
+    <header class="bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-xl border-b border-slate-200/20 top-0 sticky z-30 font-lexend tracking-tight">
+        <div class="flex justify-between items-center w-full px-8 py-4">
+            <div class="flex items-center gap-8">
+                <h1 class="text-xl font-bold text-slate-900 dark:text-white tracking-tighter">Student Roster</h1>
+                <div class="hidden md:flex space-x-6 items-center text-sm">
+                    <a class="text-blue-900 dark:text-blue-400 font-semibold border-b-2 border-blue-900 dark:border-blue-400" href="#">Dashboard</a>
+                    <span class="text-slate-400">Dr. Sarah Mills (LIP Advisor)</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-3 flex items-center text-slate-400">
+                        <span class="material-symbols-outlined text-sm">search</span>
+                    </span>
+                    <input id="search-input" aria-label="Search student records" class="bg-surface-container-low border-none rounded-full py-2 pl-10 pr-4 text-sm w-64 focus:outline-none focus:ring-2 focus:ring-primary transition-all" placeholder="Search records..." type="text"/>
+                </div>
+                <div class="w-8 h-8 rounded-full bg-surface-container-high border-2 border-white scholarly-shadow flex items-center justify-center overflow-hidden">
+                    <span class="material-symbols-outlined text-primary text-xl">account_circle</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Content Area -->
+    <div class="p-8 max-w-7xl mx-auto">
+        <!-- Hero Header Section -->
+        <div class="mb-10">
+            <div class="inline-flex items-center gap-2 px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-xs font-bold mb-4">
+                <span class="w-1.5 h-1.5 bg-secondary rounded-full"></span>
+                <span>Active Counselor Directory Overview</span>
+            </div>
+            <h2 class="text-4xl font-extrabold text-on-background tracking-tighter mb-2">Student Registry</h2>
+            <p class="text-on-surface-variant max-w-2xl leading-relaxed">
+                Managing student progress across global academic cycles. Click on any student's row to open their profile summary, credentials audit, and communication drawer.
+            </p>
+        </div>
+
+        <!-- Management Tools / Filters -->
+        <div class="flex flex-col md:flex-row gap-4 mb-6 items-end">
+            <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
+                <div class="flex flex-col gap-2">
+                    <label for="grade-filter" class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Grade Level</label>
+                    <select id="grade-filter" class="bg-surface-container-lowest border-none shadow-sm rounded-lg p-3 text-sm focus:ring-2 focus:ring-primary outline-none">
+                        <option value="All">All Grades</option>
+                        <option value="Grade 11">Grade 11</option>
+                        <option value="Grade 12">Grade 12</option>
+                    </select>
+                </div>
+                <div class="flex flex-col gap-2">
+                    <label for="province-filter" class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Province</label>
+                    <select id="province-filter" class="bg-surface-container-lowest border-none shadow-sm rounded-lg p-3 text-sm focus:ring-2 focus:ring-primary outline-none">
+                        <option value="All">All Provinces</option>
+                        <option value="ON">Ontario</option>
+                        <option value="BC">British Columbia</option>
+                        <option value="QC">Quebec</option>
+                    </select>
+                </div>
+                <div class="flex flex-col gap-2">
+                    <label for="status-filter" class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Eligibility Status</label>
+                    <select id="status-filter" class="bg-surface-container-lowest border-none shadow-sm rounded-lg p-3 text-sm focus:ring-2 focus:ring-primary outline-none">
+                        <option value="All">Any Status</option>
+                        <option value="Accepted">Accepted</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Needs Attention">Needs Attention</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bulk Actions Bar (Hidden by default, shown when checkboxes are selected) -->
+        <div id="bulk-bar" class="hidden mb-4 flex items-center justify-between bg-primary text-white px-6 py-3 rounded-xl scholarly-shadow transition-all duration-300">
+            <div class="flex items-center gap-4">
+                <span id="selected-count" class="text-sm font-bold flex items-center gap-2">
+                    <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                    0 Students Selected
+                </span>
+                <div class="h-6 w-px bg-white/20"></div>
+                <div class="flex items-center gap-2">
+                    <button class="flex items-center gap-1.5 px-3 py-1.5 hover:bg-white/10 rounded-lg transition-colors text-xs font-semibold" onclick="openBulkEmailModal()">
+                        <span class="material-symbols-outlined text-sm">mail</span>
+                        Email Group
+                    </button>
+                    <button class="flex items-center gap-1.5 px-3 py-1.5 hover:bg-white/10 rounded-lg transition-colors text-xs font-semibold cursor-not-allowed opacity-60">
+                        <span class="material-symbols-outlined text-sm">sync_alt</span>
+                        Update Status
+                    </button>
+                </div>
+            </div>
+            <button class="p-1.5 hover:bg-white/10 rounded-full transition-colors" onclick="deselectAll()">
+                <span class="material-symbols-outlined text-sm">close</span>
+            </button>
+        </div>
+
+        <!-- Student List (The Scholarly Table) -->
+        <div class="bg-surface-container-low rounded-2xl overflow-hidden scholarly-shadow border border-slate-100/50">
+            <!-- Desktop Table View -->
+            <div class="hidden sm:block overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-surface-container-highest/30">
+                            <th class="px-6 py-5 w-12">
+                                <input id="select-all-checkbox" aria-label="Select all students" class="rounded border-slate-300 text-primary-container focus:ring-primary transition-all cursor-pointer" type="checkbox" onchange="toggleSelectAll(this)"/>
+                            </th>
+                            <th class="px-6 py-5 text-[11px] font-black uppercase tracking-[0.15em] text-on-surface-variant">Student Profile</th>
+                            <th class="px-6 py-5 text-[11px] font-black uppercase tracking-[0.15em] text-on-surface-variant">Grade</th>
+                            <th class="px-6 py-5 text-[11px] font-black uppercase tracking-[0.15em] text-on-surface-variant text-center">Avg. Grade</th>
+                            <th class="px-6 py-5 text-[11px] font-black uppercase tracking-[0.15em] text-on-surface-variant">Status</th>
+                            <th class="px-6 py-5 text-[11px] font-black uppercase tracking-[0.15em] text-on-surface-variant text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-surface-container-high" id="roster-tbody">
+                        <!-- Loaded dynamically -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Mobile Cards View -->
+            <div class="sm:hidden p-4 flex flex-col gap-4" id="roster-cards-container">
+                <!-- Loaded dynamically -->
+            </div>
+        </div>
+
+        <!-- Cohort Performance Stats -->
+        <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="md:col-span-2 bg-surface-container-lowest p-8 rounded-2xl scholarly-shadow relative overflow-hidden group border border-slate-100">
+                <div class="relative z-10">
+                    <h3 class="text-xl font-bold tracking-tight mb-4">Cohort Performance Insight</h3>
+                    <p class="text-sm text-on-surface-variant leading-relaxed max-w-lg mb-6">
+                        This semester's applicants show a <span class="font-bold text-secondary">4.2% increase</span> in overall academic average compared to last year. Most "Needs Attention" flags are due to missing mid-term transcripts.
+                    </p>
+                    <div class="flex gap-4">
+                        <button class="px-5 py-2.5 bg-primary-container text-white text-xs font-bold rounded-lg hover:opacity-90 transition-opacity cursor-not-allowed opacity-60">
+                            Generate Insight Report
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-primary-container p-8 rounded-2xl scholarly-shadow text-white relative overflow-hidden">
+                <div class="mb-4">
+                    <span class="material-symbols-outlined text-secondary-fixed text-3xl">auto_awesome</span>
+                </div>
+                <div class="text-3xl font-black mb-1">94%</div>
+                <div class="text-xs font-medium text-slate-300 uppercase tracking-widest mb-4">Application Quality Index</div>
+                <div class="text-xs leading-relaxed text-slate-300">
+                    Your current roster meets high eligibility requirements for Tier 1 Universities.
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Sliding Student Profile Drawer -->
+<div id="drawer-backdrop" class="fixed inset-0 bg-slate-950/40 backdrop-blur-xs z-50 hidden transition-opacity duration-300 opacity-0" onclick="closeDrawer()"></div>
+<div id="student-drawer" class="fixed right-0 top-0 h-screen w-full sm:w-[500px] bg-white z-[60] shadow-2xl border-l border-slate-200/80 transform translate-x-full transition-transform duration-300 flex flex-col">
+    <!-- Drawer Header -->
+    <div class="p-6 bg-slate-50 border-b border-slate-100 flex items-center justify-between">
+        <div class="flex items-center gap-4">
+            <div id="drawer-avatar-badge" class="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-container to-primary flex items-center justify-center font-bold text-white text-sm shadow-inner"></div>
+            <div>
+                <h3 id="drawer-name" class="font-lexend font-bold text-lg text-primary">Alex</h3>
+                <p id="drawer-loc" class="text-xs text-on-surface-variant font-medium">Toronto, ON</p>
+            </div>
+        </div>
+        <button class="p-2 hover:bg-slate-200 rounded-full transition-colors" onclick="closeDrawer()">
+            <span class="material-symbols-outlined text-xl">close</span>
+        </button>
+    </div>
+    
+    <!-- Drawer Content (Scrollable) -->
+    <div class="flex-1 overflow-y-auto p-6 space-y-8">
+        <!-- Overview Stats -->
+        <div class="grid grid-cols-2 gap-4">
+            <div class="bg-slate-50 p-4 rounded-xl text-center border border-slate-100">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-slate-500">Average Grade</span>
+                <p id="drawer-average" class="text-3xl font-black text-secondary mt-1">92.4%</p>
+            </div>
+            <div class="bg-slate-50 p-4 rounded-xl text-center border border-slate-100">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-slate-500">Eligible Matches</span>
+                <p id="drawer-matches-count" class="text-3xl font-black text-primary mt-1">3 / 4</p>
+            </div>
+        </div>
+        
+        <!-- Detailed Transcript -->
+        <div>
+            <h4 class="font-headline font-bold text-primary text-sm uppercase tracking-wider mb-4 border-b border-slate-100 pb-2">Academic Transcript</h4>
+            <div class="space-y-3" id="drawer-transcript">
+                <!-- Loaded dynamically -->
+            </div>
+        </div>
+        
+        <!-- Extracurricular Activities -->
+        <div>
+            <h4 class="font-headline font-bold text-primary text-sm uppercase tracking-wider mb-4 border-b border-slate-100 pb-2">Extracurricular Portfolio</h4>
+            <div class="space-y-4" id="drawer-activities">
+                <!-- Loaded dynamically -->
+            </div>
+        </div>
+
+        <!-- Communications Panel -->
+        <div class="bg-slate-50 border border-slate-100 rounded-xl p-5">
+            <h4 class="font-headline font-bold text-primary text-sm mb-3">Send Advisor Message</h4>
+            
+            <!-- Conversation History -->
+            <div id="message-history" class="h-32 overflow-y-auto bg-white rounded-lg p-3 border border-slate-200/60 mb-3 text-xs space-y-2.5">
+                <div class="text-slate-400 text-center py-4">No previous conversation logs.</div>
+            </div>
+            
+            <div class="flex gap-2">
+                <input type="text" id="message-input" aria-label="Type instructions or feedback to the student" class="flex-1 bg-white border border-slate-200 rounded-lg p-2 text-xs focus:ring-1 focus:ring-primary focus:border-primary outline-none" placeholder="Type instructions or feedback..." />
+                <button class="px-4 py-2 bg-primary text-white text-xs font-bold rounded-lg hover:opacity-90 transition-all flex items-center justify-center" onclick="sendMessage()">
+                    Send
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bulk Email Modal -->
+<div id="email-modal" role="dialog" aria-modal="true" aria-labelledby="email-modal-title" class="fixed inset-0 z-[100] flex items-center justify-center hidden">
+    <div class="fixed inset-0 bg-slate-950/40 backdrop-blur-sm" onclick="closeBulkEmailModal()"></div>
+    <div class="relative bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl mx-4 border border-slate-100 transform scale-95 opacity-0 transition-all duration-300" id="email-content">
+        <h3 id="email-modal-title" class="text-xl font-bold text-primary mb-1 font-lexend">Email Cohort</h3>
+        <p id="email-recipients" class="text-xs text-slate-500 font-medium mb-6">Recipients: Julianne, Marcus</p>
+        
+        <div class="flex flex-col gap-4">
+            <div class="flex flex-col gap-1.5">
+                <label for="email-subject" class="text-[10px] font-bold uppercase tracking-wider text-slate-500">Subject</label>
+                <input type="text" id="email-subject" value="Pathway Canada Admissions Audit - Action Needed" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none" />
+            </div>
+            <div class="flex flex-col gap-1.5">
+                <label for="email-message" class="text-[10px] font-bold uppercase tracking-wider text-slate-500">Message Body</label>
+                <textarea id="email-message" rows="4" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none">Hello,
+
+Please check your Pathway Canada Dashboard. Your matching indices have been calibrated with the latest university acceptance cutoffs. Ensure your Grade 12 second term marks are fully synchronized.
+
+Best,
+Dr. Mills</textarea>
+            </div>
+        </div>
+        
+        <div class="mt-6 flex justify-end gap-3">
+            <button class="px-4 py-2 hover:bg-slate-100 rounded-lg text-slate-500 text-xs font-bold" onclick="closeBulkEmailModal()">
+                Cancel
+            </button>
+            <button id="send-bulk-btn" class="px-5 py-2 bg-primary text-white rounded-lg text-xs font-bold hover:opacity-90 flex items-center gap-1.5" onclick="sendBulkEmail()">
+                <span class="material-symbols-outlined text-sm">send</span>
+                Send Emails
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Notification Toast -->
+<div id="toast" class="fixed bottom-6 right-6 z-[200] bg-slate-900 text-white text-xs font-bold py-3.5 px-5 rounded-xl shadow-2xl flex items-center gap-2 translate-y-12 opacity-0 pointer-events-none transition-all duration-300">
+    <span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+    <span id="toast-text">Emails dispatched successfully.</span>
+</div>
+
+<script>
+    // Local database for Roster
+    const STUDENTS = [
+        {
+            id: "julianne-adams",
+            name: "Julianne Adams",
+            city: "Toronto",
+            province: "ON",
+            grade: "Grade 12",
+            average: 92.4,
+            status: "Accepted",
+            avatar: "",
+            transcript: [
+                { name: "Advanced Functions (MHF4U)", grade: 96, icon: "calculate" },
+                { name: "Chemistry (SCH4U)", grade: 94, icon: "science" },
+                { name: "Physics (SPH4U)", grade: 90, icon: "science" }
+            ],
+            activities: [
+                { title: "Student Council President", desc: "Organized events and represented student body.", category: "Leadership" },
+                { title: "Robotics Club Lead", desc: "Led programming team in regional competitions.", category: "STEM" }
+            ],
+            messages: []
+        },
+        {
+            id: "marcus-rivera",
+            name: "Marcus Rivera",
+            city: "Vancouver",
+            province: "BC",
+            grade: "Grade 12",
+            average: 88.1,
+            status: "In Progress",
+            avatar: "",
+            transcript: [
+                { name: "Calculus (MATH12)", grade: 90, icon: "calculate" },
+                { name: "Biology (BIOL12)", grade: 85, icon: "science" },
+                { name: "English (ENGL12)", grade: 89, icon: "history_edu" }
+            ],
+            activities: [
+                { title: "Varsity Soccer Captain", desc: "Regional tournament champions 2023.", category: "Athletics" },
+                { title: "Volunteer Tutor", desc: "Tutored middle school students in math.", category: "Volunteering" }
+            ],
+            messages: []
+        },
+        {
+            id: "elena-low",
+            name: "Elena Low",
+            city: "Ottawa",
+            province: "ON",
+            grade: "Grade 11",
+            average: 76.5,
+            status: "Needs Attention",
+            avatar: "",
+            transcript: [
+                { name: "Functions (MCR3U)", grade: 78, icon: "calculate" },
+                { name: "Biology (SBI3U)", grade: 72, icon: "science" },
+                { name: "English (ENG3U)", grade: 80, icon: "history_edu" }
+            ],
+            activities: [
+                { title: "Art Club Committee", desc: "Designed murals for local community center.", category: "Arts" }
+            ],
+            messages: []
+        },
+        {
+            id: "samuel-chen",
+            name: "Samuel Chen",
+            city: "Montreal",
+            province: "QC",
+            grade: "Grade 12",
+            average: 91.0,
+            status: "Accepted",
+            avatar: "",
+            transcript: [
+                { name: "Mathematics Secondary V", grade: 95, icon: "calculate" },
+                { name: "Physics Secondary V", grade: 92, icon: "science" },
+                { name: "English Secondary V", grade: 86, icon: "history_edu" }
+            ],
+            activities: [
+                { title: "Debating Society Vice President", desc: "Achieved top 3 in provincial finals.", category: "Leadership" }
+            ],
+            messages: []
+        }
+    ];
+
+    let selectedIds = new Set();
+    let currentDrawerStudentId = null;
+
+    // Load elements
+    const tbody = document.getElementById('roster-tbody');
+    const cardsContainer = document.getElementById('roster-cards-container');
+    const searchInput = document.getElementById('search-input');
+    const gradeFilter = document.getElementById('grade-filter');
+    const provinceFilter = document.getElementById('province-filter');
+    const statusFilter = document.getElementById('status-filter');
+    const bulkBar = document.getElementById('bulk-bar');
+    const selectedCountText = document.getElementById('selected-count');
+
+    // Attach listeners
+    searchInput.oninput = filterRoster;
+    gradeFilter.onchange = filterRoster;
+    provinceFilter.onchange = filterRoster;
+    statusFilter.onchange = filterRoster;
+
+    function filterRoster() {
+        const query = searchInput.value.toLowerCase();
+        const grade = gradeFilter.value;
+        const province = provinceFilter.value;
+        const status = statusFilter.value;
+        
+        const filtered = STUDENTS.filter(s => {
+            const matchesQuery = s.name.toLowerCase().includes(query) || s.city.toLowerCase().includes(query);
+            const matchesGrade = grade === "All" || s.grade === grade;
+            const matchesProvince = province === "All" || s.province === province;
+            const matchesStatus = status === "All" || s.status === status;
+            
+            return matchesQuery && matchesGrade && matchesProvince && matchesStatus;
+        });
+        
+        renderRoster(filtered);
+    }
+
+    function renderRoster(list) {
+        tbody.innerHTML = '';
+        cardsContainer.innerHTML = '';
+        
+        if (list.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="6" class="px-6 py-12 text-center text-sm text-slate-400">No matching student records found.</td></tr>`;
+            cardsContainer.innerHTML = `<div class="text-center text-sm text-slate-400 py-12">No matching student records found.</div>`;
+            return;
+        }
+
+        list.forEach(student => {
+            const isChecked = selectedIds.has(student.id);
+            const initials = student.name.split(' ').map(n => n[0]).join('');
+            
+            // Render Table Row
+            const row = document.createElement('tr');
+            row.className = "hover:bg-white transition-colors cursor-pointer";
+            row.onclick = () => openDrawer(student.id);
+            
+            row.innerHTML = `
+                <td class="px-6 py-6" onclick="event.stopPropagation()">
+                    <input type="checkbox" ${isChecked ? 'checked' : ''} class="rounded border-slate-300 text-primary focus:ring-primary cursor-pointer" onchange="toggleSelect('${student.id}', this)"/>
+                </td>
+                <td class="px-6 py-6">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-xl flex-shrink-0 bg-gradient-to-br from-primary-container to-primary flex items-center justify-center font-bold text-white text-xs shadow-inner">
+                            ${initials}
+                        </div>
+                        <div>
+                            <div class="text-sm font-bold text-primary">${student.name}</div>
+                            <div class="text-xs text-on-surface-variant">${student.city}, ${student.province}</div>
+                        </div>
+                    </div>
+                </td>
+                <td class="px-6 py-6">
+                    <span class="text-sm font-medium text-slate-700">${student.grade}</span>
+                </td>
+                <td class="px-6 py-6">
+                    <div class="flex flex-col items-center">
+                        <span class="text-sm font-bold ${student.average >= 90 ? 'text-secondary' : student.average >= 80 ? 'text-on-surface' : 'text-error'}">${student.average}%</span>
+                        <div class="w-16 h-1 bg-slate-100 rounded-full mt-1 overflow-hidden">
+                            <div class="h-full ${student.average >= 90 ? 'bg-secondary' : student.average >= 80 ? 'bg-primary' : 'bg-error'}" style="width: ${student.average}%"></div>
+                        </div>
+                    </div>
+                </td>
+                <td class="px-6 py-6">
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold ${
+                        student.status === 'Accepted' ? 'bg-secondary-container text-on-secondary-container' :
+                        student.status === 'In Progress' ? 'bg-surface-container-highest text-primary' :
+                        'bg-tertiary-fixed text-on-tertiary-fixed-variant'
+                    }">
+                        ${student.status}
+                    </span>
+                </td>
+                <td class="px-6 py-6 text-right" onclick="event.stopPropagation()">
+                    <button class="p-2 hover:bg-slate-100 rounded-lg text-slate-400 hover:text-primary transition-colors" onclick="openDrawer('${student.id}')">
+                        <span class="material-symbols-outlined">chevron_right</span>
+                    </button>
+                </td>
+            `;
+            tbody.appendChild(row);
+
+            // Render Mobile Card
+            const card = document.createElement('div');
+            card.className = "bg-white p-5 rounded-xl border border-slate-100 shadow-sm flex flex-col gap-4";
+            card.onclick = () => openDrawer(student.id);
+            card.innerHTML = `
+                <div class="flex justify-between items-start">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg flex-shrink-0 bg-gradient-to-br from-primary-container to-primary flex items-center justify-center font-bold text-white text-xs shadow-inner">
+                            ${initials}
+                        </div>
+                        <div>
+                            <div class="text-sm font-bold text-primary">${student.name}</div>
+                            <div class="text-xs text-slate-500">${student.city}, ${student.province} • ${student.grade}</div>
+                        </div>
+                    </div>
+                    <div onclick="event.stopPropagation()">
+                        <input type="checkbox" ${isChecked ? 'checked' : ''} class="rounded border-slate-300 text-primary focus:ring-primary cursor-pointer" onchange="toggleSelect('${student.id}', this)"/>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between border-t border-slate-50 pt-3">
+                    <div class="flex flex-col">
+                        <span class="text-[9px] uppercase tracking-wider text-slate-400 font-bold">Avg. Grade</span>
+                        <span class="text-sm font-black text-primary">${student.average}%</span>
+                    </div>
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[9px] font-black uppercase ${
+                        student.status === 'Accepted' ? 'bg-secondary-container text-on-secondary-container' :
+                        student.status === 'In Progress' ? 'bg-surface-container-highest text-primary' :
+                        'bg-tertiary-fixed text-on-tertiary-fixed-variant'
+                    }">
+                        ${student.status}
+                    </span>
+                </div>
+            `;
+            cardsContainer.appendChild(card);
+        });
+    }
+
+    // Select Checkboxes
+    function toggleSelect(id, el) {
+        if (el.checked) {
+            selectedIds.add(id);
+        } else {
+            selectedIds.delete(id);
+        }
+        updateBulkBar();
+        // Update both table and card views checkbox state
+        filterRoster();
+    }
+
+    function toggleSelectAll(el) {
+        if (el.checked) {
+            STUDENTS.forEach(s => selectedIds.add(s.id));
+        } else {
+            selectedIds.clear();
+        }
+        updateBulkBar();
+        filterRoster();
+    }
+
+    function deselectAll() {
+        selectedIds.clear();
+        document.getElementById('select-all-checkbox').checked = false;
+        updateBulkBar();
+        filterRoster();
+    }
+
+    function updateBulkBar() {
+        if (selectedIds.size > 0) {
+            bulkBar.classList.remove('hidden');
+            selectedCountText.innerHTML = `
+                <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                ${selectedIds.size} Student${selectedIds.size > 1 ? 's' : ''} Selected
+            `;
+        } else {
+            bulkBar.classList.add('hidden');
+        }
+    }
+
+    // Drawer Sliding Logic
+    function openDrawer(id) {
+        const student = STUDENTS.find(s => s.id === id);
+        if (!student) return;
+        
+        currentDrawerStudentId = id;
+        
+        const initials = student.name.split(' ').map(n => n[0]).join('');
+        document.getElementById('drawer-avatar-badge').textContent = initials;
+        document.getElementById('drawer-name').textContent = student.name;
+        document.getElementById('drawer-loc').textContent = `${student.city}, ${student.province} • ${student.grade}`;
+        document.getElementById('drawer-average').textContent = `${student.average}%`;
+        
+        // Transcript rendering
+        const transContainer = document.getElementById('drawer-transcript');
+        transContainer.innerHTML = '';
+        student.transcript.forEach(t => {
+            transContainer.innerHTML += `
+                <div class="flex justify-between items-center bg-slate-50/60 p-3 rounded-lg border border-slate-100">
+                    <span class="text-xs font-bold text-primary flex items-center gap-2">
+                        <span class="material-symbols-outlined text-sm text-slate-400">${t.icon}</span>
+                        ${t.name}
+                    </span>
+                    <span class="text-xs font-black text-secondary">${t.grade}%</span>
+                </div>
+            `;
+        });
+        
+        // Activities rendering
+        const actContainer = document.getElementById('drawer-activities');
+        actContainer.innerHTML = '';
+        student.activities.forEach(a => {
+            actContainer.innerHTML += `
+                <div class="bg-slate-50/40 p-4 rounded-lg border border-slate-100">
+                    <span class="px-2 py-0.5 bg-secondary-container text-on-secondary-container rounded text-[9px] font-black uppercase tracking-wider">${a.category}</span>
+                    <h5 class="text-xs font-bold text-primary mt-2">${a.title}</h5>
+                    <p class="text-[11px] text-slate-500 mt-0.5 italic leading-relaxed">${a.desc}</p>
+                </div>
+            `;
+        });
+
+        // Messages rendering
+        renderMessages();
+        
+        // Open
+        const backdrop = document.getElementById('drawer-backdrop');
+        const drawer = document.getElementById('student-drawer');
+        
+        backdrop.classList.remove('hidden');
+        setTimeout(() => {
+            backdrop.classList.remove('opacity-0');
+            backdrop.classList.add('opacity-100');
+            drawer.classList.remove('translate-x-full');
+            drawer.classList.add('translate-x-0');
+        }, 10);
+    }
+    
+    function closeDrawer() {
+        const backdrop = document.getElementById('drawer-backdrop');
+        const drawer = document.getElementById('student-drawer');
+        
+        backdrop.classList.remove('opacity-100');
+        backdrop.classList.add('opacity-0');
+        drawer.classList.remove('translate-x-0');
+        drawer.classList.add('translate-x-full');
+        
+        setTimeout(() => {
+            backdrop.classList.add('hidden');
+            currentDrawerStudentId = null;
+        }, 300);
+    }
+
+    // Messaging within Drawer
+    function renderMessages() {
+        const student = STUDENTS.find(s => s.id === currentDrawerStudentId);
+        if (!student) return;
+        
+        const history = document.getElementById('message-history');
+        history.innerHTML = '';
+        
+        if (student.messages.length === 0) {
+            history.innerHTML = `<div class="text-slate-400 text-center py-8">No previous conversation logs.</div>`;
+            return;
+        }
+        
+        student.messages.forEach(m => {
+            history.innerHTML += `
+                <div class="flex flex-col ${m.sender === 'Counselor' ? 'items-end' : 'items-start'}">
+                    <div class="p-2.5 rounded-lg text-xs leading-relaxed max-w-[85%] ${
+                        m.sender === 'Counselor' ? 'bg-primary text-white rounded-br-none' : 'bg-slate-100 text-slate-700 rounded-bl-none'
+                    }">
+                        ${m.text}
+                    </div>
+                    <span class="text-[9px] text-slate-400 mt-1 uppercase tracking-wider">${m.sender} • Just now</span>
+                </div>
+            `;
+        });
+        history.scrollTop = history.scrollHeight;
+    }
+
+    function sendMessage() {
+        const input = document.getElementById('message-input');
+        const text = input.value.trim();
+        if (!text) return;
+        
+        const student = STUDENTS.find(s => s.id === currentDrawerStudentId);
+        if (!student) return;
+        
+        student.messages.push({
+            sender: "Counselor",
+            text: text
+        });
+        
+        input.value = '';
+        renderMessages();
+        showToast(`Message sent to ${student.name.split(' ')[0]}.`);
+        
+        // Mock a student typing response after 2 seconds for extra dynamic feel
+        setTimeout(() => {
+            if (currentDrawerStudentId === student.id) {
+                student.messages.push({
+                    sender: student.name.split(' ')[0],
+                    text: "Thank you for the feedback. I will review and update my course checklist tonight."
+                });
+                renderMessages();
+            }
+        }, 2200);
+    }
+
+    // Bulk Email Modal
+    function openBulkEmailModal() {
+        const names = Array.from(selectedIds).map(id => STUDENTS.find(s => s.id === id).name.split(' ')[0]);
+        document.getElementById('email-recipients').textContent = `Recipients: ${names.join(', ')}`;
+        
+        const modal = document.getElementById('email-modal');
+        modal.classList.remove('hidden');
+        setTimeout(() => {
+            document.getElementById('email-content').classList.remove('scale-95', 'opacity-0');
+            document.getElementById('email-content').classList.add('scale-100', 'opacity-100');
+        }, 10);
+    }
+
+    function closeBulkEmailModal() {
+        const content = document.getElementById('email-content');
+        content.classList.remove('scale-100', 'opacity-100');
+        content.classList.add('scale-95', 'opacity-0');
+        setTimeout(() => {
+            document.getElementById('email-modal').classList.add('hidden');
+        }, 300);
+    }
+
+    function sendBulkEmail() {
+        const btn = document.getElementById('send-bulk-btn');
+        btn.disabled = true;
+        btn.innerHTML = '<span class="material-symbols-outlined animate-spin text-sm">sync</span> Dispatched...';
+        
+        setTimeout(() => {
+            closeBulkEmailModal();
+            showToast(`Admissions audit emails dispatched to ${selectedIds.size} students.`);
+            deselectAll();
+            btn.disabled = false;
+            btn.innerHTML = '<span class="material-symbols-outlined text-sm">send</span> Send Emails';
+        }, 1500);
+    }
+
+    // Toast Notification helper
+    let toastTimer = null;
+    function showToast(text) {
+        const toast = document.getElementById('toast');
+        document.getElementById('toast-text').textContent = text;
+        
+        clearTimeout(toastTimer);
+        toast.classList.remove('translate-y-12', 'opacity-0', 'pointer-events-none');
+        toast.classList.add('translate-y-0', 'opacity-100');
+        
+        toastTimer = setTimeout(() => {
+            toast.classList.remove('translate-y-0', 'opacity-100');
+            toast.classList.add('translate-y-12', 'opacity-0', 'pointer-events-none');
+        }, 3000);
+    }
+
+    // Global keyboard handler for closing bulk email modal and student drawer
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeBulkEmailModal();
+            closeDrawer();
+        }
+    });
+
+    // Initial render
+    renderRoster(STUDENTS);
+</script>
+</body>
+</html>

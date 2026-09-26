@@ -1,0 +1,118 @@
+:root {
+    --navy: #0A192F; /* Dark Navy */
+    --gold: #C5A028; /* Academic Gold */
+    --cream: #FDF9F3; /* Warm Cream for backgrounds */
+    --white: #FFFFFF;
+    --dark-gray: #333333;
+    --light-gray: #EFEFEF;
+    --accent-blue: #0077B6;
+    --border-radius-lg: 10px;
+    --border-radius-md: 8px;
+    --border-radius-sm: 6px;
+    --box-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --box-shadow-md: 0 5px 15px rgba(0, 0, 0, 0.15);
+    --box-shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif; /* Playful but readable heading */
+    color: var(--navy);
+    line-height: 1.2;
+}
+
+body {
+    font-family: 'Lato', sans-serif; /* Clean sans-serif for body */
+    margin: 0;
+    padding: 0;
+    background-color: var(--cream);
+    color: var(--dark-gray);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+/* Buttons */
+.btn-primary {
+    display: inline-block;
+    background-color: var(--gold);
+    color: var(--navy);
+    padding: 1rem 2.5rem;
+    border-radius: var(--border-radius-md);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    border: none;
+    cursor: pointer;
+    box-shadow: var(--box-shadow-sm);
+}
+
+.btn-primary:hover {
+    background-color: #B49A3E; /* Slightly darker gold */
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: var(--box-shadow-md);
+}
+.btn-primary:active {
+    transform: translateY(0);
+    box-shadow: var(--box-shadow-sm);
+}
+
+.btn-secondary {
+    display: inline-block;
+    background-color: var(--navy);
+    color: var(--white);
+    padding: 1rem 2.5rem;
+    border-radius: var(--border-radius-md);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid var(--gold);
+    cursor: pointer;
+    box-shadow: var(--box-shadow-sm);
+}
+
+.btn-secondary:hover {
+    background-color: var(--accent-blue);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: var(--box-shadow-md);
+}
+.btn-secondary:active {
+    transform: translateY(0);
+    box-shadow: var(--box-shadow-sm);
+}
+
+/* Utility Classes */
+.text-center {
+    text-align: center;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.icon-large {
+    font-size: 2.5rem; /* For animal emojis */
+    line-height: 1;
+    margin-right: 0.5rem;
+}
+
+/* Global Transitions */
+* {
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}

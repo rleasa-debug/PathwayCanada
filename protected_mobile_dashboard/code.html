@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Academic Canada - Student Dashboard</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&amp;family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline": "#74777e",
+                    "on-secondary-fixed": "#002201",
+                    "primary": "#00152a",
+                    "surface-container-highest": "#cee5ff",
+                    "on-primary-fixed": "#011d35",
+                    "surface-container-low": "#edf4ff",
+                    "on-surface-variant": "#43474d",
+                    "tertiary-container": "#422000",
+                    "on-error-container": "#93000a",
+                    "secondary-fixed": "#bcf0ae",
+                    "outline-variant": "#c3c6ce",
+                    "on-primary": "#ffffff",
+                    "on-secondary-fixed-variant": "#23501e",
+                    "inverse-surface": "#12334c",
+                    "surface-variant": "#cee5ff",
+                    "surface-container-high": "#d8eaff",
+                    "inverse-primary": "#b0c9e8",
+                    "on-tertiary-container": "#d97705",
+                    "on-primary-fixed-variant": "#314863",
+                    "background": "#f7f9ff",
+                    "tertiary-fixed-dim": "#ffb77d",
+                    "tertiary": "#240f00",
+                    "on-surface": "#001d33",
+                    "on-tertiary-fixed": "#2f1500",
+                    "on-error": "#ffffff",
+                    "surface": "#f7f9ff",
+                    "on-background": "#001d33",
+                    "primary-fixed": "#d1e4ff",
+                    "tertiary-fixed": "#ffdcc3",
+                    "surface-bright": "#f7f9ff",
+                    "surface-tint": "#49607c",
+                    "surface-container": "#e3efff",
+                    "secondary-fixed-dim": "#a1d494",
+                    "on-primary-container": "#7a92b0",
+                    "secondary": "#3b6934",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed-dim": "#b0c9e8",
+                    "primary-container": "#102a43",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-container": "#b9eeab",
+                    "on-tertiary-fixed-variant": "#6e3900",
+                    "inverse-on-surface": "#e8f2ff",
+                    "error": "#ba1a1a",
+                    "on-secondary-container": "#3f6d38",
+                    "error-container": "#ffdad6",
+                    "surface-dim": "#bfddfe",
+                    "on-secondary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Lexend"],
+                    "body": ["Public Sans"],
+                    "label": ["Public Sans"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(12px);
+      }
+      body {
+        font-family: 'Public Sans', sans-serif;
+      }
+      h1, h2, h3, h4 {
+        font-family: 'Lexend', sans-serif;
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex items-center justify-between px-6 h-16 bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-xl">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-surface-container-highest">
+<img alt="Student Profile Photo" class="w-full h-full object-cover" data-alt="professional headshot of a young adult student smiling warmly against a soft-focus library background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB79TfWEE7WYfQ-O5ZDBV8VAwFNDkooXI5RVuEAWuwCpubZpPGwDsAtBBh5itScqUCP9fYmzPGT8X4HqXrQknmZkF_7zrtmqYDnAVnq1bi0BBx9JltIaiKLazpFOVzh9YFzeX-BJDPKIw2ZKP9zmCJ9Do2Z9pDqaHCbFH2VET-IYJzmI0L3YkWeXhJ3nIcEOq1X7cdUU0szZbImv8WIQ0hL-PRkasvJswKFg5Hn67nc-Muphe0cc3nfy540V4wKbICVxEAqC9xIpGnl"/>
+</div>
+<span class="text-lg font-bold tracking-tight text-slate-900 dark:text-slate-100">ACADEMIC CANADA</span>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-colors">
+<span class="material-symbols-outlined text-slate-900 dark:text-slate-50">settings</span>
+</button>
+</header>
+<main class="mt-20 px-6 space-y-8">
+<!-- Hero Section: Stats & Voice -->
+<section class="space-y-6">
+<div class="flex flex-col gap-1">
+<span class="text-on-surface-variant font-medium tracking-wide label-md uppercase">Student Portfolio</span>
+<h1 class="text-3xl font-extrabold text-primary leading-tight">Curriculum Overview</h1>
+</div>
+<!-- Bento Stats Grid -->
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-lowest p-5 rounded-xl flex flex-col justify-between h-32 relative overflow-hidden group transition-all duration-150 active:scale-95">
+<div class="absolute top-0 left-0 w-1 h-full bg-primary-fixed-dim"></div>
+<span class="text-on-surface-variant label-md font-semibold">GPA Rank</span>
+<div class="flex items-baseline gap-1">
+<span class="text-4xl font-bold text-primary">3.88</span>
+<span class="text-secondary font-bold text-sm">↑2%</span>
+</div>
+</div>
+<div class="bg-primary p-5 rounded-xl flex flex-col justify-between h-32 text-on-primary transition-all duration-150 active:scale-95 shadow-lg">
+<span class="label-md font-medium opacity-80">3 Applications</span>
+<div class="flex items-center justify-between">
+<span class="text-3xl font-bold">Active</span>
+<span class="material-symbols-outlined text-3xl">rocket_launch</span>
+</div>
+</div>
+</div>
+<!-- Voice Integration Bar -->
+<button class="w-full bg-surface-container-low flex items-center justify-between px-5 py-4 rounded-full group hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-primary-container rounded-full flex items-center justify-center text-on-tertiary-container">
+<span class="material-symbols-outlined">mic</span>
+</div>
+<span class="font-semibold text-primary">Listen to Overview</span>
+</div>
+<div class="flex gap-1">
+<div class="w-1 h-4 bg-primary-container/20 rounded-full"></div>
+<div class="w-1 h-6 bg-primary-container/40 rounded-full"></div>
+<div class="w-1 h-4 bg-primary-container/60 rounded-full"></div>
+</div>
+</button>
+</section>
+<!-- Smart Match Section -->
+<section class="space-y-4">
+<div class="flex items-center justify-between">
+<h2 class="text-xl font-bold text-primary">Smart Match Recommendations</h2>
+<span class="material-symbols-outlined text-on-surface-variant">info</span>
+</div>
+<div class="space-y-4">
+<!-- Match Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-5 shadow-sm border-l-4 border-secondary">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-bold text-lg text-primary">University of Toronto</h3>
+<p class="text-on-surface-variant text-sm font-medium">B.Sc. Computer Science</p>
+</div>
+<div class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-xs font-bold">
+                            94% MATCH
+                        </div>
+</div>
+<div class="space-y-3">
+<div class="flex items-center justify-between text-sm">
+<span class="text-on-surface-variant">Academic Fit</span>
+<span class="font-bold text-primary">98%</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1.5">
+<div class="bg-secondary h-1.5 rounded-full" style="width: 98%"></div>
+</div>
+<div class="flex gap-2 mt-4">
+<span class="bg-surface-container-low px-2 py-1 rounded-md text-[10px] font-bold text-primary uppercase">Research Priority</span>
+<span class="bg-surface-container-low px-2 py-1 rounded-md text-[10px] font-bold text-primary uppercase">Elite Tier</span>
+</div>
+</div>
+</div>
+<!-- Match Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-5 shadow-sm border-l-4 border-tertiary-fixed-dim">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-bold text-lg text-primary">UBC Vancouver</h3>
+<p class="text-on-surface-variant text-sm font-medium">Cognitive Systems</p>
+</div>
+<div class="bg-tertiary-fixed text-on-tertiary-fixed-variant px-3 py-1 rounded-full text-xs font-bold">
+                            88% MATCH
+                        </div>
+</div>
+<div class="space-y-3">
+<div class="flex items-center justify-between text-sm">
+<span class="text-on-surface-variant">Extracurricular Fit</span>
+<span class="font-bold text-primary">82%</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1.5">
+<div class="bg-tertiary-fixed-dim h-1.5 rounded-full" style="width: 82%"></div>
+</div>
+<!-- Match Breakdown Tooltip Mock -->
+<div class="bg-primary text-on-primary text-[11px] p-3 rounded-lg mt-2 flex items-start gap-2">
+<span class="material-symbols-outlined text-sm">psychology</span>
+<p>Match Breakdown: Strong alignment in neural ethics labs. GPA exceeds average by 0.2 points.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Recent Activity Timeline -->
+<section class="space-y-6">
+<h2 class="text-xl font-bold text-primary">Recent Activity</h2>
+<div class="relative pl-8 space-y-8 before:content-[''] before:absolute before:left-3 before:top-2 before:bottom-2 before:w-0.5 before:bg-surface-container-high">
+<!-- Activity Item 1 -->
+<div class="relative">
+<div class="absolute -left-8 w-6 h-6 rounded-full bg-secondary-container flex items-center justify-center z-10 border-4 border-background">
+<span class="material-symbols-outlined text-xs text-on-secondary-container" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="space-y-1">
+<p class="font-bold text-primary">Transcript Verified</p>
+<p class="text-sm text-on-surface-variant">BC Ministry of Education confirmed documents.</p>
+<p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">2 hours ago</p>
+</div>
+</div>
+<!-- Activity Item 2 -->
+<div class="relative">
+<div class="absolute -left-8 w-6 h-6 rounded-full bg-primary-fixed-dim flex items-center justify-center z-10 border-4 border-background">
+<span class="material-symbols-outlined text-xs text-primary" style="font-variation-settings: 'FILL' 1;">edit_document</span>
+</div>
+<div class="space-y-1">
+<p class="font-bold text-primary">Reference Added</p>
+<p class="text-sm text-on-surface-variant">Dr. Aris Thorne submitted a recommendation.</p>
+<p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Yesterday</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Protection & Privacy Banners -->
+<section class="space-y-3 pt-4">
+<div class="bg-surface-container-high p-4 rounded-xl flex items-center gap-4">
+<div class="bg-primary/10 w-10 h-10 rounded-lg flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">shield_person</span>
+</div>
+<div>
+<p class="font-bold text-sm text-primary">IP Protection Active</p>
+<p class="text-xs text-on-surface-variant">Digital fingerprinting secure for all submissions.</p>
+</div>
+</div>
+<div class="bg-blue-50 p-4 rounded-xl flex items-center gap-4">
+<div class="bg-blue-200 w-10 h-10 rounded-lg flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-blue-900" style="font-variation-settings: 'FILL' 1;">lock</span>
+</div>
+<div>
+<p class="font-bold text-sm text-blue-900">Privacy Standards</p>
+<p class="text-xs text-blue-800/70">GDPR &amp; FIPPA compliant data processing.</p>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-white/90 dark:bg-slate-900/90 backdrop-blur-lg shadow-[0_-4px_20px_rgba(0,29,51,0.05)] rounded-t-2xl">
+<a class="flex flex-col items-center justify-center text-blue-900 dark:text-blue-200 bg-blue-50/50 dark:bg-blue-900/30 rounded-xl px-3 py-1" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">import_contacts</span>
+<span class="text-[10px] font-semibold mt-1">Portfolio</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:text-blue-700 transition-colors" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="text-[10px] font-semibold mt-1">Discovery</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:text-blue-700 transition-colors" href="#">
+<span class="material-symbols-outlined">mic_none</span>
+<span class="text-[10px] font-semibold mt-1">Voice</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:text-blue-700 transition-colors" href="#">
+<span class="material-symbols-outlined">auto_stories</span>
+<span class="text-[10px] font-semibold mt-1">Library</span>
+</a>
+</nav>
+</body></html>

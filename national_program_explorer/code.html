@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Academic Canada | Program Explorer</title>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&amp;family=Public+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#cee5ff",
+                        "secondary-container": "#b9eeab",
+                        "error-container": "#ffdad6",
+                        "outline-variant": "#c3c6ce",
+                        "on-tertiary-fixed": "#2f1500",
+                        "on-background": "#001d33",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#422000",
+                        "on-tertiary-fixed-variant": "#6e3900",
+                        "surface-bright": "#f7f9ff",
+                        "on-secondary-container": "#3f6d38",
+                        "on-secondary-fixed": "#002201",
+                        "secondary-fixed": "#bcf0ae",
+                        "inverse-on-surface": "#e8f2ff",
+                        "on-secondary": "#ffffff",
+                        "surface-dim": "#bfddfe",
+                        "tertiary-fixed-dim": "#ffb77d",
+                        "surface": "#f7f9ff",
+                        "primary-container": "#102a43",
+                        "on-surface": "#001d33",
+                        "on-secondary-fixed-variant": "#23501e",
+                        "inverse-surface": "#12334c",
+                        "surface-container-low": "#edf4ff",
+                        "surface-tint": "#49607c",
+                        "on-surface-variant": "#43474d",
+                        "on-primary-container": "#7a92b0",
+                        "on-primary": "#ffffff",
+                        "outline": "#74777e",
+                        "primary-fixed-dim": "#b0c9e8",
+                        "on-tertiary-container": "#d97705",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed": "#011d35",
+                        "secondary": "#3b6934",
+                        "primary-fixed": "#d1e4ff",
+                        "inverse-primary": "#b0c9e8",
+                        "primary": "#00152a",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed-variant": "#314863",
+                        "tertiary-fixed": "#ffdcc3",
+                        "tertiary": "#240f00",
+                        "surface-variant": "#cee5ff",
+                        "on-error-container": "#93000a",
+                        "error": "#ba1a1a",
+                        "background": "#f7f9ff",
+                        "surface-container-high": "#d8eaff",
+                        "secondary-fixed-dim": "#a1d494",
+                        "surface-container": "#e3efff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Lexend"],
+                        "body": ["Public Sans"],
+                        "label": ["Public Sans"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Public Sans', sans-serif; background-color: #f7f9ff; color: #001d33; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+        .font-lexend { font-family: 'Lexend', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-slate-50/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-sm">
+<div class="flex justify-between items-center w-full px-8 h-16 max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-bold text-blue-950 dark:text-white font-lexend tracking-tight">Academic Canada</span>
+<nav class="hidden md:flex items-center gap-6 font-lexend tracking-tight">
+<a class="text-slate-600 dark:text-slate-400 hover:text-blue-900 transition-colors" href="#">Dashboard</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-blue-900 transition-colors" href="#">Applications</a>
+<a class="text-blue-700 dark:text-blue-400 border-b-2 border-blue-700 dark:border-blue-400 pb-1" href="#">Discovery</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-blue-900 transition-colors" href="#">Library</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors rounded-full">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors rounded-full">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+<div class="bg-slate-200/50 dark:bg-slate-800/50 h-[1px]"></div>
+</header>
+<!-- SideNavBar (Hidden on small screens) -->
+<aside class="hidden lg:flex flex-col p-4 gap-2 h-screen w-64 fixed left-0 top-16 bg-slate-50 dark:bg-slate-950 border-r border-slate-200/20 dark:border-slate-800/20 z-40">
+<div class="mb-6 px-2 py-4">
+<p class="font-lexend font-medium text-sm text-slate-500 uppercase tracking-widest mb-1">Welcome, Alex</p>
+<p class="text-xs text-blue-900/60 dark:text-blue-100/60">Application Status: Active</p>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 hover:translate-x-1 duration-300 rounded-lg transition-all ease-in-out font-lexend font-medium text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="person_book">person_book</span>
+<span>My Portfolio</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 hover:translate-x-1 duration-300 rounded-lg transition-all ease-in-out font-lexend font-medium text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span>Transcripts</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 hover:translate-x-1 duration-300 rounded-lg transition-all ease-in-out font-lexend font-medium text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="event_upcoming">event_upcoming</span>
+<span>Deadlines</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 hover:translate-x-1 duration-300 rounded-lg transition-all ease-in-out font-lexend font-medium text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="record_voice_over">record_voice_over</span>
+<span>Speech Tools</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 hover:translate-x-1 duration-300 rounded-lg transition-all ease-in-out font-lexend font-medium text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+<div class="mt-auto p-2">
+<button class="w-full bg-gradient-to-br from-primary to-primary-container text-on-primary py-3 rounded-md font-lexend font-medium text-sm shadow-sm transition-opacity active:opacity-80">
+                Find Programs
+            </button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="lg:ml-64 pt-24 pb-20 px-6 lg:px-12 max-w-7xl mx-auto">
+<!-- Hero Section -->
+<div class="mb-12">
+<h1 class="text-4xl lg:text-5xl font-lexend font-extrabold text-primary tracking-tight mb-4">Discovery</h1>
+<p class="text-on-surface-variant max-w-2xl text-lg leading-relaxed">
+                Explore thousands of academic paths across Canada. Our AI-driven curator matches your profile with the best programs for your future.
+            </p>
+</div>
+<!-- Filter Controls - Asymmetric Layout -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12">
+<!-- Search & Filters (8 Columns) -->
+<div class="lg:col-span-8 flex flex-col gap-6">
+<div class="bg-surface-container-low p-1 rounded-xl flex items-center shadow-sm">
+<div class="flex-grow flex items-center px-4">
+<span class="material-symbols-outlined text-outline" data-icon="search">search</span>
+<input class="w-full bg-transparent border-none focus:ring-0 text-on-surface placeholder:text-outline font-body text-base px-3 py-4" placeholder="Search programs, universities, or subjects..." type="text"/>
+</div>
+<button class="bg-primary text-on-primary px-8 py-3 rounded-lg font-lexend font-bold transition-all hover:opacity-90">
+                        Search
+                    </button>
+</div>
+<div class="flex flex-wrap gap-4">
+<div class="flex flex-col gap-2">
+<label class="text-[10px] uppercase tracking-wider font-lexend font-bold text-on-surface-variant px-1">Province</label>
+<select class="bg-surface-container-lowest border-none border-b-2 border-outline-variant focus:border-primary focus:ring-0 text-sm font-medium py-2 pr-10 rounded-t-lg transition-colors">
+<option>All Provinces</option>
+<option>Ontario</option>
+<option>British Columbia</option>
+<option>Quebec</option>
+<option>Alberta</option>
+</select>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-[10px] uppercase tracking-wider font-lexend font-bold text-on-surface-variant px-1">Degree Type</label>
+<select class="bg-surface-container-lowest border-none border-b-2 border-outline-variant focus:border-primary focus:ring-0 text-sm font-medium py-2 pr-10 rounded-t-lg transition-colors">
+<option>Any Degree</option>
+<option>Bachelor's</option>
+<option>Master's</option>
+<option>Doctorate</option>
+<option>Diploma</option>
+</select>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-[10px] uppercase tracking-wider font-lexend font-bold text-on-surface-variant px-1">Match Probability</label>
+<select class="bg-surface-container-lowest border-none border-b-2 border-outline-variant focus:border-primary focus:ring-0 text-sm font-medium py-2 pr-10 rounded-t-lg transition-colors">
+<option>All Probability</option>
+<option>&gt; 90% High</option>
+<option>&gt; 75% Good</option>
+<option>&gt; 50% Fair</option>
+</select>
+</div>
+</div>
+</div>
+<!-- Marginalia / Quick Stats (4 Columns) -->
+<div class="lg:col-span-4 bg-surface-container-high rounded-xl p-6 flex flex-col justify-center">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary" data-icon="auto_awesome">auto_awesome</span>
+<h3 class="font-lexend font-bold text-primary">Curation Insights</h3>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<span class="text-xs font-medium text-on-surface-variant">Programs Found</span>
+<span class="text-sm font-bold text-primary">1,248</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-xs font-medium text-on-surface-variant">Your Avg. Match</span>
+<span class="text-sm font-bold text-secondary">82%</span>
+</div>
+<div class="pt-4 border-t border-white/20">
+<p class="text-xs leading-relaxed text-on-surface-variant">Your portfolio is particularly strong in <span class="font-bold text-primary">Environmental Sciences</span> and <span class="font-bold text-primary">Renewable Energy</span>.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Program Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+<!-- Program Card 1 -->
+<article class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_12px_32px_-4px_rgba(0,29,51,0.08)] group hover:-translate-y-1 transition-transform duration-300">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Modern university campus building with large glass windows reflecting a bright blue sky and green trees" src="https://lh3.googleusercontent.com/aida-public/AB6AXuClPALrIDi903AkL_6cf8JD5Dx4uNo8Oq9-6HYxezd_ZK0SiF7pVnorr8q7Du4lOOPLhXo7ybliqqYB6NFQPtQpUyyAlhJxrLzNwGMgrE3uRYGq8b6DjxIf_bkAS5fCctgJdcyS9ARd-TkQPCl4W6ksVRuEusgRpFYmSbWeSNprFFNVJY9rDfZCoSpSyYjKsgJEOAAa5zgbRG3fMlNqx58nruiQ-yOr5LrtBpG08lJP7GWoC6knfKOPN1VpRV4_v0oUWIWLkyh5SQU-"/>
+<div class="absolute top-4 right-4 bg-secondary-container px-3 py-1 rounded-full flex items-center gap-1">
+<span class="text-[10px] font-lexend font-extrabold text-on-secondary-container">94% MATCH</span>
+</div>
+<div class="absolute bottom-4 left-4">
+<span class="bg-white/90 backdrop-blur text-[10px] font-bold text-primary px-2 py-1 rounded">UNIVERSITY OF TORONTO</span>
+</div>
+</div>
+<div class="p-6 border-l-4 border-primary-fixed-dim">
+<h3 class="font-lexend font-bold text-xl text-primary mb-2">B.Sc. Computer Science &amp; AI</h3>
+<p class="text-sm text-on-surface-variant mb-6 line-clamp-2">Leading the frontier of artificial intelligence and machine learning in an urban innovative ecosystem.</p>
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div>
+<p class="text-[10px] uppercase font-bold text-outline tracking-wider">Tuition</p>
+<p class="text-sm font-semibold text-on-surface">$14,200/yr</p>
+</div>
+<div>
+<p class="text-[10px] uppercase font-bold text-outline tracking-wider">Duration</p>
+<p class="text-sm font-semibold text-on-surface">4 Years</p>
+</div>
+</div>
+<button class="w-full flex items-center justify-center gap-2 bg-surface-container-highest text-primary py-3 rounded-lg font-lexend font-bold text-sm hover:bg-primary hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-base" data-icon="volume_up">volume_up</span>
+                        Listen to Summary
+                    </button>
+</div>
+</article>
+<!-- Program Card 2 -->
+<article class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_12px_32px_-4px_rgba(0,29,51,0.08)] group hover:-translate-y-1 transition-transform duration-300">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Historic stone library interior with high vaulted ceilings and students studying at long wooden tables" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvhHmbg4sGsMLlkhVmFeZV-N9DcrKRJMG_viZM8zSUTY-Cw9GYl85O3sTQmMoIrmmDnRsp9tIugULcz2eNW1JJW1D9T8naK85XQh4cFUqz945whHwddPBJ_SB5j-2PB5YsdSUa4MqmLsM9yirj4bg82s-z6dn_LDkEn3jcbkeViT0AQAwKBm39Kyv-q0a4mUgvk_mYgr2nriEfO0h9quSuT-wsFchTI8rkn2fS85WNluDRO20Z7TdIR97iJ4-jiZsxxusiXDjnU20m"/>
+<div class="absolute top-4 right-4 bg-tertiary-fixed px-3 py-1 rounded-full flex items-center gap-1">
+<span class="text-[10px] font-lexend font-extrabold text-on-tertiary-fixed-variant">88% MATCH</span>
+</div>
+<div class="absolute bottom-4 left-4">
+<span class="bg-white/90 backdrop-blur text-[10px] font-bold text-primary px-2 py-1 rounded">MCGILL UNIVERSITY</span>
+</div>
+</div>
+<div class="p-6 border-l-4 border-primary-fixed-dim">
+<h3 class="font-lexend font-bold text-xl text-primary mb-2">Master of Public Policy</h3>
+<p class="text-sm text-on-surface-variant mb-6 line-clamp-2">Analyzing complex societal issues through a rigorous analytical framework in the heart of Montreal.</p>
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div>
+<p class="text-[10px] uppercase font-bold text-outline tracking-wider">Tuition</p>
+<p class="text-sm font-semibold text-on-surface">$18,500/yr</p>
+</div>
+<div>
+<p class="text-[10px] uppercase font-bold text-outline tracking-wider">Duration</p>
+<p class="text-sm font-semibold text-on-surface">2 Years</p>
+</div>
+</div>
+<button class="w-full flex items-center justify-center gap-2 bg-surface-container-highest text-primary py-3 rounded-lg font-lexend font-bold text-sm hover:bg-primary hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-base" data-icon="volume_up">volume_up</span>
+                        Listen to Summary
+                    </button>
+</div>
+</article>
+<!-- Program Card 3 -->
+<article class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_12px_32px_-4px_rgba(0,29,51,0.08)] group hover:-translate-y-1 transition-transform duration-300">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Wide shot of a coastal university campus with modern architecture overlooking the Pacific Ocean at dusk" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDI_FC2d3z2dWCE2NuNJbPvxiWyinUuW3bspCx5ZyWgT2KO6xjObPvW-3FHGMZ38P4qLj2dp8zQlH4Ez9fICkwTrW30T8ODIgHns_0j_-0An6h4ARIpDpdXHuvdvOzStfV2KPgfZksKqYqE3eoH63eYkMlBK64Hmtd_wAJGk65mMD3Gqsxn8B1uSOnzha5u80fdLESQzcITVH9gdIiUfBJ9UbThM4RWq3KPywLKBZgUiaJC8fxToA_wcSM7ZAS3qlbsG9NRwjHyKPDs"/>
+<div class="absolute top-4 right-4 bg-secondary-container px-3 py-1 rounded-full flex items-center gap-1">
+<span class="text-[10px] font-lexend font-extrabold text-on-secondary-container">91% MATCH</span>
+</div>
+<div class="absolute bottom-4 left-4">
+<span class="bg-white/90 backdrop-blur text-[10px] font-bold text-primary px-2 py-1 rounded">UBC VANCOUVER</span>
+</div>
+</div>
+<div class="p-6 border-l-4 border-primary-fixed-dim">
+<h3 class="font-lexend font-bold text-xl text-primary mb-2">B.A. Sustainable Development</h3>
+<p class="text-sm text-on-surface-variant mb-6 line-clamp-2">Integrating ecological wisdom with economic realities to build a resilient and sustainable global future.</p>
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div>
+<p class="text-[10px] uppercase font-bold text-outline tracking-wider">Tuition</p>
+<p class="text-sm font-semibold text-on-surface">$12,800/yr</p>
+</div>
+<div>
+<p class="text-[10px] uppercase font-bold text-outline tracking-wider">Duration</p>
+<p class="text-sm font-semibold text-on-surface">4 Years</p>
+</div>
+</div>
+<button class="w-full flex items-center justify-center gap-2 bg-surface-container-highest text-primary py-3 rounded-lg font-lexend font-bold text-sm hover:bg-primary hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-base" data-icon="volume_up">volume_up</span>
+                        Listen to Summary
+                    </button>
+</div>
+</article>
+<!-- Program Card 4 -->
+<article class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_12px_32px_-4px_rgba(0,29,51,0.08)] group hover:-translate-y-1 transition-transform duration-300">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="High-tech laboratory with white surfaces and blue lighting, scientists in white coats working with microscopes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHHZZV97Zlzan-aff_qzNjJoT-EE4FAjYuWNtPH0dIG_5Dt6koUpxhN_perGAqxBfrQfDS1LrbQxJRbixbn4bJw-HnFv7zLFyzUAeQYuIcKkWrwP7LKKVPdMZt8WY7d4BVQqhpyngx0KCAatt3ab3WVkUBxN5bQtoSofXGsvMPgOkPIq6DMAc657c7YKkBy_46WAO6alBmhoxaK_xKIWTCcTzXwowG09Ol1OTAcms-MNvbXW1cUbtgWi_irLPpNA391xU1bLnLA7ch"/>
+<div class="absolute top-4 right-4 bg-tertiary-fixed px-3 py-1 rounded-full flex items-center gap-1">
+<span class="text-[10px] font-lexend font-extrabold text-on-tertiary-fixed-variant">72% MATCH</span>
+</div>
+<div class="absolute bottom-4 left-4">
+<span class="bg-white/90 backdrop-blur text-[10px] font-bold text-primary px-2 py-1 rounded">UNIVERSITY OF WATERLOO</span>
+</div>
+</div>
+<div class="p-6 border-l-4 border-primary-fixed-dim">
+<h3 class="font-lexend font-bold text-xl text-primary mb-2">B.Eng. Biomedical Engineering</h3>
+<p class="text-sm text-on-surface-variant mb-6 line-clamp-2">Pioneering medical breakthroughs through hardware and software integration in world-class labs.</p>
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div>
+<p class="text-[10px] uppercase font-bold text-outline tracking-wider">Tuition</p>
+<p class="text-sm font-semibold text-on-surface">$16,900/yr</p>
+</div>
+<div>
+<p class="text-[10px] uppercase font-bold text-outline tracking-wider">Duration</p>
+<p class="text-sm font-semibold text-on-surface">5 Years (Co-op)</p>
+</div>
+</div>
+<button class="w-full flex items-center justify-center gap-2 bg-surface-container-highest text-primary py-3 rounded-lg font-lexend font-bold text-sm hover:bg-primary hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-base" data-icon="volume_up">volume_up</span>
+                        Listen to Summary
+                    </button>
+</div>
+</article>
+<!-- Load More Asymmetric CTA -->
+<div class="flex flex-col justify-center items-center p-8 bg-surface-container-low rounded-xl border-2 border-dashed border-outline-variant md:col-span-2 xl:col-span-1">
+<span class="material-symbols-outlined text-4xl text-outline mb-4" data-icon="explore">explore</span>
+<p class="font-lexend font-bold text-primary mb-2">Still searching?</p>
+<p class="text-xs text-on-surface-variant text-center mb-6">We have 800+ more programs matching your current filters.</p>
+<button class="text-primary font-lexend font-bold text-sm hover:underline flex items-center gap-1">
+                    Load More Results
+                    <span class="material-symbols-outlined text-xs" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Visible on Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-3 pb-safe bg-white/90 dark:bg-slate-900/90 backdrop-blur-md shadow-[0_-4px_20px_rgba(0,0,0,0.05)] rounded-t-2xl z-50 md:hidden">
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 scale-95 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="school">school</span>
+<span class="font-lexend text-[10px] uppercase tracking-wider">Portfolio</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 scale-95 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="timer">timer</span>
+<span class="font-lexend text-[10px] uppercase tracking-wider">Deadlines</span>
+</a>
+<a class="flex flex-col items-center justify-center text-blue-700 dark:text-blue-400 font-bold scale-95 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="font-lexend text-[10px] uppercase tracking-wider">Discovery</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 scale-95 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="library_books">library_books</span>
+<span class="font-lexend text-[10px] uppercase tracking-wider">Library</span>
+</a>
+</nav>
+</body></html>

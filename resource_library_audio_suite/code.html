@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Counselor Resource Library | Counselor Hub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface": "#001d33",
+                        "surface-container-low": "#edf4ff",
+                        "primary-fixed-dim": "#b0c9e8",
+                        "surface-bright": "#f7f9ff",
+                        "inverse-on-surface": "#e8f2ff",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed": "#bcf0ae",
+                        "surface-container": "#e3efff",
+                        "surface-container-highest": "#cee5ff",
+                        "outline": "#74777e",
+                        "tertiary-fixed-dim": "#ffb77d",
+                        "background": "#f7f9ff",
+                        "on-primary-container": "#7a92b0",
+                        "inverse-primary": "#b0c9e8",
+                        "on-tertiary-fixed": "#2f1500",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#422000",
+                        "on-secondary-container": "#3f6d38",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#d8eaff",
+                        "secondary": "#3b6934",
+                        "primary": "#00152a",
+                        "secondary-fixed-dim": "#a1d494",
+                        "tertiary-fixed": "#ffdcc3",
+                        "on-error-container": "#93000a",
+                        "on-tertiary": "#ffffff",
+                        "surface-tint": "#49607c",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed-variant": "#23501e",
+                        "on-tertiary-fixed-variant": "#6e3900",
+                        "on-primary-fixed-variant": "#314863",
+                        "inverse-surface": "#12334c",
+                        "on-surface-variant": "#43474d",
+                        "surface-dim": "#bfddfe",
+                        "on-tertiary-container": "#d97705",
+                        "tertiary": "#240f00",
+                        "on-secondary": "#ffffff",
+                        "surface": "#f7f9ff",
+                        "error-container": "#ffdad6",
+                        "primary-container": "#102a43",
+                        "primary-fixed": "#d1e4ff",
+                        "on-secondary-fixed": "#002201",
+                        "surface-variant": "#cee5ff",
+                        "on-primary-fixed": "#011d35",
+                        "on-background": "#001d33",
+                        "secondary-container": "#b9eeab",
+                        "outline-variant": "#c3c6ce"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Lexend"],
+                        "body": ["Public Sans"],
+                        "label": ["Public Sans"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Public Sans', sans-serif; }
+        .font-lexend { font-family: 'Lexend', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .editorial-shadow { box-shadow: 0 12px 32px -4px rgba(0, 29, 51, 0.08); }
+        .glass-header { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- SideNavBar (Shared Component) -->
+<aside class="fixed left-0 top-0 hidden md:flex flex-col h-screen w-64 bg-slate-50 dark:bg-slate-950 border-r border-slate-200/20 font-['Lexend'] font-medium z-40">
+<div class="px-6 py-8">
+<h1 class="text-lg font-black text-blue-900 dark:text-blue-50">Counselor Hub</h1>
+<p class="text-xs text-slate-500 uppercase tracking-widest mt-1">The Scholarly Curator</p>
+</div>
+<nav class="flex-1 px-4 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-200/50 transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-blue-50 text-blue-700 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="library_books">library_books</span>
+<span>Resource Library</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-200/50 transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-200/50 transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="record_voice_over">record_voice_over</span>
+<span>Speech Studio</span>
+</a>
+</nav>
+<div class="p-4">
+<button class="w-full bg-gradient-to-br from-primary to-primary-container text-white py-3 rounded-lg text-sm font-semibold shadow-lg active:scale-95 transition-transform">
+                Start Audio Session
+            </button>
+</div>
+<div class="px-4 py-6 border-t border-slate-100 dark:border-slate-900 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 text-sm text-slate-500 hover:text-blue-600" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="help_outline">help_outline</span>
+<span>Help</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-sm text-slate-500 hover:text-blue-600" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="security">security</span>
+<span>Privacy</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="md:ml-64 min-h-screen">
+<!-- TopAppBar (Shared Component) -->
+<header class="fixed top-0 right-0 left-0 md:left-64 z-30 bg-slate-50/80 backdrop-blur-lg shadow-sm font-['Lexend'] tracking-tight">
+<div class="flex justify-between items-center px-6 py-3 w-full">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative max-w-md w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-slate-100/50 border-none rounded-full text-sm focus:ring-2 focus:ring-primary/20" placeholder="Search curated resources..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 hover:bg-slate-100 transition-colors rounded-full active:scale-95">
+<span class="material-symbols-outlined" data-icon="volume_up">volume_up</span>
+</button>
+<button class="p-2 text-slate-500 hover:bg-slate-100 transition-colors rounded-full active:scale-95">
+<span class="material-symbols-outlined" data-icon="accessibility_new">accessibility_new</span>
+</button>
+<button class="p-2 text-slate-900 font-bold hover:bg-slate-100 transition-colors rounded-full active:scale-95">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<div class="pt-24 px-8 pb-12 max-w-7xl mx-auto">
+<!-- Hero Section -->
+<section class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div class="max-w-2xl">
+<h2 class="text-4xl font-black font-lexend text-primary tracking-tighter mb-2">Resource Library</h2>
+<p class="text-on-surface-variant text-lg leading-relaxed">Access scholarly guidance, provincial curriculum updates, and academic tools curated for the modern educational consultant.</p>
+</div>
+<div class="flex flex-wrap gap-3">
+<span class="px-4 py-2 bg-secondary-container text-on-secondary-fixed-variant rounded-full text-xs font-bold uppercase tracking-widest">34 New Updates</span>
+<span class="px-4 py-2 bg-tertiary-fixed text-on-tertiary-fixed-variant rounded-full text-xs font-bold uppercase tracking-widest">Fall 2024 Semester</span>
+</div>
+</section>
+<!-- Filters Bar (Editorial Style) -->
+<section class="mb-10 p-6 bg-surface-container-low rounded-xl flex flex-wrap items-center gap-8">
+<div class="flex flex-col gap-1">
+<label class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest ml-1">Province</label>
+<select class="bg-transparent border-none font-lexend font-medium text-primary focus:ring-0 p-1 cursor-pointer">
+<option>Ontario (ON)</option>
+<option>British Columbia (BC)</option>
+<option>Alberta (AB)</option>
+<option>Quebec (QC)</option>
+</select>
+</div>
+<div class="h-8 w-[1px] bg-outline-variant/30 hidden md:block"></div>
+<div class="flex flex-col gap-1">
+<label class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest ml-1">Resource Type</label>
+<select class="bg-transparent border-none font-lexend font-medium text-primary focus:ring-0 p-1 cursor-pointer">
+<option>Curriculum Guide</option>
+<option>Pedagogical Research</option>
+<option>Student Toolkit</option>
+<option>Policy Brief</option>
+</select>
+</div>
+<div class="h-8 w-[1px] bg-outline-variant/30 hidden md:block"></div>
+<div class="flex flex-col gap-1">
+<label class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest ml-1">Grade Level</label>
+<select class="bg-transparent border-none font-lexend font-medium text-primary focus:ring-0 p-1 cursor-pointer">
+<option>Post-Secondary</option>
+<option>K-12 Professional</option>
+<option>Secondary (9-12)</option>
+<option>Early Childhood</option>
+</select>
+</div>
+<button class="ml-auto flex items-center gap-2 px-6 py-2.5 bg-surface-container-highest text-primary font-lexend font-bold rounded-lg hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-lg">filter_alt</span>
+                    Advanced Filters
+                </button>
+</section>
+<!-- Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+<!-- Resource Card 1 -->
+<div class="group bg-surface-container-lowest editorial-shadow rounded-xl overflow-hidden border-l-4 border-primary transition-all hover:-translate-y-1">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="Close-up of classic leather-bound books on a dark wooden shelf with cinematic warm light highlighting the textures" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXXWMjB50DMFmwx1T4YY2RHUVFen8KJ7UqR3oWj6TToUw3R2A4-7x7teLnh4th7buTgd6DLBjpzd_xETz6c_tJogVFeuiKKTXVjQ74OD53wZf43fiTfCjq7WY4QmpqxKO9rGWGY1OJDHoexNDnRAbmhzIWyF1ms2-Of1Nyobl0BXftRotysaLCdvPbtAHJkZF0WX1zU2ekXWN6ADjBV9E_7UgT5N-o90dtp6WdLrGRLjmN72hPysP6t-dWsRF7Ndgg1G7j10xoCBfx"/>
+<div class="absolute top-4 right-4 px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-[10px] font-bold text-primary uppercase">Guidebook</div>
+</div>
+<div class="p-6">
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-secondary text-sm" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="text-xs font-bold text-on-secondary-fixed-variant tracking-wider uppercase">Ontario Ministry Approved</span>
+</div>
+<h3 class="text-xl font-bold font-lexend text-primary mb-2">2024 Higher Education Admissions Framework</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed mb-6">A comprehensive analysis of evolving entry requirements for STEM programs across Canadian universities.</p>
+<div class="flex items-center justify-between border-t border-slate-50 pt-4">
+<button class="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary to-primary-container text-white rounded-md text-sm font-lexend font-semibold shadow-sm hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-sm">record_voice_over</span>
+                                Listen
+                            </button>
+<span class="text-xs text-slate-400 italic">12 min listen</span>
+</div>
+</div>
+</div>
+<!-- Resource Card 2 -->
+<div class="group bg-surface-container-lowest editorial-shadow rounded-xl overflow-hidden border-l-4 border-secondary transition-all hover:-translate-y-1">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="Minimalist workspace with a clean white desk, an open notebook, and a small succulent plant in soft natural daylight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDx5jRMZUEmxk4KHnkVrs9axDTmM1Re1FwWCPigpKwp1rq2vhk2FFlgFxZVheHKyGdTpHYWjmbclpAh4gGjttpVXp6JKDaaWduEEmKZWsGsM3cCODXwKxHoO79XJQ4CeLT-7EORHk4-gvoLdOozBxoijZyGmHEoUkcEBGGhRajjCtJjg-hyVifHgo0yI1gVUQ77Z-cFmFzoPP-8AfRC1YUBpEEAyIxDDytGJmTQOXw2vJRHy2h4TldjtdPb5le0Ut8UH7u2DVZXdZfl"/>
+<div class="absolute top-4 right-4 px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-[10px] font-bold text-primary uppercase">Curriculum</div>
+</div>
+<div class="p-6">
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-tertiary-fixed-dim text-sm" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="text-xs font-bold text-on-tertiary-fixed-variant tracking-wider uppercase">Updated Today</span>
+</div>
+<h3 class="text-xl font-bold font-lexend text-primary mb-2">Social-Emotional Learning Toolkit (K-12)</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed mb-6">Evidence-based interventions and classroom strategies for counselor-led mental health workshops.</p>
+<div class="flex items-center justify-between border-t border-slate-50 pt-4">
+<button class="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary to-primary-container text-white rounded-md text-sm font-lexend font-semibold shadow-sm hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-sm">record_voice_over</span>
+                                Listen
+                            </button>
+<span class="text-xs text-slate-400 italic">8 min listen</span>
+</div>
+</div>
+</div>
+<!-- Resource Card 3 -->
+<div class="group bg-surface-container-lowest editorial-shadow rounded-xl overflow-hidden border-l-4 border-tertiary-fixed-dim transition-all hover:-translate-y-1">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="Macro photo of a fountain pen nib touching thick cream-colored paper with elegant ink strokes and shallow depth of field" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-Os0jE6cnJdja2vqW0gSGpK6_PEzi0BHtBuYQoSHeuwqgXTp9wKtAsecmVeKD5fsL0kgQjZ_XBpfFlIXNz7zmsej6tgY06OWwbu4EzPN7qQocvNuCQvPlNN0gkRdsop4vG9IuPPevbeApXtCUNB6flb6PreaThskQSLhIRpmC0KCCfEjlEe3C7gxek12wY1DQAMi_8yMEH5JmPl4IRtLiJFHHrAPzLl97j__sftQCwS89-iD5fBEZJRcmvbKcHnVEibY-l7B0STco"/>
+<div class="absolute top-4 right-4 px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-[10px] font-bold text-primary uppercase">Policy</div>
+</div>
+<div class="p-6">
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">history_edu</span>
+<span class="text-xs font-bold text-on-surface-variant tracking-wider uppercase">Archived Series</span>
+</div>
+<h3 class="text-xl font-bold font-lexend text-primary mb-2">Ethics in Academic Consultation (2024)</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed mb-6">Detailed guidelines on professional conduct, data privacy, and inclusive advising practices.</p>
+<div class="flex items-center justify-between border-t border-slate-50 pt-4">
+<button class="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary to-primary-container text-white rounded-md text-sm font-lexend font-semibold shadow-sm hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-sm">record_voice_over</span>
+                                Listen
+                            </button>
+<span class="text-xs text-slate-400 italic">22 min listen</span>
+</div>
+</div>
+</div>
+<!-- Resource Card 4 (Bento Variation) -->
+<div class="md:col-span-2 group bg-surface-container-lowest editorial-shadow rounded-xl overflow-hidden flex flex-col md:flex-row transition-all hover:-translate-y-1">
+<div class="md:w-1/2 relative min-h-[250px]">
+<img class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="Group of diverse students working together around a table with laptops and documents in a bright modern library" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSw37rClIPs0k-a4TkqqySxot91OiL7icoKFF7ZyMrlvzB3usZVqCghoTx-HHtkM15p7OgYVReUliIJdiddacsc10J-O4S2D_hf4S3OM469n6cAzR48_yfJwGeIwGqewGAJUQiG0ppBL50tuioZBTRVE1s0LCh2RI-8oKtckgyPs3JPkCfxW7DfXhHlz9ViJWV4vZbt797gmU_bsfzSsncGMmC4AAIZXNDI7r0Y3A4zafuxVXfd8jYGRslgQsBRS0vHqfIT0UnBwjk"/>
+</div>
+<div class="md:w-1/2 p-8 flex flex-col justify-center">
+<span class="inline-block px-3 py-1 bg-secondary text-white rounded-full text-[10px] font-bold uppercase w-max mb-4">New Spotlight</span>
+<h3 class="text-2xl font-black font-lexend text-primary mb-4 leading-tight">Digital Citizenship &amp; Media Literacy in the Age of AI</h3>
+<p class="text-base text-on-surface-variant leading-relaxed mb-8">An essential curriculum update for high school counselors addressing the ethical implications of generative tools in academic environments.</p>
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-2 px-6 py-3 bg-gradient-to-br from-primary to-primary-container text-white rounded-lg text-sm font-lexend font-bold shadow-md hover:scale-[1.02] transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">record_voice_over</span>
+                                Listen to Overview
+                            </button>
+<button class="p-3 text-primary border border-primary/10 rounded-lg hover:bg-primary/5 transition-colors">
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Auxiliary Information Card -->
+<div class="bg-primary p-8 rounded-xl flex flex-col justify-between text-white overflow-hidden relative">
+<div class="z-10">
+<span class="material-symbols-outlined text-4xl mb-4 text-secondary-fixed">school</span>
+<h3 class="text-2xl font-bold font-lexend mb-2">Need a Custom Summary?</h3>
+<p class="text-blue-100/80 text-sm mb-6 leading-relaxed">Our AI can condense 50-page curriculum updates into a 5-minute audio briefing tailored to your specific grade levels.</p>
+</div>
+<button class="z-10 w-full py-3 bg-white text-primary font-bold rounded-lg text-sm transition-transform active:scale-95">
+                        Request Custom Audio
+                    </button>
+<!-- Decorative background texture -->
+<div class="absolute -bottom-10 -right-10 w-48 h-48 bg-white/5 rounded-full blur-3xl"></div>
+</div>
+</div>
+<!-- Pagination/Footer Context -->
+<div class="mt-16 flex items-center justify-between border-t border-surface-container-high pt-8">
+<p class="text-xs font-medium text-on-surface-variant tracking-wider uppercase">Showing 5 of 128 scholarly resources</p>
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container-high text-primary hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-primary text-white font-bold">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-primary hover:bg-surface-container-high transition-colors">2</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-primary hover:bg-surface-container-high transition-colors">3</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container-high text-primary hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</body></html>

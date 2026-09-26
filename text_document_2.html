@@ -1,0 +1,23 @@
+<!--
+  Copyright 2026 Pathways Canada. All Rights Reserved.
+  This code is the proprietary property of Pathways Canada and is subject to Invention Assignment Agreements.
+-->
+
+# API Keys Required for Pathway Canada Integration
+
+To fully activate the features we've designed, please provide the following keys from your service provider accounts:
+
+## 1. Stripe (Payments)
+*   **Stripe Publishable Key:** (e.g., `pk_live_...` or `pk_test_...`) - Used for the secure checkout interface.
+*   **Stripe Secret Key:** (e.g., `sk_live_...` or `sk_test_...`) - Used for backend processing (I will store this as a secure placeholder).
+
+## 2. ElevenLabs (Voice/Speech)
+*   **ElevenLabs API Key:** This enables the "Charlotte" voice for the audio summaries and accessibility features.
+*   **Voice ID (Optional):** If you have a specific custom Voice ID for "Charlotte," please include that as well.
+
+## 3. Chat Service (Customer Support)
+*   **Service Name:** Which provider are you using? (e.g., Intercom, Zendesk, Crisp, Tidio).
+*   **App ID / Integration Key:** The unique identifier provided by your chat service to embed the widget.
+
+---
+**Security Note:** I will treat these as sensitive credentials. In the generated code and framework, they will be handled using standard security practices (placeholders/environment variable structures) to ensure they aren't exposed directly in plain text.

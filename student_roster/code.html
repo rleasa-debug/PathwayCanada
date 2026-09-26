@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Student Roster | Academic Canada</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#f7f9ff",
+                        "on-background": "#001d33",
+                        "surface-container-high": "#d8eaff",
+                        "tertiary-container": "#422000",
+                        "secondary-fixed": "#bcf0ae",
+                        "tertiary-fixed": "#ffdcc3",
+                        "on-primary-container": "#7a92b0",
+                        "on-error-container": "#93000a",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#f7f9ff",
+                        "on-primary": "#ffffff",
+                        "background": "#f7f9ff",
+                        "surface-container-highest": "#cee5ff",
+                        "primary-container": "#102a43",
+                        "on-tertiary-container": "#d97705",
+                        "surface-variant": "#cee5ff",
+                        "on-tertiary-fixed-variant": "#6e3900",
+                        "surface-container": "#e3efff",
+                        "on-tertiary-fixed": "#2f1500",
+                        "tertiary": "#240f00",
+                        "surface-tint": "#49607c",
+                        "primary": "#00152a",
+                        "on-primary-fixed": "#011d35",
+                        "surface-dim": "#bfddfe",
+                        "primary-fixed-dim": "#b0c9e8",
+                        "on-primary-fixed-variant": "#314863",
+                        "on-secondary-fixed-variant": "#23501e",
+                        "tertiary-fixed-dim": "#ffb77d",
+                        "on-secondary-fixed": "#002201",
+                        "secondary-fixed-dim": "#a1d494",
+                        "on-surface-variant": "#43474d",
+                        "error": "#ba1a1a",
+                        "outline": "#74777e",
+                        "primary-fixed": "#d1e4ff",
+                        "inverse-surface": "#12334c",
+                        "secondary-container": "#b9eeab",
+                        "inverse-on-surface": "#e8f2ff",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-surface": "#001d33",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#b0c9e8",
+                        "error-container": "#ffdad6",
+                        "secondary": "#3b6934",
+                        "outline-variant": "#c3c6ce",
+                        "on-secondary-container": "#3f6d38",
+                        "surface-container-low": "#edf4ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Lexend"],
+                        "body": ["Public Sans"],
+                        "label": ["Public Sans"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Public Sans', sans-serif; }
+        h1, h2, h3, h4 { font-family: 'Lexend', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .scholarly-shadow {
+            box-shadow: 0 12px 32px -4px rgba(0, 29, 51, 0.08);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex">
+<!-- SideNavBar (Shared Component) -->
+<aside class="h-screen w-64 fixed left-0 top-0 flex flex-col bg-slate-100 dark:bg-slate-900 font-lexend font-medium text-sm z-50">
+<div class="flex flex-col h-full py-6">
+<!-- Header Section -->
+<div class="px-6 mb-8 flex items-center space-x-3">
+<div class="w-10 h-10 bg-primary-container rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white" data-icon="school">school</span>
+</div>
+<div>
+<div class="text-lg font-black text-blue-950 dark:text-blue-200 tracking-tighter">Counselor Hub</div>
+<div class="text-[10px] uppercase tracking-widest text-slate-500">Academic Canada</div>
+</div>
+</div>
+<!-- Navigation Tabs -->
+<nav class="flex-1 space-y-1">
+<!-- ACTIVE TAB: Student Roster -->
+<a class="bg-white dark:bg-slate-800 text-blue-900 dark:text-blue-400 shadow-sm rounded-lg mx-2 my-1 px-4 py-3 font-bold flex items-center gap-3" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span>Student Roster</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 mx-2 my-1 px-4 py-3 rounded-lg flex items-center gap-3 transition-all duration-200 hover:translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span>Applications</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 mx-2 my-1 px-4 py-3 rounded-lg flex items-center gap-3 transition-all duration-200 hover:translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span>Analytics</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 mx-2 my-1 px-4 py-3 rounded-lg flex items-center gap-3 transition-all duration-200 hover:translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span>Resource Library</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 mx-2 my-1 px-4 py-3 rounded-lg flex items-center gap-3 transition-all duration-200 hover:translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+<!-- CTA & Footer -->
+<div class="px-4 mt-auto">
+<button class="w-full bg-primary-container text-white py-3 rounded-xl font-bold mb-6 hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+                    New Application
+                </button>
+<div class="space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 text-xs text-slate-500 hover:text-blue-900 transition-colors" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="policy">policy</span>
+<span>Privacy Policy</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-xs text-slate-500 hover:text-blue-900 transition-colors" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="contact_support">contact_support</span>
+<span>Contact Support</span>
+</a>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="ml-64 flex-1 min-h-screen relative overflow-x-hidden">
+<!-- TopAppBar (Shared Component) -->
+<header class="bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-xl shadow-sm dark:shadow-none docked full-width top-0 sticky z-40 font-lexend tracking-tight">
+<div class="flex justify-between items-center w-full px-8 py-4">
+<div class="flex items-center gap-8">
+<h1 class="text-xl font-bold text-slate-900 dark:text-white tracking-tighter">Student Roster</h1>
+<div class="hidden md:flex space-x-6 items-center">
+<a class="text-blue-900 dark:text-blue-400 font-semibold border-b-2 border-blue-900 dark:border-blue-400" href="#">Dashboard</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-colors" href="#">Quick Reports</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative group">
+<span class="absolute inset-y-0 left-3 flex items-center text-slate-400">
+<span class="material-symbols-outlined text-sm" data-icon="search">search</span>
+</span>
+<input class="bg-surface-container-low border-none rounded-full py-2 pl-10 pr-4 text-sm w-64 focus:ring-2 focus:ring-primary-fixed-dim transition-all" placeholder="Search records..." type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 text-slate-600 hover:bg-slate-100 rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-slate-600 hover:bg-slate-100 rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+</div>
+<div class="h-8 w-px bg-slate-200 mx-2"></div>
+<div class="flex items-center gap-3 cursor-pointer group">
+<img alt="Counselor Profile" class="w-8 h-8 rounded-full bg-surface-container-high border-2 border-white scholarly-shadow" data-alt="close-up portrait of a professional academic counselor in a bright modern office setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAKoubxeuQ1GFRMCfV0dU0o9U_rd474pLi0q-h39eiu_uyWOp2cQ03eVV0HMgf5V8cCmsRi7Bd8FdL_HSEYBch3JYBC8WRHb2zty8l_CCamO-1NFa-DcaHmx7BQbwr5g70UqKY9Q2YJThxs_BXgHiQDvvCm38NduYzZ0TTTHaLyar-imzQ9_6633A1genyaZGHQ8kFVQ2wRJ009CIg66IJq9m0_dKxdP6qEa60c5hif-X-Brr6Bs4oaCvumu2cbq_L_cxmA6hbHUri"/>
+<span class="text-sm font-medium text-slate-700 group-hover:text-primary transition-colors">Dr. Sarah Mills</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Content Area -->
+<div class="p-8 max-w-7xl mx-auto">
+<!-- Hero Header Section -->
+<div class="mb-10">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-xs font-bold mb-4">
+<span class="w-1.5 h-1.5 bg-secondary rounded-full"></span>
+                    24 New Applications This Week
+                </div>
+<h2 class="text-4xl font-extrabold text-on-background tracking-tighter mb-2">Student Registry</h2>
+<p class="text-on-surface-variant max-w-2xl leading-relaxed">Managing student progress across global academic cycles. Use the scholarly filters to refine your current applicant cohort view.</p>
+</div>
+<!-- Management Tools / Filters -->
+<div class="flex flex-col md:flex-row gap-4 mb-8 items-end">
+<div class="flex-1 grid grid-cols-1 md:grid-cols-4 gap-4 w-full">
+<div class="flex flex-col gap-2">
+<label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Grade Level</label>
+<select class="bg-surface-container-lowest border-none shadow-sm rounded-lg p-3 text-sm focus:ring-2 focus:ring-primary-fixed-dim">
+<option>All Grades</option>
+<option>Grade 11</option>
+<option>Grade 12</option>
+</select>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Province</label>
+<select class="bg-surface-container-lowest border-none shadow-sm rounded-lg p-3 text-sm focus:ring-2 focus:ring-primary-fixed-dim">
+<option>All Provinces</option>
+<option>Ontario</option>
+<option>British Columbia</option>
+<option>Quebec</option>
+</select>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Eligibility</label>
+<select class="bg-surface-container-lowest border-none shadow-sm rounded-lg p-3 text-sm focus:ring-2 focus:ring-primary-fixed-dim">
+<option>Any Status</option>
+<option>Eligible</option>
+<option>Ineligible</option>
+<option>Pending Review</option>
+</select>
+</div>
+<div class="flex items-end">
+<button class="bg-surface-container-high text-primary px-6 py-3 rounded-lg font-bold text-sm hover:bg-surface-container-highest transition-all w-full flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="filter_alt">filter_alt</span>
+                            Advanced Filters
+                        </button>
+</div>
+</div>
+</div>
+<!-- Student List (The Scholarly Table) -->
+<div class="bg-surface-container-low rounded-2xl overflow-hidden scholarly-shadow">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-highest/50">
+<th class="px-6 py-5 text-[11px] font-black uppercase tracking-[0.15em] text-on-surface-variant">Student Profile</th>
+<th class="px-6 py-5 text-[11px] font-black uppercase tracking-[0.15em] text-on-surface-variant">Grade</th>
+<th class="px-6 py-5 text-[11px] font-black uppercase tracking-[0.15em] text-on-surface-variant text-center">Avg. GPA</th>
+<th class="px-6 py-5 text-[11px] font-black uppercase tracking-[0.15em] text-on-surface-variant">Status</th>
+<th class="px-6 py-5 text-[11px] font-black uppercase tracking-[0.15em] text-on-surface-variant text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-high">
+<!-- Student Row 1 -->
+<tr class="hover:bg-white transition-colors">
+<td class="px-6 py-6">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-xl overflow-hidden flex-shrink-0 bg-primary-fixed">
+<img alt="Julianne Adams" class="w-full h-full object-cover" data-alt="headshot portrait of a smiling teenage girl with glasses in front of a soft library background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBehlmCYcMsDCOpmbo0YhenvyhjAHzpgJvW7QlfxBfZzMk2Du1Osgjj-Xvb4qfzwxyHxAHoGy9DSahjFhUVnxlpFx0tT1itnw-yFEeLkmxru_CnIUABMySNseZXqnpNZ-cwJic_6mtxKdS3Xm1Omsjv1gfh9SvxvNiKJffNCvKXxzTBWiUmFUv3Ub3Gk-tgBiSGLzBc2tCRcyRTbtPNi1QiK-EewuGx6p2_YuV8TluRDTCXOCuqmC_DAGd4iO6PP_iVX9yXSg8YKgTD"/>
+</div>
+<div>
+<div class="text-sm font-bold text-primary">Julianne Adams</div>
+<div class="text-xs text-on-surface-variant">Toronto, ON</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-6">
+<span class="text-sm font-medium">Grade 12</span>
+</td>
+<td class="px-6 py-6">
+<div class="flex flex-col items-center">
+<span class="text-sm font-bold text-secondary">92.4%</span>
+<div class="w-16 h-1 bg-surface-container-high rounded-full mt-1 overflow-hidden">
+<div class="bg-secondary h-full" style="width: 92%"></div>
+</div>
+</div>
+</td>
+<td class="px-6 py-6">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold bg-secondary-container text-on-secondary-container">
+                                        Accepted
+                                    </span>
+</td>
+<td class="px-6 py-6 text-right">
+<button class="p-2 hover:bg-surface-container-high rounded-lg text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Student Row 2 -->
+<tr class="hover:bg-white transition-colors">
+<td class="px-6 py-6">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-xl overflow-hidden flex-shrink-0 bg-surface-dim">
+<img alt="Marcus Rivera" class="w-full h-full object-cover" data-alt="headshot of a confident young man in a varsity jacket in a sunny campus courtyard" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDytb2hTTxFwCbMc5JLKdVeCG1m75p5KrKEWBq7cDVZoC3TTY2aT43sHtVmGWlCUfu9lZcpp5uNDs7jOw_miO5VngtfWfaYC77r99qlKaNmxaqieHFyA92P7tzRnRPdCcipjE3bsavi4Uwzo66T1WiNZlqzp0hAwGCgKDETXH8IWJ7op4Ac2D0xZILUxtWNMiDDSTaZE9mfiGpM5ww_buXc7xBe-icrTfjqUapU79wehU6WAJYDT5wTtZAihb190jf9kjusgbJlIyIJ"/>
+</div>
+<div>
+<div class="text-sm font-bold text-primary">Marcus Rivera</div>
+<div class="text-xs text-on-surface-variant">Vancouver, BC</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-6">
+<span class="text-sm font-medium">Grade 12</span>
+</td>
+<td class="px-6 py-6">
+<div class="flex flex-col items-center">
+<span class="text-sm font-bold text-on-surface">88.1%</span>
+<div class="w-16 h-1 bg-surface-container-high rounded-full mt-1 overflow-hidden">
+<div class="bg-primary h-full" style="width: 88%"></div>
+</div>
+</div>
+</td>
+<td class="px-6 py-6">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold bg-surface-container-highest text-primary">
+                                        In Progress
+                                    </span>
+</td>
+<td class="px-6 py-6 text-right">
+<button class="p-2 hover:bg-surface-container-high rounded-lg text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Student Row 3 -->
+<tr class="hover:bg-white transition-colors">
+<td class="px-6 py-6">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-xl overflow-hidden flex-shrink-0 bg-tertiary-fixed">
+<img alt="Elena Low" class="w-full h-full object-cover" data-alt="portrait of a focused student writing in a notebook, studio lighting with clean aesthetics" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2XQk2Ug9ppPWU2h0KOIbH0DmBtRENg1NL8gOhe0LrEdz24ESEL0hWnX-6sTrVjMtxRZveuJLAmVeqbwU8CFqhnKJamh7IjbFlJXDEQX9o657zBfMxS6bYx2ZbF7_ARmvBWu92BMQJn6n9L7lZapMT5YWgSJOhZHTUuoCGndCTrB1WX-EaRBrdE9nH3yn5Z-hhr5plUJUW5FdcT8IM-GwdLY6F6VkShXYL-YsgS8HKxpVLUWrVdVfTyeh-MIS9Hu4GtVol0RU36yfi"/>
+</div>
+<div>
+<div class="text-sm font-bold text-primary">Elena Low</div>
+<div class="text-xs text-on-surface-variant">Ottawa, ON</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-6">
+<span class="text-sm font-medium">Grade 11</span>
+</td>
+<td class="px-6 py-6">
+<div class="flex flex-col items-center">
+<span class="text-sm font-bold text-error">76.5%</span>
+<div class="w-16 h-1 bg-surface-container-high rounded-full mt-1 overflow-hidden">
+<div class="bg-error h-full" style="width: 76%"></div>
+</div>
+</div>
+</td>
+<td class="px-6 py-6">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold bg-tertiary-fixed text-on-tertiary-fixed-variant">
+                                        Needs Attention
+                                    </span>
+</td>
+<td class="px-6 py-6 text-right">
+<button class="p-2 hover:bg-surface-container-high rounded-lg text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Student Row 4 -->
+<tr class="hover:bg-white transition-colors">
+<td class="px-6 py-6">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-xl overflow-hidden flex-shrink-0 bg-primary-fixed-dim">
+<img alt="Samuel Chen" class="w-full h-full object-cover" data-alt="professional headshot of a student in a dark blazer with a bright window light source" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWovuNy5r-ixaafy-VyYatjPY7DGg3699v7LpVr36jXFP0PkSwh89o34iXnxrKlIeLOWEt0kvS4jS_ufxEaWuWUwjv0iFOP4BAvBwv0k5-2xghVYdOK5p5XdKxlrnlohLQukeRG2jYH3R0rAWNBSn6P-jeoMNoRJBX3HtqDizFlTgqQCQgzXsQPVc4-vmhsfK32w0fvI7VNCdOveLkcevwMfKFeuzhrKGZ9hUsXQ_HmWQ4rl_3VgVW-LyEWrU6bEIvrY5FaL1vUcJu"/>
+</div>
+<div>
+<div class="text-sm font-bold text-primary">Samuel Chen</div>
+<div class="text-xs text-on-surface-variant">Montreal, QC</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-6">
+<span class="text-sm font-medium">Grade 12</span>
+</td>
+<td class="px-6 py-6">
+<div class="flex flex-col items-center">
+<span class="text-sm font-bold text-secondary">91.0%</span>
+<div class="w-16 h-1 bg-surface-container-high rounded-full mt-1 overflow-hidden">
+<div class="bg-secondary h-full" style="width: 91%"></div>
+</div>
+</div>
+</td>
+<td class="px-6 py-6">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold bg-secondary-container text-on-secondary-container">
+                                        Accepted
+                                    </span>
+</td>
+<td class="px-6 py-6 text-right">
+<button class="p-2 hover:bg-surface-container-high rounded-lg text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Footer / Pagination -->
+<div class="px-6 py-4 bg-surface-container-lowest flex items-center justify-between">
+<span class="text-xs font-medium text-on-surface-variant">Showing 4 of 482 students</span>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-lg hover:bg-surface-container-low text-slate-400 hover:text-primary transition-all">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<div class="flex gap-1">
+<button class="w-8 h-8 flex items-center justify-center rounded-lg bg-primary-container text-white text-xs font-bold">1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-surface-container-low text-xs font-medium">2</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-surface-container-low text-xs font-medium">3</button>
+<span class="px-1 py-1 text-slate-400">...</span>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-surface-container-low text-xs font-medium">12</button>
+</div>
+<button class="p-2 rounded-lg hover:bg-surface-container-low text-slate-400 hover:text-primary transition-all">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Asymmetric Marginalia / Stats Grid -->
+<div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="md:col-span-2 bg-surface-container-lowest p-8 rounded-2xl scholarly-shadow relative overflow-hidden group">
+<div class="relative z-10">
+<h3 class="text-xl font-bold tracking-tight mb-4">Cohort Performance Insight</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed max-w-lg mb-6">
+                            This semester's applicants show a <span class="font-bold text-secondary">4.2% increase</span> in overall GPA compared to last year. Most "Needs Attention" flags are due to missing mid-term transcripts.
+                        </p>
+<div class="flex gap-4">
+<button class="px-5 py-2.5 bg-primary-container text-white text-xs font-bold rounded-lg hover:opacity-90 transition-opacity">
+                                Generate Insight Report
+                            </button>
+<button class="px-5 py-2.5 text-primary text-xs font-bold rounded-lg hover:bg-surface-container-high transition-colors">
+                                View Trends
+                            </button>
+</div>
+</div>
+<div class="absolute -right-12 -bottom-12 w-64 h-64 bg-surface-container-highest rounded-full blur-3xl opacity-30 group-hover:opacity-50 transition-opacity"></div>
+</div>
+<div class="bg-primary-container p-8 rounded-2xl scholarly-shadow text-white">
+<div class="mb-4">
+<span class="material-symbols-outlined text-primary-fixed-dim" data-icon="auto_awesome">auto_awesome</span>
+</div>
+<div class="text-3xl font-black mb-1">94%</div>
+<div class="text-xs font-medium text-primary-fixed-dim uppercase tracking-widest mb-4">Application Quality Index</div>
+<div class="text-[11px] leading-relaxed text-on-primary-container">
+                        Your current roster meets high eligibility requirements for Tier 1 Universities.
+                    </div>
+</div>
+</div>
+</div>
+</main>
+<!-- Contextual FAB (Hidden on Roster as per Suppression Rules, but included for complete UI logic if needed on Home) -->
+<!-- Suppression Logic: Suppressed on Details/List management screens to focus on filtering -->
+</body></html>

@@ -1,0 +1,25 @@
+{
+  "antigravityVersion": "2.0",
+  "project": "pathway-canada",
+  "routing": {
+    "publicDir": "dist",
+    "fallback": "index.html"
+  },
+  "build": {
+    "engine": "vite",
+    "command": "npm run build",
+    "output": "dist",
+    "environment": "production"
+  },
+  "regions": {
+    "primary": "ca-central-1",
+    "compliance": "PIPEDA-compliant-hosting"
+  },
+  "services": [
+    {
+      "name": "supabase-identity-proxy",
+      "type": "database-link",
+      "connectionString": "${SUPABASE_DB_URL}"
+    }
+  ]
+}

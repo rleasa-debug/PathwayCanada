@@ -1,0 +1,212 @@
+<!--
+  Copyright 2026 Pathways Canada. All Rights Reserved.
+  This code is the proprietary property of Pathways Canada and is subject to Invention Assignment Agreements.
+-->
+
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta name="description" content="Privacy Policy and CPPA Compliance Center for Pathway Canada. Read about our Zero-Password Architecture and student data sovereignty."/>
+    <title>Privacy & Data Sovereignty | Pathway Canada</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#102A43",
+                        "secondary": "#3b6934",
+                        "background": "#f7f9ff",
+                        "on-surface": "#001d33",
+                        "surface-container-lowest": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Lexend"],
+                        "lexend": ["Lexend"],
+                        "body": ["Public Sans"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body { font-family: 'Public Sans', sans-serif; background-color: #f7f9ff; }
+        h1, h2, h3, h4, .font-lexend { font-family: 'Lexend', sans-serif; }
+        .editorial-shadow {
+            box-shadow: 0 20px 40px -6px rgba(0, 29, 51, 0.08)
+        }
+        .litho-gradient {
+            background: linear-gradient(135deg, #102A43 0%, #001d33 100%)
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface flex flex-col min-h-screen">
+
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-slate-50/80 backdrop-blur-lg border-b border-slate-200/20">
+    <div class="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto">
+        <a class="text-xl font-bold text-primary font-lexend tracking-tight flex items-center gap-2" href="index.html">
+            <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">shield</span>
+            Pathway Canada
+        </a>
+        <div class="hidden md:flex items-center space-x-8 font-lexend tracking-tight text-sm font-medium">
+            <a class="text-slate-600 hover:text-primary transition-colors" href="student-dashboard.html">Dashboard</a>
+            <a class="text-slate-600 hover:text-primary transition-colors" href="academic-records.html">My Portfolio</a>
+            <a class="text-slate-600 hover:text-primary transition-colors" href="pricing.html">Plans & Pricing</a>
+        </div>
+        <div class="flex items-center gap-4">
+            <a href="student-dashboard.html" class="px-4 py-2 border border-primary/20 rounded-xl font-lexend font-bold text-xs text-primary hover:bg-slate-100 transition-all">Go to App</a>
+        </div>
+    </div>
+</nav>
+
+<main class="flex-grow pt-28 pb-20 px-6">
+    <div class="max-w-4xl mx-auto bg-white rounded-3xl p-8 md:p-12 border border-slate-100/80 shadow-sm">
+        
+        <!-- Header -->
+        <div class="border-b border-slate-100 pb-8 mb-8">
+            <div class="flex items-center gap-3 text-emerald-600 mb-3">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+                <span class="font-lexend font-bold text-xs uppercase tracking-wider">CPPA / Bill C-27 Compliant</span>
+            </div>
+            <h1 class="text-4xl font-headline font-black text-primary tracking-tight">Privacy & Data Sovereignty Policy</h1>
+            <p class="text-on-surface-variant text-sm mt-3 font-body">Effective Date: May 24, 2026. Last Updated: May 24, 2026.</p>
+        </div>
+
+        <!-- Policy Content -->
+        <div class="space-y-8 text-slate-700 text-sm md:text-base leading-relaxed font-body">
+            
+            <section>
+                <h2 class="text-xl font-headline font-bold text-primary mb-3">1. Executive Overview: Data Sovereignty</h2>
+                <p>
+                    Pathway Canada is committed to ensuring that Canadian high school students retain complete ownership over their academic data. In alignment with the **Consumer Privacy Protection Act (CPPA / Bill C-27)**, we implement data minimization, zero-password authentication, and structural isolation of student record databases to guarantee the highest level of cyber security.
+                </p>
+            </section>
+
+            <section class="bg-slate-50 border-l-4 border-primary p-5 rounded-r-xl">
+                <h3 class="font-headline font-bold text-primary mb-2 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">shield</span>
+                    The Zero-Password Architecture
+                </h3>
+                <p class="text-xs md:text-sm text-slate-600">
+                    Pathway Canada does not collect, record, or store passwords on our servers. All identity verification is delegated to secure enterprise OAuth providers (Google, Apple, and Facebook). This completely eliminates credential-based database exposure. If a data breach occurs, no user passwords exist to be compromised.
+                </p>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-headline font-bold text-primary mb-3">2. PII vs. Academic Record Isolation</h2>
+                <p>
+                    To minimize cyber liability and ensure strict compliance with C-27 requirements, we enforce **strict data isolation**:
+                </p>
+                <ul class="list-disc pl-5 space-y-2 mt-3 text-xs md:text-sm">
+                    <li>
+                        <strong>Personally Identifiable Information (PII)</strong>, such as the student's legal name, date of birth, and social profile identifiers, are stored isolated from academic metrics.
+                    </li>
+                    <li>
+                        <strong>Admissions Data & Grades</strong> are analyzed locally inside the user's browser runtime. When analytical telemetry is dispatched for platform optimization, all identifiers are scrubbed and anonymized, making it impossible to correlate individual grades to a specific legal identity.
+                    </li>
+                    <li>
+                        <strong>Admissions Portfolios</strong> are hosted client-side by default, ensuring your grades are not centralized in a vulnerable public cloud database.
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-headline font-bold text-primary mb-3">3. Right to Explanation (Explainable AI)</h2>
+                <p>
+                    Under Canadian C-27 regulations, students have the right to request an explanation of any automated matching recommendation. We transparently publish our weighting logic:
+                </p>
+                <ul class="list-disc pl-5 space-y-2 mt-3 text-xs md:text-sm">
+                    <li>
+                        <strong>Prerequisite Compliance (Hard Gate)</strong>: Programs enforce specific prerequisite packages (e.g. senior physics, chemistry, or advanced math). Missing prerequisites will cap match likeness at 50% regardless of overall GPA.
+                    </li>
+                    <li>
+                        <strong>Academic Average (GPA Weighting)</strong>: Match ratings are scaled relative to institutional historical cutoffs. Average grades above the cutoff scale upward at a factor of 2.5x per point. Averages below cutoffs scale downward rapidly at a penalty factor of 5.0x per point.
+                    </li>
+                    <li>
+                        <strong>Holistic Adjustments</strong>: Extracurricular and leadership activities are weighted qualitatively as additive confidence scores rather than hard entry caps.
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-headline font-bold text-primary mb-3">4. User Control & Data Deletion (Right to be Forgotten)</h2>
+                <p>
+                    Pathway Canada guarantees your right to delete your profile instantly:
+                </p>
+                <p class="mt-2 text-xs md:text-sm">
+                    All locally cached transcript and favorite records can be cleared by clicking the "Reset Portal" options on the dashboard or student settings pages. Any analytics logs are fully anonymized and carry no correlation identifiers to you.
+                </p>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-headline font-bold text-primary mb-3">5. PIPEDA & FIPPA Adherence</h2>
+                <p>
+                    Pathway Canada is structured to comply fully with the **Personal Information Protection and Electronic Documents Act (PIPEDA)** and provincial equivalents (such as **FIPPA** in Ontario). We ensure that:
+                </p>
+                <ul class="list-disc pl-5 space-y-2 mt-3 text-xs md:text-sm">
+                    <li><strong>Explicit Consent:</strong> We collect and process academic records solely with your explicit, informed consent. We do not use pre-checked boxes or opt-out schemes.</li>
+                    <li><strong>Limiting Collection:</strong> We limit data collection to the minimum required academic credentials needed to calculate post-secondary matches.</li>
+                    <li><strong>Individual Access:</strong> You retain the right to query, download, and review any personal metrics compiled by our engine at any time.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-headline font-bold text-primary mb-3">6. Canadian Data Residency Sovereignty</h2>
+                <p>
+                    In accordance with federal sovereignty principles, all database hosting, analytical storage, and serverless processing logs for Pathway Canada are hosted in physical data centers located **within the borders of Canada**.
+                </p>
+                <p class="mt-2 mb-4">
+                    Your academic performance records are never transferred, cached, or replicated in foreign jurisdictions, protecting your records from cross-border legal request exposure and ensuring compliance with public sector residency standards.
+                </p>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-headline font-bold text-primary mb-3">7. Contact Information</h2>
+                <p>
+                    For inquiries regarding our compliance or data processing, please contact the Pathways Canada Privacy and Security Officer at `privacy@pathwayscanada.ca`.
+                </p>
+            </section>
+
+        </div>
+        
+        <!-- Back Button -->
+        <div class="mt-12 pt-8 border-t border-slate-100 flex justify-between">
+            <a href="index.html" class="flex items-center gap-1.5 text-primary hover:opacity-80 transition-opacity font-bold font-lexend text-xs uppercase">
+                <span class="material-symbols-outlined text-xs">arrow_back</span> Back to Home
+            </a>
+            <a href="student-dashboard.html" class="flex items-center gap-1.5 text-secondary hover:opacity-80 transition-opacity font-bold font-lexend text-xs uppercase">
+                Go to Dashboard <span class="material-symbols-outlined text-xs">arrow_forward</span>
+            </a>
+        </div>
+
+    </div>
+</main>
+
+<footer class="bg-primary text-blue-50 w-full py-12 border-t border-primary-container">
+    <div class="flex flex-col md:flex-row justify-between items-center px-8 max-w-7xl mx-auto">
+        <div class="mb-8 md:mb-0">
+            <div class="font-headline font-bold text-white text-lg mb-2">Pathway Canada</div>
+            <p class="font-sans text-xs uppercase tracking-widest text-blue-200/70">© 2026 Pathway Canada Portal. All rights reserved.</p>
+        </div>
+        <div class="flex flex-wrap justify-center gap-8 font-sans text-xs uppercase tracking-widest">
+            <a class="text-blue-200/70 hover:text-white transition-colors" href="privacy-policy.html">Privacy Hub</a>
+            <a class="text-blue-200/70 hover:text-white transition-colors" href="pricing.html">Methodology</a>
+            <a class="text-blue-200/70 hover:text-white transition-colors" href="student-dashboard.html">Dashboard</a>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

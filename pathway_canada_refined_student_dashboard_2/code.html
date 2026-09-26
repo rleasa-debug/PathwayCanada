@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dashboard | Pathway Canada</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&amp;family=Public+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#cee5ff",
+                        "secondary-container": "#b9eeab",
+                        "error-container": "#ffdad6",
+                        "outline-variant": "#c3c6ce",
+                        "on-tertiary-fixed": "#2f1500",
+                        "on-background": "#001d33",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#422000",
+                        "on-tertiary-fixed-variant": "#6e3900",
+                        "surface-bright": "#f7f9ff",
+                        "on-secondary-container": "#3f6d38",
+                        "on-secondary-fixed": "#002201",
+                        "secondary-fixed": "#bcf0ae",
+                        "inverse-on-surface": "#e8f2ff",
+                        "on-secondary": "#ffffff",
+                        "surface-dim": "#bfddfe",
+                        "tertiary-fixed-dim": "#ffb77d",
+                        "surface": "#f7f9ff",
+                        "primary-container": "#102a43",
+                        "on-surface": "#001d33",
+                        "on-secondary-fixed-variant": "#23501e",
+                        "inverse-surface": "#12334c",
+                        "surface-container-low": "#edf4ff",
+                        "surface-tint": "#49607c",
+                        "on-surface-variant": "#43474d",
+                        "on-primary-container": "#7a92b0",
+                        "on-primary": "#ffffff",
+                        "outline": "#74777e",
+                        "primary-fixed-dim": "#b0c9e8",
+                        "on-tertiary-container": "#d97705",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed": "#011d35",
+                        "secondary": "#3b6934",
+                        "primary-fixed": "#d1e4ff",
+                        "inverse-primary": "#b0c9e8",
+                        "primary": "#00152a",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed-variant": "#314863",
+                        "tertiary-fixed": "#ffdcc3",
+                        "tertiary": "#240f00",
+                        "surface-variant": "#cee5ff",
+                        "on-error-container": "#93000a",
+                        "error": "#ba1a1a",
+                        "background": "#f7f9ff",
+                        "surface-container-high": "#d8eaff",
+                        "secondary-fixed-dim": "#a1d494",
+                        "surface-container": "#e3efff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Lexend"],
+                        "body": ["Public Sans"],
+                        "label": ["Public Sans"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Public Sans', sans-serif; }
+        h1, h2, h3, h4, .font-lexend { font-family: 'Lexend', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .editorial-gradient {
+            background: linear-gradient(135deg, #00152a 0%, #102a43 100%);
+        }
+        .academic-texture {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23102a43' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2v-4h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2v-4h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- TopAppBar -->
+<nav class="fixed top-0 w-full z-50 bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-lg">
+<div class="flex justify-between items-center px-6 py-4 max-w-full mx-auto font-lexend tracking-tight">
+<div class="text-xl font-bold text-blue-950 dark:text-white">Pathway Canada</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-blue-900 dark:text-blue-100 font-semibold border-b-2 border-blue-900 pb-1" href="#">Dashboard</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-blue-800 dark:hover:text-blue-200 transition-colors" href="#">Applications</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-blue-800 dark:hover:text-blue-200 transition-colors" href="#">Discovery</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-blue-800 dark:hover:text-blue-200 transition-colors" href="#">Library</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-600 dark:text-slate-400 hover:text-blue-800 dark:hover:text-blue-200 transition-all scale-95 duration-150 ease-in-out">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-primary-fixed-dim flex items-center justify-center text-primary font-bold text-xs">JD</div>
+</div>
+</div>
+<div class="bg-slate-200/50 dark:bg-slate-800/50 h-[1px]"></div>
+</nav>
+<!-- SideNavBar -->
+<aside class="hidden lg:flex flex-col gap-2 p-4 h-screen w-64 fixed left-0 top-0 bg-slate-50 dark:bg-slate-950 pt-20 border-r border-slate-100 dark:border-slate-800">
+<div class="mb-8 px-2">
+<p class="text-lg font-bold text-blue-900 dark:text-blue-50 font-lexend">Student Portal</p>
+<p class="text-xs text-slate-500 uppercase tracking-widest font-lexend">Post-Secondary Discovery</p>
+</div>
+<nav class="flex flex-col gap-1 font-lexend text-sm">
+<a class="flex items-center gap-3 p-3 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all hover:translate-x-1 duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">search</span>
+            National Search
+        </a>
+<a class="flex items-center gap-3 p-3 bg-white dark:bg-blue-900/30 text-blue-900 dark:text-blue-200 border-l-4 border-blue-900 font-bold shadow-sm" href="#">
+<span class="material-symbols-outlined">folder_shared</span>
+            My Portfolio
+        </a>
+<a class="flex items-center gap-3 p-3 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all hover:translate-x-1 duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">library_books</span>
+            Resources
+        </a>
+<a class="flex items-center gap-3 p-3 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all hover:translate-x-1 duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">assignment_turned_in</span>
+            Applications
+        </a>
+</nav>
+<div class="mt-auto pt-4">
+<button class="w-full editorial-gradient text-white py-3 rounded-lg text-sm font-lexend font-bold shadow-sm hover:opacity-90 transition-opacity">
+            Find Programs
+        </button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="lg:pl-64 pt-20 pb-12 lg:pb-8 px-6 min-h-screen">
+<div class="max-w-6xl mx-auto">
+<!-- Header Section with Integrated Audio Overview -->
+<header class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+<div>
+<h1 class="text-4xl md:text-5xl font-extrabold text-primary tracking-tight mb-2">Curriculum Overview</h1>
+<p class="text-on-surface-variant max-w-xl body-md">Your academic trajectory is currently trending towards advanced research opportunities in Southern Ontario.</p>
+</div>
+<button class="flex items-center gap-3 px-6 py-3 bg-surface-container-high border border-outline-variant/30 rounded-full text-primary hover:shadow-md transition-all duration-200 group relative overflow-hidden">
+<div class="absolute inset-0 academic-texture opacity-50"></div>
+<span class="material-symbols-outlined text-2xl group-active:scale-90 duration-150 relative z-10">headset</span>
+<div class="flex flex-col items-start relative z-10">
+<span class="text-[10px] uppercase tracking-widest font-bold opacity-60">AI Narrator</span>
+<span class="text-sm font-bold font-lexend leading-tight">Listen to Summary (Charlotte)</span>
+</div>
+</button>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 mb-12">
+<!-- GPA Card (Large Primary) -->
+<div class="md:col-span-4 bg-surface-container-lowest p-8 rounded-xl relative overflow-hidden flex flex-col justify-between group cursor-default shadow-sm border border-slate-100">
+<div class="absolute top-0 right-0 p-4 opacity-[0.03]">
+<span class="material-symbols-outlined text-8xl">school</span>
+</div>
+<div class="absolute top-0 left-0 h-full w-1.5 bg-primary-fixed-dim"></div>
+<div>
+<h3 class="text-on-surface-variant font-lexend text-xs uppercase tracking-widest mb-1">National GPA Equivalent</h3>
+<p class="text-6xl font-extrabold text-primary tracking-tighter">3.88</p>
+</div>
+<div class="mt-6">
+<div class="flex justify-between items-center text-xs mb-2">
+<span class="text-secondary font-bold">Top 5% Nationally</span>
+<span class="text-on-surface-variant">Last update: 2h ago</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-low rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[88%]"></div>
+</div>
+</div>
+</div>
+<!-- Stats Summary + Savings Insight Widget -->
+<div class="md:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
+<div class="bg-surface-container-low p-6 rounded-xl border-l-4 border-primary relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-[0.05]">
+<span class="material-symbols-outlined text-6xl">file_copy</span>
+</div>
+<div class="flex items-center gap-4 relative z-10">
+<div class="w-12 h-12 rounded-lg editorial-gradient flex items-center justify-center text-white">
+<span class="material-symbols-outlined">description</span>
+</div>
+<div>
+<p class="text-2xl font-bold text-primary">3 Applications</p>
+<p class="text-sm text-on-surface-variant font-medium">Currently in Review</p>
+</div>
+</div>
+</div>
+<!-- Savings Insight Widget -->
+<div class="bg-surface-container-low p-6 rounded-xl border-l-4 border-secondary relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-[0.05]">
+<span class="material-symbols-outlined text-6xl">account_balance_wallet</span>
+</div>
+<div class="flex items-center gap-4 relative z-10">
+<div class="w-12 h-12 rounded-lg bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<div>
+<p class="text-2xl font-bold text-primary">$4,200 Saved</p>
+<p class="text-sm text-on-surface-variant font-medium">Match-based savings insight</p>
+</div>
+</div>
+<div class="mt-4 p-3 bg-white/50 dark:bg-slate-900/50 rounded-lg relative z-10 border border-white/50">
+<p class="text-[10px] font-bold text-secondary uppercase tracking-widest mb-1">Efficiency Metric</p>
+<p class="text-xs text-on-surface-variant">Focusing on your <span class="font-bold text-primary">90%+ match</span> profile saves an average of 12h per application.</p>
+</div>
+</div>
+</div>
+<!-- Smart Match Section -->
+<section class="md:col-span-8">
+<div class="flex items-center justify-between mb-6 px-2">
+<h2 class="text-2xl font-bold text-primary font-lexend tracking-tight">Smart Match recommendations</h2>
+<a class="text-primary text-sm font-bold flex items-center gap-1 hover:underline" href="#">
+                        View algorithm profile <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+<!-- Match 1 - UofT -->
+<div class="bg-surface-container-lowest p-5 rounded-xl transition-all duration-300 group border border-slate-100 hover:shadow-xl relative overflow-visible flex flex-col h-full">
+<div class="w-full h-36 bg-slate-200 mb-4 rounded-lg overflow-hidden relative">
+<img alt="University of Toronto - University College" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUCq7VYBBv2G2NjbVIsx0vLboTnS_GrFW4YA2CMk1oZg_RNfNsTzRkJjPHSGghyYlOczdFs-PqUTl9eW16cwD74hjQMq5K5QU5s8NNQNyvSVx7k-S57GRMKMfvR8QPX5tumsUu9dn8NOtgruemq1OuaxAaL79CjsPPUUQR-NqeWBSWerT1FNPplNxknCgMI6-UeyFPTJlsIFhffHLKzXvhKzHoYstmuiH_GMnEtl8-EszigsnBe5drFvEfC_g14zya8BfzQTZVtwAH"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+</div>
+<div class="flex items-center justify-between mb-2">
+<span class="inline-block px-2 py-1 bg-secondary-container text-on-secondary-container rounded-full text-[10px] font-bold uppercase tracking-tight">98% Match</span>
+<div class="relative group/tooltip">
+<span class="material-symbols-outlined text-slate-400 cursor-help text-lg">info</span>
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-56 p-4 bg-slate-900 text-white rounded-xl shadow-2xl opacity-0 invisible group-hover/tooltip:opacity-100 group-hover/tooltip:visible transition-all duration-300 z-50 text-xs">
+<div class="font-bold border-b border-slate-700 pb-2 mb-2 text-blue-300">Match Breakdown</div>
+<p class="leading-relaxed">Based on <span class="text-secondary-fixed">30+ years of educator-led algorithms</span> weighting your unique academic grades and research potential.</p>
+<div class="mt-2 flex items-center gap-1 text-[10px] text-slate-400">
+<span class="material-symbols-outlined text-[10px]">verified</span> Verified Accuracy
+                                    </div>
+</div>
+</div>
+</div>
+<h4 class="font-lexend font-bold text-sm text-primary leading-tight mb-1">MSc Computer Science</h4>
+<p class="text-xs text-on-surface-variant font-medium mt-auto">University of Toronto</p>
+</div>
+<!-- Match 2 - McGill -->
+<div class="bg-surface-container-lowest p-5 rounded-xl transition-all duration-300 group border border-slate-100 hover:shadow-xl relative overflow-visible flex flex-col h-full">
+<div class="w-full h-36 bg-slate-200 mb-4 rounded-lg overflow-hidden relative">
+<img alt="McGill University Arts Building" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGk4oAY7mKFl1oURrVDQTWHC0SYOd4PTV4ukilma_SS5k-NtWSb03X1LTM8ENsCjgWMJ6PpLJ2PLmeMe5gyW8z0TnNbx9wJgl1Iu8oSlo8pJz2Ths--5vzKTEYbGxekOBsIbtT_hTFDSugrB_H7HmOkinghQggVAChyW-XUNQrmec-XUAGNnIFH9dsyNlNJXFUR3928D5ULYk4rWCmPpznuHVE8StqgbJ-GwYNLjAwSbKORYIA_FeJtOvoas68My-vdtLNS3LJ8CE9"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+</div>
+<div class="flex items-center justify-between mb-2">
+<span class="inline-block px-2 py-1 bg-secondary-container text-on-secondary-container rounded-full text-[10px] font-bold uppercase tracking-tight">94% Match</span>
+<div class="relative group/tooltip">
+<span class="material-symbols-outlined text-slate-400 cursor-help text-lg">info</span>
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-56 p-4 bg-slate-900 text-white rounded-xl shadow-2xl opacity-0 invisible group-hover/tooltip:opacity-100 group-hover/tooltip:visible transition-all duration-300 z-50 text-xs">
+<div class="font-bold border-b border-slate-700 pb-2 mb-2 text-blue-300">Match Breakdown</div>
+<p class="leading-relaxed">High correlation with your software development extracurriculars and previous project portfolio.</p>
+</div>
+</div>
+</div>
+<h4 class="font-lexend font-bold text-sm text-primary leading-tight mb-1">Software Engineering</h4>
+<p class="text-xs text-on-surface-variant font-medium mt-auto">McGill University</p>
+</div>
+<!-- Match 3 - UBC -->
+<div class="bg-surface-container-lowest p-5 rounded-xl transition-all duration-300 group border border-slate-100 hover:shadow-xl relative overflow-visible flex flex-col h-full">
+<div class="w-full h-36 bg-slate-200 mb-4 rounded-lg overflow-hidden relative">
+<img alt="UBC Vancouver IKB Library" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAG24IzVerEYHdxKv7IySwKqGhNxsWIbkIVWWwO7-WGJCYdb_LYl6y0ZJd3nnCbj4j7lzyTRdkAg6hAsmdbX3bjJcq-C58YoUNHbicMCRFjUwGjQ8eiUxeruTV4tQIJfGH3gHbNqlvfvC1TO0ExTQ-OwC-quFd2pVh_yDEN04YCQ7Ytx4VR8E3Ed5JDDXRDNwOa4vaY9S3wTrBq_NpYBYGjwXzTrDz2akPJYytqfVYK8_YSj22zmO4gU0I4cCUTASoylrlR_XTb-7t4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+</div>
+<div class="flex items-center justify-between mb-2">
+<span class="inline-block px-2 py-1 bg-secondary-container text-on-secondary-container rounded-full text-[10px] font-bold uppercase tracking-tight">91% Match</span>
+<div class="relative group/tooltip">
+<span class="material-symbols-outlined text-slate-400 cursor-help text-lg">info</span>
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-56 p-4 bg-slate-900 text-white rounded-xl shadow-2xl opacity-0 invisible group-hover/tooltip:opacity-100 group-hover/tooltip:visible transition-all duration-300 z-50 text-xs">
+<div class="font-bold border-b border-slate-700 pb-2 mb-2 text-blue-300">Match Breakdown</div>
+<p class="leading-relaxed">Optimized for your interest in data science and regional preference for the West Coast.</p>
+</div>
+</div>
+</div>
+<h4 class="font-lexend font-bold text-sm text-primary leading-tight mb-1">Data Intelligence</h4>
+<p class="text-xs text-on-surface-variant font-medium mt-auto">UBC Vancouver</p>
+</div>
+</div>
+</section>
+<!-- Activity Feed -->
+<aside class="md:col-span-4 flex flex-col">
+<h2 class="text-2xl font-bold text-primary font-lexend tracking-tight mb-6 px-2">Recent Activity</h2>
+<div class="flex-1 space-y-6">
+<div class="relative pl-6 pb-6 border-l border-outline-variant/30">
+<div class="absolute -left-1.5 top-0 w-3 h-3 rounded-full bg-secondary ring-4 ring-white"></div>
+<p class="text-xs font-bold text-secondary uppercase tracking-widest mb-1">Today, 09:12 AM</p>
+<p class="text-sm font-bold text-primary">Transcript verified</p>
+<p class="text-xs text-on-surface-variant font-medium leading-relaxed">Pathway Canada has officially verified your Year 3 transcripts with National Database.</p>
+</div>
+<div class="relative pl-6 pb-6 border-l border-outline-variant/30">
+<div class="absolute -left-1.5 top-0 w-3 h-3 rounded-full bg-primary ring-4 ring-white"></div>
+<p class="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-1">Yesterday</p>
+<p class="text-sm font-bold text-primary">New program match found</p>
+<p class="text-xs text-on-surface-variant font-medium leading-relaxed">A new high-probability match for 'Quantum Computing' at Waterloo is now available.</p>
+</div>
+<div class="relative pl-6 border-l border-outline-variant/30">
+<div class="absolute -left-1.5 top-0 w-3 h-3 rounded-full bg-outline-variant ring-4 ring-white"></div>
+<p class="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-1">2 days ago</p>
+<p class="text-sm font-bold text-primary">Profile updated</p>
+<p class="text-xs text-on-surface-variant font-medium leading-relaxed">Your extracurricular activities were updated successfully by the portal.</p>
+</div>
+</div>
+</aside>
+</div>
+<!-- Footer -->
+<footer class="mt-20 pt-12 border-t border-surface-container-high">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+<div class="col-span-1 md:col-span-2">
+<div class="flex items-center gap-2 mb-4">
+<div class="text-xl font-bold text-primary font-lexend tracking-tight">Pathway Canada</div>
+</div>
+<p class="text-sm text-on-surface-variant max-w-sm leading-relaxed mb-6">Leading the future of post-secondary discovery through data-driven matching and academic portfolio management.</p>
+<div class="flex flex-wrap gap-6">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-xl">verified_user</span>
+<span class="text-[10px] font-bold font-lexend uppercase tracking-wider">National Integrity</span>
+</div>
+<div class="flex items-center gap-2 text-secondary">
+<span class="material-symbols-outlined text-xl">shield</span>
+<span class="text-[10px] font-bold font-lexend uppercase tracking-wider">Data Privacy Protected</span>
+</div>
+</div>
+</div>
+<div>
+<h4 class="font-lexend font-bold text-primary mb-4 text-sm">Legal &amp; Policy</h4>
+<ul class="space-y-3 text-xs text-on-surface-variant font-medium">
+<li><a class="hover:text-primary transition-colors" href="#">Terms of Service</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Cookie Policy</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Compliance Registry</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-lexend font-bold text-primary mb-4 text-sm">Support</h4>
+<ul class="space-y-3 text-xs text-on-surface-variant font-medium">
+<li><a class="hover:text-primary transition-colors" href="#">Help Center</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Student Resources</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Academic Advisory</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Report an Issue</a></li>
+</ul>
+</div>
+</div>
+<div class="py-8 border-t border-outline-variant/20 flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="text-[10px] text-on-surface-variant font-bold uppercase tracking-widest">© 2026 Pathway Canada. All rights reserved.</div>
+<div class="text-[10px] text-on-surface-variant/70 uppercase tracking-[0.1em] font-bold">
+                    Proprietary Matching Algorithm - Protected under Canadian IP Law
+                </div>
+</div>
+</footer>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="lg:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-3 pb-safe bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl border-t border-slate-100 dark:border-slate-800 shadow-[0_-4px_20px_rgba(0,29,51,0.05)] z-50 rounded-t-2xl">
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 px-4 py-1 active:bg-slate-100 dark:active:bg-slate-800 transition-all scale-90 duration-200" href="#">
+<span class="material-symbols-outlined">search</span>
+<span class="font-lexend text-[10px] font-medium uppercase tracking-wider">Search</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-blue-50 dark:bg-blue-900/40 text-blue-900 dark:text-blue-100 rounded-xl px-4 py-1 active:bg-slate-100 dark:active:bg-slate-800 transition-all scale-90 duration-200" href="#">
+<span class="material-symbols-outlined">account_box</span>
+<span class="font-lexend text-[10px] font-medium uppercase tracking-wider">Portfolio</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 px-4 py-1 active:bg-slate-100 dark:active:bg-slate-800 transition-all scale-90 duration-200" href="#">
+<span class="material-symbols-outlined">auto_stories</span>
+<span class="font-lexend text-[10px] font-medium uppercase tracking-wider">Library</span>
+</a>
+</nav>
+</body></html>
