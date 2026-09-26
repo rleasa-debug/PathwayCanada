@@ -886,7 +886,7 @@ Dr. Mills</textarea>
             // Local simulation toggle
             student.isPro = !student.isPro;
             student.status = student.isPro ? "Pro Student" : "In Progress";
-            showToast(`✓ Pro status toggled for demo record.`);
+            showToast(`✓ Pro status updated for ${student.name}.`);
             openDrawer(student.id);
             filterRoster();
         }

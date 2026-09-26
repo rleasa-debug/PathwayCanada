@@ -33,6 +33,40 @@
                         }
                     });
                     console.log('✓ Supabase Client successfully initialized');
+
+                    // Real-time Auth State Listener: Sync live user credentials and cloud records
+                    client.auth.onAuthStateChange(async (event, session) => {
+                        if (session && session.user) {
+                            const u = session.user;
+                            const realName = u.user_metadata?.full_name || u.user_metadata?.name || u.email?.split('@')[0] || 'Student';
+                            const email = u.email || '';
+                            const picture = u.user_metadata?.avatar_url || u.user_metadata?.picture || '';
+                            const provider = u.app_metadata?.provider || 'Supabase';
+
+                            let state = PathwayAuth.getLocalState();
+                            state.userName = realName;
+                            state.userEmail = email;
+                            state.userPicture = picture;
+                            state.authProvider = provider;
+                            PathwayAuth.saveLocalState(state);
+
+                            // Load student cloud records if available
+                            try {
+                                const cloudData = await PathwayAuth.loadRecordsFromCloud();
+                                if (cloudData && cloudData.courses && cloudData.courses.length > 0) {
+                                    state.courses = cloudData.courses;
+                                    state.average = cloudData.calculated_average || state.average;
+                                    PathwayAuth.saveLocalState(state);
+                                }
+                            } catch (e) {
+                                console.warn('Could not retrieve cloud records:', e);
+                            }
+
+                            window.dispatchEvent(new CustomEvent('pathway-auth-state', { detail: { user: u, state: state } }));
+                            if (typeof window.renderDashboard === 'function') window.renderDashboard();
+                            if (typeof window.renderPage === 'function') window.renderPage();
+                        }
+                    });
                 } catch (e) {
                     console.error('Failed to initialize Supabase client:', e);
                     client = null;
@@ -100,7 +134,7 @@
                 if (settingsResp.ok) {
                     const settings = await settingsResp.json();
                     if (settings.external && settings.external[p] === false) {
-                        this.showOAuthUnavailableModal(provider, `${provider} sign-in is not enabled in your Supabase backend.`);
+                        this.showOAuthHelpModal(provider, `${provider} sign-in is not enabled in your Supabase backend.`);
                         return;
                     }
                 }
@@ -118,7 +152,7 @@
 
             if (error) {
                 console.error('OAuth error:', error);
-                this.showOAuthUnavailableModal(provider, error.message);
+                this.showOAuthHelpModal(provider, error.message);
             }
         },
 
@@ -363,8 +397,8 @@
                             <button id="btn-save-cloud-config" class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs py-2.5 rounded-xl transition-all shadow-md">
                                 Save & Connect
                             </button>
-                            <button onclick="PathwayAuth.continueAsGuest('${context}')" class="px-4 py-2.5 text-xs text-slate-500 hover:text-slate-700 dark:text-slate-400 border border-slate-200 dark:border-slate-700 rounded-xl">
-                                Continue as Demo
+                            <button onclick="document.getElementById('pathway-cloud-config-modal').remove()" class="px-4 py-2.5 text-xs text-slate-500 hover:text-slate-700 dark:text-slate-400 border border-slate-200 dark:border-slate-700 rounded-xl">
+                                Cancel
                             </button>
                         </div>
                     </div>
@@ -393,75 +427,66 @@
             });
         },
 
-        continueAsGuest: function (provider) {
-            document.getElementById('pathway-cloud-config-modal')?.remove();
-            document.getElementById('pathway-oauth-unavailable-modal')?.remove();
-            let state = JSON.parse(localStorage.getItem('pathway_canada_state') || '{}');
-            state.userName = state.userName || 'Student';
-            state.authProvider = provider || 'Demo';
-            localStorage.setItem('pathway_canada_state', JSON.stringify(state));
-            window.location.href = 'student-dashboard.html';
-        },
-
-        showOAuthUnavailableModal: function (provider, detailMsg) {
-            let existing = document.getElementById('pathway-oauth-unavailable-modal');
+        showOAuthHelpModal: function (provider, detailMsg) {
+            let existing = document.getElementById('pathway-oauth-help-modal');
             if (existing) existing.remove();
 
             const pName = provider ? (provider.charAt(0).toUpperCase() + provider.slice(1)) : 'OAuth';
             const modalHtml = `
-            <div id="pathway-oauth-unavailable-modal" class="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fadeIn font-sans">
+            <div id="pathway-oauth-help-modal" class="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fadeIn font-sans">
                 <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-lg w-full p-6 shadow-2xl relative text-left">
-                    <button onclick="document.getElementById('pathway-oauth-unavailable-modal').remove()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-lg">✕</button>
+                    <button onclick="document.getElementById('pathway-oauth-help-modal').remove()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-lg">✕</button>
                     
                     <div class="flex items-center gap-3 mb-4">
-                        <div class="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-600 flex items-center justify-center flex-shrink-0">
-                            <span class="material-symbols-outlined text-2xl">key</span>
+                        <div class="w-12 h-12 rounded-2xl bg-primary/10 text-primary dark:text-emerald-400 flex items-center justify-center flex-shrink-0">
+                            <span class="material-symbols-outlined text-2xl">lock</span>
                         </div>
                         <div>
-                            <h3 class="font-lexend font-bold text-lg text-slate-900 dark:text-white">${pName} OAuth Setup Required</h3>
-                            <p class="text-xs text-slate-500">Supabase CANEDU is active, but Google OAuth credentials are pending</p>
+                            <h3 class="font-lexend font-bold text-lg text-slate-900 dark:text-white">Sign In with ${pName}</h3>
+                            <p class="text-xs text-slate-500">Sign in with your verified ${pName} account email address</p>
                         </div>
-                    </div>
-
-                    <div class="p-3 bg-amber-50 dark:bg-amber-950/30 rounded-xl border border-amber-200 dark:border-amber-800/50 text-xs text-amber-900 dark:text-amber-200 mb-5 leading-relaxed">
-                        <strong>Supabase Status:</strong> 1-Click ${pName} sign-in requires an OAuth Client ID from Google Cloud Console. In the meantime, use your <strong>active Email Magic Link</strong> or fast demo mode below:
                     </div>
 
                     <!-- Instant Method 1: Magic Link (Working 100% Right Now) -->
                     <div class="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl border border-slate-200 dark:border-slate-700/80 mb-4">
-                        <label class="block text-xs font-bold text-slate-800 dark:text-slate-200 mb-1">
-                            Instant Magic Link Sign-In (Working Now)
+                        <label class="block text-xs font-bold text-slate-800 dark:text-slate-200 mb-1 font-lexend">
+                            Instant Magic Link Sign-In
                         </label>
                         <p class="text-[11px] text-slate-500 dark:text-slate-400 mb-2.5">
-                            Supabase will dispatch a secure 1-click login link directly to your inbox.
+                            Supabase will dispatch an encrypted 1-click login link directly to your inbox.
                         </p>
                         <div class="flex gap-2">
-                            <input id="oauth-fallback-email" type="email" placeholder="you@domain.com" value="rleasa@gmail.com" class="flex-1 text-xs px-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 dark:bg-slate-900 dark:text-white focus:ring-2 focus:ring-primary outline-none">
-                            <button id="btn-oauth-send-magic" class="bg-primary hover:bg-slate-900 text-white font-semibold text-xs px-4 py-2.5 rounded-xl transition-all shadow-sm">
+                            <input id="oauth-fallback-email" type="email" placeholder="your-email@domain.com" class="flex-1 text-xs px-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 dark:bg-slate-900 dark:text-white focus:ring-2 focus:ring-primary outline-none font-lexend">
+                            <button id="btn-oauth-send-magic" class="bg-primary hover:bg-slate-900 text-white font-semibold text-xs px-4 py-2.5 rounded-xl transition-all shadow-sm font-lexend cursor-pointer">
                                 Send Link
                             </button>
                         </div>
                         <div id="oauth-magic-status" class="text-[11px] mt-2 hidden"></div>
                     </div>
 
-                    <!-- Instant Method 2: Fast Demo / Guest Login -->
-                    <div class="flex items-center justify-between gap-3 pt-1 mb-4">
-                        <div class="text-xs text-slate-500">Or continue instantly:</div>
-                        <button onclick="PathwayAuth.continueAsGuest('${pName}')" class="px-4 py-2.5 bg-slate-200 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all">
-                            Enter Dashboard as Admin / Guest →
-                        </button>
+                    <!-- Password Sign-In Option -->
+                    <div class="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl border border-slate-200 dark:border-slate-700/80 mb-4">
+                        <label class="block text-xs font-bold text-slate-800 dark:text-slate-200 mb-1 font-lexend">
+                            Or Sign In with Password
+                        </label>
+                        <div class="space-y-2">
+                            <input id="oauth-fallback-pwd" type="password" placeholder="Account Password" class="w-full text-xs px-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 dark:bg-slate-900 dark:text-white focus:ring-2 focus:ring-primary outline-none font-lexend">
+                            <button id="btn-oauth-signin-pwd" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-semibold text-xs py-2.5 rounded-xl transition-all shadow-sm font-lexend cursor-pointer">
+                                Sign In with Password
+                            </button>
+                        </div>
                     </div>
 
                     <!-- Collapsible Admin Instructions -->
                     <details class="text-[11px] text-slate-500 border-t border-slate-200 dark:border-slate-800 pt-3">
                         <summary class="cursor-pointer font-medium hover:text-slate-700 dark:hover:text-slate-300 select-none">
-                            ⚙️ Administrator: How to enable 1-Click ${pName} OAuth
+                            ⚙️ Administrator: How to enable 1-Click ${pName} OAuth Direct SSO
                         </summary>
                         <div class="mt-2 space-y-1.5 pl-3 text-slate-600 dark:text-slate-400">
-                            <div>1. Go to <a href="https://console.cloud.google.com/apis/credentials" target="_blank" class="text-primary underline">Google Cloud Console</a> &gt; Create OAuth Client ID (Web).</div>
-                            <div>2. Set Authorized Redirect URI: <code class="bg-slate-200 dark:bg-slate-800 px-1 py-0.5 rounded text-[10px] select-all">${supabaseUrl}/auth/v1/callback</code></div>
-                            <div>3. Open Supabase: <a href="https://supabase.com/dashboard/project/wlnhygrpipvebyaxmvyp/auth/providers" target="_blank" class="text-primary underline font-medium">Auth Providers &gt; Google</a>.</div>
-                            <div>4. Toggle Google ON, paste Client ID &amp; Secret, and save.</div>
+                            <div>1. Open Supabase Dashboard: <a href="https://supabase.com/dashboard/project/wlnhygrpipvebyaxmvyp/auth/providers" target="_blank" class="text-primary underline font-medium">Auth Providers &gt; ${pName}</a>.</div>
+                            <div>2. Toggle <strong>${pName}</strong> to ON.</div>
+                            <div>3. Paste your ${pName} Client ID &amp; Secret from your ${pName} Developer Console and save.</div>
+                            <div>4. Add authorized redirect URI: <code class="bg-slate-200 dark:bg-slate-800 px-1 py-0.5 rounded text-[10px] select-all">${supabaseUrl}/auth/v1/callback</code></div>
                         </div>
                     </details>
                 </div>
@@ -496,9 +521,22 @@
                         statusDiv.innerHTML = `<span class="text-emerald-600 dark:text-emerald-400 font-semibold">✓ Secure magic link sent to ${email}!</span> Check your inbox to sign in.`;
                         statusDiv.className = 'text-[11px] mt-2 block';
                     } else {
-                        statusDiv.innerHTML = `<span class="text-rose-500 font-semibold">Failed to send link.</span> Please try demo mode or check configuration.`;
+                        statusDiv.innerHTML = `<span class="text-rose-500 font-semibold">Failed to send link.</span> Please verify email or check configuration.`;
                         statusDiv.className = 'text-[11px] mt-2 block';
                     }
+                });
+            }
+
+            const pwdBtn = document.getElementById('btn-oauth-signin-pwd');
+            if (pwdBtn) {
+                pwdBtn.addEventListener('click', async () => {
+                    const email = (document.getElementById('oauth-fallback-email').value || '').trim();
+                    const password = (document.getElementById('oauth-fallback-pwd').value || '').trim();
+                    if (!email || !password) {
+                        alert('Please enter both your email and password.');
+                        return;
+                    }
+                    await PathwayAuth.signInWithPassword(email, password);
                 });
             }
         }

@@ -367,7 +367,7 @@
                 Sign in with Facebook
             </button>
 
-            <!-- Email / Password or Demo Modal Trigger -->
+            <!-- Email / Password Sign-In Modal Trigger -->
             <button onclick="openSignInModal('Email')" class="click-compress flex items-center justify-center gap-2 w-full bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 py-2.5 rounded-xl font-lexend font-medium text-xs transition-all cursor-pointer mt-1">
                 <span class="material-symbols-outlined text-sm">mail</span>
                 Sign in with Email / Magic Link
@@ -1058,16 +1058,16 @@
                 <span class="material-symbols-outlined text-2xl text-primary dark:text-emerald-400">lock_person</span>
             </div>
             <h3 id="signin-modal-title" class="text-xl font-bold text-primary dark:text-white font-lexend">Pathway Sign-In</h3>
-            <p id="signin-modal-subtitle" class="text-xs text-slate-500 dark:text-slate-400 mt-1 font-body">Connect with Supabase Cloud or continue in Demo mode.</p>
+            <p id="signin-modal-subtitle" class="text-xs text-slate-500 dark:text-slate-400 mt-1 font-body">Sign in to access your admissions matches and portfolio.</p>
         </div>
 
         <!-- Mode Selector Tabs -->
         <div class="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-xl mb-4 text-xs font-semibold font-lexend">
-            <button id="tab-magic-link" onclick="switchAuthTab('magic')" class="flex-1 py-1.5 rounded-lg bg-white dark:bg-slate-700 text-primary dark:text-white shadow-sm transition-all">
+            <button id="tab-magic-link" onclick="switchAuthTab('magic')" class="flex-1 py-1.5 rounded-lg bg-white dark:bg-slate-700 text-primary dark:text-white shadow-sm transition-all cursor-pointer">
                 Email Magic Link
             </button>
-            <button id="tab-instant-demo" onclick="switchAuthTab('demo')" class="flex-1 py-1.5 rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all">
-                Quick Access
+            <button id="tab-password" onclick="switchAuthTab('password')" class="flex-1 py-1.5 rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer">
+                Password Sign-In
             </button>
         </div>
 
@@ -1079,7 +1079,6 @@
                     type="email"
                     id="signin-email-input"
                     placeholder="you@domain.com"
-                    value="rleasa@gmail.com"
                     autocomplete="email"
                     class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-xs font-lexend text-primary dark:text-white focus:ring-2 focus:ring-primary outline-none transition-all"
                     onkeydown="if(event.key==='Enter') sendModalMagicLink();"
@@ -1091,23 +1090,38 @@
             <div id="signin-magic-feedback" class="text-[11px] leading-relaxed hidden"></div>
         </div>
 
-        <!-- Tab 2: Instant Demo / Name Input -->
-        <div id="auth-panel-demo" class="space-y-3 hidden">
+        <!-- Tab 2: Password Sign-In & Sign-Up -->
+        <div id="auth-panel-password" class="space-y-3 hidden">
             <div class="flex flex-col gap-1.5">
-                <label for="signin-name-input" class="text-[10px] font-bold uppercase tracking-widest text-slate-400 font-lexend">Your First Name</label>
+                <label for="signin-pwd-email" class="text-[10px] font-bold uppercase tracking-widest text-slate-400 font-lexend">Email Address</label>
                 <input
-                    type="text"
-                    id="signin-name-input"
-                    placeholder="e.g. Alex"
-                    autocomplete="given-name"
+                    type="email"
+                    id="signin-pwd-email"
+                    placeholder="you@domain.com"
+                    autocomplete="email"
                     class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-xs font-lexend text-primary dark:text-white focus:ring-2 focus:ring-primary outline-none transition-all"
-                    onkeydown="if(event.key==='Enter') confirmSignIn();"
                 />
-                <p id="signin-error" class="text-xs text-red-500 font-lexend hidden">Please enter a name to continue.</p>
             </div>
-            <button onclick="confirmSignIn()" class="w-full py-3 bg-slate-800 hover:bg-black text-white rounded-xl font-lexend font-bold text-xs transition-all shadow-md hover:scale-[1.01] active:scale-[0.99] cursor-pointer">
-                Enter Dashboard as Guest →
-            </button>
+            <div class="flex flex-col gap-1.5">
+                <label for="signin-pwd-password" class="text-[10px] font-bold uppercase tracking-widest text-slate-400 font-lexend">Password</label>
+                <input
+                    type="password"
+                    id="signin-pwd-password"
+                    placeholder="••••••••"
+                    autocomplete="current-password"
+                    class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-xs font-lexend text-primary dark:text-white focus:ring-2 focus:ring-primary outline-none transition-all"
+                    onkeydown="if(event.key==='Enter') submitModalPasswordSignIn();"
+                />
+            </div>
+            <div class="flex gap-2 pt-1">
+                <button onclick="submitModalPasswordSignIn()" class="flex-1 py-2.5 bg-primary hover:bg-slate-900 text-white rounded-xl font-lexend font-bold text-xs transition-all shadow-md cursor-pointer">
+                    Sign In
+                </button>
+                <button onclick="submitModalPasswordSignUp()" class="flex-1 py-2.5 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-xl font-lexend font-bold text-xs transition-all border border-slate-200 dark:border-slate-700 cursor-pointer">
+                    Create Account
+                </button>
+            </div>
+            <div id="signin-pwd-feedback" class="text-[11px] leading-relaxed hidden"></div>
         </div>
 
         <!-- Trust note -->
@@ -1272,22 +1286,22 @@
 
     function switchAuthTab(tab) {
         const tabMagic = document.getElementById('tab-magic-link');
-        const tabDemo = document.getElementById('tab-instant-demo');
+        const tabPwd = document.getElementById('tab-password');
         const panelMagic = document.getElementById('auth-panel-magic');
-        const panelDemo = document.getElementById('auth-panel-demo');
+        const panelPwd = document.getElementById('auth-panel-password');
 
         if (tab === 'magic') {
-            tabMagic.className = 'flex-1 py-1.5 rounded-lg bg-white dark:bg-slate-700 text-primary dark:text-white shadow-sm transition-all';
-            tabDemo.className = 'flex-1 py-1.5 rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all';
+            tabMagic.className = 'flex-1 py-1.5 rounded-lg bg-white dark:bg-slate-700 text-primary dark:text-white shadow-sm transition-all cursor-pointer';
+            tabPwd.className = 'flex-1 py-1.5 rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer';
             panelMagic.classList.remove('hidden');
-            panelDemo.classList.add('hidden');
+            panelPwd.classList.add('hidden');
             setTimeout(() => document.getElementById('signin-email-input')?.focus(), 100);
         } else {
-            tabDemo.className = 'flex-1 py-1.5 rounded-lg bg-white dark:bg-slate-700 text-primary dark:text-white shadow-sm transition-all';
-            tabMagic.className = 'flex-1 py-1.5 rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all';
-            panelDemo.classList.remove('hidden');
+            tabPwd.className = 'flex-1 py-1.5 rounded-lg bg-white dark:bg-slate-700 text-primary dark:text-white shadow-sm transition-all cursor-pointer';
+            tabMagic.className = 'flex-1 py-1.5 rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer';
+            panelPwd.classList.remove('hidden');
             panelMagic.classList.add('hidden');
-            setTimeout(() => document.getElementById('signin-name-input')?.focus(), 100);
+            setTimeout(() => document.getElementById('signin-pwd-email')?.focus(), 100);
         }
     }
 
@@ -1313,9 +1327,9 @@
             if (window.PathwayAuth) {
                 const ok = await window.PathwayAuth.signInWithMagicLink(email);
                 if (ok) {
-                    feedback.innerHTML = `<span class="text-emerald-600 dark:text-emerald-400 font-bold">✓ Magic link sent to ${email}!</span><br><span class="text-slate-500">Please check your inbox to sign in instantly.</span>`;
+                    feedback.innerHTML = `<span class="text-emerald-600 dark:text-emerald-400 font-bold">✓ Magic link sent to ${email}!</span><br><span class="text-slate-500">Please check your inbox to sign in securely.</span>`;
                 } else {
-                    feedback.innerHTML = `<span class="text-rose-500">Could not dispatch magic link.</span> Try Quick Access mode.`;
+                    feedback.innerHTML = `<span class="text-rose-500">Could not dispatch magic link.</span> Please verify your email.`;
                 }
             } else {
                 feedback.innerHTML = `<span class="text-emerald-600 font-bold">Link dispatched!</span> Check your inbox.`;
@@ -1328,34 +1342,67 @@
         }
     }
 
-    // ── Name modal (used for Apple / Facebook and as GSI fallback) ────────────
+    async function submitModalPasswordSignIn() {
+        const email = (document.getElementById('signin-pwd-email')?.value || '').trim();
+        const pwd = (document.getElementById('signin-pwd-password')?.value || '').trim();
+        const feedback = document.getElementById('signin-pwd-feedback');
+
+        if (!email || !pwd) {
+            feedback.innerHTML = '<span class="text-rose-500 font-semibold">Please enter your email and password.</span>';
+            feedback.classList.remove('hidden');
+            return;
+        }
+
+        feedback.className = 'text-[11px] leading-relaxed text-slate-500 block';
+        feedback.textContent = 'Authenticating with Supabase...';
+
+        if (window.PathwayAuth) {
+            const data = await window.PathwayAuth.signInWithPassword(email, pwd);
+            if (data && data.user) {
+                feedback.innerHTML = '<span class="text-emerald-600 font-bold">✓ Sign in successful! Redirecting...</span>';
+                window.location.href = 'student-dashboard.html';
+            } else {
+                feedback.innerHTML = '<span class="text-rose-500 font-semibold">Invalid email or password.</span>';
+            }
+        }
+    }
+
+    async function submitModalPasswordSignUp() {
+        const email = (document.getElementById('signin-pwd-email')?.value || '').trim();
+        const pwd = (document.getElementById('signin-pwd-password')?.value || '').trim();
+        const feedback = document.getElementById('signin-pwd-feedback');
+
+        if (!email || !pwd) {
+            feedback.innerHTML = '<span class="text-rose-500 font-semibold">Please enter email and password to create an account.</span>';
+            feedback.classList.remove('hidden');
+            return;
+        }
+
+        if (pwd.length < 6) {
+            feedback.innerHTML = '<span class="text-rose-500 font-semibold">Password must be at least 6 characters.</span>';
+            feedback.classList.remove('hidden');
+            return;
+        }
+
+        feedback.className = 'text-[11px] leading-relaxed text-slate-500 block';
+        feedback.textContent = 'Creating secure student account...';
+
+        if (window.PathwayAuth) {
+            const data = await window.PathwayAuth.signUpWithPassword(email, pwd, email.split('@')[0]);
+            if (data) {
+                feedback.innerHTML = '<span class="text-emerald-600 font-bold">✓ Account created! Check your email to confirm registration.</span>';
+            }
+        }
+    }
+
     function openSignInModal(provider) {
-        _loginProvider = provider || 'Google';
+        _loginProvider = provider || 'Email';
         const modal = document.getElementById('signin-modal');
         const card = document.getElementById('signin-card');
         const title = document.getElementById('signin-modal-title');
-        const nameInput = document.getElementById('signin-name-input');
 
         title.textContent = `Sign in to Pathway`;
-
-        // If provider is Email or Magic Link, show magic tab
-        if (_loginProvider.toLowerCase().includes('email')) {
-            switchAuthTab('magic');
-        } else {
-            // Default to magic link tab, but allow quick demo
-            switchAuthTab('magic');
-        }
-
-        // Pre-fill if returning user
-        const stored = localStorage.getItem('pathway_canada_state');
-        if (stored) {
-            try {
-                const state = window.decryptState ? window.decryptState(stored) : JSON.parse(stored);
-                if (state && state.userName && state.userName !== 'Alex') {
-                    nameInput.value = state.userName;
-                }
-            } catch(e) {}
-        }
+        switchAuthTab('magic');
 
         modal.classList.remove('hidden');
         requestAnimationFrame(() => {
@@ -1371,47 +1418,6 @@
         card.classList.add('scale-95', 'opacity-0');
         setTimeout(() => modal.classList.add('hidden'), 250);
     }
-
-    function confirmSignIn() {
-        const nameInput = document.getElementById('signin-name-input');
-        const errorEl = document.getElementById('signin-error');
-        const finalName = (nameInput.value || '').trim() || 'Alex';
-
-        if (window.navigator.webdriver) {
-            window.location.href = 'student-dashboard.html';
-            return;
-        }
-
-        saveStateAndRedirect({ userName: finalName, authProvider: _loginProvider });
-    }
-
-    // ── Attach social login click handlers ────────────────────────────────────
-    document.querySelectorAll('.social-login-btn').forEach(btn => {
-        btn.addEventListener('click', (event) => {
-            event.preventDefault();
-
-            // Returning user with a real name → go straight to dashboard
-            const stored = localStorage.getItem('pathway_canada_state');
-            if (stored) {
-                try {
-                    const state = window.decryptState ? window.decryptState(stored) : JSON.parse(stored);
-                    if (state && state.userName && state.userName !== 'Alex') {
-                        window.location.href = 'student-dashboard.html';
-                        return;
-                    }
-                } catch(e) {}
-            }
-
-            const provider = btn.getAttribute('data-provider');
-            if (provider === 'Google') {
-                triggerGoogleSignIn();
-            } else if (provider === 'Facebook') {
-                triggerFacebookSignIn();
-            } else {
-                openSignInModal(provider);
-            }
-        });
-    });
 
     function toggleChat() {
         const windowEl = document.getElementById('chat-window');

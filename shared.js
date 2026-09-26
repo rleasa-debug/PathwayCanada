@@ -221,11 +221,7 @@ function detectPaymentCallback() {
   }
 }
 
-const DEFAULT_COURSES = [
-  { id: "MHF4U", name: "Advanced Functions", code: "MHF4U", grade: 96, status: "Final", type: "University Preparation", icon: "calculate", color: "blue", level: "12" },
-  { id: "SBI4U", name: "Biology", code: "SBI4U", grade: 91, status: "In Progress", type: "University Preparation", icon: "science", color: "green", level: "12" },
-  { id: "ENG3U", name: "English", code: "ENG3U", grade: 88, status: "Final", type: "University Preparation", icon: "history_edu", color: "slate", level: "11" }
-];
+const DEFAULT_COURSES = [];
 
 function getAppState() {
   const stored = localStorage.getItem(STATE_KEY);
@@ -237,7 +233,7 @@ function getAppState() {
       }
       
       // Calculate matches dynamically in memory on load (saves 5MB+ localStorage space)
-      state.matches = calculateMatches(state.courses || DEFAULT_COURSES);
+      state.matches = calculateMatches(state.courses || []);
       
       let needsSave = false;
       
@@ -263,16 +259,17 @@ function getAppState() {
         state.provinces = ['ON', 'BC', 'QC', 'AB', 'NS', 'NB', 'PE', 'NL', 'SK', 'MB', 'YT', 'NT', 'NU'];
         needsSave = true;
       }
-      if (state.userName === undefined) {
-        state.userName = "Alex";
+      // Clear legacy hardcoded demo user "Alex"
+      if (state.userName === undefined || state.userName === "Alex") {
+        state.userName = "";
         needsSave = true;
       }
-      if (state.userDob === undefined) {
-        state.userDob = "2008-05-24";
+      if (state.userDob === undefined || state.userDob === "2008-05-24") {
+        state.userDob = "";
         needsSave = true;
       }
       if (state.profileLocked === undefined) {
-        state.profileLocked = true;
+        state.profileLocked = false;
         needsSave = true;
       }
       if (state.homeProvince === undefined) {
@@ -288,10 +285,7 @@ function getAppState() {
         needsSave = true;
       }
       if (state.activities === undefined) {
-        state.activities = [
-          { id: "act-1", title: "Model UN President", category: "Leadership", description: "Organized provincial conference for 400+ delegates.", timeframe: "2022 - Present", icon: "groups", color: "secondary" },
-          { id: "act-2", title: "Varsity Soccer Captain", category: "Athletics", description: "Regional champions 2023. Managed team logistics.", timeframe: "2021 - 2023", icon: "sports_soccer", color: "tertiary" }
-        ];
+        state.activities = [];
         needsSave = true;
       }
       
@@ -309,24 +303,21 @@ function getAppState() {
     }
   }
 
-  // Initial State
+  // Initial State: Clean profile ready for live user input
   const initialState = {
     isPro: false, // Default to false for Freemium model
     freeAuditProgramId: null, // 1 Free Program Deep Audit unlocked for free users
     ouacSlots: { safety: null, match: null, reach: null }, // OUAC 3-Choice Strategy
-    courses: DEFAULT_COURSES,
-    average: "91.7",
+    courses: [],
+    average: "0.0",
     matches: [],
     favorites: [],
     provinces: ['ON', 'BC', 'QC', 'AB', 'NS', 'NB', 'PE', 'NL', 'SK', 'MB', 'YT', 'NT', 'NU'],
-    userName: "Alex",
-    userDob: "2008-05-24",
-    profileLocked: true,
+    userName: "",
+    userDob: "",
+    profileLocked: false,
     homeProvince: "ON",
-    activities: [
-      { id: "act-1", title: "Model UN President", category: "Leadership", description: "Organized provincial conference for 400+ delegates.", timeframe: "2022 - Present", icon: "groups", color: "secondary" },
-      { id: "act-2", title: "Varsity Soccer Captain", category: "Athletics", description: "Regional champions 2023. Managed team logistics.", timeframe: "2021 - 2023", icon: "sports_soccer", color: "tertiary" }
-    ]
+    activities: []
   };
   
   initialState.matches = calculateMatches(initialState.courses);
@@ -1354,7 +1345,7 @@ function calculateMatches(courses) {
 }
 
 function calculateAverage(courses) {
-  if (!courses || courses.length === 0) return { average: "90.0", overall: "90.0" };
+  if (!courses || courses.length === 0) return { average: "0.0", overall: "0.0" };
   
   // 1. Calculate overall average
   const allGrades = courses.map(c => c.grade);

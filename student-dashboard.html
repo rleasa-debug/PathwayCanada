@@ -453,9 +453,9 @@
     <div class="p-3 border-t border-slate-200/40 dark:border-slate-800/40 bg-slate-100/50 dark:bg-slate-900/30 flex flex-col gap-3">
         <!-- User profile indicator -->
         <div class="flex items-center gap-3 px-1">
-            <div class="w-8 h-8 rounded-full bg-primary-fixed-dim flex items-center justify-center text-primary font-bold text-xs shadow-sm user-initials-display flex-shrink-0" id="sidebar-avatar">AL</div>
+            <div class="w-8 h-8 rounded-full bg-primary-fixed-dim flex items-center justify-center text-primary font-bold text-xs shadow-sm user-initials-display flex-shrink-0" id="sidebar-avatar">ST</div>
             <div class="hidden lg:block overflow-hidden">
-                <p class="text-xs font-bold text-primary dark:text-white truncate" id="sidebar-name">Alex L.</p>
+                <p class="text-xs font-bold text-primary dark:text-white truncate" id="sidebar-name">Student</p>
                 <p class="text-[9px] text-slate-500 truncate" id="sidebar-tier">Free Plan</p>
                 <div class="flex items-center gap-1 mt-1 text-[8px] text-emerald-600 dark:text-emerald-400 font-bold uppercase tracking-wider">
                     <span class="material-symbols-outlined text-[10px]" style="font-variation-settings: 'FILL' 1;">security</span>
@@ -466,9 +466,9 @@
         </div>
         
         <!-- Reset Button -->
-        <button onclick="resetAppState()" class="w-full flex items-center justify-center lg:justify-start gap-3.5 px-2 py-2 text-red-650 dark:text-red-400 hover:bg-red-500/10 rounded-lg text-xs font-bold transition-all" title="Reset Demo State">
-            <span class="material-symbols-outlined text-xl flex-shrink-0">logout</span>
-            <span class="hidden lg:block font-lexend">Reset Demo</span>
+        <button onclick="resetAppState()" class="w-full flex items-center justify-center lg:justify-start gap-3.5 px-2 py-2 text-rose-600 dark:text-rose-400 hover:bg-rose-500/10 rounded-lg text-xs font-bold transition-all cursor-pointer" title="Reset Course Transcript">
+            <span class="material-symbols-outlined text-xl flex-shrink-0">restart_alt</span>
+            <span class="hidden lg:block font-lexend">Reset Transcript</span>
         </button>
     </div>
 </aside>
@@ -1328,8 +1328,8 @@
         state = getAppState();
         
         // Update user identity initials dynamically
-        const userName = state.userName || "Alex";
-        const userInitials = userName.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+        const userName = state.userName || "Student";
+        const userInitials = (userName === "Student" ? "ST" : userName.split(' ').map(n => n[0]).join('').substring(0, 2)).toUpperCase();
         document.querySelectorAll('.user-initials-display').forEach(el => {
             el.textContent = userInitials;
         });

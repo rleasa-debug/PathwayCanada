@@ -298,17 +298,17 @@
     <div class="p-3 border-t border-slate-200/40 dark:border-slate-800/40 bg-slate-100/50 dark:bg-slate-900/30 flex flex-col gap-3">
         <!-- User profile indicator -->
         <div class="flex items-center gap-3 px-1">
-            <div class="w-8 h-8 rounded-full bg-primary-fixed-dim flex items-center justify-center text-primary font-bold text-xs shadow-sm user-initials-display flex-shrink-0">AL</div>
+            <div class="w-8 h-8 rounded-full bg-primary-fixed-dim flex items-center justify-center text-primary font-bold text-xs shadow-sm user-initials-display flex-shrink-0" id="sidebar-profile-avatar">ST</div>
             <div class="hidden lg:block overflow-hidden">
-                <p class="text-xs font-bold text-primary dark:text-white truncate">Alex L.</p>
-                <p class="text-[9px] text-slate-500 truncate">Premium Member</p>
+                <p class="text-xs font-bold text-primary dark:text-white truncate sidebar-name-display" id="sidebar-name">Student</p>
+                <p class="text-[9px] text-slate-500 truncate" id="sidebar-plan-badge">Basic Explorer</p>
             </div>
         </div>
         
         <!-- Reset Button -->
-        <button onclick="resetAppState()" class="w-full flex items-center justify-center lg:justify-start gap-3.5 px-2 py-2 text-red-655 dark:text-red-400 hover:bg-red-500/10 rounded-lg text-xs font-bold transition-all" title="Reset Demo State">
-            <span class="material-symbols-outlined text-xl flex-shrink-0">logout</span>
-            <span class="hidden lg:block font-lexend">Reset Demo</span>
+        <button onclick="resetAppState()" class="w-full flex items-center justify-center lg:justify-start gap-3.5 px-2 py-2 text-rose-600 dark:text-rose-400 hover:bg-rose-500/10 rounded-lg text-xs font-bold transition-all cursor-pointer" title="Reset Course Transcript">
+            <span class="material-symbols-outlined text-xl flex-shrink-0">restart_alt</span>
+            <span class="hidden lg:block font-lexend">Reset Transcript</span>
         </button>
     </div>
 </aside>
@@ -525,12 +525,12 @@
             <div class="bg-surface-container-lowest p-5 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm">
                 <!-- Compact Verified Account Badge -->
                 <div class="flex items-center gap-3 pb-4 mb-4 border-b border-slate-100 dark:border-slate-800">
-                    <div class="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-sm" id="sidebar-profile-avatar">
-                        AL
+                    <div class="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-sm user-initials-display" id="sidebar-profile-avatar">
+                        ST
                     </div>
                     <div class="flex-grow">
                         <div class="flex items-center gap-1.5">
-                            <span class="font-lexend font-bold text-slate-900 dark:text-white text-sm sidebar-name-display">Alex</span>
+                            <span class="font-lexend font-bold text-slate-900 dark:text-white text-sm sidebar-name-display">Student</span>
                             <span class="material-symbols-outlined text-blue-500 text-sm" style="font-variation-settings: 'FILL' 1;">verified</span>
                         </div>
                         <span class="text-[10px] text-slate-500 font-medium">OSSD Verified Candidate</span>
@@ -927,8 +927,8 @@
         state = getAppState();
         
         // Update user identity fields dynamically
-        const userName = state.userName || "Alex";
-        const userInitials = userName.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+        const userName = state.userName || "Student";
+        const userInitials = (userName === "Student" ? "ST" : userName.split(' ').map(n => n[0]).join('').substring(0, 2)).toUpperCase();
         
         document.querySelectorAll('.user-name-display').forEach(el => {
             el.textContent = `Welcome, ${userName}`;
@@ -2015,7 +2015,7 @@
             const dateStr = new Date().toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' });
             document.getElementById('print-date').textContent = dateStr;
             
-            const studentName = state.userName || "Alex";
+            const studentName = state.userName || "Student";
             document.getElementById('print-student-name').textContent = studentName;
             document.getElementById('print-student-dob').textContent = state.userDob || "2008-05-24";
             document.getElementById('print-student-average').textContent = `${state.average}%`;
@@ -2063,7 +2063,7 @@
         const dobInput = document.getElementById('profile-dob-input');
         const provinceSelect = document.getElementById('profile-province-select');
         if (!state.profileLocked) {
-            state.userName = nameInput.value.trim() || "Alex";
+            state.userName = nameInput.value.trim() || "Student";
             state.userDob = dobInput.value || "2008-05-24";
             if (provinceSelect) {
                 state.homeProvince = provinceSelect.value || "ON";
