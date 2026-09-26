@@ -91,20 +91,21 @@
 
             const p = (provider || 'google').toLowerCase();
 
-            // Pre-check if OAuth provider is enabled and has credentials in Supabase
+            // Pre-check if OAuth provider is enabled in Supabase settings
             // to prevent stranding users on a raw 400 error page
             try {
-                const checkUrl = `${supabaseUrl}/auth/v1/authorize?provider=${p}`;
-                const resp = await fetch(checkUrl);
-                if (!resp.ok) {
-                    const err = await resp.json().catch(() => ({}));
-                    const msg = err.msg || err.error_description || 'OAuth provider credentials not configured';
-                    console.warn(`Supabase ${provider} pre-check returned ${resp.status}:`, msg);
-                    this.showOAuthUnavailableModal(provider, msg);
-                    return;
+                const settingsResp = await fetch(`${supabaseUrl}/auth/v1/settings`, {
+                    headers: { 'apikey': supabaseAnonKey }
+                });
+                if (settingsResp.ok) {
+                    const settings = await settingsResp.json();
+                    if (settings.external && settings.external[p] === false) {
+                        this.showOAuthUnavailableModal(provider, `${provider} sign-in is not enabled in your Supabase backend.`);
+                        return;
+                    }
                 }
             } catch (e) {
-                console.warn('OAuth pre-flight check bypassed:', e);
+                console.warn('Auth settings pre-flight check bypassed:', e);
             }
 
             const redirectTo = window.location.origin + '/student-dashboard.html';
