@@ -9,9 +9,12 @@
     const STORAGE_KEY_ANON = 'pathway_supabase_anon_key';
     const STORAGE_KEY_STRIPE = 'pathway_stripe_payment_link';
 
-    // Default configuration (can be updated via UI settings modal or environment)
-    let supabaseUrl = localStorage.getItem(STORAGE_KEY_URL) || (typeof process !== 'undefined' && process.env?.VITE_SUPABASE_URL) || '';
-    let supabaseAnonKey = localStorage.getItem(STORAGE_KEY_ANON) || (typeof process !== 'undefined' && process.env?.VITE_SUPABASE_ANON_KEY) || '';
+    // Default CANEDU Supabase configuration
+    const CANEDU_URL = 'https://wlnhygrpipvebyaxmvyp.supabase.co';
+    const CANEDU_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indsbmh5Z3JwaXB2ZWJ5YXhtdnlwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU1NjU4NzMsImV4cCI6MjA4MTE0MTg3M30.fTvwgc0ljLfTw1Q_SDe6uFmn1BKdZal4C8c0djmnfdA';
+
+    let supabaseUrl = localStorage.getItem(STORAGE_KEY_URL) || (typeof process !== 'undefined' && process.env?.VITE_SUPABASE_URL) || CANEDU_URL;
+    let supabaseAnonKey = localStorage.getItem(STORAGE_KEY_ANON) || (typeof process !== 'undefined' && process.env?.VITE_SUPABASE_ANON_KEY) || CANEDU_ANON_KEY;
 
     // Default Stripe Payment Link ($29 Pathway Canada Pro)
     let stripePaymentLink = localStorage.getItem(STORAGE_KEY_STRIPE) || 'https://buy.stripe.com/test_pathway_canada_pro';
