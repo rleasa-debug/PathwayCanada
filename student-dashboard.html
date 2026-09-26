@@ -557,6 +557,77 @@
             </div>
         </div>
 
+        <!-- OUAC 3-Choice Strategy Portfolio Optimizer -->
+        <div class="bg-gradient-to-r from-primary via-slate-900 to-primary text-white rounded-3xl p-6 sm:p-7 shadow-lg border border-slate-700/60 mb-8 relative overflow-hidden">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-4 mb-5">
+                <div>
+                    <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-400/20 text-amber-300 text-[10px] font-black uppercase tracking-wider font-lexend mb-1">
+                        <span class="material-symbols-outlined text-xs">balance</span> OUAC Base Choice Optimizer
+                    </div>
+                    <h3 class="text-xl font-headline font-black tracking-tight text-white">Your OUAC 3-Choice Strategy Portfolio</h3>
+                    <p class="text-xs text-slate-300 font-body mt-0.5 max-w-2xl leading-relaxed">
+                        The Ontario OUAC application covers <strong>3 base choices for ~$156 CAD</strong> ($50+ per additional pick). Avoid wasting money on unqualified stretch targets with our balanced 1-1-1 formula:
+                    </p>
+                </div>
+                <div class="text-right shrink-0">
+                    <span id="ouac-status-badge" class="px-3 py-1.5 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-500/30 text-xs font-bold font-lexend inline-flex items-center gap-1.5">
+                        <span class="material-symbols-outlined text-sm">tune</span> 0 / 3 Slots Filled
+                    </span>
+                </div>
+            </div>
+
+            <!-- 3 Choice Slots Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="ouac-slots-grid">
+                <!-- Slot 1: Safety -->
+                <div class="bg-white/5 border border-white/10 rounded-2xl p-4 flex flex-col justify-between" id="ouac-slot-safety">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-lexend">Choice 1 • Safety</span>
+                            <span class="text-[10px] font-bold text-slate-400">&gt;90% Odds</span>
+                        </div>
+                        <div id="ouac-slot-safety-content">
+                            <p class="text-xs text-slate-300 font-medium">Select a <strong>Safety (Locked In)</strong> program to guarantee your backup offer.</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-[10px] text-slate-400 font-lexend">
+                        <span>Target: Exceed cutoff by +3%</span>
+                    </div>
+                </div>
+
+                <!-- Slot 2: Match -->
+                <div class="bg-white/5 border border-white/10 rounded-2xl p-4 flex flex-col justify-between" id="ouac-slot-match">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 font-lexend">Choice 2 • Solid Match</span>
+                            <span class="text-[10px] font-bold text-slate-400">75–90% Odds</span>
+                        </div>
+                        <div id="ouac-slot-match-content">
+                            <p class="text-xs text-slate-300 font-medium">Select a <strong>Solid Match</strong> program where your Top 6 matches cutoff.</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-[10px] text-slate-400 font-lexend">
+                        <span>Target: Within ±2% cutoff</span>
+                    </div>
+                </div>
+
+                <!-- Slot 3: Reach -->
+                <div class="bg-white/5 border border-white/10 rounded-2xl p-4 flex flex-col justify-between" id="ouac-slot-reach">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 font-lexend">Choice 3 • Realistic Reach</span>
+                            <span class="text-[10px] font-bold text-slate-400">60–74% Odds</span>
+                        </div>
+                        <div id="ouac-slot-reach-content">
+                            <p class="text-xs text-slate-300 font-medium">Select a <strong>Realistic Reach</strong> dream program to aim high with confidence.</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-[10px] text-slate-400 font-lexend">
+                        <span>Target: 2–5% below cutoff</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Two Column Main Body Grid -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-12">
             <!-- Left Column: Dynamic Data (col-span-9) -->
@@ -832,59 +903,59 @@
                     
                     <!-- Confidence Levels -->
                     <div class="space-y-3.5">
-                        <!-- High Confidence -->
+                        <!-- Safety (Locked In) -->
                         <div class="flex flex-col gap-1 p-2 rounded-xl transition-all duration-300 hover:bg-white/50 dark:hover:bg-slate-900/30">
                             <div class="flex items-center justify-between">
                                 <span class="px-2 py-0.5 text-[8px] font-black uppercase tracking-wider border rounded bg-emerald-50 text-emerald-700 border-emerald-100 dark:bg-emerald-950/20 dark:text-emerald-400 dark:border-emerald-900/30">
-                                    High Match
+                                    Safety (Locked In)
                                 </span>
                                 <span class="detailed-only text-[10px] font-bold text-emerald-600 dark:text-emerald-400 font-lexend">&gt;90% Match</span>
-                                <span class="simple-only text-[10px] font-bold text-emerald-600 dark:text-emerald-400 font-lexend">Excellent</span>
+                                <span class="simple-only text-[10px] font-bold text-emerald-600 dark:text-emerald-400 font-lexend">Safety</span>
                             </div>
                             <p class="detailed-only text-[10px] text-slate-500 dark:text-slate-400 leading-normal mt-0.5">
-                                Your average exceeds typical cutoffs. High likelihood of admission.
+                                Your Top 6 average exceeds cutoff by +3.0%+. Prereqs fully satisfied.
                             </p>
                         </div>
 
-                        <!-- Target Match -->
+                        <!-- Solid Match -->
                         <div class="flex flex-col gap-1 p-2 rounded-xl transition-all duration-300 hover:bg-white/50 dark:hover:bg-slate-900/30">
                             <div class="flex items-center justify-between">
-                                <span class="px-2 py-0.5 text-[8px] font-black uppercase tracking-wider border rounded bg-blue-50 text-blue-705 border-blue-100 dark:bg-blue-950/20 dark:text-blue-400 dark:border-blue-900/30">
-                                    Target Match
+                                <span class="px-2 py-0.5 text-[8px] font-black uppercase tracking-wider border rounded bg-blue-50 text-blue-700 border-blue-100 dark:bg-blue-950/20 dark:text-blue-400 dark:border-blue-900/30">
+                                    Solid Match
                                 </span>
-                                <span class="detailed-only text-[10px] font-bold text-blue-600 dark:text-blue-400 font-lexend">75–89% Match</span>
-                                <span class="simple-only text-[10px] font-bold text-blue-600 dark:text-blue-400 font-lexend">Good Match</span>
+                                <span class="detailed-only text-[10px] font-bold text-blue-600 dark:text-blue-400 font-lexend">75–90% Match</span>
+                                <span class="simple-only text-[10px] font-bold text-blue-600 dark:text-blue-400 font-lexend">Target</span>
                             </div>
                             <p class="detailed-only text-[10px] text-slate-500 dark:text-slate-400 leading-normal mt-0.5">
-                                Your average is competitive and meets target admission expectations.
+                                Average is competitive within ±2.0% of cutoff. Prerequisites met.
                             </p>
                         </div>
 
-                        <!-- Stretch Match -->
+                        <!-- Reach (High Climb) -->
                         <div class="flex flex-col gap-1 p-2 rounded-xl transition-all duration-300 hover:bg-white/50 dark:hover:bg-slate-900/30">
                             <div class="flex items-center justify-between">
-                                <span class="px-2 py-0.5 text-[8px] font-black uppercase tracking-wider border rounded bg-amber-50 text-amber-705 border-amber-100 dark:bg-amber-950/20 dark:text-amber-400 dark:border-amber-900/30">
-                                    Stretch Match
+                                <span class="px-2 py-0.5 text-[8px] font-black uppercase tracking-wider border rounded bg-amber-50 text-amber-800 border-amber-100 dark:bg-amber-950/20 dark:text-amber-400 dark:border-amber-900/30">
+                                    Reach (High Climb)
                                 </span>
-                                <span class="detailed-only text-[10px] font-bold text-amber-600 dark:text-amber-555 font-lexend">60–74% Match</span>
-                                <span class="simple-only text-[10px] font-bold text-amber-600 dark:text-amber-555 font-lexend">Stretch</span>
+                                <span class="detailed-only text-[10px] font-bold text-amber-600 dark:text-amber-500 font-lexend">60–74% Match</span>
+                                <span class="simple-only text-[10px] font-bold text-amber-600 dark:text-amber-500 font-lexend">Reach</span>
                             </div>
                             <p class="detailed-only text-[10px] text-slate-500 dark:text-slate-400 leading-normal mt-0.5">
-                                Admission cutoffs higher than your average. Raising grades recommended.
+                                2.0% to 5.0% below cutoff. Strategic exam coaching required.
                             </p>
                         </div>
 
-                        <!-- Reach Match -->
+                        <!-- Unlikely (Longshot) -->
                         <div class="flex flex-col gap-1 p-2 rounded-xl transition-all duration-300 hover:bg-white/50 dark:hover:bg-slate-900/30">
                             <div class="flex items-center justify-between">
-                                <span class="px-2 py-0.5 text-[8px] font-black uppercase tracking-wider border rounded bg-slate-50 text-slate-500 border-slate-200 dark:bg-slate-950/20 dark:text-slate-400 dark:border-slate-900/30">
-                                    Reach Match
+                                <span class="px-2 py-0.5 text-[8px] font-black uppercase tracking-wider border rounded bg-slate-50 text-slate-600 border-slate-200 dark:bg-slate-950/20 dark:text-slate-400 dark:border-slate-900/30">
+                                    Unlikely (Longshot)
                                 </span>
                                 <span class="detailed-only text-[10px] font-bold text-slate-500 dark:text-slate-450 font-lexend">&lt;60% Match</span>
-                                <span class="simple-only text-[10px] font-bold text-slate-500 dark:text-slate-450 font-lexend">Reach</span>
+                                <span class="simple-only text-[10px] font-bold text-slate-500 dark:text-slate-450 font-lexend">Unlikely</span>
                             </div>
                             <p class="detailed-only text-[10px] text-slate-500 dark:text-slate-400 leading-normal mt-0.5">
-                                Significantly below historical cutoffs, or missing required courses.
+                                More than 5.0% below cutoff or missing core senior prerequisites.
                             </p>
                         </div>
                     </div>
@@ -1018,34 +1089,64 @@
         </div>
         
         <!-- Breakdown Content -->
-        <div class="space-y-6 text-sm">
+        <div class="space-y-4 text-sm">
             <div class="flex items-start gap-3">
                 <span class="material-symbols-outlined text-secondary mt-0.5" style="font-variation-settings: 'FILL' 1;">check_circle</span>
                 <div>
-                    <h4 class="font-bold text-primary font-lexend">Academic Criteria</h4>
+                    <h4 class="font-bold text-primary font-lexend">Academic Cutoff Standing</h4>
                     <p id="explainer-academic" class="text-on-surface-variant mt-1 leading-relaxed font-body"></p>
                 </div>
             </div>
+            
+            <!-- Prerequisites Check -->
+            <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-700/60">
+                <span class="material-symbols-outlined text-blue-600 mt-0.5" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+                <div class="flex-1">
+                    <h4 class="font-bold text-primary dark:text-white font-lexend text-xs uppercase tracking-wider">Mandatory Prerequisites</h4>
+                    <p id="explainer-prereqs" class="text-xs text-on-surface-variant mt-1 leading-relaxed font-body"></p>
+                </div>
+            </div>
+
+            <!-- Predictive Exam Target -->
+            <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-700/60">
+                <span class="material-symbols-outlined text-emerald-600 mt-0.5" style="font-variation-settings: 'FILL' 1;">trending_up</span>
+                <div class="flex-1">
+                    <h4 class="font-bold text-primary dark:text-white font-lexend text-xs uppercase tracking-wider">Predictive Exam Target</h4>
+                    <p id="explainer-target" class="text-xs text-on-surface-variant mt-1 leading-relaxed font-body"></p>
+                </div>
+            </div>
+
+            <!-- College-to-University Articulation (2+2) -->
+            <div id="explainer-articulation-box" class="hidden flex items-start gap-3 p-3 rounded-xl bg-indigo-50/50 dark:bg-indigo-950/20 border border-indigo-200/60 dark:border-indigo-800/40">
+                <span class="material-symbols-outlined text-indigo-600 mt-0.5">school</span>
+                <div class="flex-1">
+                    <h4 class="font-bold text-indigo-950 dark:text-indigo-300 font-lexend text-xs uppercase tracking-wider">College-to-University Articulation</h4>
+                    <p id="explainer-articulation" class="text-xs text-indigo-900/80 dark:text-indigo-200/80 mt-1 leading-relaxed font-body"></p>
+                </div>
+            </div>
+
             <div class="flex items-start gap-3">
-                <span class="material-symbols-outlined text-secondary mt-0.5" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                <span class="material-symbols-outlined text-secondary mt-0.5" style="font-variation-settings: 'FILL' 1;">stars</span>
                 <div>
-                    <h4 class="font-bold text-primary font-lexend">Extracurricular Boosts</h4>
+                    <h4 class="font-bold text-primary font-lexend">Extracurricular Alignment</h4>
                     <p id="explainer-extracurricular" class="text-on-surface-variant mt-1 leading-relaxed font-body"></p>
                 </div>
             </div>
+
             <div class="relative overflow-hidden rounded-xl" id="explainer-teaser-wrapper">
                 <div class="flex items-start gap-3 bg-primary-container/10 p-4 rounded-xl border border-primary/10 transition-all duration-300" id="explainer-counselor-section">
                     <span class="material-symbols-outlined text-primary mt-0.5" style="font-variation-settings: 'FILL' 1;">info</span>
                     <div>
-                        <h4 class="font-bold text-primary font-lexend">Counselor Recommendation</h4>
+                        <h4 class="font-bold text-primary font-lexend">Admissions Strategy</h4>
                         <p id="explainer-recommendation" class="text-on-surface-variant mt-1 leading-relaxed font-body"></p>
                     </div>
                 </div>
                 <!-- Teaser Paywall Overlay -->
-                <div id="explainer-paywall-overlay" class="absolute inset-0 bg-slate-950/60 backdrop-blur-sm flex flex-col items-center justify-center rounded-xl border border-dashed border-primary/30 text-center p-3 cursor-pointer hidden" onclick="openUpgradeModal(event)">
-                    <span class="material-symbols-outlined text-white text-base" style="font-variation-settings: 'FILL' 1;">lock</span>
-                    <span class="text-xs font-bold text-white font-lexend mt-1">Unlock Recommendation & Critical Gaps</span>
-                    <p class="text-[9px] text-slate-200 mt-0.5 leading-snug">Upgrade to Pro to view counselor insights and critical gaps analysis.</p>
+                <div id="explainer-paywall-overlay" class="absolute inset-0 bg-slate-950/80 backdrop-blur-sm flex flex-col items-center justify-center rounded-xl border border-dashed border-amber-400/40 text-center p-4 cursor-pointer hidden">
+                    <span class="material-symbols-outlined text-amber-400 text-2xl" style="font-variation-settings: 'FILL' 1;">lock</span>
+                    <span class="text-xs font-black text-white font-lexend mt-1 uppercase tracking-wider">Detailed Diagnostics Locked</span>
+                    <p class="text-[10px] text-slate-300 mt-1 max-w-xs leading-relaxed">Prerequisite audit, exam cutoff score target, and admissions probability are reserved for Pro users or your 1 Free Program Deep Audit.</p>
+                    <div id="explainer-claim-cta" class="mt-3 flex flex-col sm:flex-row gap-2 w-full max-w-xs"></div>
                 </div>
             </div>
         </div>
@@ -1096,21 +1197,25 @@
 
         <!-- Financial Value Hook -->
         <div class="bg-amber-500/10 dark:bg-amber-500/5 border border-amber-500/20 rounded-2xl p-4 text-left text-xs mb-6 text-slate-700 dark:text-slate-350 font-body">
-            <span class="font-bold text-amber-800 dark:text-amber-400 block mb-1">💡 Save on Application Fees</span>
-            The average Canadian family spends over <strong class="text-slate-900 dark:text-white">$550</strong> in trial-and-error application fees. Pro acts as an optimization tool using a <strong>99% precision matching algorithm</strong> to guarantee data currency and prevent costly, low-probability submissions.
+            <span class="font-bold text-amber-800 dark:text-amber-400 block mb-1">💡 Save on Application Fees (OUAC / OCAS)</span>
+            The average Canadian family saves over <strong class="text-slate-900 dark:text-white">$325+</strong> by eliminating non-viable submissions and balancing their 3 base application choices (1 Confirmed Safety, 1 Solid Target, 1 Realistic Reach).
         </div>
 
         <div class="bg-primary/5 dark:bg-white/5 border border-primary/20 rounded-2xl p-4 text-center mb-6">
-            <div class="text-3xl font-black text-primary font-lexend">$29.00 <span class="text-sm font-normal text-on-surface-variant">/ year</span></div>
-            <p class="text-xs text-on-surface-variant mt-1.5 font-bold">Billed annually. Cancel anytime.</p>
+            <div class="text-3xl font-black text-primary font-lexend">$29.00 <span class="text-sm font-normal text-on-surface-variant">CAD</span></div>
+            <p class="text-xs text-on-surface-variant mt-1.5 font-bold">Full access valid through June 30, 2027 • Single charge, non-renewing</p>
+            <div class="mt-2.5 p-2 bg-emerald-500/10 border border-emerald-500/20 rounded-xl text-xs text-emerald-800 dark:text-emerald-300 font-semibold">
+                Use code <span class="font-mono font-bold bg-white dark:bg-slate-900 px-2 py-0.5 rounded shadow-sm text-emerald-600 dark:text-emerald-400">SAVE10</span> for $10 off ($19 CAD)
+            </div>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-2">Grade 11 Student? Check out the <a href="pricing.html" class="underline text-primary dark:text-blue-400 font-bold">2-Year Pass ($39 CAD)</a> valid through June 30, 2028.</p>
         </div>
         
         <div class="flex flex-col gap-3">
-            <button onclick="if(window.PathwayAuth){PathwayAuth.startStripeCheckout();}else{window.location.href='pricing.html';}" class="block w-full text-center py-4 bg-primary hover:bg-slate-900 text-white rounded-2xl font-lexend font-bold text-lg border-2 border-slate-700 hover:border-black shadow-lg transition-all focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-primary cursor-pointer">
-                Upgrade Now ($29.00 CAD)
+            <button onclick="if(window.PathwayAuth){PathwayAuth.startStripeCheckout();}else{window.location.href='pricing.html';}" class="block w-full text-center py-4 bg-primary hover:bg-slate-900 text-white rounded-2xl font-lexend font-black text-lg border-2 border-slate-700 hover:border-black shadow-lg transition-all focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-primary cursor-pointer">
+                Unlock Pro Pass ($29 CAD)
             </button>
-            <button class="w-full text-center py-3 bg-white hover:bg-slate-50 text-slate-700 rounded-2xl font-lexend font-bold text-base border-2 border-slate-300 hover:border-slate-400 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-slate-500 transition-all" onclick="closeUpgradeModal()">
-                Continue on Free Version
+            <button class="w-full text-center py-3 bg-white hover:bg-slate-50 text-slate-700 rounded-2xl font-lexend font-bold text-base border-2 border-slate-300 hover:border-slate-400 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-slate-500 transition-all cursor-pointer" onclick="closeUpgradeModal()">
+                Continue on Free Explorer
             </button>
         </div>
     </div>
@@ -1182,11 +1287,13 @@
 
     function getQualitativeBadge(match) {
         if (match > 90) {
-            return `<span class="px-2.5 py-1 border border-emerald-300 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-950/60 rounded-full text-[9px] font-black uppercase tracking-wider font-lexend shadow-sm badge-high-match-pulse">High Match</span>`;
+            return `<span class="px-2.5 py-1 border border-emerald-300 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-950/60 rounded-full text-[9px] font-black uppercase tracking-wider font-lexend shadow-sm badge-high-match-pulse">🎯 Safety (Locked In)</span>`;
         } else if (match >= 75) {
-            return `<span class="px-2.5 py-1 border border-amber-300 dark:border-amber-800 text-amber-800 dark:text-amber-300 bg-amber-100 dark:bg-amber-950/60 rounded-full text-[9px] font-black uppercase tracking-wider font-lexend shadow-sm">Medium Match</span>`;
+            return `<span class="px-2.5 py-1 border border-indigo-300 dark:border-indigo-800 text-indigo-800 dark:text-indigo-300 bg-indigo-100 dark:bg-indigo-950/60 rounded-full text-[9px] font-black uppercase tracking-wider font-lexend shadow-sm">⚖️ Solid Match</span>`;
+        } else if (match >= 60) {
+            return `<span class="px-2.5 py-1 border border-amber-300 dark:border-amber-800 text-amber-800 dark:text-amber-300 bg-amber-100 dark:bg-amber-950/60 rounded-full text-[9px] font-black uppercase tracking-wider font-lexend shadow-sm">🧗 Reach (High Climb)</span>`;
         } else {
-            return `<span class="px-2.5 py-1 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-400 bg-slate-100 dark:bg-slate-800/60 rounded-full text-[9px] font-black uppercase tracking-wider font-lexend shadow-sm">Low Match</span>`;
+            return `<span class="px-2.5 py-1 border border-rose-300 dark:border-rose-800 text-rose-800 dark:text-rose-300 bg-rose-100 dark:bg-rose-950/60 rounded-full text-[9px] font-black uppercase tracking-wider font-lexend shadow-sm">🎲 Unlikely (Longshot)</span>`;
         }
     }
 
@@ -1349,16 +1456,15 @@
                 : `0 Low-Prob. Apps Avoided`;
         }
         
-        // Sync checkboxes in dropdown with state.provinces
+        // Sync checkboxes in dropdown with state.provinces (100% free discovery)
         const checkboxes = document.querySelectorAll('.province-checkbox');
         checkboxes.forEach(cb => {
-            if (state.isPro) {
-                cb.checked = state.provinces && state.provinces.includes(cb.value);
-            } else {
-                cb.checked = true;
-            }
+            cb.checked = state.provinces && state.provinces.includes(cb.value);
         });
         updateProvinceBtnText();
+        
+        // Render OUAC 3-Choice Strategy Portfolio
+        renderOuacSlots();
         
         // Render Smart Matches (Top 6 eligible, paginated)
         renderPrograms(currentPageIndex);
@@ -1527,103 +1633,110 @@
                 const brandColor = (item.logoStyle && item.logoStyle.brandColor) || '#2563eb';
                 card.style.setProperty('--brand-glow-color', brandColor);
                 
-                let badgeHTML = '';
-                let teaserMatchHTML = '';
-                let proSectionHTML = '';
+                const isUnlocked = item.isUnlocked;
+                const isFreeAudit = item.isFreeAudit;
+                const hasUsedFreeAudit = Boolean(state.freeAuditProgramId);
+                const ouacSlots = state.ouacSlots || { safety: null, match: null, reach: null };
+                const isSafety = ouacSlots.safety === item.id;
+                const isMatch = ouacSlots.match === item.id;
+                const isReach = ouacSlots.reach === item.id;
                 
-                if (item.proLocked) {
+                // 1. Badge Zone: Qualitative status is 100% free for all programs!
+                let badgeHTML = '';
+                if (isUnlocked) {
+                    const pulseClass = item.match > 90 ? 'badge-high-match-pulse' : '';
                     badgeHTML = `
-                        <div class="z-20 relative cursor-pointer pointer-events-auto" onclick="openUpgradeModal(event)">
-                            <span class="px-2.5 py-1 bg-amber-500 text-slate-950 border border-amber-400 rounded-full text-[9px] font-black uppercase tracking-wider font-lexend">
-                                🔒 Data Wall
-                            </span>
-                        </div>
-                    `;
-                    teaserMatchHTML = `
-                        <span class="text-amber-600 dark:text-amber-400 text-xs font-black tracking-tight font-lexend select-none">
-                            [${item.match}% Match Locked]
-                        </span>
-                    `;
-                    
-                    let prereqPreview = "ENG4U, MHF4U, MCV4U, +2 more [Locked]";
-                    if (item.type === 'College' || item.program.toLowerCase().includes('nursing') || item.program.toLowerCase().includes('health')) {
-                        prereqPreview = "ENG4U, SBI4U, SCH4U, +1 more [Locked]";
-                    }
-                    
-                    proSectionHTML = `
-                        <div class="mt-3 p-3 bg-red-500/5 dark:bg-red-500/10 rounded-xl border border-red-500/20 text-left cursor-pointer z-20 relative overflow-hidden group/lock" onclick="openUpgradeModal(event)">
-                            <!-- Inner Content that is blurred -->
-                            <div class="text-[10px] space-y-1.5 text-slate-650 dark:text-slate-350 font-body transition duration-300 filter blur-[2.5px] select-none">
-                                <div>
-                                    <div class="flex items-center justify-between font-semibold">
-                                        <span>Target Cutoff:</span>
-                                        <span class="text-slate-800 dark:text-slate-200">${item.cutoff}%</span>
-                                    </div>
-                                    <div class="text-[8.5px] text-slate-500 italic mt-0.5 leading-tight">
-                                        Strict cutoff tracking is exclusive to Pro.
-                                    </div>
-                                </div>
-                                <div class="h-px bg-slate-100 dark:bg-slate-800 my-1"></div>
-                                <div>
-                                    <div class="flex items-center justify-between font-semibold">
-                                        <span>Prerequisites:</span>
-                                        <span class="text-slate-800 dark:text-slate-200">${prereqPreview}</span>
-                                    </div>
-                                    <div class="text-[8.5px] text-slate-500 italic mt-0.5 leading-tight">
-                                        Specific course combination analysis is exclusive to Pro.
-                                    </div>
-                                </div>
-                                <div class="h-px bg-slate-100 dark:bg-slate-800 my-1"></div>
-                                <div>
-                                    <div class="flex items-center justify-between font-semibold">
-                                        <span>Cohort Standing:</span>
-                                        <span class="text-slate-800 dark:text-slate-200">Top 15% Standing</span>
-                                    </div>
-                                    <div class="text-[8.5px] text-slate-500 italic mt-0.5 leading-tight">
-                                        Historical cohort standings are exclusive to Pro.
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Glassmorphic Blur Overlay -->
-                            <div class="absolute inset-0 bg-slate-900/10 dark:bg-black/10 backdrop-blur-[6px] transition-all duration-300 group-hover/lock:backdrop-blur-[2px] flex flex-col items-center justify-center gap-1 z-10">
-                                <div class="w-8 h-8 rounded-full bg-white/95 dark:bg-slate-900/95 shadow-md flex items-center justify-center transition-all duration-500 transform group-hover/lock:scale-110 active:scale-95 text-amber-500 lock-spring-icon">
-                                    <span class="material-symbols-outlined text-lg">lock</span>
-                                </div>
-                                <span class="text-[8px] font-black uppercase text-slate-700 dark:text-slate-300 tracking-wider font-lexend bg-white/90 dark:bg-slate-900/90 px-2 py-0.5 rounded shadow-sm">
-                                    Unlock Analytics
+                        <div class="flex flex-col gap-1 items-start">
+                            ${getQualitativeBadge(item.match)}
+                            <div class="flex items-center gap-1">
+                                <span class="px-2 py-0.5 bg-emerald-500/15 text-emerald-800 dark:text-emerald-300 border border-emerald-500/30 rounded-full text-[9px] font-black uppercase tracking-wider font-lexend ${pulseClass}">
+                                    ${item.match}% Match
                                 </span>
+                                ${isFreeAudit ? `
+                                <span class="px-2 py-0.5 bg-amber-500/20 text-amber-800 dark:text-amber-300 border border-amber-500/40 rounded-full text-[8px] font-black uppercase tracking-wider font-lexend">
+                                    ✨ Free Audit
+                                </span>` : ''}
                             </div>
                         </div>
                     `;
                 } else {
-                    if (state.isPro) {
-                        const pulseClass = item.match > 90 ? 'badge-high-match-pulse' : '';
-                        badgeHTML = `
-                            <span class="px-2.5 py-1 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20 rounded-full text-[9px] font-black uppercase tracking-wider font-lexend ${pulseClass}">
-                                ${item.match}% Match
-                            </span>
-                        `;
-                        
-                        const isCompetitive = item.id === 'university-of-waterloo' || item.id === 'university-of-toronto' || item.id === 'mcgill-university' || item.id === 'mcmaster-university';
-                        if (isCompetitive) {
-                            proSectionHTML = `
-                                <div class="mt-3 p-3 bg-emerald-500/5 dark:bg-emerald-950/10 rounded-xl border border-emerald-500/10 text-left">
-                                    <div class="flex items-center justify-between mb-1">
-                                        <span class="text-[9px] font-black uppercase text-emerald-600 dark:text-emerald-450 tracking-wider font-lexend">Pro Analytics</span>
-                                        <span class="material-symbols-outlined text-[12px] text-emerald-500">verified</span>
-                                    </div>
-                                    <div class="text-[10px] space-y-1 text-slate-650 dark:text-slate-350 font-body">
-                                        <div>Target Cutoff: <strong class="text-slate-900 dark:text-white">${item.cutoff}%</strong></div>
-                                        <div>Prereqs: <span class="font-semibold text-slate-800 dark:text-slate-200">ENG4U, MHF4U, MCV4U</span></div>
-                                        <div>Admission Probability: <span class="font-bold text-emerald-600 dark:text-emerald-400">${item.match}%</span></div>
-                                    </div>
+                    badgeHTML = getQualitativeBadge(item.match);
+                }
+
+                // 2. Diagnostics Section:
+                let proSectionHTML = '';
+                if (isUnlocked) {
+                    const studentAvgNum = parseFloat(state.average);
+                    const avgGap = (studentAvgNum - item.cutoff).toFixed(1);
+                    const gapColor = avgGap >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400';
+                    const gapSign = avgGap >= 0 ? `+${avgGap}%` : `${avgGap}%`;
+
+                    proSectionHTML = `
+                        <div class="mt-3 p-3.5 bg-emerald-500/5 dark:bg-emerald-950/20 rounded-2xl border border-emerald-500/20 text-left space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[9px] font-black uppercase text-emerald-700 dark:text-emerald-400 tracking-wider font-lexend flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-[13px]">verified</span>
+                                    ${isFreeAudit ? '1 Free Deep Audit' : 'Pro Diagnostics'}
+                                </span>
+                                <span class="text-[9px] font-bold ${gapColor} font-lexend">Avg ${state.average}% (${gapSign})</span>
+                            </div>
+                            
+                            <div class="text-[10px] space-y-1.5 text-slate-700 dark:text-slate-300 font-body">
+                                <div class="flex items-start gap-1.5">
+                                    <span class="font-bold text-slate-900 dark:text-white shrink-0">Prerequisites:</span>
+                                    <span class="${item.diagnostic.prereqsMet ? 'text-emerald-600 dark:text-emerald-400 font-semibold' : 'text-rose-600 dark:text-rose-400 font-bold'}">
+                                        ${item.diagnostic.prereqsMet ? '✅ Mandatory Grade 12 prerequisites met' : '⚠️ ' + item.diagnostic.missing}
+                                    </span>
                                 </div>
-                            `;
-                        }
-                    } else {
-                        badgeHTML = getQualitativeBadge(item.match);
-                    }
+                                <div class="flex items-start gap-1.5">
+                                    <span class="font-bold text-slate-900 dark:text-white shrink-0">Action Target:</span>
+                                    <span class="text-slate-600 dark:text-slate-300">${item.diagnostic.examTarget}</span>
+                                </div>
+                                ${item.articulation ? `
+                                <div class="p-2 bg-indigo-50 dark:bg-indigo-950/40 rounded-xl border border-indigo-200/60 dark:border-indigo-800/40 text-[9.5px]">
+                                    <span class="font-black text-indigo-900 dark:text-indigo-300 font-lexend block">🎓 ${item.articulation.agreement} (${item.articulation.partner})</span>
+                                    <span class="text-indigo-800/80 dark:text-indigo-300/80 block mt-0.5">${item.articulation.savings} • ${item.articulation.detail}</span>
+                                </div>` : ''}
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    proSectionHTML = `
+                        <div class="mt-3 p-3 bg-slate-50 dark:bg-slate-800/40 rounded-2xl border border-slate-200 dark:border-slate-700 text-left relative overflow-hidden">
+                            <!-- Blurred teaser rows -->
+                            <div class="text-[10px] space-y-2 text-slate-500 filter blur-[3px] select-none pointer-events-none">
+                                <div class="flex justify-between">
+                                    <span>Prerequisites:</span>
+                                    <span>ENG4U, MHF4U, SBI4U [Mandatory]</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Target Final Exam Grade:</span>
+                                    <span>86% Required to pass cutoff</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Historical Cohort Standing:</span>
+                                    <span>Top 15% Rank</span>
+                                </div>
+                            </div>
+
+                            <!-- Overlay Action -->
+                            <div class="absolute inset-0 bg-slate-900/10 dark:bg-black/25 backdrop-blur-[3px] flex flex-col items-center justify-center p-3 text-center">
+                                ${!hasUsedFreeAudit ? `
+                                <button onclick="handleClaimFreeAudit('${item.id}', event)" class="w-full py-2 px-3 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-[10px] uppercase tracking-wider rounded-xl shadow-md transition-all flex items-center justify-center gap-1.5 cursor-pointer transform hover:scale-[1.02] active:scale-98">
+                                    <span class="material-symbols-outlined text-[15px]">stars</span>
+                                    Unlock 1 Free Program Deep Audit
+                                </button>
+                                <span class="text-[8.5px] text-slate-700 dark:text-slate-300 font-medium mt-1">Unlock prerequisites & exam targets for this dream school</span>
+                                ` : `
+                                <button onclick="openUpgradeModal(event)" class="w-full py-2 px-3 bg-slate-950 hover:bg-slate-800 text-amber-300 font-black text-[10px] uppercase tracking-wider rounded-xl border border-amber-400/40 shadow-sm transition-all flex items-center justify-center gap-1 cursor-pointer">
+                                    <span class="material-symbols-outlined text-[14px]">lock_open</span>
+                                    Unlock Portfolio Diagnostics ($29 CAD)
+                                </button>
+                                <span class="text-[8px] text-slate-600 dark:text-slate-400 mt-1">Code <strong class="text-emerald-500">SAVE10</strong> drops price to $19 CAD</span>
+                                `}
+                            </div>
+                        </div>
+                    `;
                 }
                 
                 const isPinned = state.favorites && state.favorites.includes(item.id);
@@ -1636,7 +1749,7 @@
                     </div>
 
                     <!-- Primary Campus Image -->
-                    <div class="w-full h-48 bg-slate-200 overflow-hidden relative shadow-inner cursor-pointer" onclick="${item.proLocked ? 'openUpgradeModal(event)' : ''}">
+                    <div class="w-full h-48 bg-slate-200 overflow-hidden relative shadow-inner cursor-pointer" onclick="openExplainer('${item.id}', event)">
                         ${item.image ? `
                         <img alt="${item.university}" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" src="${item.image}" onerror="handleImageError(this, '${item.id}')"/>
                         ` : ''}
@@ -1646,7 +1759,7 @@
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none"></div>
                         
                         <!-- Restored Logo Overlaid -->
-                        <div class="absolute bottom-3 left-1/2 -translate-x-1/2 w-14 h-14 rounded-full border-2 border-white/20 overflow-hidden bg-white shadow-lg z-30" ${item.proLocked ? `title="Official ${item.university} Admissions Data available for Pro users."` : ''}>
+                        <div class="absolute bottom-3 left-1/2 -translate-x-1/2 w-14 h-14 rounded-full border-2 border-white/20 overflow-hidden bg-white shadow-lg z-30" title="${item.university}">
                             <img class="w-full h-full object-contain p-0.5" src="${item.logoUrl}" alt="${item.university} Logo" onerror="handleLogoError(this, '${item.crestSvg}');"/>
                             <div class="hidden absolute inset-0 items-center justify-center bg-white">
                                 <img src="${item.crestSvg}" alt="${item.university} crest" class="w-full h-full object-contain p-1" />
@@ -1654,7 +1767,7 @@
                         </div>
                     </div>
 
-                    <div class="flex flex-col items-center text-center flex-1 relative z-20 mt-4 px-4" onclick="${item.proLocked ? 'openUpgradeModal(event)' : ''}">
+                    <div class="flex flex-col items-center text-center flex-1 relative z-20 mt-4 px-4 cursor-pointer" onclick="openExplainer('${item.id}', event)">
                         <!-- Program and University with distinct weights -->
                         <h4 class="program-title font-black text-sm text-primary dark:text-white leading-tight mb-1 w-full flex items-center justify-center gap-1.5 min-w-0">
                             ${getMatchDotIndicator(item.match)}
@@ -1669,7 +1782,7 @@
                         </div>
 
                         <!-- Critical Metadata Badges -->
-                        <div class="flex flex-wrap gap-1.5 mt-1.5 justify-center mb-4">
+                        <div class="flex flex-wrap gap-1.5 mt-1.5 justify-center mb-2">
                             <span class="px-2.5 py-0.5 bg-primary/5 text-primary dark:bg-primary/10 dark:text-blue-300 text-[9px] font-extrabold rounded-full uppercase tracking-wider select-none">
                                 Min. Avg: ${item.cutoff}%
                             </span>
@@ -1679,46 +1792,61 @@
                             ${item.ranking ? `
                             <span class="px-2.5 py-0.5 bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/20 text-[9px] font-extrabold rounded-full uppercase tracking-wider flex items-center gap-1 select-none">
                                 <span class="material-symbols-outlined text-[10px] leading-none">leaderboard</span>
-                                Maclean's: #${item.ranking.rank} ${item.ranking.category}
+                                #${item.ranking.rank} ${item.ranking.category}
                             </span>
                             ` : ''}
                         </div>
                     </div>
 
                     <div class="relative flex-1 flex flex-col z-10">
-                        <!-- Removed secondary campus image -->
-
                         ${proSectionHTML}
 
+                        <!-- OUAC 3-Choice Strategy Quick Selector -->
+                        <div class="mt-3 pt-2.5 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between gap-1 text-[9px] font-lexend font-bold">
+                            <span class="text-slate-400 uppercase tracking-wider text-[8px] shrink-0">OUAC 3-Choice:</span>
+                            <div class="flex items-center gap-1">
+                                <button onclick="handleAssignOuac('safety', '${item.id}', event)" class="px-2 py-1 rounded-lg ${isSafety ? 'bg-emerald-600 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-emerald-100 dark:hover:bg-emerald-950'} transition-all cursor-pointer" title="Add as Safety Choice">
+                                    ${isSafety ? '✓ Safety' : '+ Safety'}
+                                </button>
+                                <button onclick="handleAssignOuac('match', '${item.id}', event)" class="px-2 py-1 rounded-lg ${isMatch ? 'bg-indigo-600 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-indigo-100 dark:hover:bg-indigo-950'} transition-all cursor-pointer" title="Add as Target Choice">
+                                    ${isMatch ? '✓ Target' : '+ Target'}
+                                </button>
+                                <button onclick="handleAssignOuac('reach', '${item.id}', event)" class="px-2 py-1 rounded-lg ${isReach ? 'bg-amber-600 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-amber-100 dark:hover:bg-amber-950'} transition-all cursor-pointer" title="Add as Reach Choice">
+                                    ${isReach ? '✓ Reach' : '+ Reach'}
+                                </button>
+                            </div>
+                        </div>
+
                         <!-- Action Buttons -->
-                        <div class="mt-4 mb-2 flex flex-col gap-2 w-full relative z-20">
-                            <a href="${item.proLocked ? '#' : item.applyUrl}" 
-                               target="${item.proLocked ? '_self' : '_blank'}" 
+                        <div class="mt-3 mb-2 flex flex-col gap-2 w-full relative z-20">
+                            <a href="${item.applyUrl}" 
+                               target="_blank" 
                                rel="noopener noreferrer" 
-                               onclick="${item.proLocked ? 'openUpgradeModal(event)' : 'event.stopPropagation();'}" 
-                               class="w-full text-center py-3 ${item.proLocked ? 'bg-amber-500 hover:bg-amber-600 text-slate-950 font-black' : 'bg-primary hover:bg-primary/95 text-white'} text-xs font-black uppercase tracking-wider rounded-xl transition-all duration-200 shadow-sm cursor-pointer hover:scale-[1.02] active:scale-98 flex items-center justify-center gap-1">
-                                ${item.proLocked ? 'Unlock Predictive Analytics' : 'How to Apply'}
-                                <span class="material-symbols-outlined text-[14px]">${item.proLocked ? 'lock_open' : 'arrow_outward'}</span>
+                               onclick="event.stopPropagation();" 
+                               class="w-full text-center py-2.5 bg-primary hover:bg-primary/95 text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all duration-200 shadow-sm cursor-pointer hover:scale-[1.02] active:scale-98 flex items-center justify-center gap-1">
+                                How to Apply
+                                <span class="material-symbols-outlined text-[14px]">arrow_outward</span>
                             </a>
-                            <a href="${item.proLocked ? '#' : item.websiteUrl}" 
-                               target="${item.proLocked ? '_self' : '_blank'}" 
+                            <a href="${item.websiteUrl}" 
+                               target="_blank" 
                                rel="noopener noreferrer" 
-                               onclick="${item.proLocked ? 'openUpgradeModal(event)' : 'event.stopPropagation();'}" 
-                               class="w-full text-center py-3 bg-slate-55 bg-slate-50 hover:bg-slate-100 dark:bg-slate-805 dark:hover:bg-slate-800 border border-slate-200/60 dark:border-slate-700 text-slate-650 dark:text-slate-350 hover:text-primary dark:hover:text-white text-[10px] font-black uppercase tracking-wider rounded-xl transition-all duration-200 cursor-pointer">
-                                ${item.proLocked ? 'Compare Premium Benefits' : 'View Program Website'}
+                               onclick="event.stopPropagation();" 
+                               class="w-full text-center py-2 bg-slate-50 hover:bg-slate-100 dark:bg-slate-805 dark:hover:bg-slate-800 border border-slate-200/60 dark:border-slate-700 text-slate-650 dark:text-slate-350 hover:text-primary dark:hover:text-white text-[10px] font-black uppercase tracking-wider rounded-xl transition-all duration-200 cursor-pointer">
+                                View Program Website
                             </a>
                         </div>
 
                         <!-- Card Footer -->
                         <div class="flex items-center justify-between mt-auto pt-3 border-t border-slate-100/60 dark:border-slate-800/60">
-                            <div class="flex items-center gap-2">
-                                ${teaserMatchHTML}
+                            <div class="flex items-center gap-1.5">
+                                <span class="text-[9px] font-bold uppercase tracking-wider text-slate-400 font-lexend">Status:</span>
+                                <span class="text-xs font-black text-slate-700 dark:text-slate-300 font-lexend">${item.qualitativeTier}</span>
                             </div>
                             <div class="flex items-center gap-2">
                                 <button class="material-symbols-outlined ${isPinned ? 'text-primary' : 'text-slate-400 hover:text-primary opacity-0 group-hover:opacity-100'} text-lg cursor-pointer transition-all duration-300" onclick="toggleFavorite('${item.id}', event)" style="${isPinned ? "font-variation-settings: 'FILL' 1;" : ""}">
                                     push_pin
                                 </button>
-                                <button class="material-symbols-outlined text-slate-400 hover:text-primary text-lg cursor-pointer opacity-0 group-hover:opacity-100 transition-all duration-300" onclick="openExplainer('${item.id}', event)">
+                                <button class="material-symbols-outlined text-slate-400 hover:text-primary text-lg cursor-pointer opacity-0 group-hover:opacity-100 transition-all duration-300" onclick="openExplainer('${item.id}', event)" title="View Deep Audit Breakdown">
                                     info
                                 </button>
                             </div>
@@ -1794,13 +1922,8 @@
         const outlookEl = document.getElementById('filter-outlook');
         const outlookFilter = outlookEl ? outlookEl.value : 'ALL';
         
-        let activeProvinces = [];
         const checkboxes = document.querySelectorAll('.province-checkbox');
-        if (state.isPro) {
-            activeProvinces = Array.from(checkboxes).filter(cb => cb.checked).map(cb => cb.value);
-        } else {
-            activeProvinces = Array.from(checkboxes).map(cb => cb.value);
-        }
+        const activeProvinces = Array.from(checkboxes).filter(cb => cb.checked).map(cb => cb.value);
         
         return dataList.filter(item => {
             const matchesQuery = !query || 
@@ -1979,105 +2102,112 @@
                 // Staggered entry animation delay
                 card.style.setProperty('--card-index', index);
                 
-                let badgeHTML = '';
-                let teaserMatchHTML = '';
-                let proSectionHTML = '';
+                const isUnlocked = item.isUnlocked;
+                const isFreeAudit = item.isFreeAudit;
+                const hasUsedFreeAudit = Boolean(state.freeAuditProgramId);
+                const ouacSlots = state.ouacSlots || { safety: null, match: null, reach: null };
+                const isSafety = ouacSlots.safety === item.id;
+                const isMatch = ouacSlots.match === item.id;
+                const isReach = ouacSlots.reach === item.id;
                 
-                if (item.proLocked) {
+                // 1. Badge Zone: Qualitative status is 100% free for all programs!
+                let badgeHTML = '';
+                if (isUnlocked) {
+                    const pulseClass = item.match > 90 ? 'badge-high-match-pulse' : '';
                     badgeHTML = `
-                        <div class="z-20 relative cursor-pointer pointer-events-auto" onclick="openUpgradeModal(event)">
-                            <span class="px-2.5 py-1 bg-amber-500 text-slate-950 border border-amber-400 rounded-full text-[9px] font-black uppercase tracking-wider font-lexend">
-                                🔒 Data Wall
-                            </span>
-                        </div>
-                    `;
-                    teaserMatchHTML = `
-                        <span class="text-amber-600 dark:text-amber-400 text-xs font-black tracking-tight font-lexend mr-2 select-none">
-                            [${item.match}% Match Locked]
-                        </span>
-                    `;
-                    
-                    let prereqPreview = "ENG4U, MHF4U, MCV4U, +2 more [Locked]";
-                    if (item.type === 'College' || item.program.toLowerCase().includes('nursing') || item.program.toLowerCase().includes('health')) {
-                        prereqPreview = "ENG4U, SBI4U, SCH4U, +1 more [Locked]";
-                    }
-                    
-                    proSectionHTML = `
-                        <div class="mt-3 p-3 bg-red-500/5 dark:bg-red-500/10 rounded-xl border border-red-500/20 text-left cursor-pointer z-20 relative overflow-hidden group/lock" onclick="openUpgradeModal(event)">
-                            <!-- Inner Content that is blurred -->
-                            <div class="text-[10px] space-y-1.5 text-slate-650 dark:text-slate-350 font-body transition duration-300 filter blur-[2.5px] select-none">
-                                <div>
-                                    <div class="flex items-center justify-between font-semibold">
-                                        <span>Target Cutoff:</span>
-                                        <span class="text-slate-800 dark:text-slate-200">${item.cutoff}%</span>
-                                    </div>
-                                    <div class="text-[8.5px] text-slate-500 italic mt-0.5 leading-tight">
-                                        Strict cutoff tracking is exclusive to Pro.
-                                    </div>
-                                </div>
-                                <div class="h-px bg-slate-100 dark:bg-slate-800 my-1"></div>
-                                <div>
-                                    <div class="flex items-center justify-between font-semibold">
-                                        <span>Prerequisites:</span>
-                                        <span class="text-slate-800 dark:text-slate-200">${prereqPreview}</span>
-                                    </div>
-                                    <div class="text-[8.5px] text-slate-500 italic mt-0.5 leading-tight">
-                                        Specific course combination analysis is exclusive to Pro.
-                                    </div>
-                                </div>
-                                <div class="h-px bg-slate-100 dark:bg-slate-800 my-1"></div>
-                                <div>
-                                    <div class="flex items-center justify-between font-semibold">
-                                        <span>Cohort Standing:</span>
-                                        <span class="text-slate-800 dark:text-slate-200">Top 15% Standing</span>
-                                    </div>
-                                    <div class="text-[8.5px] text-slate-500 italic mt-0.5 leading-tight">
-                                        Historical cohort standings are exclusive to Pro.
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Glassmorphic Blur Overlay -->
-                            <div class="absolute inset-0 bg-slate-900/10 dark:bg-black/10 backdrop-blur-[6px] transition-all duration-300 group-hover/lock:backdrop-blur-[2px] flex flex-col items-center justify-center gap-1 z-10">
-                                <div class="w-8 h-8 rounded-full bg-white/95 dark:bg-slate-900/95 shadow-md flex items-center justify-center transition-all duration-500 transform group-hover/lock:scale-110 active:scale-95 text-amber-500 lock-spring-icon">
-                                    <span class="material-symbols-outlined text-lg">lock</span>
-                                </div>
-                                <span class="text-[8px] font-black uppercase text-slate-700 dark:text-slate-350 tracking-wider font-lexend bg-white/90 dark:bg-slate-900/90 px-2 py-0.5 rounded shadow-sm">
-                                    Unlock Analytics
+                        <div class="flex flex-col gap-1 items-end">
+                            ${getQualitativeBadge(item.match)}
+                            <div class="flex items-center gap-1">
+                                <span class="px-2 py-0.5 bg-emerald-500/15 text-emerald-800 dark:text-emerald-300 border border-emerald-500/30 rounded-full text-[9px] font-black uppercase tracking-wider font-lexend ${pulseClass}">
+                                    ${item.match}% Match
                                 </span>
+                                ${isFreeAudit ? `
+                                <span class="px-2 py-0.5 bg-amber-500/20 text-amber-800 dark:text-amber-300 border border-amber-500/40 rounded-full text-[8px] font-black uppercase tracking-wider font-lexend">
+                                    ✨ Free Audit
+                                </span>` : ''}
                             </div>
                         </div>
                     `;
                 } else {
-                    if (state.isPro) {
-                        const pulseClass = item.match > 90 ? 'badge-high-match-pulse' : '';
-                        badgeHTML = `
-                            <span class="px-2.5 py-1 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20 rounded-full text-[9px] font-black uppercase tracking-wider font-lexend ${pulseClass}">
-                                ${item.match}% Match
-                            </span>
-                        `;
-                        
-                        const isCompetitive = item.id === 'university-of-waterloo' || item.id === 'university-of-toronto' || item.id === 'mcgill-university' || item.id === 'mcmaster-university';
-                        if (isCompetitive) {
-                            proSectionHTML = `
-                                <div class="mt-3 p-3 bg-emerald-500/5 dark:bg-emerald-950/10 rounded-xl border border-emerald-500/10 text-left">
-                                    <div class="flex items-center justify-between mb-1">
-                                        <span class="text-[9px] font-black uppercase text-emerald-600 dark:text-emerald-450 tracking-wider font-lexend">Pro Analytics</span>
-                                        <span class="material-symbols-outlined text-[12px] text-emerald-500">verified</span>
-                                    </div>
-                                    <div class="text-[10px] space-y-1 text-slate-650 dark:text-slate-350 font-body">
-                                        <div>Target Cutoff: <strong class="text-slate-900 dark:text-white">${item.cutoff}%</strong></div>
-                                        <div>Prereqs: <span class="font-semibold text-slate-800 dark:text-slate-200">ENG4U, MHF4U, MCV4U</span></div>
-                                        <div>Admission Probability: <span class="font-bold text-emerald-600 dark:text-emerald-400">${item.match}%</span></div>
-                                    </div>
-                                </div>
-                            `;
-                        }
-                    } else {
-                        badgeHTML = getQualitativeBadge(item.match);
-                    }
+                    badgeHTML = getQualitativeBadge(item.match);
                 }
-                
+
+                // 2. Diagnostics Section:
+                let proSectionHTML = '';
+                if (isUnlocked) {
+                    const studentAvgNum = parseFloat(state.average);
+                    const avgGap = (studentAvgNum - item.cutoff).toFixed(1);
+                    const gapColor = avgGap >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400';
+                    const gapSign = avgGap >= 0 ? `+${avgGap}%` : `${avgGap}%`;
+
+                    proSectionHTML = `
+                        <div class="mt-3 p-3.5 bg-emerald-500/5 dark:bg-emerald-950/20 rounded-2xl border border-emerald-500/20 text-left space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[9px] font-black uppercase text-emerald-700 dark:text-emerald-400 tracking-wider font-lexend flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-[13px]">verified</span>
+                                    ${isFreeAudit ? '1 Free Deep Audit' : 'Pro Diagnostics'}
+                                </span>
+                                <span class="text-[9px] font-bold ${gapColor} font-lexend">Avg ${state.average}% (${gapSign})</span>
+                            </div>
+                            
+                            <div class="text-[10px] space-y-1.5 text-slate-700 dark:text-slate-300 font-body">
+                                <div class="flex items-start gap-1.5">
+                                    <span class="font-bold text-slate-900 dark:text-white shrink-0">Prerequisites:</span>
+                                    <span class="${item.diagnostic.prereqsMet ? 'text-emerald-600 dark:text-emerald-400 font-semibold' : 'text-rose-600 dark:text-rose-400 font-bold'}">
+                                        ${item.diagnostic.prereqsMet ? '✅ Mandatory Grade 12 prerequisites met' : '⚠️ ' + item.diagnostic.missing}
+                                    </span>
+                                </div>
+                                <div class="flex items-start gap-1.5">
+                                    <span class="font-bold text-slate-900 dark:text-white shrink-0">Action Target:</span>
+                                    <span class="text-slate-600 dark:text-slate-300">${item.diagnostic.examTarget}</span>
+                                </div>
+                                ${item.articulation ? `
+                                <div class="p-2 bg-indigo-50 dark:bg-indigo-950/40 rounded-xl border border-indigo-200/60 dark:border-indigo-800/40 text-[9.5px]">
+                                    <span class="font-black text-indigo-900 dark:text-indigo-300 font-lexend block">🎓 ${item.articulation.agreement} (${item.articulation.partner})</span>
+                                    <span class="text-indigo-800/80 dark:text-indigo-300/80 block mt-0.5">${item.articulation.savings} • ${item.articulation.detail}</span>
+                                </div>` : ''}
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    proSectionHTML = `
+                        <div class="mt-3 p-3 bg-slate-50 dark:bg-slate-800/40 rounded-2xl border border-slate-200 dark:border-slate-700 text-left relative overflow-hidden">
+                            <!-- Blurred teaser rows -->
+                            <div class="text-[10px] space-y-2 text-slate-500 filter blur-[3px] select-none pointer-events-none">
+                                <div class="flex justify-between">
+                                    <span>Prerequisites:</span>
+                                    <span>ENG4U, MHF4U, SBI4U [Mandatory]</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Target Final Exam Grade:</span>
+                                    <span>86% Required to pass cutoff</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Historical Cohort Standing:</span>
+                                    <span>Top 15% Rank</span>
+                                </div>
+                            </div>
+
+                            <!-- Overlay Action -->
+                            <div class="absolute inset-0 bg-slate-900/10 dark:bg-black/25 backdrop-blur-[3px] flex flex-col items-center justify-center p-3 text-center">
+                                ${!hasUsedFreeAudit ? `
+                                <button onclick="handleClaimFreeAudit('${item.id}', event)" class="w-full py-2 px-3 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-[10px] uppercase tracking-wider rounded-xl shadow-md transition-all flex items-center justify-center gap-1.5 cursor-pointer transform hover:scale-[1.02] active:scale-98">
+                                    <span class="material-symbols-outlined text-[15px]">stars</span>
+                                    Unlock 1 Free Program Deep Audit
+                                </button>
+                                <span class="text-[8.5px] text-slate-700 dark:text-slate-300 font-medium mt-1">Unlock prerequisites & exam targets for this dream school</span>
+                                ` : `
+                                <button onclick="openUpgradeModal(event)" class="w-full py-2 px-3 bg-slate-950 hover:bg-slate-800 text-amber-300 font-black text-[10px] uppercase tracking-wider rounded-xl border border-amber-400/40 shadow-sm transition-all flex items-center justify-center gap-1 cursor-pointer">
+                                    <span class="material-symbols-outlined text-[14px]">lock_open</span>
+                                    Unlock Portfolio Diagnostics ($29 CAD)
+                                </button>
+                                <span class="text-[8px] text-slate-600 dark:text-slate-400 mt-1">Code <strong class="text-emerald-500">SAVE10</strong> drops price to $19 CAD</span>
+                                `}
+                            </div>
+                        </div>
+                    `;
+                }
+
                 const isPinned = state.favorites && state.favorites.includes(item.id);
                 
                 card.innerHTML = `
@@ -2086,7 +2216,7 @@
                         ${badgeHTML}
                     </div>
 
-                    <div class="flex-1 min-w-0 text-left mb-4 z-20 relative cursor-pointer" onclick="${item.proLocked ? 'openUpgradeModal(event)' : ''}">
+                    <div class="flex-1 min-w-0 text-left mb-4 z-20 relative cursor-pointer" onclick="openExplainer('${item.id}', event)">
                         <h4 class="font-black text-sm text-primary dark:text-white leading-tight mb-0.5 font-lexend flex items-center gap-1.5 min-w-0">
                             ${getMatchDotIndicator(item.match)}
                             <span class="truncate">${item.program}</span>
@@ -2095,7 +2225,7 @@
                     </div>
                     
                     <div class="relative flex-1 flex flex-col">
-                        <div class="w-full h-32 bg-slate-200 mb-3 rounded-xl overflow-hidden relative shadow-inner cursor-pointer" onclick="${item.proLocked ? 'openUpgradeModal(event)' : ''}">
+                        <div class="w-full h-32 bg-slate-200 mb-3 rounded-xl overflow-hidden relative shadow-inner cursor-pointer" onclick="openExplainer('${item.id}', event)">
                             ${item.image ? `
                             <img alt="${item.university}" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" src="${item.image}" loading="lazy" decoding="async" onerror="handleImageError(this, '${item.id}')"/>
                             ` : ''}
@@ -2105,7 +2235,7 @@
                             <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none"></div>
                             
                             <!-- Restored Logo Overlaid -->
-                            <div class="absolute bottom-3 left-4 w-12 h-12 rounded-full border border-white/20 overflow-hidden bg-white shadow-lg z-30" ${item.proLocked ? `title="Official ${item.university} Admissions Data available for Pro users."` : ''}>
+                            <div class="absolute bottom-3 left-4 w-12 h-12 rounded-full border border-white/20 overflow-hidden bg-white shadow-lg z-30" title="${item.university}">
                                 <img class="w-full h-full object-contain p-0.5" src="${item.logoUrl}" alt="${item.university} Logo" loading="lazy" decoding="async" onerror="handleLogoError(this, '${item.crestSvg}');"/>
                             </div>
                         </div>
@@ -2125,7 +2255,7 @@
                             ${item.ranking ? `
                             <span class="px-2.5 py-0.5 bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/20 text-[9px] font-extrabold rounded-full uppercase tracking-wider flex items-center gap-1">
                                 <span class="material-symbols-outlined text-[10px] leading-none">leaderboard</span>
-                                Maclean's: #${item.ranking.rank} ${item.ranking.category}
+                                #${item.ranking.rank} ${item.ranking.category}
                             </span>
                             ` : ''}
                         </div>
@@ -2158,35 +2288,52 @@
 
                         ${proSectionHTML}
 
+                        <!-- OUAC 3-Choice Strategy Quick Selector -->
+                        <div class="mt-3 pt-2.5 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between gap-1 text-[9px] font-lexend font-bold">
+                            <span class="text-slate-400 uppercase tracking-wider text-[8px] shrink-0">OUAC 3-Choice:</span>
+                            <div class="flex items-center gap-1">
+                                <button onclick="handleAssignOuac('safety', '${item.id}', event)" class="px-2 py-1 rounded-lg ${isSafety ? 'bg-emerald-600 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-650 dark:text-slate-300 hover:bg-emerald-100 dark:hover:bg-emerald-950'} transition-all cursor-pointer" title="Add as Safety Choice">
+                                    ${isSafety ? '✓ Safety' : '+ Safety'}
+                                </button>
+                                <button onclick="handleAssignOuac('match', '${item.id}', event)" class="px-2 py-1 rounded-lg ${isMatch ? 'bg-indigo-600 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-650 dark:text-slate-300 hover:bg-indigo-100 dark:hover:bg-indigo-950'} transition-all cursor-pointer" title="Add as Target Choice">
+                                    ${isMatch ? '✓ Target' : '+ Target'}
+                                </button>
+                                <button onclick="handleAssignOuac('reach', '${item.id}', event)" class="px-2 py-1 rounded-lg ${isReach ? 'bg-amber-600 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-650 dark:text-slate-300 hover:bg-amber-100 dark:hover:bg-amber-950'} transition-all cursor-pointer" title="Add as Reach Choice">
+                                    ${isReach ? '✓ Reach' : '+ Reach'}
+                                </button>
+                            </div>
+                        </div>
+
                         <!-- Action Buttons -->
-                        <div class="mt-4 mb-2 flex flex-col gap-2 w-full relative z-20">
-                            <a href="${item.proLocked ? '#' : item.applyUrl}" 
-                               target="${item.proLocked ? '_self' : '_blank'}" 
+                        <div class="mt-3 mb-2 flex flex-col gap-2 w-full relative z-20">
+                            <a href="${item.applyUrl}" 
+                               target="_blank" 
                                rel="noopener noreferrer" 
-                               onclick="${item.proLocked ? 'openUpgradeModal(event)' : 'event.stopPropagation();'}" 
-                               class="w-full text-center py-3 ${item.proLocked ? 'bg-amber-500 hover:bg-amber-600 text-slate-950 font-black' : 'bg-primary hover:bg-primary/95 text-white'} text-xs font-black uppercase tracking-wider rounded-xl transition-all duration-200 shadow-sm cursor-pointer hover:scale-[1.02] active:scale-98 flex items-center justify-center gap-1">
-                                ${item.proLocked ? 'Unlock Predictive Analytics' : 'How to Apply'}
-                                <span class="material-symbols-outlined text-[14px]">${item.proLocked ? 'lock_open' : 'arrow_outward'}</span>
+                               onclick="event.stopPropagation();" 
+                               class="w-full text-center py-2.5 bg-primary hover:bg-primary/95 text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all duration-200 shadow-sm cursor-pointer hover:scale-[1.02] active:scale-98 flex items-center justify-center gap-1">
+                                How to Apply
+                                <span class="material-symbols-outlined text-[14px]">arrow_outward</span>
                             </a>
-                            <a href="${item.proLocked ? '#' : item.websiteUrl}" 
-                               target="${item.proLocked ? '_self' : '_blank'}" 
+                            <a href="${item.websiteUrl}" 
+                               target="_blank" 
                                rel="noopener noreferrer" 
-                               onclick="${item.proLocked ? 'openUpgradeModal(event)' : 'event.stopPropagation();'}" 
-                               class="w-full text-center py-3 bg-slate-55 bg-slate-50 hover:bg-slate-100 dark:bg-slate-805 dark:hover:bg-slate-800 border border-slate-200/60 dark:border-slate-700 text-slate-650 dark:text-slate-350 hover:text-primary dark:hover:text-white text-[10px] font-black uppercase tracking-wider rounded-xl transition-all duration-200 cursor-pointer">
-                                ${item.proLocked ? 'Compare Premium Benefits' : 'View Program Website'}
+                               onclick="event.stopPropagation();" 
+                               class="w-full text-center py-2 bg-slate-50 hover:bg-slate-100 dark:bg-slate-805 dark:hover:bg-slate-800 border border-slate-200/60 dark:border-slate-700 text-slate-650 dark:text-slate-350 hover:text-primary dark:hover:text-white text-[10px] font-black uppercase tracking-wider rounded-xl transition-all duration-200 cursor-pointer">
+                                View Program Website
                             </a>
                         </div>
 
                         <!-- Card Footer -->
                         <div class="flex items-center justify-between mt-auto pt-3 border-t border-slate-100/60 dark:border-slate-800/60">
-                            <div class="flex items-center gap-2">
-                                ${teaserMatchHTML}
+                            <div class="flex items-center gap-1.5">
+                                <span class="text-[9px] font-bold uppercase tracking-wider text-slate-400 font-lexend">Status:</span>
+                                <span class="text-xs font-black text-slate-700 dark:text-slate-300 font-lexend">${item.qualitativeTier}</span>
                             </div>
                             <div class="flex items-center gap-2">
                                 <button class="material-symbols-outlined ${isPinned ? 'text-primary' : 'text-slate-400 hover:text-primary opacity-0 group-hover:opacity-100'} text-lg cursor-pointer transition-all duration-300" onclick="toggleFavorite('${item.id}', event)" style="${isPinned ? "font-variation-settings: 'FILL' 1;" : ""}">
                                     push_pin
                                 </button>
-                                <button class="material-symbols-outlined text-slate-400 hover:text-primary text-lg cursor-pointer opacity-0 group-hover:opacity-100 transition-all duration-300" onclick="openExplainer('${item.id}', event)">
+                                <button class="material-symbols-outlined text-slate-400 hover:text-primary text-lg cursor-pointer opacity-0 group-hover:opacity-100 transition-all duration-300" onclick="openExplainer('${item.id}', event)" title="View Deep Audit Breakdown">
                                     info
                                 </button>
                             </div>
@@ -2204,55 +2351,100 @@
         const item = state.matches.find(m => m.id === id);
         if (!item) return;
         
-        if (item.proLocked) {
-            openUpgradeModal(event);
-            return;
-        }
-        
         document.getElementById('explainer-uni').textContent = item.university;
         document.getElementById('explainer-prog').textContent = item.program;
         
         const badge = document.getElementById('explainer-match-badge');
-        if (state.isPro) {
-            badge.textContent = `${item.match}% Match`;
-            badge.className = "px-3 py-1.5 bg-secondary-container text-on-secondary-container rounded-lg text-sm font-black uppercase font-lexend shadow-sm";
+        if (item.isUnlocked) {
+            badge.innerHTML = `
+                <div class="flex items-center gap-1.5">
+                    <span class="px-2.5 py-1 bg-emerald-500/20 text-emerald-800 dark:text-emerald-300 border border-emerald-500/30 rounded-lg text-xs font-black uppercase font-lexend">${item.match}% Match</span>
+                    ${item.isFreeAudit ? '<span class="px-2 py-0.5 bg-amber-500/20 text-amber-700 dark:text-amber-300 border border-amber-500/30 rounded-lg text-[10px] font-black uppercase font-lexend">✨ Free Audit</span>' : ''}
+                </div>
+            `;
         } else {
-            let qualText = "High Climb";
-            let badgeClass = "badge-high-climb";
-            if (item.match > 90) {
-                qualText = "Locked In";
-                badgeClass = "badge-locked-in";
-            } else if (item.match >= 75) {
-                qualText = "Strong Contender";
-                badgeClass = "badge-strong-contender";
-            } else if (item.match >= 60) {
-                qualText = "The Longshot";
-                badgeClass = "badge-the-longshot";
-            }
-            badge.textContent = qualText;
-            badge.className = `px-3 py-1.5 border rounded-lg text-sm font-black uppercase font-lexend shadow-sm ${badgeClass}`;
+            badge.innerHTML = getQualitativeBadge(item.match);
         }
         
-        // Personalized academic breakdown using actual student courses
+        // Personalized academic cutoff comparison
         const studentAvgNum = parseFloat(state.average);
         const courseList = (state.courses || []).map(c => `${c.code || c.name} (${c.grade}%)`).join(', ');
         const isAbove = studentAvgNum >= item.cutoff;
         const gapText = isAbove
-            ? `Your average of ${state.average}% is ${(studentAvgNum - item.cutoff).toFixed(1)}% above the ${item.cutoff}% cutoff.`
-            : `Your average of ${state.average}% is ${(item.cutoff - studentAvgNum).toFixed(1)}% below the ${item.cutoff}% target cutoff.`;
-        const academicText = `${gapText} Courses on record: ${courseList || 'None entered yet'}.`;
-        document.getElementById('explainer-academic').textContent = academicText;
+            ? `Your Top 6 average of ${state.average}% exceeds the ${item.cutoff}% cutoff by +${(studentAvgNum - item.cutoff).toFixed(1)}%.`
+            : `Your Top 6 average of ${state.average}% is currently ${(item.cutoff - studentAvgNum).toFixed(1)}% below the ${item.cutoff}% cutoff.`;
+        document.getElementById('explainer-academic').textContent = `${gapText} Logged senior courses: ${courseList || 'None entered'}.`;
+        
+        // Mandatory Prerequisites
+        const prereqEl = document.getElementById('explainer-prereqs');
+        if (prereqEl) {
+            if (item.isUnlocked) {
+                prereqEl.textContent = item.diagnostic.prereqsMet
+                    ? "All required Grade 12 prerequisites on file. No missing subject deficiencies detected."
+                    : item.diagnostic.missing + ". You must complete this course to receive an offer of admission.";
+                prereqEl.className = item.diagnostic.prereqsMet 
+                    ? "text-xs text-emerald-600 dark:text-emerald-400 font-semibold mt-1 leading-relaxed font-body"
+                    : "text-xs text-rose-600 dark:text-rose-400 font-bold mt-1 leading-relaxed font-body";
+            } else {
+                prereqEl.textContent = "Prerequisite combination audit is locked. Claim your 1 Free Deep Audit or upgrade to Pro.";
+                prereqEl.className = "text-xs text-slate-500 italic mt-1 leading-relaxed font-body";
+            }
+        }
+
+        // Predictive Exam Target
+        const targetEl = document.getElementById('explainer-target');
+        if (targetEl) {
+            if (item.isUnlocked) {
+                targetEl.textContent = item.diagnostic.examTarget;
+            } else {
+                targetEl.textContent = "Predictive final exam grade target is locked.";
+            }
+        }
+
+        // College-to-University Articulation (2+2)
+        const artBox = document.getElementById('explainer-articulation-box');
+        const artText = document.getElementById('explainer-articulation');
+        if (artBox && artText) {
+            if (item.articulation) {
+                artBox.classList.remove('hidden');
+                artText.textContent = `${item.articulation.agreement} with ${item.articulation.partner}. ${item.articulation.savings}. ${item.articulation.detail}`;
+            } else {
+                artBox.classList.add('hidden');
+            }
+        }
+
         document.getElementById('explainer-extracurricular').textContent = item.breakdown.extracurriculars;
         document.getElementById('explainer-recommendation').textContent = item.breakdown.recommendation;
         
+        // Teaser Paywall Overlay & Action button
         const teaserOverlay = document.getElementById('explainer-paywall-overlay');
         const counselorSec = document.getElementById('explainer-counselor-section');
-        if (state.isPro) {
-            teaserOverlay.classList.add('hidden');
-            counselorSec.classList.remove('blur-sm');
+        const claimCta = document.getElementById('explainer-claim-cta');
+
+        if (item.isUnlocked) {
+            if (teaserOverlay) teaserOverlay.classList.add('hidden');
+            if (counselorSec) counselorSec.classList.remove('blur-sm');
         } else {
-            teaserOverlay.classList.remove('hidden');
-            counselorSec.classList.add('blur-sm');
+            if (teaserOverlay) teaserOverlay.classList.remove('hidden');
+            if (counselorSec) counselorSec.classList.add('blur-sm');
+            if (claimCta) {
+                const hasUsedFreeAudit = Boolean(state.freeAuditProgramId);
+                if (!hasUsedFreeAudit) {
+                    claimCta.innerHTML = `
+                        <button onclick="handleClaimFreeAudit('${item.id}', event)" class="w-full py-2.5 px-4 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-xs uppercase tracking-wider rounded-xl shadow-lg transition-all flex items-center justify-center gap-1.5 cursor-pointer">
+                            <span class="material-symbols-outlined text-sm">stars</span>
+                            Unlock 1 Free Program Deep Audit
+                        </button>
+                    `;
+                } else {
+                    claimCta.innerHTML = `
+                        <button onclick="openUpgradeModal(event)" class="w-full py-2.5 px-4 bg-primary hover:bg-primary/90 text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-lg transition-all flex items-center justify-center gap-1.5 cursor-pointer">
+                            <span class="material-symbols-outlined text-sm">lock_open</span>
+                            Unlock All Programs ($29 CAD • $19 w/ SAVE10)
+                        </button>
+                    `;
+                }
+            }
         }
         
         const modal = document.getElementById('explainer-modal');
@@ -2295,10 +2487,6 @@
 
     function toggleProvinceDropdown(event) {
         if (event) event.stopPropagation();
-        if (!state.isPro) {
-            openUpgradeModal(event);
-            return;
-        }
         const options = document.getElementById('province-multiselect-options');
         if (options) {
             options.classList.toggle('hidden');
@@ -2306,13 +2494,6 @@
     }
 
     function handleProvinceCheckboxChange() {
-        if (!state.isPro) {
-            document.querySelectorAll('.province-checkbox').forEach(cb => {
-                cb.checked = true;
-            });
-            openUpgradeModal();
-            return;
-        }
         const checkboxes = document.querySelectorAll('.province-checkbox');
         state.provinces = Array.from(checkboxes).filter(cb => cb.checked).map(cb => cb.value);
         saveAppState(state);
@@ -2322,11 +2503,6 @@
     function updateProvinceBtnText() {
         const btnText = document.getElementById('province-btn-text');
         if (!btnText) return;
-        
-        if (!state.isPro) {
-            btnText.textContent = "Filter Provinces";
-            return;
-        }
         
         const selectedCount = state.provinces ? state.provinces.length : 0;
         const totalCount = document.querySelectorAll('.province-checkbox').length;
@@ -2382,6 +2558,108 @@
         }
     }
 
+    function renderOuacSlots() {
+        state = getAppState();
+        const slots = state.ouacSlots || { safety: null, match: null, reach: null };
+        const slotKeys = ['safety', 'match', 'reach'];
+        let filledCount = 0;
+
+        slotKeys.forEach(slotKey => {
+            const contentEl = document.getElementById(`ouac-slot-${slotKey}-content`);
+            if (!contentEl) return;
+            const programId = slots[slotKey];
+            if (programId) {
+                const item = state.matches.find(m => m.id === programId);
+                if (item) {
+                    filledCount++;
+                    contentEl.innerHTML = `
+                        <div class="mt-1 p-2.5 bg-white/10 dark:bg-slate-900/60 rounded-xl border border-white/15 flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-lg overflow-hidden flex-shrink-0 bg-white shadow-sm p-0.5">
+                                <img src="${item.logoUrl}" alt="${item.university}" class="w-full h-full object-contain" onerror="handleLogoError(this, '${item.crestSvg}');" />
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-xs font-black text-white font-lexend truncate">${item.program}</p>
+                                <p class="text-[10px] text-slate-300 font-medium truncate">${item.university}</p>
+                                <div class="flex items-center gap-2 mt-1 text-[9px] text-slate-300">
+                                    <span>Cutoff: <strong class="text-white">${item.cutoff}%</strong></span>
+                                    <span>${getQualitativeBadge(item.match)}</span>
+                                </div>
+                            </div>
+                            <button onclick="handleRemoveOuac('${slotKey}', event)" class="text-slate-400 hover:text-rose-400 transition-colors p-1 cursor-pointer" title="Remove choice">
+                                <span class="material-symbols-outlined text-base">close</span>
+                            </button>
+                        </div>
+                    `;
+                    return;
+                }
+            }
+            // Empty placeholder
+            const labels = {
+                safety: { name: 'Safety (Locked In)', desc: 'Exceeds cutoff by +3% to guarantee offer' },
+                match: { name: 'Solid Match', desc: 'Top 6 aligns within ±2% of target cutoff' },
+                reach: { name: 'Realistic Reach', desc: 'Aspirational dream choice (2-5% below cutoff)' }
+            };
+            contentEl.innerHTML = `
+                <p class="text-xs text-slate-300 font-medium leading-relaxed">
+                    Select a <strong class="text-white">${labels[slotKey].name}</strong> program using the cards below. ${labels[slotKey].desc}.
+                </p>
+            `;
+        });
+
+        const badge = document.getElementById('ouac-status-badge');
+        if (badge) {
+            if (filledCount === 3) {
+                badge.className = "px-3 py-1.5 rounded-xl bg-emerald-500/25 text-emerald-300 border border-emerald-500/40 text-xs font-black font-lexend inline-flex items-center gap-1.5 shadow-sm";
+                badge.innerHTML = `<span class="material-symbols-outlined text-sm">verified</span> 3 / 3 Balanced Portfolio Active`;
+            } else {
+                badge.className = "px-3 py-1.5 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-500/30 text-xs font-bold font-lexend inline-flex items-center gap-1.5";
+                badge.innerHTML = `<span class="material-symbols-outlined text-sm">tune</span> ${filledCount} / 3 Slots Filled`;
+            }
+        }
+    }
+
+    function handleClaimFreeAudit(programId, event) {
+        if (event) event.stopPropagation();
+        if (window.claimFreeAudit) {
+            window.claimFreeAudit(programId);
+        } else {
+            state.freeAuditProgramId = programId;
+            saveAppState(state);
+        }
+        if (typeof confetti === 'function') {
+            confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
+        }
+        renderDashboard();
+        setTimeout(() => {
+            openExplainer(programId);
+        }, 150);
+    }
+
+    function handleAssignOuac(slotKey, programId, event) {
+        if (event) event.stopPropagation();
+        if (window.assignOuacSlot) {
+            window.assignOuacSlot(slotKey, programId);
+        } else {
+            if (!state.ouacSlots) state.ouacSlots = { safety: null, match: null, reach: null };
+            state.ouacSlots[slotKey] = programId;
+            saveAppState(state);
+        }
+        renderDashboard();
+    }
+
+    function handleRemoveOuac(slotKey, event) {
+        if (event) event.stopPropagation();
+        if (window.removeOuacSlot) {
+            window.removeOuacSlot(slotKey);
+        } else {
+            if (state.ouacSlots) {
+                state.ouacSlots[slotKey] = null;
+                saveAppState(state);
+            }
+        }
+        renderDashboard();
+    }
+
     // Expose functions globally for HTML event handlers
     window.openExplainer = openExplainer;
     window.closeExplainer = closeExplainer;
@@ -2395,6 +2673,10 @@
     window.changeExplorerPage = changeExplorerPage;
     window.renderPrograms = renderPrograms;
     window.toggleAdvancedFilters = toggleAdvancedFilters;
+    window.renderOuacSlots = renderOuacSlots;
+    window.handleClaimFreeAudit = handleClaimFreeAudit;
+    window.handleAssignOuac = handleAssignOuac;
+    window.handleRemoveOuac = handleRemoveOuac;
 
     // Global keyboard handler for closing modals on Escape key
     window.addEventListener('keydown', (e) => {

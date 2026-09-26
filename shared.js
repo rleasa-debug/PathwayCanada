@@ -279,6 +279,14 @@ function getAppState() {
         state.homeProvince = "ON";
         needsSave = true;
       }
+      if (state.freeAuditProgramId === undefined) {
+        state.freeAuditProgramId = null;
+        needsSave = true;
+      }
+      if (state.ouacSlots === undefined) {
+        state.ouacSlots = { safety: null, match: null, reach: null };
+        needsSave = true;
+      }
       if (state.activities === undefined) {
         state.activities = [
           { id: "act-1", title: "Model UN President", category: "Leadership", description: "Organized provincial conference for 400+ delegates.", timeframe: "2022 - Present", icon: "groups", color: "secondary" },
@@ -304,6 +312,8 @@ function getAppState() {
   // Initial State
   const initialState = {
     isPro: false, // Default to false for Freemium model
+    freeAuditProgramId: null, // 1 Free Program Deep Audit unlocked for free users
+    ouacSlots: { safety: null, match: null, reach: null }, // OUAC 3-Choice Strategy
     courses: DEFAULT_COURSES,
     average: "91.7",
     matches: [],
@@ -1101,11 +1111,63 @@ function getFutureOutlook(programName) {
   return 'Stable';
 }
 
+const ARTICULATION_MAP = {
+  "fanshawe-college": {
+    partner: "Western University",
+    agreement: "2+2 Degree Completion Pathway",
+    detail: "Complete 2 years at Fanshawe College + 2 years at Western University to graduate with a full Western Honours Bachelor's Degree.",
+    savings: "$18,000+ tuition savings"
+  },
+  "seneca-college": {
+    partner: "York University",
+    agreement: "2+2 / 3+2 Articulation Agreement",
+    detail: "Guaranteed block credit transfer into Year 3 at York University Faculty of Liberal Arts & Professional Studies or Lassonde Engineering.",
+    savings: "$16,500+ tuition savings"
+  },
+  "humber-college": {
+    partner: "University of Guelph-Humber",
+    agreement: "Dual-Credential Degree + Diploma",
+    detail: "Concurrent graduation with an Honours Degree from University of Guelph and an Advanced Diploma from Humber College in 4 years.",
+    savings: "Dual qualification in 4 yrs"
+  },
+  "george-brown-college": {
+    partner: "Toronto Metropolitan University",
+    agreement: "2+2 Articulation Agreement",
+    detail: "Direct pathway into 3rd year at TMU for business, computing, and community services graduates.",
+    savings: "$15,000+ tuition savings"
+  },
+  "sheridan-college": {
+    partner: "University of Toronto Mississauga",
+    agreement: "Joint Degree & Diploma (CCIT)",
+    detail: "Joint program with U of T Mississauga awarding both an Honours B.A. and a Sheridan certificate/diploma.",
+    savings: "Elite dual-credential"
+  },
+  "conestoga-college": {
+    partner: "Wilfrid Laurier University",
+    agreement: "2+2 Transfer Agreement",
+    detail: "Direct block credit transfer into 3rd year of Laurier Bachelor of Arts or Applied Technology.",
+    savings: "$14,000+ tuition savings"
+  },
+  "algonquin-college": {
+    partner: "Carleton University",
+    agreement: "2+2 Degree Completion",
+    detail: "Block credit transfer to Carleton University Bachelor of Information Technology (BIT) or Commerce.",
+    savings: "$15,500+ tuition savings"
+  },
+  "mohawk-college": {
+    partner: "McMaster University",
+    agreement: "2+2 / B.Tech Articulation",
+    detail: "Seamless credit transfer into McMaster University's Bachelor of Technology degree completion program.",
+    savings: "$17,000+ tuition savings"
+  }
+};
+
 function calculateMatches(courses) {
   const averageResult = calculateAverage(courses);
   const average = parseFloat(averageResult.average);
   
   let isPro = false;
+  let freeAuditProgramId = null;
   let homeProvince = 'ON';
   let activities = [];
   try {
@@ -1113,7 +1175,8 @@ function calculateMatches(courses) {
     if (stored) {
       const parsed = decryptState(stored);
       if (parsed) {
-        isPro = parsed.isPro;
+        isPro = parsed.isPro || false;
+        freeAuditProgramId = parsed.freeAuditProgramId || null;
         homeProvince = parsed.homeProvince || 'ON';
         activities = parsed.activities || [];
       }
@@ -1202,14 +1265,39 @@ function calculateMatches(courses) {
       recommendation: recExplainer
     };
     
-    // Check if competitive program (Waterloo SE, U of T CS, McGill CS, McMaster Health Sci)
-    const isWaterlooSE = item.id === 'university-of-waterloo' && (item.program.includes('Software') || item.program.includes('SE'));
-    const isUoftCS = item.id === 'university-of-toronto' && (item.program.includes('Computer Science') || item.program.includes('CS'));
-    const isMcGillCS = item.id === 'mcgill-university' && (item.program.includes('Computer Science') || item.program.includes('Software') || item.program.includes('CS') || item.program.includes('SE'));
-    const isMcMasterHealthSci = item.id === 'mcmaster-university' && (item.program.includes('Health Sciences') || item.program.includes('Health Sci'));
-    
-    const isCompetitive = isWaterlooSE || isUoftCS || isMcGillCS || isMcMasterHealthSci;
-    const proLocked = isCompetitive && !isPro;
+    // Freemium Teaser & 1 Free Program Deep Audit Logic:
+    // Free: Qualitative status (Safety, Match, Reach, Unlikely) is 100% free for all programs.
+    // Pro: Reveals specific reasons why and how to fix it for all programs.
+    // 1 Free Deep Audit: Unlocks complete diagnostics & numerical probability for 1 dream program!
+    let qualitativeTier = 'Unlikely (Longshot)';
+    if (match > 90) {
+      qualitativeTier = 'Safety (Locked In)';
+    } else if (match >= 75) {
+      qualitativeTier = 'Solid Match';
+    } else if (match >= 60) {
+      qualitativeTier = 'Reach (High Climb)';
+    }
+
+    const isUnlocked = isPro || (freeAuditProgramId && freeAuditProgramId === item.id);
+    const isFreeAudit = !isPro && freeAuditProgramId === item.id;
+    const proLocked = !isUnlocked;
+
+    // Granular Diagnostic Action Plan
+    const prereqsMet = prereqs.met;
+    let missingDetail = "";
+    if (!prereqsMet) {
+      missingDetail = `Missing mandatory ${prereqs.missing.join(' and ')}`;
+    }
+
+    let examTarget = "";
+    if (average < cutoff) {
+      const neededExam = Math.min(99, Math.round(cutoff + (cutoff - average) * 1.5));
+      examTarget = `Need an ${neededExam}% on your final exams/remaining senior courses to cross the ${cutoff}% cutoff.`;
+    } else {
+      examTarget = `Top 6 average is +${(average - cutoff).toFixed(1)}% above cutoff. Maintain an 82%+ on remaining coursework to secure early admission.`;
+    }
+
+    const articulation = ARTICULATION_MAP[item.id] || null;
     
     const domain = getUniversityDomain(item.id);
     // Use clearbit for higher quality, consistent logos
@@ -1232,8 +1320,18 @@ function calculateMatches(courses) {
       image: image,
       logoStyle: logoStyle,
       match: match,
+      qualitativeTier: qualitativeTier,
+      isUnlocked: isUnlocked,
+      isFreeAudit: isFreeAudit,
       proLocked: proLocked,
-      isCompetitive: isCompetitive,
+      diagnostic: {
+        prereqsMet: prereqsMet,
+        missing: missingDetail,
+        missingCourses: prereqs.missing,
+        examTarget: examTarget
+      },
+      articulation: articulation,
+      isCompetitive: item.id === 'university-of-waterloo' || item.id === 'university-of-toronto' || item.id === 'mcgill-university' || item.id === 'mcmaster-university',
       breakdown: breakdown,
       cutoff: cutoff,
       isPartTime: geo.isPartTime,
@@ -1345,6 +1443,33 @@ function setupUpgradeButtons() {
   });
 }
 
+function claimFreeAudit(programId) {
+  const state = getAppState();
+  if (!state.isPro && !state.freeAuditProgramId) {
+    state.freeAuditProgramId = programId;
+    saveAppState(state);
+    return true;
+  }
+  return false;
+}
+
+function assignOuacSlot(slotType, programId) {
+  const state = getAppState();
+  if (!state.ouacSlots) {
+    state.ouacSlots = { safety: null, match: null, reach: null };
+  }
+  state.ouacSlots[slotType] = programId;
+  saveAppState(state);
+}
+
+function removeOuacSlot(slotType) {
+  const state = getAppState();
+  if (state.ouacSlots) {
+    state.ouacSlots[slotType] = null;
+    saveAppState(state);
+  }
+}
+
 window.getAppState = getAppState;
 window.saveAppState = saveAppState;
 window.calculateMatches = calculateMatches;
@@ -1355,6 +1480,9 @@ window.handleLogoError = handleLogoError;
 window.getUniversityDomain = getUniversityDomain;
 window.resetAppState = resetAppState;
 window.STRIPE_PAYMENT_LINK = STRIPE_PAYMENT_LINK;
+window.claimFreeAudit = claimFreeAudit;
+window.assignOuacSlot = assignOuacSlot;
+window.removeOuacSlot = removeOuacSlot;
 
 // Initialize payment detection after all dependencies have initialized
 detectPaymentCallback();
