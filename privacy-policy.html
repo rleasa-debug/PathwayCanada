@@ -163,9 +163,22 @@
             </section>
 
             <section>
-                <h2 class="text-xl font-headline font-bold text-primary mb-3">6. Canadian Data Residency Sovereignty</h2>
+                <h2 class="text-xl font-headline font-bold text-primary mb-3">6. Enterprise Cryptography & Payment Security</h2>
                 <p>
-                    In accordance with federal sovereignty principles, all database hosting, analytical storage, and serverless processing logs for Pathway Canada are hosted in physical data centers located **within the borders of Canada**.
+                    Pathway Canada adheres to modern industry-standard cryptographic frameworks for all operations:
+                </p>
+                <ul class="list-disc pl-5 space-y-2 mt-3 text-xs md:text-sm">
+                    <li><strong>In-Transit Security:</strong> All data transmissions between your browser and our servers are protected using Transport Layer Security (TLS 1.3) with ephemeral Diffie-Hellman key exchanges and forward secrecy.</li>
+                    <li><strong>At-Rest Encryption:</strong> All persistent database records are encrypted at rest using Advanced Encryption Standard (AES-256) block ciphers with automated key rotation.</li>
+                    <li><strong>Row-Level Security (RLS):</strong> Our PostgreSQL cloud database enforces database-level Row-Level Security policies. Even at the query level, a student's records can only ever be queried or updated by that specific authenticated user's cryptographically verified token.</li>
+                    <li><strong>PCI DSS Level 1 Payments:</strong> All monetary transactions (including Pathway Canada Pro upgrades) are handled exclusively through Stripe, certified to the highest compliance standard in the payments industry (PCI DSS Level 1). Pathway Canada never sees, processes, or stores your raw card numbers or financial account information.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-headline font-bold text-primary mb-3">7. Canadian Data Residency Sovereignty</h2>
+                <p>
+                    In accordance with federal sovereignty principles, all database hosting, analytical storage, and serverless processing logs for Pathway Canada are hosted in physical data centers located **within the borders of Canada** (Toronto region).
                 </p>
                 <p class="mt-2 mb-4">
                     Your academic performance records are never transferred, cached, or replicated in foreign jurisdictions, protecting your records from cross-border legal request exposure and ensuring compliance with public sector residency standards.
@@ -173,7 +186,7 @@
             </section>
 
             <section>
-                <h2 class="text-xl font-headline font-bold text-primary mb-3">7. Contact Information</h2>
+                <h2 class="text-xl font-headline font-bold text-primary mb-3">8. Contact Information</h2>
                 <p>
                     For inquiries regarding our compliance or data processing, please contact the Pathways Canada Privacy and Security Officer at `privacy@pathwayscanada.ca`.
                 </p>

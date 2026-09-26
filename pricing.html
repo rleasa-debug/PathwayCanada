@@ -10,6 +10,8 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <meta name="description" content="Pathway Canada is now 100% free for all Canadian high school students to ensure equal access to post-secondary admissions planning."/>
     <title>Plans & Access | Pathway Canada</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/supabaseClient.js"></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
@@ -205,9 +207,9 @@
                     </ul>
                 </div>
                 
-                <a href="student-dashboard.html?payment=success" class="block w-full text-center py-3.5 bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-slate-950 rounded-xl font-headline font-extrabold text-sm hover:opacity-95 transition-all hover:scale-[1.01] active:scale-95 shadow-lg shadow-amber-500/10">
-                    Upgrade to Pro Now
-                </a>
+                <button onclick="if(window.PathwayAuth){PathwayAuth.startStripeCheckout();}else{window.location.href='student-dashboard.html?payment=success';}" class="block w-full text-center py-3.5 bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-slate-950 rounded-xl font-headline font-extrabold text-sm hover:opacity-95 transition-all hover:scale-[1.01] active:scale-95 shadow-lg shadow-amber-500/10 cursor-pointer">
+                    Upgrade to Pro Now ($29 CAD)
+                </button>
             </div>
         </div>
 

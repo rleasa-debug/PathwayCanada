@@ -6,14 +6,14 @@
  */
 
 const AdManager = {
-    // Current Active Campaign Config (Can be fetched from an API later)
+    // Current Active Campaign Config
     activeCampaign: {
-        partnerName: 'Acme Student Loans',
-        tagline: 'Finance your education',
-        headline: 'Finance your education with Acme Student Loans.',
-        ctaText: 'Check Eligibility',
-        ctaLink: '#',
-        bannerImage: 'campuses/sponsor.png', // Relative path must work across pages
+        partnerName: 'Canada Student Financial Assistance',
+        tagline: 'Federal & Provincial Student Grants',
+        headline: 'Explore non-repayable Canada Student Grants & Provincial Aid.',
+        ctaText: 'Explore Grants & Aid',
+        ctaLink: 'https://www.canada.ca/en/services/benefits/education/student-aid/grants-loans.html',
+        bannerImage: '/campuses/sponsor.png', // Relative path must work across pages
     },
 
     init: function() {
@@ -40,11 +40,11 @@ const AdManager = {
             
             const html = `
                 <!-- Premium Inline Banner -->
-                <div class="relative w-full h-32 rounded-3xl overflow-hidden shadow-lg border-2 border-amber-300/40 group cursor-pointer" onclick="window.open('${this.activeCampaign.ctaLink}', '_blank')">
+                <div class="relative w-full h-32 rounded-3xl overflow-hidden shadow-lg border-2 border-emerald-300/40 group cursor-pointer" onclick="window.open('${this.activeCampaign.ctaLink}', '_blank')">
                     <img src="${this.getBannerImage()}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="${this.activeCampaign.tagline}">
                     <div class="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/60 to-transparent"></div>
                     <div class="relative h-full flex flex-col justify-center px-8 z-10">
-                        <span class="text-[9px] font-black text-amber-400 uppercase tracking-widest mb-1">Featured Partner</span>
+                        <span class="text-[9px] font-black text-emerald-400 uppercase tracking-widest mb-1">Financial Aid Resource</span>
                         <h3 class="text-xl font-bold text-white font-lexend leading-tight mb-2 max-w-sm">${this.activeCampaign.headline}</h3>
                         <button class="w-fit text-xs font-black text-slate-900 bg-white hover:bg-slate-100 px-4 py-1.5 rounded-full transition-colors flex items-center gap-1">
                             ${this.activeCampaign.ctaText}

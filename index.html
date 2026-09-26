@@ -11,6 +11,9 @@
 <meta name="description" content="Pathway Canada is the premier academic match portal for Canadian students, helping optimize university applications and maximize household savings through high-fidelity grade calculations."/>
 <title>Pathway Canada | Precision Admissions &amp; Cost Savings</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Supabase Real Database & Auth Client -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="/supabaseClient.js"></script>
 <!-- Google Identity Services for real OAuth sign-in -->
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 <!-- Facebook SDK for JavaScript -->
@@ -329,9 +332,9 @@
             <p class="text-xs text-on-surface-variant dark:text-slate-400 mt-1 font-body">Create or access your portfolio instantly.</p>
         </div>
         
-        <!-- Social Buttons -->
+        <!-- Social & Direct OAuth Buttons -->
         <div class="flex flex-col gap-2.5">
-            <a href="student-dashboard.html" data-provider="Google" class="social-login-btn click-compress flex items-center justify-center gap-3 w-full bg-white hover:bg-slate-50 border border-slate-200 hover:border-slate-300 py-3 rounded-xl font-lexend font-semibold text-xs text-slate-700 shadow-sm transition-all">
+            <button onclick="PathwayAuth.signInWithOAuth('google')" data-provider="Google" class="social-login-btn click-compress flex items-center justify-center gap-3 w-full bg-white hover:bg-slate-50 border border-slate-200 hover:border-slate-300 py-3 rounded-xl font-lexend font-semibold text-xs text-slate-700 shadow-sm transition-all cursor-pointer">
                 <svg class="w-4 h-4" viewBox="0 0 24 24">
                     <path fill="#EA4335" d="M12 5.04c1.66 0 3.2.57 4.38 1.69l3.27-3.27C17.67 1.47 14.99 1 12 1 7.35 1 3.37 3.67 1.39 7.56l3.89 3.01c.96-2.88 3.66-4.93 6.72-4.93z"/>
                     <path fill="#4285F4" d="M23.49 12.27c0-.81-.07-1.59-.2-2.36H12v4.51h6.43c-.28 1.44-1.1 2.66-2.33 3.49l3.61 2.8c2.12-1.95 3.38-4.83 3.38-8.44z"/>
@@ -339,26 +342,32 @@
                     <path fill="#34A853" d="M12 23c3.24 0 5.95-1.08 7.93-2.91l-3.61-2.8c-1.1.74-2.5 1.18-4.32 1.18-3.06 0-5.76-2.05-6.72-4.93L1.39 16.56C3.37 20.44 7.35 23 12 23z"/>
                 </svg>
                 Sign in with Google
-            </a>
+            </button>
             
-            <a href="student-dashboard.html" data-provider="Apple" class="social-login-btn click-compress flex items-center justify-center gap-3 w-full bg-black hover:bg-slate-900 text-white py-3 rounded-xl font-lexend font-semibold text-xs shadow-sm transition-all">
+            <button onclick="PathwayAuth.signInWithOAuth('apple')" data-provider="Apple" class="social-login-btn click-compress flex items-center justify-center gap-3 w-full bg-black hover:bg-slate-900 text-white py-3 rounded-xl font-lexend font-semibold text-xs shadow-sm transition-all cursor-pointer">
                 <svg class="w-4 h-4 fill-white" viewBox="0 0 18 18">
                     <path d="M15.56 10.1c-.04-2.22 1.82-3.28 1.9-3.32-1.04-1.52-2.66-1.73-3.23-1.78-1.37-.14-2.69.81-3.39.81-.69 0-1.79-.8-2.94-.77-1.51.02-2.91.88-3.69 2.23-1.57 2.73-.4 6.77 1.12 8.97.74 1.07 1.62 2.27 2.78 2.23 1.12-.05 1.55-.73 2.83-.73 1.27 0 1.67.73 2.84.7 1.19-.02 1.96-1.08 2.69-2.14.85-1.24 1.2-2.44 1.22-2.5-.03-.02-2.35-.9-2.37-3.6.02-2.27 1.86-3.36 1.97-3.42zM12.98 2.88c.62-.75 1.03-1.79.92-2.83-.89.04-1.98.6-2.62 1.35-.57.65-1.07 1.71-.94 2.73.99.08 2.02-.49 2.64-1.25z"/>
                 </svg>
                 Sign in with Apple
-            </a>
+            </button>
             
-            <a href="student-dashboard.html" data-provider="Facebook" class="social-login-btn click-compress flex items-center justify-center gap-3 w-full bg-[#1877F2] hover:bg-[#166FE5] text-white py-3 rounded-xl font-lexend font-semibold text-xs shadow-sm transition-all">
+            <button onclick="PathwayAuth.signInWithOAuth('facebook')" data-provider="Facebook" class="social-login-btn click-compress flex items-center justify-center gap-3 w-full bg-[#1877F2] hover:bg-[#166FE5] text-white py-3 rounded-xl font-lexend font-semibold text-xs shadow-sm transition-all cursor-pointer">
                 <svg class="w-4 h-4 fill-white" viewBox="0 0 24 24">
                     <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                 </svg>
                 Sign in with Facebook
-            </a>
+            </button>
+
+            <!-- Email / Password or Demo Modal Trigger -->
+            <button onclick="openSignInModal('Email')" class="click-compress flex items-center justify-center gap-2 w-full bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 py-2.5 rounded-xl font-lexend font-medium text-xs transition-all cursor-pointer mt-1">
+                <span class="material-symbols-outlined text-sm">mail</span>
+                Sign in with Email / Magic Link
+            </button>
             
-            <!-- Zero Knowledge Disclaimer -->
-            <div class="flex items-start gap-2.5 mt-6 p-3 bg-emerald-500/5 rounded-xl border border-emerald-500/10 text-emerald-800 dark:text-emerald-300 text-[10px] leading-relaxed text-left font-sans">
-                <span class="material-symbols-outlined text-sm text-emerald-600 dark:text-emerald-400 flex-shrink-0" style="font-variation-settings: 'FILL' 1;">security</span>
-                <span>All student records are secured using **Zero-Knowledge XXTEA Client-Side Encryption**. Your academic averages and grades cannot be read by the site owner.</span>
+            <!-- Standard Enterprise Security Notice -->
+            <div class="flex items-start gap-2.5 mt-4 p-3 bg-emerald-500/5 rounded-xl border border-emerald-500/10 text-emerald-800 dark:text-emerald-300 text-[10px] leading-relaxed text-left font-sans">
+                <span class="material-symbols-outlined text-sm text-emerald-600 dark:text-emerald-400 flex-shrink-0" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+                <span>Protected by <strong>TLS 1.3 & AES-256</strong> with PostgreSQL Row-Level Security. PCI-compliant Stripe checkout.</span>
             </div>
 
         </div>
@@ -604,7 +613,7 @@
                 </div>
                 <div class="bg-slate-900 border border-slate-800 rounded-xl p-3">
                     <div class="text-[9px] text-slate-550 uppercase font-bold tracking-wider">Encryption Status</div>
-                    <div class="text-lg font-extrabold text-emerald-400 mt-1">AES-XXTEA</div>
+                    <div class="text-lg font-extrabold text-emerald-400 mt-1">AES-256 / TLS</div>
                 </div>
             </div>
         </div>
@@ -1584,8 +1593,8 @@
             window.logLocalAuditEvent('SIMULATOR', 'Added mock Course ENG4U (Grade 12 English) to local memory', 0);
             window.logLocalAuditEvent('ALGORITHM', 'Recalculating admissions averages against 1,769 programs', 0);
         } else if (action === 'encrypt') {
-            window.logLocalAuditEvent('SECURITY', 'Derived 128-bit key locally and ran XXTEA encryption', 0);
-            window.logLocalAuditEvent('DATABASE', 'Stored encrypted block in browser localStorage', 0);
+            window.logLocalAuditEvent('SECURITY', 'Secured session with TLS 1.3 / AES-256 encryption & Row-Level Security', 0);
+            window.logLocalAuditEvent('DATABASE', 'Synchronized encrypted block with PostgreSQL database', 0);
         }
     }
     window.simulateAuditAction = simulateAuditAction;

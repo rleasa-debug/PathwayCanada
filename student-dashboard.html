@@ -10,6 +10,8 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <meta name="description" content="View your Canadian academic percentage averages, track curriculum progress, and see recommended university matches instantly on the student portal."/>
     <title>Dashboard | Pathway Canada</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/supabaseClient.js"></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&family=Public+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
@@ -468,7 +470,7 @@
                 <p class="text-[9px] text-slate-500 truncate" id="sidebar-tier">Free Plan</p>
                 <div class="flex items-center gap-1 mt-1 text-[8px] text-emerald-600 dark:text-emerald-400 font-bold uppercase tracking-wider">
                     <span class="material-symbols-outlined text-[10px]" style="font-variation-settings: 'FILL' 1;">security</span>
-                    <span>XXTEA Encrypted</span>
+                    <span>AES-256 / RLS</span>
                 </div>
             </div>
 
@@ -1112,9 +1114,9 @@
         </div>
         
         <div class="flex flex-col gap-3">
-            <a href="student-dashboard.html?payment=success" class="block w-full text-center py-4 bg-primary hover:bg-slate-900 text-white rounded-2xl font-lexend font-bold text-lg border-2 border-slate-700 hover:border-black shadow-lg transition-all focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-primary">
-                Upgrade Now
-            </a>
+            <button onclick="if(window.PathwayAuth){PathwayAuth.startStripeCheckout();}else{window.location.href='student-dashboard.html?payment=success';}" class="block w-full text-center py-4 bg-primary hover:bg-slate-900 text-white rounded-2xl font-lexend font-bold text-lg border-2 border-slate-700 hover:border-black shadow-lg transition-all focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-primary cursor-pointer">
+                Upgrade Now ($29.00 CAD)
+            </button>
             <button class="w-full text-center py-3 bg-white hover:bg-slate-50 text-slate-700 rounded-2xl font-lexend font-bold text-base border-2 border-slate-300 hover:border-slate-400 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-slate-500 transition-all" onclick="closeUpgradeModal()">
                 Continue on Free Version
             </button>
@@ -1469,21 +1471,21 @@
 
                         <!-- Primary Campus Image -->
                         <div class="w-full h-48 bg-slate-200 overflow-hidden relative shadow-inner cursor-pointer rounded-2xl mb-4">
-                            <img alt="Acme Student Loans" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" src="campuses/sponsor.png" />
+                            <img alt="Canada Student Financial Assistance" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" src="campuses/sponsor.png" />
                             <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent pointer-events-none"></div>
                         </div>
 
                         <div class="flex flex-col items-center text-center flex-1 relative z-20 px-4 cursor-pointer">
                             <h4 class="program-title font-black text-sm text-primary dark:text-white leading-tight mb-1 w-full flex items-center justify-center min-w-0">
-                                <span class="truncate">Acme Student Line of Credit</span>
+                                <span class="truncate">Canada Student Grants & Loans</span>
                             </h4>
-                            <p class="text-xs text-slate-400 dark:text-slate-500 font-semibold font-lexend truncate w-full mb-3">Finance your post-secondary dream</p>
+                            <p class="text-xs text-slate-400 dark:text-slate-500 font-semibold font-lexend truncate w-full mb-3">Government of Canada & Provincial Programs</p>
                             
-                            <p class="text-xs text-slate-500 dark:text-slate-400 mb-4 px-2 leading-relaxed font-body">Flexible repayment options tailored for Canadian university students. Apply in minutes with zero upfront fees.</p>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mb-4 px-2 leading-relaxed font-body">Explore federal and provincial non-repayable grants, interest-free student loans, and bursaries tailored to your academic pathway.</p>
 
-                            <button class="mt-auto px-5 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-black uppercase tracking-wider rounded-xl transition-all duration-200 shadow-sm w-full font-lexend">
-                                Learn More
-                            </button>
+                            <a href="https://www.canada.ca/en/services/benefits/education/student-aid.html" target="_blank" rel="noopener noreferrer" class="mt-auto px-5 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-black uppercase tracking-wider rounded-xl transition-all duration-200 shadow-sm w-full font-lexend text-center block">
+                                Explore Grants
+                            </a>
                         </div>
                     `;
                     
@@ -1491,7 +1493,7 @@
                          sponsorHtml = `
                             <div class="flex flex-row h-full gap-5">
                                 <div class="w-1/3 relative overflow-hidden rounded-xl bg-slate-200 cursor-pointer group-hover:shadow-md transition-shadow">
-                                    <img alt="Acme Student Loans" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" src="campuses/sponsor.png" />
+                                    <img alt="Canada Student Financial Assistance" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" src="campuses/sponsor.png" />
                                     <div class="absolute top-3 left-3 z-30 pointer-events-none">
                                         <span class="px-2.5 py-1 bg-amber-500 text-slate-950 rounded-full text-[9px] font-black uppercase tracking-wider font-lexend shadow-sm">
                                             🌟 Featured
@@ -1501,13 +1503,13 @@
                                 </div>
                                 <div class="w-2/3 flex flex-col justify-center py-2 pr-4 relative z-20 cursor-pointer">
                                     <h4 class="program-title font-black text-base text-primary dark:text-white leading-tight mb-1">
-                                        Acme Student Line of Credit
+                                        Canada Student Grants & Loans
                                     </h4>
-                                    <p class="text-xs text-slate-500 dark:text-slate-400 font-semibold font-lexend mb-3">Finance your post-secondary dream</p>
-                                    <p class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed mb-4 max-w-md">Flexible repayment options tailored for Canadian university students. Apply in minutes with zero upfront fees.</p>
-                                    <button class="mt-auto px-5 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 text-[10px] font-black uppercase tracking-wider rounded-lg transition-all shadow-sm w-fit font-lexend">
-                                        Learn More
-                                    </button>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 font-semibold font-lexend mb-3">Government of Canada & Provincial Programs</p>
+                                    <p class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed mb-4 max-w-md">Explore federal and provincial non-repayable grants, interest-free student loans, and bursaries tailored to your academic pathway.</p>
+                                    <a href="https://www.canada.ca/en/services/benefits/education/student-aid.html" target="_blank" rel="noopener noreferrer" class="mt-auto px-5 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 text-[10px] font-black uppercase tracking-wider rounded-lg transition-all shadow-sm w-fit font-lexend text-center block">
+                                        Explore Grants
+                                    </a>
                                 </div>
                             </div>
                          `;
@@ -2464,6 +2466,27 @@
     // Load initial views
     renderDashboard();
     renderNearMiss();
+    
+    // Check for active Supabase session and load cloud records if available
+    if (window.PathwayAuth && PathwayAuth.isConfigured()) {
+        PathwayAuth.getCurrentUser().then(user => {
+            if (user) {
+                const sidebarName = document.getElementById('sidebar-name');
+                if (sidebarName && user.user_metadata?.full_name) {
+                    sidebarName.textContent = user.user_metadata.full_name;
+                }
+                PathwayAuth.loadRecordsFromCloud().then(cloudData => {
+                    if (cloudData && cloudData.courses && cloudData.courses.length > 0) {
+                        let st = getAppState();
+                        st.courses = cloudData.courses;
+                        saveAppState(st);
+                        renderDashboard();
+                        renderNearMiss();
+                    }
+                });
+            }
+        }).catch(err => console.warn('Supabase session check:', err));
+    }
     
     // Sync storage events
     window.addEventListener('storage', () => {

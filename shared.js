@@ -344,6 +344,9 @@ function saveAppState(state) {
   if (typeof logLocalAuditEvent !== 'undefined') {
     logLocalAuditEvent('SECURITY', 'Saved encrypted profile changes to localStorage', 0);
   }
+  if (typeof window !== 'undefined' && window.PathwayAuth && typeof window.PathwayAuth.syncRecordsToCloud === 'function') {
+    window.PathwayAuth.syncRecordsToCloud(state).catch(e => console.warn('Supabase sync deferred:', e));
+  }
   window.dispatchEvent(new Event('storage'));
 }
 
@@ -1331,29 +1334,15 @@ function showUpgradeToast() {
 }
 
 function setupUpgradeButtons() {
-  const isMock = STRIPE_PAYMENT_LINK.includes('mock-link-placeholder');
-  if (!isMock) {
-    // Real Stripe link — wire all upgrade anchors to it
-    const links = document.querySelectorAll('a[href*="payment=success"]');
-    links.forEach(link => {
-      link.href = STRIPE_PAYMENT_LINK;
-      link.target = '_blank';
-      link.rel = 'noopener noreferrer';
+  const links = document.querySelectorAll('a[href*="payment=success"], button[onclick*="payment=success"]');
+  links.forEach(link => {
+    link.addEventListener('click', (e) => {
+      if (window.PathwayAuth && typeof window.PathwayAuth.startStripeCheckout === 'function') {
+        e.preventDefault();
+        window.PathwayAuth.startStripeCheckout();
+      }
     });
-  } else {
-    // No Stripe link yet — intercept clicks and show friendly toast
-    // (keep href so local ?payment=success demo still works in dev)
-    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-    if (!isLocal) {
-      const links = document.querySelectorAll('a[href*="payment=success"]');
-      links.forEach(link => {
-        link.addEventListener('click', (e) => {
-          e.preventDefault();
-          showUpgradeToast();
-        });
-      });
-    }
-  }
+  });
 }
 
 window.getAppState = getAppState;
