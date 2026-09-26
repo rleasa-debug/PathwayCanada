@@ -102,15 +102,16 @@
         }
         .watermark-bg::before {
             content: "OFFICIAL ACADEMIC CANADA DATA • CONFIDENTIAL • OFFICIAL ACADEMIC CANADA DATA • CONFIDENTIAL";
-            position: fixed;
+            position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) rotate(-30deg);
             font-size: 1.5rem;
             font-weight: 900;
-            color: rgba(0, 21, 42, 0.03);
+            color: rgba(0, 21, 42, 0.05);
+            opacity: 0.05;
             white-space: nowrap;
-            z-index: -1;
+            z-index: 0;
             pointer-events: none;
             width: 200%;
             display: block;
@@ -212,7 +213,7 @@
 <div class="bg-primary text-on-primary py-2 px-6 flex items-center justify-center space-x-4 text-[10px] font-bold uppercase tracking-[0.25em] relative z-[60]">
 <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">lock</span>
 <span>Secure 256-bit Encrypted Session Active</span>
-<span class="hidden sm:inline border-l border-on-primary/20 h-3 ml-2 pl-4 text-on-primary/60">Verification Status: Confirmed Academic Institution</span>
+<span class="hidden sm:inline border-l border-on-primary/20 h-3 ml-2 pl-4 text-on-primary/60">Verification Status: Verified Admissions Benchmarks</span>
 </div>
 <!-- TopAppBar Component -->
 <header class="sticky top-0 w-full z-50 bg-white border-b border-outline-variant/30">
@@ -226,6 +227,10 @@
 <a class="px-4 py-2 rounded-lg text-sm font-medium text-on-surface-variant hover:bg-surface-container transition-colors" href="student-dashboard.html">Dashboard</a>
 <a class="px-4 py-2 rounded-lg text-sm font-medium text-on-surface-variant hover:bg-surface-container transition-colors" href="academic-records.html">My Portfolio</a>
 <a class="px-4 py-2 rounded-lg text-sm font-medium text-on-surface-variant hover:bg-surface-container transition-colors" href="pricing.html">Plans & Pricing</a>
+<a class="px-3 py-1.5 rounded-lg text-xs font-semibold text-purple-700 dark:text-purple-300 bg-purple-50 dark:bg-purple-950/40 hover:bg-purple-100 transition-colors flex items-center gap-1.5 border border-purple-200 dark:border-purple-800" href="admin-dashboard.html">
+    <span class="material-symbols-outlined text-sm">admin_panel_settings</span>
+    Admin Console
+</a>
 </nav>
 </div>
 <div class="flex items-center space-x-4">
@@ -249,16 +254,16 @@
 <!-- Hero Section -->
 <section class="relative overflow-hidden pt-16 pb-32">
 <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-<div class="lg:col-span-7 z-10 text-left">
+<div class="lg:col-span-7 relative z-[2] text-left">
 <div class="inline-flex items-center space-x-2 bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full mb-6 opacity-0 animate-fade-in-up">
 <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">verified</span>
-<span class="text-xs font-bold tracking-wider uppercase">Official 2026-27 Curriculum Data</span>
+<span class="text-xs font-bold tracking-wider uppercase">Official 2025–2026 Admissions Data</span>
 </div>
 <h1 class="text-5xl md:text-7xl font-black tracking-tight text-primary leading-[1.1] mb-8 opacity-0 animate-fade-in-up delay-100">
                         Find the Programs You Qualify For Safely, Securely, and Instantly
                     </h1>
 <p class="text-lg md:text-xl text-on-surface-variant max-w-2xl mb-10 font-body leading-relaxed opacity-0 animate-fade-in-up delay-300">
-                        Zero-knowledge client-side encrypted grade matching for Canadian students. Input your marks to discover university and college programs where you meet the cutoff with 100% mathematical precision—completely private, instant, and free.
+                        Zero-knowledge client-side encrypted grade matching for Canadian students. Input your marks to discover university and college programs matched against published prerequisites and historical admission cutoffs—completely private, instant, and free.
                     </p>
 <div class="flex flex-col sm:flex-row gap-4 opacity-0 animate-fade-in-up delay-500">
 <a class="click-compress inline-block text-center academic-gradient text-on-primary px-8 py-4 rounded-lg font-lexend font-bold text-lg shadow-xl shadow-primary/10 hover:opacity-90 active:scale-95 transition-all" href="student-dashboard.html">
@@ -277,7 +282,7 @@
                 Privacy & Trust Promise
             </h4>
             <p class="text-[10px] text-on-surface-variant dark:text-slate-350 mt-1 leading-normal font-body">
-                <strong>Zero Password Policy & PIPEDA Adherence:</strong> We delegate authentication to secure OAuth channels and enforce strict data isolation. Grade analytics are processed locally. All student data is hosted strictly on **Canadian servers** in compliance with <strong>PIPEDA</strong> and <strong>Bill C-27</strong>.
+                <strong>Zero Password Policy & PIPEDA Adherence:</strong> We delegate authentication to secure OAuth channels and enforce strict data isolation. Grade analytics are processed locally. All student data is hosted strictly on <strong>Canadian servers</strong> in compliance with <strong>PIPEDA</strong> and <strong>Bill C-27</strong>.
             </p>
         </div>
     </div>
@@ -636,7 +641,7 @@
 <span class="material-symbols-outlined text-on-secondary-container">savings</span>
 </div>
 <div>
-<h4 class="font-bold text-primary text-xl">Average <span class="count-metric">$550</span> Saved</h4>
+<h4 class="font-bold text-primary text-xl">Average <span class="count-metric">$325</span> Saved</h4>
 <p class="text-on-surface-variant">Pathway Canada reduces 'trial-and-error' applications that don't lead to offers by using high-fidelity algorithm matching.</p>
 </div>
 </div>
@@ -653,7 +658,7 @@
 </div>
 <div class="bg-surface-container-low p-10 rounded-3xl relative overflow-hidden">
 <div class="relative z-10">
-<div class="text-6xl font-black text-primary mb-2 count-metric">$550</div>
+<div class="text-6xl font-black text-primary mb-2 count-metric">$325</div>
 <div class="text-sm font-bold text-on-surface-variant uppercase tracking-widest mb-8">Average Household Savings</div>
 <div class="space-y-4">
 <div class="bg-surface-container-lowest p-4 rounded-xl border border-slate-200">
@@ -813,13 +818,13 @@
     </div>
 </div>
 </section>
-<!-- Real Student Outlines Testimonials -->
+<!-- Real Student Outcomes Testimonials -->
 <section class="py-24 bg-slate-900 text-white scroll-reveal relative overflow-hidden">
     <div class="max-w-7xl mx-auto px-6 relative z-10">
         <div class="text-center mb-16">
             <div class="text-emerald-400 font-lexend font-bold uppercase tracking-widest text-xs mb-3">Verification & Insights</div>
             <h2 class="text-3xl md:text-5xl font-black tracking-tight text-white mb-4">
-                Real Student Outlines
+                Real Student Outcomes
             </h2>
             <p class="text-slate-400 max-w-xl mx-auto font-body text-sm leading-relaxed">
                 Join thousands of students who traded application anxiety for strategy. Real admissions outcomes from across the nation.
@@ -967,6 +972,7 @@
 <li><a class="text-blue-200/70 dark:text-slate-500 hover:text-white transition-colors text-xs uppercase tracking-widest" href="pricing.html">Plans & Pricing</a></li>
 <li><a class="text-blue-200/70 dark:text-slate-500 hover:text-white transition-colors text-xs uppercase tracking-widest" href="student-dashboard.html">Student Dashboard</a></li>
 <li><a class="text-blue-200/70 dark:text-slate-500 hover:text-white transition-colors text-xs uppercase tracking-widest" href="counselor-dashboard.html">Counselor Access</a></li>
+<li><a class="text-emerald-400 hover:text-white transition-colors text-xs uppercase tracking-widest font-bold flex items-center gap-1" href="admin-dashboard.html"><span class="material-symbols-outlined text-xs">admin_panel_settings</span>Admin Console</a></li>
 </ul>
 </div>
 </div>

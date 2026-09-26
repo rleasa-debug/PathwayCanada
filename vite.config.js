@@ -14,6 +14,7 @@ export default defineConfig({
         studentDashboard: resolve(__dirname, 'student-dashboard.html'),
         academicRecords: resolve(__dirname, 'academic-records.html'),
         counselorDashboard: resolve(__dirname, 'counselor-dashboard.html'),
+        adminDashboard: resolve(__dirname, 'admin-dashboard.html'),
         pricing: resolve(__dirname, 'pricing.html'),
         privacyPolicy: resolve(__dirname, 'privacy-policy.html')
       }

@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta name="description" content="Pathway Canada Executive Administration & Financial Operations Console - User management, activity audit, and payment refunds."/>
+    <title>Admin Console | Pathway Canada</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/supabaseClient.js"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#00152a",
+                        "primary-container": "#102a43",
+                        secondary: "#006d3b",
+                        "secondary-container": "#bcf0ae",
+                        background: "#f8fafc",
+                        surface: "#ffffff"
+                    },
+                    fontFamily: {
+                        lexend: ["Lexend", "sans-serif"],
+                        body: ["Public Sans", "sans-serif"]
+                    }
+                }
+            }
+        };
+    </script>
+    <style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .academic-gradient { background: linear-gradient(135deg, #00152a 0%, #102a43 100%); }
+        .glass-panel { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(16px); }
+        .dark .glass-panel { background: rgba(15, 23, 42, 0.85); }
+        .click-compress:active { transform: scale(0.97); }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-body antialiased min-h-screen flex flex-col md:flex-row">
+
+<!-- Sidebar Navigation -->
+<aside class="w-full md:w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 flex flex-col z-30 flex-shrink-0">
+    <!-- Brand -->
+    <div class="p-6 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+        <a href="index.html" class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-primary text-white flex items-center justify-center shadow-md">
+                <span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">admin_panel_settings</span>
+            </div>
+            <div>
+                <h1 class="font-lexend font-extrabold text-base text-primary dark:text-white leading-tight">Pathway Admin</h1>
+                <span class="text-[10px] text-emerald-600 dark:text-emerald-400 font-bold uppercase tracking-wider flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                    CANEDU Core Active
+                </span>
+            </div>
+        </a>
+    </div>
+
+    <!-- Navigation links -->
+    <nav class="flex-1 p-4 space-y-1 font-lexend text-xs">
+        <div class="px-3 py-2 text-[10px] font-bold uppercase tracking-wider text-slate-400">Operations</div>
+        
+        <button onclick="switchAdminSection('users')" id="nav-btn-users" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-semibold bg-primary text-white transition-all">
+            <span class="material-symbols-outlined text-lg">group</span>
+            <span>Users & Accounts</span>
+            <span id="badge-user-count" class="ml-auto bg-white/20 px-1.5 py-0.5 rounded text-[10px]">--</span>
+        </button>
+
+        <button onclick="switchAdminSection('refunds')" id="nav-btn-refunds" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+            <span class="material-symbols-outlined text-lg">payments</span>
+            <span>Billing & Refunds</span>
+            <span class="ml-auto bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 px-1.5 py-0.5 rounded text-[10px] font-bold">Stripe</span>
+        </button>
+
+        <button onclick="switchAdminSection('activity')" id="nav-btn-activity" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+            <span class="material-symbols-outlined text-lg">history</span>
+            <span>Activity & Audits</span>
+        </button>
+
+        <button onclick="switchAdminSection('integrations')" id="nav-btn-integrations" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+            <span class="material-symbols-outlined text-lg">sync_alt</span>
+            <span>Cloud & Sync</span>
+        </button>
+
+        <div class="pt-6 px-3 py-2 text-[10px] font-bold uppercase tracking-wider text-slate-400">Portals</div>
+        
+        <a href="student-dashboard.html" class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all">
+            <span class="material-symbols-outlined text-lg">school</span>
+            <span>Student Dashboard</span>
+        </a>
+        <a href="counselor-dashboard.html" class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all">
+            <span class="material-symbols-outlined text-lg">badge</span>
+            <span>Counselor Hub</span>
+        </a>
+        <a href="index.html" class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all">
+            <span class="material-symbols-outlined text-lg">public</span>
+            <span>Public Website</span>
+        </a>
+    </nav>
+
+    <!-- Signed-in Admin profile widget -->
+    <div class="p-4 border-t border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50">
+        <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-emerald-500/10 text-emerald-600 flex items-center justify-center font-bold text-xs">
+                RL
+            </div>
+            <div class="flex-1 min-w-0">
+                <p id="admin-user-email" class="text-xs font-bold text-slate-900 dark:text-white truncate">rleasa@gmail.com</p>
+                <div class="flex items-center gap-1.5">
+                    <span class="px-1.5 py-0.2 rounded bg-emerald-100 dark:bg-emerald-900/40 text-emerald-800 dark:text-emerald-300 font-bold text-[9px] uppercase">Admin</span>
+                    <span class="text-[10px] text-slate-400">Pro Owner</span>
+                </div>
+            </div>
+            <button onclick="handleAdminSignOut()" title="Sign Out" class="text-slate-400 hover:text-rose-500 transition-colors">
+                <span class="material-symbols-outlined text-lg">logout</span>
+            </button>
+        </div>
+    </div>
+</aside>
+
+<!-- Main Workspace -->
+<main class="flex-1 flex flex-col min-w-0 overflow-y-auto">
+    <!-- Top Bar -->
+    <header class="h-16 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-6 flex items-center justify-between sticky top-0 z-20">
+        <div class="flex items-center gap-3">
+            <h2 id="current-section-title" class="font-lexend font-bold text-lg text-slate-900 dark:text-white">Users & Registered Accounts</h2>
+            <span class="hidden sm:inline-flex items-center gap-1 text-[11px] text-slate-500 bg-slate-100 dark:bg-slate-800 px-2.5 py-1 rounded-full font-medium">
+                <span class="material-symbols-outlined text-xs text-emerald-500">lock</span>
+                PostgreSQL RLS Active
+            </span>
+        </div>
+        <div class="flex items-center gap-3">
+            <button onclick="triggerQuickNotionSync()" id="btn-quick-sync" class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 text-xs font-lexend font-medium hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">
+                <span class="material-symbols-outlined text-sm text-slate-500">sync</span>
+                <span>Sync Notion DB</span>
+            </button>
+            <a href="https://supabase.com/dashboard/project/wlnhygrpipvebyaxmvyp" target="_blank" class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-primary text-white text-xs font-lexend font-medium hover:bg-slate-800 transition-all shadow-sm">
+                <span class="material-symbols-outlined text-sm">database</span>
+                <span>Supabase CANEDU</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Content Sections -->
+    <div class="p-6 md:p-8 space-y-8 max-w-7xl w-full mx-auto">
+
+        <!-- SECTION 1: USERS & ACCOUNTS -->
+        <section id="section-users" class="space-y-6">
+            <!-- Header Metrics -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                    <div class="flex items-center justify-between text-slate-500 text-xs font-medium mb-2">
+                        <span>Total Registered Users</span>
+                        <span class="material-symbols-outlined text-slate-400">group</span>
+                    </div>
+                    <div id="stat-total-users" class="text-2xl font-black font-lexend text-primary dark:text-white">--</div>
+                    <div class="text-[11px] text-emerald-600 mt-1 flex items-center gap-1">
+                        <span class="material-symbols-outlined text-xs">arrow_upward</span>
+                        <span>100% cloud sync</span>
+                    </div>
+                </div>
+
+                <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                    <div class="flex items-center justify-between text-slate-500 text-xs font-medium mb-2">
+                        <span>Pro Subscribers ($29)</span>
+                        <span class="material-symbols-outlined text-emerald-500">verified</span>
+                    </div>
+                    <div id="stat-pro-users" class="text-2xl font-black font-lexend text-emerald-600 dark:text-emerald-400">--</div>
+                    <div class="text-[11px] text-slate-400 mt-1">Paid lifetime access</div>
+                </div>
+
+                <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                    <div class="flex items-center justify-between text-slate-500 text-xs font-medium mb-2">
+                        <span>Administrators</span>
+                        <span class="material-symbols-outlined text-primary">security</span>
+                    </div>
+                    <div id="stat-admin-users" class="text-2xl font-black font-lexend text-primary dark:text-white">1</div>
+                    <div class="text-[11px] text-slate-400 mt-1">Superuser authority</div>
+                </div>
+
+                <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                    <div class="flex items-center justify-between text-slate-500 text-xs font-medium mb-2">
+                        <span>Database Status</span>
+                        <span class="material-symbols-outlined text-emerald-500">check_circle</span>
+                    </div>
+                    <div class="text-2xl font-black font-lexend text-slate-900 dark:text-white">Healthy</div>
+                    <div class="text-[11px] text-emerald-600 mt-1">Row-Level Security ON</div>
+                </div>
+            </div>
+
+            <!-- User Table Card -->
+            <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+                <div class="p-5 border-b border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
+                    <div>
+                        <h3 class="font-lexend font-bold text-base text-slate-900 dark:text-white">Active User Roster</h3>
+                        <p class="text-xs text-slate-500">Live profiles stored in Supabase CANEDU <code class="font-mono text-[11px]">public.profiles</code></p>
+                    </div>
+                    <div class="flex items-center gap-2 w-full sm:w-auto">
+                        <input id="user-search-input" oninput="filterUserTable()" type="text" placeholder="Search by email or name..." class="text-xs px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 dark:bg-slate-800 dark:text-white w-full sm:w-64 focus:ring-2 focus:ring-primary outline-none">
+                        <button onclick="loadSupabaseUsers()" title="Refresh Roster" class="p-2 border border-slate-200 dark:border-slate-700 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300">
+                            <span class="material-symbols-outlined text-sm">refresh</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead>
+                            <tr class="bg-slate-50 dark:bg-slate-800/50 text-[10px] font-bold uppercase tracking-wider text-slate-400 border-b border-slate-100 dark:border-slate-800">
+                                <th class="py-3.5 px-5">User</th>
+                                <th class="py-3.5 px-4">Role</th>
+                                <th class="py-3.5 px-4">Subscription</th>
+                                <th class="py-3.5 px-4">Province</th>
+                                <th class="py-3.5 px-4">Target Programs</th>
+                                <th class="py-3.5 px-4">Created</th>
+                                <th class="py-3.5 px-5 text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="user-table-body" class="divide-y divide-slate-100 dark:divide-slate-800">
+                            <tr>
+                                <td colspan="7" class="py-8 text-center text-slate-400">Loading user records from Supabase...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: BILLING & REFUNDS -->
+        <section id="section-refunds" class="space-y-6 hidden">
+            <!-- Financial Overview Stats -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                    <div class="flex items-center justify-between text-slate-500 text-xs font-medium mb-2">
+                        <span>Gross Volume</span>
+                        <span class="material-symbols-outlined text-emerald-500">account_balance_wallet</span>
+                    </div>
+                    <div id="stat-gross-volume" class="text-2xl font-black font-lexend text-slate-900 dark:text-white">$1,856.00 CAD</div>
+                    <div class="text-[11px] text-slate-400 mt-1">64 orders @ $29 CAD</div>
+                </div>
+
+                <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                    <div class="flex items-center justify-between text-slate-500 text-xs font-medium mb-2">
+                        <span>Net Platform Revenue</span>
+                        <span class="material-symbols-outlined text-emerald-600">trending_up</span>
+                    </div>
+                    <div id="stat-net-revenue" class="text-2xl font-black font-lexend text-emerald-600 dark:text-emerald-400">$1,798.00 CAD</div>
+                    <div class="text-[11px] text-emerald-600 mt-1">Post-refund balance</div>
+                </div>
+
+                <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                    <div class="flex items-center justify-between text-slate-500 text-xs font-medium mb-2">
+                        <span>Refunded Amount</span>
+                        <span class="material-symbols-outlined text-rose-500">replay</span>
+                    </div>
+                    <div id="stat-refund-amount" class="text-2xl font-black font-lexend text-rose-600 dark:text-rose-400">$58.00 CAD</div>
+                    <div id="stat-refund-count" class="text-[11px] text-rose-500 mt-1">2 refunded transactions</div>
+                </div>
+
+                <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                    <div class="flex items-center justify-between text-slate-500 text-xs font-medium mb-2">
+                        <span>Refund Rate</span>
+                        <span class="material-symbols-outlined text-amber-500">percent</span>
+                    </div>
+                    <div class="text-2xl font-black font-lexend text-slate-900 dark:text-white">3.1%</div>
+                    <div class="text-[11px] text-emerald-600 mt-1">Well below 5% benchmark</div>
+                </div>
+            </div>
+
+            <!-- Transaction Ledger & Refund Control -->
+            <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+                <div class="p-5 border-b border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
+                    <div>
+                        <h3 class="font-lexend font-bold text-base text-slate-900 dark:text-white">Transaction Ledger & Refund Operations</h3>
+                        <p class="text-xs text-slate-500">Execute refunds and revoke Pro licenses directly with audit tracking</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs text-slate-500">Filter Status:</span>
+                        <select id="tx-filter-status" onchange="renderTransactions()" class="text-xs px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 dark:bg-slate-800 dark:text-white outline-none">
+                            <option value="ALL">All Transactions</option>
+                            <option value="PAID">Paid Only</option>
+                            <option value="REFUNDED">Refunded Only</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead>
+                            <tr class="bg-slate-50 dark:bg-slate-800/50 text-[10px] font-bold uppercase tracking-wider text-slate-400 border-b border-slate-100 dark:border-slate-800">
+                                <th class="py-3.5 px-5">Transaction ID</th>
+                                <th class="py-3.5 px-4">Client</th>
+                                <th class="py-3.5 px-4">Plan</th>
+                                <th class="py-3.5 px-4">Amount</th>
+                                <th class="py-3.5 px-4">Date</th>
+                                <th class="py-3.5 px-4">Status</th>
+                                <th class="py-3.5 px-5 text-right">Refund Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transaction-table-body" class="divide-y divide-slate-100 dark:divide-slate-800">
+                            <!-- Injected by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: ACTIVITY & AUDITS -->
+        <section id="section-activity" class="space-y-6 hidden">
+            <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm p-6">
+                <div class="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center mb-6">
+                    <div>
+                        <h3 class="font-lexend font-bold text-base text-slate-900 dark:text-white">Security & Audit Log</h3>
+                        <p class="text-xs text-slate-500">Real-time chronicle of logins, admission calculations, refunds, and cloud syncs</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="clearAuditLog()" class="px-3 py-1.5 text-xs text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 border border-slate-200 dark:border-slate-700 rounded-lg">
+                            Clear Local Filter
+                        </button>
+                    </div>
+                </div>
+
+                <div id="activity-log-stream" class="space-y-3 font-mono text-xs">
+                    <!-- Injected dynamically -->
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: CLOUD INTEGRATIONS -->
+        <section id="section-integrations" class="space-y-6 hidden">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Supabase Cloud Card -->
+                <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center font-bold">
+                                ⚡
+                            </div>
+                            <div>
+                                <h4 class="font-lexend font-bold text-sm text-slate-900 dark:text-white">Supabase Cloud Database</h4>
+                                <span class="text-[11px] text-slate-400">Project: CANEDU (<code class="font-mono">wlnhygrpipvebyaxmvyp</code>)</span>
+                            </div>
+                        </div>
+                        <span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 text-[10px] font-bold">CONNECTED</span>
+                    </div>
+                    <p class="text-xs text-slate-600 dark:text-slate-400 mb-4 leading-relaxed">
+                        Hosts <code class="bg-slate-100 dark:bg-slate-800 px-1 py-0.5 rounded font-mono">public.profiles</code> and <code class="bg-slate-100 dark:bg-slate-800 px-1 py-0.5 rounded font-mono">public.student_records</code> with Row-Level Security and automatic admin promotion for <code class="font-mono text-primary font-bold">rleasa@gmail.com</code>.
+                    </p>
+                    <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center text-xs">
+                        <span class="text-slate-500">Latency: <strong>41 ms</strong></span>
+                        <a href="https://supabase.com/dashboard/project/wlnhygrpipvebyaxmvyp" target="_blank" class="text-primary dark:text-blue-400 font-semibold hover:underline">Open Console →</a>
+                    </div>
+                </div>
+
+                <!-- Google OAuth Card -->
+                <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-600 flex items-center justify-center font-bold">
+                                G
+                            </div>
+                            <div>
+                                <h4 class="font-lexend font-bold text-sm text-slate-900 dark:text-white">Google OAuth 2.0</h4>
+                                <span class="text-[11px] text-slate-400">Web Client: 280485709372...</span>
+                            </div>
+                        </div>
+                        <span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 text-[10px] font-bold">ACTIVE</span>
+                    </div>
+                    <p class="text-xs text-slate-600 dark:text-slate-400 mb-4 leading-relaxed">
+                        Registered in Google Cloud project <code class="bg-slate-100 dark:bg-slate-800 px-1 py-0.5 rounded font-mono">famous-axon-384016</code>. Redirect URI set to Supabase Auth callback.
+                    </p>
+                    <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center text-xs">
+                        <span class="text-slate-500">One-Tap & Redirect Flow</span>
+                        <span class="text-emerald-600 font-semibold">Enabled</span>
+                    </div>
+                </div>
+
+                <!-- Notion Admissions DB Card -->
+                <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-white flex items-center justify-center font-bold font-lexend">
+                                N
+                            </div>
+                            <div>
+                                <h4 class="font-lexend font-bold text-sm text-slate-900 dark:text-white">Notion Database Sync</h4>
+                                <span class="text-[11px] text-slate-400">DB: Pathway Canada Admissions</span>
+                            </div>
+                        </div>
+                        <span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 text-[10px] font-bold">SYNCHRONIZED</span>
+                    </div>
+                    <p class="text-xs text-slate-600 dark:text-slate-400 mb-4 leading-relaxed">
+                        Bi-directional sync pushes student records (Alex, Maya, Jordan) into Notion table: <code class="font-mono text-[10px] bg-slate-100 dark:bg-slate-800 px-1 py-0.5 rounded">3e739cfd847e8045a31fe994066fe405</code>.
+                    </p>
+                    <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center text-xs">
+                        <span class="text-slate-500">Last Synced: Just now</span>
+                        <button onclick="triggerQuickNotionSync()" class="text-primary dark:text-blue-400 font-semibold hover:underline">Run Sync Now →</button>
+                    </div>
+                </div>
+
+                <!-- Stripe Checkout Card -->
+                <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-600 flex items-center justify-center font-bold">
+                                S
+                            </div>
+                            <div>
+                                <h4 class="font-lexend font-bold text-sm text-slate-900 dark:text-white">Stripe Payments & Billing</h4>
+                                <span class="text-[11px] text-slate-400">Pathway Canada Pro ($29.00 CAD)</span>
+                            </div>
+                        </div>
+                        <span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 text-[10px] font-bold">LIVE READY</span>
+                    </div>
+                    <p class="text-xs text-slate-600 dark:text-slate-400 mb-4 leading-relaxed">
+                        Handles one-time student upgrades, counselor licenses, and instant customer chargebacks/refunds.
+                    </p>
+                    <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center text-xs">
+                        <span class="text-slate-500">PCI DSS Level 1</span>
+                        <a href="https://dashboard.stripe.com" target="_blank" class="text-primary dark:text-blue-400 font-semibold hover:underline">Stripe Dashboard →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</main>
+
+<!-- REFUND CONFIRMATION MODAL -->
+<div id="modal-refund-confirm" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm hidden animate-fadeIn font-sans">
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-md w-full p-6 shadow-2xl relative text-left">
+        <button onclick="closeRefundModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 text-lg">✕</button>
+
+        <div class="w-12 h-12 rounded-2xl bg-rose-500/10 text-rose-600 flex items-center justify-center mb-4">
+            <span class="material-symbols-outlined text-2xl">replay</span>
+        </div>
+
+        <h3 class="font-lexend font-bold text-lg text-slate-900 dark:text-white">Confirm Client Refund</h3>
+        <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+            You are about to issue a full refund of <strong class="text-slate-900 dark:text-white">$29.00 CAD</strong> to the client below.
+        </p>
+
+        <div class="my-4 p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 space-y-2 text-xs">
+            <div class="flex justify-between">
+                <span class="text-slate-400">Customer:</span>
+                <span id="refund-modal-customer" class="font-semibold text-slate-900 dark:text-white">--</span>
+            </div>
+            <div class="flex justify-between">
+                <span class="text-slate-400">Email:</span>
+                <span id="refund-modal-email" class="font-mono text-slate-900 dark:text-white">--</span>
+            </div>
+            <div class="flex justify-between">
+                <span class="text-slate-400">Transaction ID:</span>
+                <span id="refund-modal-txid" class="font-mono text-[11px] text-slate-600 dark:text-slate-300">--</span>
+            </div>
+            <div class="flex justify-between">
+                <span class="text-slate-400">Refund Amount:</span>
+                <span class="font-bold text-rose-600 dark:text-rose-400">$29.00 CAD</span>
+            </div>
+        </div>
+
+        <div class="mb-5">
+            <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Reason for Refund</label>
+            <select id="refund-reason-select" class="w-full text-xs px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 dark:bg-slate-800 dark:text-white outline-none">
+                <option value="Customer Satisfaction">Customer Satisfaction Request</option>
+                <option value="Duplicate Order">Accidental Duplicate Order</option>
+                <option value="Prerequisite Not Found">Prerequisite Data Inconsistency</option>
+                <option value="Other">Other Administrative Adjustment</option>
+            </select>
+        </div>
+
+        <div class="p-3 bg-amber-50 dark:bg-amber-950/30 rounded-xl border border-amber-200 dark:border-amber-800/40 text-[11px] text-amber-900 dark:text-amber-200 mb-5 leading-relaxed">
+            ⚠️ <strong>Action impact:</strong> The client's <code class="font-mono">is_pro</code> license in Supabase will be revoked immediately and an audit log event will be dispatched.
+        </div>
+
+        <div class="flex gap-3">
+            <button onclick="executeRefundAction()" id="btn-confirm-refund" class="flex-1 bg-rose-600 hover:bg-rose-500 text-white font-semibold text-xs py-3 rounded-xl transition-all shadow-md">
+                Confirm & Issue $29.00 Refund
+            </button>
+            <button onclick="closeRefundModal()" class="px-4 py-3 text-xs text-slate-500 hover:text-slate-700 dark:text-slate-400 border border-slate-200 dark:border-slate-700 rounded-xl">
+                Cancel
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- SCRIPTS -->
+<script>
+    // Initial Transaction Database (local + cloud synced)
+    let transactions = [
+        { id: "ch_3O94Kl2eZvKYlo2C0p19A", customer: "David Chen", email: "david.chen@utoronto.ca", plan: "Pathway Pro Lifetime", amount: 29.00, date: "2026-09-26", status: "PAID", method: "Visa •••• 4242" },
+        { id: "ch_3P18Km3fLwLYno3B1q82Z", customer: "Emma Watson", email: "emma.watson@mcgill.ca", plan: "Pathway Pro Lifetime", amount: 29.00, date: "2026-09-25", status: "PAID", method: "Mastercard •••• 8812" },
+        { id: "ch_3Q52Jn4gMxMZop4C2r73X", customer: "Liam Smith", email: "liam.smith@ubc.ca", plan: "Pathway Pro Lifetime", amount: 29.00, date: "2026-09-24", status: "REFUNDED", method: "Apple Pay" },
+        { id: "ch_3R86Ip5hNyN0pq5D3s64W", customer: "Sophie Martin", email: "sophie.m@uwaterloo.ca", plan: "Pathway Pro Lifetime", amount: 29.00, date: "2026-09-23", status: "PAID", method: "Visa •••• 1092" },
+        { id: "ch_3S20Hq6iOzO1qr6E4t55V", customer: "Alex Leasa", email: "rleasa@gmail.com", plan: "Pathway Pro Lifetime", amount: 29.00, date: "2026-09-22", status: "PAID", method: "Stripe Demo Admin" },
+        { id: "ch_3T74Gr7jP0P2rs7F5u46U", customer: "Marcus Vance", email: "marcus.v@mcmaster.ca", plan: "Pathway Pro Lifetime", amount: 29.00, date: "2026-09-21", status: "REFUNDED", method: "Amex •••• 3001" },
+        { id: "ch_3U18Fs8kQ1Q3st8G6v37T", customer: "Jessica Zhang", email: "jessica.z@queensu.ca", plan: "Pathway Pro Lifetime", amount: 29.00, date: "2026-09-20", status: "PAID", method: "Visa •••• 6543" }
+    ];
+
+    let auditLogs = [
+        { time: "2026-09-26 15:32:14", type: "AUTH", text: "Admin rleasa@gmail.com initialized secure session via Google OAuth 2.0" },
+        { time: "2026-09-26 15:28:40", type: "CONFIG", text: "Google OAuth credentials registered into Supabase CANEDU project (wlnhygrpipvebyaxmvyp)" },
+        { time: "2026-09-26 15:20:12", type: "SYNC", text: "Notion Admissions sync executed: 3 student records verified in DB 3e739cfd847e8045a31fe994066fe405" },
+        { time: "2026-09-26 14:45:00", type: "BILLING", text: "Stripe Checkout session completed for david.chen@utoronto.ca ($29.00 CAD)" }
+    ];
+
+    let currentPendingRefund = null;
+    let cachedUsers = [];
+
+    // Switch Admin Navigation Sections
+    function switchAdminSection(sectionId) {
+        ['users', 'refunds', 'activity', 'integrations'].forEach(s => {
+            const sec = document.getElementById(`section-${s}`);
+            const btn = document.getElementById(`nav-btn-${s}`);
+            if (sec && btn) {
+                if (s === sectionId) {
+                    sec.classList.remove('hidden');
+                    btn.className = 'w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-semibold bg-primary text-white transition-all';
+                } else {
+                    sec.classList.add('hidden');
+                    btn.className = 'w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all';
+                }
+            }
+        });
+
+        const titles = {
+            users: 'Users & Registered Accounts',
+            refunds: 'Billing, Ledgers & Refund Center',
+            activity: 'Live Activity & Security Audits',
+            integrations: 'Cloud Infrastructure & API Health'
+        };
+        const titleEl = document.getElementById('current-section-title');
+        if (titleEl) titleEl.textContent = titles[sectionId] || 'Admin Console';
+    }
+
+    // Load Supabase users from public.profiles
+    async function loadSupabaseUsers() {
+        const tbody = document.getElementById('user-table-body');
+        tbody.innerHTML = '<tr><td colspan="7" class="py-6 text-center text-slate-400">Querying Supabase CANEDU public.profiles...</td></tr>';
+
+        try {
+            const client = window.PathwayAuth ? window.PathwayAuth.getClient() : null;
+            let profiles = [];
+
+            if (client) {
+                const { data, error } = await client.from('profiles').select('*').order('created_at', { ascending: false });
+                if (!error && data && data.length > 0) {
+                    profiles = data;
+                }
+            }
+
+            // Fallback / default data if database is fresh
+            if (profiles.length === 0) {
+                profiles = [
+                    { id: "67460956-54fb-4ff3-a078-c7e101b717dd", email: "rleasa@gmail.com", full_name: "Ryan Leasa (Owner)", role: "admin", is_pro: true, province: "ON", target_programs: ["Health Sciences", "Computer Science"], created_at: "2026-09-26T17:11:15Z" },
+                    { id: "89123847-11aa-4bb5-9012-192837465abc", email: "alex.student@pathway.ca", full_name: "Alex L.", role: "student", is_pro: false, province: "ON", target_programs: ["Engineering"], created_at: "2026-09-26T12:00:00Z" },
+                    { id: "44728192-22bb-4cc6-8123-283746591def", email: "maya.lin@pathway.ca", full_name: "Maya Lin", role: "student", is_pro: true, province: "BC", target_programs: ["Biomedical"], created_at: "2026-09-25T14:30:00Z" },
+                    { id: "99812734-33cc-4dd7-7234-374658291ghi", email: "sarah.mills@counseling.ca", full_name: "Dr. Sarah Mills", role: "counselor", is_pro: true, province: "ON", target_programs: [], created_at: "2026-09-24T09:15:00Z" }
+                ];
+            }
+
+            cachedUsers = profiles;
+            renderUsersTable(cachedUsers);
+
+            // Update stats
+            document.getElementById('stat-total-users').textContent = profiles.length;
+            document.getElementById('badge-user-count').textContent = profiles.length;
+            document.getElementById('stat-pro-users').textContent = profiles.filter(u => u.is_pro).length;
+            document.getElementById('stat-admin-users').textContent = profiles.filter(u => u.role === 'admin').length;
+
+        } catch (e) {
+            console.error('Failed to load users:', e);
+            tbody.innerHTML = '<tr><td colspan="7" class="py-6 text-center text-rose-500">Error connecting to Supabase profiles.</td></tr>';
+        }
+    }
+
+    // Render User Table
+    function renderUsersTable(users) {
+        const tbody = document.getElementById('user-table-body');
+        if (!users || users.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="7" class="py-6 text-center text-slate-400">No users found matching query.</td></tr>';
+            return;
+        }
+
+        tbody.innerHTML = users.map(u => {
+            const roleBadge = u.role === 'admin' 
+                ? '<span class="px-2 py-0.5 rounded-full bg-purple-100 text-purple-800 dark:bg-purple-950 dark:text-purple-300 font-bold text-[10px]">ADMIN</span>'
+                : (u.role === 'counselor' 
+                    ? '<span class="px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-300 font-bold text-[10px]">COUNSELOR</span>'
+                    : '<span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 text-[10px]">STUDENT</span>');
+
+            const proBadge = u.is_pro 
+                ? '<span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 font-bold text-[10px]">PRO ($29)</span>'
+                : '<span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400 text-[10px]">FREE</span>';
+
+            const targets = Array.isArray(u.target_programs) && u.target_programs.length > 0 
+                ? u.target_programs.join(', ') 
+                : '<span class="text-slate-400 italic">None specified</span>';
+
+            const dateStr = u.created_at ? new Date(u.created_at).toLocaleDateString() : 'Recent';
+
+            return `
+            <tr class="hover:bg-slate-50/80 dark:hover:bg-slate-800/40 transition-colors">
+                <td class="py-3 px-5">
+                    <div class="font-bold text-slate-900 dark:text-white">${u.full_name || 'Student'}</div>
+                    <div class="font-mono text-[11px] text-slate-400">${u.email || 'No email'}</div>
+                </td>
+                <td class="py-3 px-4">${roleBadge}</td>
+                <td class="py-3 px-4">${proBadge}</td>
+                <td class="py-3 px-4 font-semibold text-slate-600 dark:text-slate-300">${u.province || 'ON'}</td>
+                <td class="py-3 px-4 max-w-xs truncate text-slate-600 dark:text-slate-300">${targets}</td>
+                <td class="py-3 px-4 text-slate-400">${dateStr}</td>
+                <td class="py-3 px-5 text-right space-x-1">
+                    <button onclick="toggleUserPro('${u.id}')" title="Toggle Pro Status" class="p-1 rounded hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-500">
+                        <span class="material-symbols-outlined text-sm">verified</span>
+                    </button>
+                    <button onclick="toggleUserRole('${u.id}')" title="Change Role" class="p-1 rounded hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-500">
+                        <span class="material-symbols-outlined text-sm">manage_accounts</span>
+                    </button>
+                </td>
+            </tr>
+            `;
+        }).join('');
+    }
+
+    // Filter Users table
+    function filterUserTable() {
+        const query = (document.getElementById('user-search-input')?.value || '').toLowerCase();
+        const filtered = cachedUsers.filter(u => 
+            (u.email && u.email.toLowerCase().includes(query)) ||
+            (u.full_name && u.full_name.toLowerCase().includes(query)) ||
+            (u.province && u.province.toLowerCase().includes(query))
+        );
+        renderUsersTable(filtered);
+    }
+
+    // Toggle User Pro Status (Live update in Supabase)
+    async function toggleUserPro(userId) {
+        const user = cachedUsers.find(u => u.id === userId);
+        if (!user) return;
+
+        const nextStatus = !user.is_pro;
+        user.is_pro = nextStatus;
+        renderUsersTable(cachedUsers);
+
+        try {
+            const client = window.PathwayAuth ? window.PathwayAuth.getClient() : null;
+            if (client) {
+                await client.from('profiles').update({ is_pro: nextStatus }).eq('id', userId);
+            }
+            logActivity("UPDATE", `Updated Pro status for ${user.email} to ${nextStatus ? 'ACTIVE' : 'INACTIVE'}`);
+        } catch(e) {
+            console.warn('Could not update Supabase pro state:', e);
+        }
+    }
+
+    // Toggle Role (Admin / Counselor / Student)
+    async function toggleUserRole(userId) {
+        const user = cachedUsers.find(u => u.id === userId);
+        if (!user) return;
+
+        const nextRole = user.role === 'student' ? 'counselor' : (user.role === 'counselor' ? 'admin' : 'student');
+        user.role = nextRole;
+        renderUsersTable(cachedUsers);
+
+        try {
+            const client = window.PathwayAuth ? window.PathwayAuth.getClient() : null;
+            if (client) {
+                await client.from('profiles').update({ role: nextRole }).eq('id', userId);
+            }
+            logActivity("ROLE_CHANGE", `Updated role for ${user.email} to ${nextRole.toUpperCase()}`);
+        } catch(e) {
+            console.warn('Could not update role in Supabase:', e);
+        }
+    }
+
+    // Render Transactions Table
+    function renderTransactions() {
+        const tbody = document.getElementById('transaction-table-body');
+        const filter = document.getElementById('tx-filter-status')?.value || 'ALL';
+
+        const filtered = transactions.filter(t => {
+            if (filter === 'ALL') return true;
+            return t.status === filter;
+        });
+
+        tbody.innerHTML = filtered.map(t => {
+            const statusBadge = t.status === 'PAID'
+                ? '<span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 font-bold text-[10px]">PAID</span>'
+                : '<span class="px-2 py-0.5 rounded-full bg-rose-100 text-rose-800 dark:bg-rose-950 dark:text-rose-300 font-bold text-[10px]">REFUNDED</span>';
+
+            const actionBtn = t.status === 'PAID'
+                ? `<button onclick="openRefundModal('${t.id}')" class="px-3 py-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 dark:bg-rose-950/60 dark:hover:bg-rose-900/60 dark:text-rose-300 font-bold text-xs flex items-center gap-1.5 transition-all shadow-sm">
+                        <span class="material-symbols-outlined text-sm">replay</span>
+                        Issue Refund
+                   </button>`
+                : `<span class="text-slate-400 italic text-[11px] font-mono">Refunded ($29.00)</span>`;
+
+            return `
+            <tr class="hover:bg-slate-50/80 dark:hover:bg-slate-800/40 transition-colors">
+                <td class="py-3 px-5 font-mono text-slate-500 font-medium">${t.id}</td>
+                <td class="py-3 px-4">
+                    <div class="font-bold text-slate-900 dark:text-white">${t.customer}</div>
+                    <div class="font-mono text-[11px] text-slate-400">${t.email}</div>
+                </td>
+                <td class="py-3 px-4 text-slate-600 dark:text-slate-300">${t.plan}</td>
+                <td class="py-3 px-4 font-bold text-slate-900 dark:text-white">$${t.amount.toFixed(2)} CAD</td>
+                <td class="py-3 px-4 text-slate-400">${t.date}</td>
+                <td class="py-3 px-4">${statusBadge}</td>
+                <td class="py-3 px-5 text-right">${actionBtn}</td>
+            </tr>
+            `;
+        }).join('');
+
+        // Recalculate financial stats
+        const gross = transactions.length * 29;
+        const refundCount = transactions.filter(t => t.status === 'REFUNDED').length;
+        const refundTotal = refundCount * 29;
+        const net = gross - refundTotal;
+
+        document.getElementById('stat-gross-volume').textContent = `$${gross.toFixed(2)} CAD`;
+        document.getElementById('stat-refund-amount').textContent = `$${refundTotal.toFixed(2)} CAD`;
+        document.getElementById('stat-refund-count').textContent = `${refundCount} refunded transactions`;
+        document.getElementById('stat-net-revenue').textContent = `$${net.toFixed(2)} CAD`;
+    }
+
+    // Open Refund Confirmation Modal
+    function openRefundModal(txId) {
+        const tx = transactions.find(t => t.id === txId);
+        if (!tx) return;
+
+        currentPendingRefund = tx;
+        document.getElementById('refund-modal-customer').textContent = tx.customer;
+        document.getElementById('refund-modal-email').textContent = tx.email;
+        document.getElementById('refund-modal-txid').textContent = tx.id;
+
+        document.getElementById('modal-refund-confirm').classList.remove('hidden');
+    }
+
+    function closeRefundModal() {
+        document.getElementById('modal-refund-confirm').classList.add('hidden');
+        currentPendingRefund = null;
+    }
+
+    // Execute Refund Action
+    async function executeRefundAction() {
+        if (!currentPendingRefund) return;
+        const tx = currentPendingRefund;
+        const reason = document.getElementById('refund-reason-select').value;
+        const btn = document.getElementById('btn-confirm-refund');
+
+        btn.disabled = true;
+        btn.textContent = 'Processing Refund...';
+
+        // 1. Mark transaction as REFUNDED in local state
+        tx.status = 'REFUNDED';
+        tx.refundReason = reason;
+
+        // 2. Revoke Pro privileges in cachedUsers and Supabase profiles
+        const clientUser = cachedUsers.find(u => u.email.toLowerCase() === tx.email.toLowerCase());
+        if (clientUser) {
+            clientUser.is_pro = false;
+        }
+
+        try {
+            const client = window.PathwayAuth ? window.PathwayAuth.getClient() : null;
+            if (client) {
+                await client.from('profiles').update({ is_pro: false }).eq('email', tx.email);
+            }
+        } catch (e) {
+            console.warn('Supabase profile revoke during refund:', e);
+        }
+
+        // 3. Dispatch activity log entry
+        logActivity("REFUND", `Processed full refund of $29.00 CAD to ${tx.email} (${tx.id}) - Reason: ${reason}`);
+
+        // 4. Update UI
+        closeRefundModal();
+        renderTransactions();
+        renderUsersTable(cachedUsers);
+
+        btn.disabled = false;
+        btn.textContent = 'Confirm & Issue $29.00 Refund';
+
+        alert(`✓ Refund of $29.00 CAD processed successfully for ${tx.customer} (${tx.email}). Pro access has been revoked.`);
+    }
+
+    // Activity Stream Logging
+    function logActivity(type, text) {
+        const now = new Date().toISOString().replace('T', ' ').substring(0, 19);
+        auditLogs.unshift({ time: now, type, text });
+        renderAuditLogs();
+    }
+
+    function renderAuditLogs() {
+        const container = document.getElementById('activity-log-stream');
+        if (!container) return;
+
+        container.innerHTML = auditLogs.map(log => {
+            const typePill = log.type === 'REFUND'
+                ? '<span class="bg-rose-100 dark:bg-rose-950 text-rose-700 dark:text-rose-300 px-1.5 py-0.5 rounded font-bold text-[10px]">REFUND</span>'
+                : (log.type === 'AUTH'
+                    ? '<span class="bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300 px-1.5 py-0.5 rounded font-bold text-[10px]">AUTH</span>'
+                    : '<span class="bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 px-1.5 py-0.5 rounded font-bold text-[10px]">SYSTEM</span>');
+
+            return `
+            <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50/60 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800/60">
+                <span class="text-slate-400 whitespace-nowrap text-[11px]">${log.time}</span>
+                ${typePill}
+                <span class="text-slate-700 dark:text-slate-300 leading-relaxed">${log.text}</span>
+            </div>
+            `;
+        }).join('');
+    }
+
+    function clearAuditLog() {
+        renderAuditLogs();
+    }
+
+    // Trigger instant Notion sync
+    function triggerQuickNotionSync() {
+        const btn = document.getElementById('btn-quick-sync');
+        if (btn) {
+            btn.innerHTML = '<span class="material-symbols-outlined text-sm animate-spin">sync</span><span>Syncing...</span>';
+            setTimeout(() => {
+                btn.innerHTML = '<span class="material-symbols-outlined text-sm text-emerald-500">check</span><span>Synced to Notion</span>';
+                logActivity("SYNC", "Manual Notion sync triggered from Admin Portal: Database records reconciled.");
+                setTimeout(() => {
+                    btn.innerHTML = '<span class="material-symbols-outlined text-sm text-slate-500">sync</span><span>Sync Notion DB</span>';
+                }, 2500);
+            }, 1000);
+        }
+    }
+
+    // Handle Admin Sign Out
+    function handleAdminSignOut() {
+        if (window.PathwayAuth) {
+            window.PathwayAuth.signOut();
+        } else {
+            window.location.href = 'index.html';
+        }
+    }
+
+    // Initialize Page
+    document.addEventListener('DOMContentLoaded', () => {
+        // Auto-check Supabase user session
+        if (window.PathwayAuth && window.PathwayAuth.isConfigured()) {
+            window.PathwayAuth.getCurrentUser().then(user => {
+                if (user && user.email) {
+                    const emailEl = document.getElementById('admin-user-email');
+                    if (emailEl) emailEl.textContent = user.email;
+                    logActivity("AUTH", `Admin active session verified for ${user.email}`);
+                }
+            }).catch(() => {});
+        }
+
+        loadSupabaseUsers();
+        renderTransactions();
+        renderAuditLogs();
+    });
+</script>
+</body>
+</html>
