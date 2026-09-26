@@ -89,17 +89,35 @@
                 return;
             }
 
+            const p = (provider || 'google').toLowerCase();
+
+            // Pre-check if OAuth provider is enabled and has credentials in Supabase
+            // to prevent stranding users on a raw 400 error page
+            try {
+                const checkUrl = `${supabaseUrl}/auth/v1/authorize?provider=${p}`;
+                const resp = await fetch(checkUrl);
+                if (!resp.ok) {
+                    const err = await resp.json().catch(() => ({}));
+                    const msg = err.msg || err.error_description || 'OAuth provider credentials not configured';
+                    console.warn(`Supabase ${provider} pre-check returned ${resp.status}:`, msg);
+                    this.showOAuthUnavailableModal(provider, msg);
+                    return;
+                }
+            } catch (e) {
+                console.warn('OAuth pre-flight check bypassed:', e);
+            }
+
             const redirectTo = window.location.origin + '/student-dashboard.html';
             const { data, error } = await client.auth.signInWithOAuth({
-                provider: provider.toLowerCase(),
+                provider: p,
                 options: {
                     redirectTo: redirectTo
                 }
             });
 
             if (error) {
-                alert(`Authentication error with ${provider}: ` + error.message);
                 console.error('OAuth error:', error);
+                this.showOAuthUnavailableModal(provider, error.message);
             }
         },
 
@@ -374,11 +392,112 @@
 
         continueAsGuest: function (provider) {
             document.getElementById('pathway-cloud-config-modal')?.remove();
+            document.getElementById('pathway-oauth-unavailable-modal')?.remove();
             let state = JSON.parse(localStorage.getItem('pathway_canada_state') || '{}');
             state.userName = state.userName || 'Student';
             state.authProvider = provider || 'Demo';
             localStorage.setItem('pathway_canada_state', JSON.stringify(state));
             window.location.href = 'student-dashboard.html';
+        },
+
+        showOAuthUnavailableModal: function (provider, detailMsg) {
+            let existing = document.getElementById('pathway-oauth-unavailable-modal');
+            if (existing) existing.remove();
+
+            const pName = provider ? (provider.charAt(0).toUpperCase() + provider.slice(1)) : 'OAuth';
+            const modalHtml = `
+            <div id="pathway-oauth-unavailable-modal" class="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fadeIn font-sans">
+                <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-lg w-full p-6 shadow-2xl relative text-left">
+                    <button onclick="document.getElementById('pathway-oauth-unavailable-modal').remove()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-lg">✕</button>
+                    
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-600 flex items-center justify-center flex-shrink-0">
+                            <span class="material-symbols-outlined text-2xl">key</span>
+                        </div>
+                        <div>
+                            <h3 class="font-lexend font-bold text-lg text-slate-900 dark:text-white">${pName} OAuth Setup Required</h3>
+                            <p class="text-xs text-slate-500">Supabase CANEDU is active, but Google OAuth credentials are pending</p>
+                        </div>
+                    </div>
+
+                    <div class="p-3 bg-amber-50 dark:bg-amber-950/30 rounded-xl border border-amber-200 dark:border-amber-800/50 text-xs text-amber-900 dark:text-amber-200 mb-5 leading-relaxed">
+                        <strong>Supabase Status:</strong> 1-Click ${pName} sign-in requires an OAuth Client ID from Google Cloud Console. In the meantime, use your <strong>active Email Magic Link</strong> or fast demo mode below:
+                    </div>
+
+                    <!-- Instant Method 1: Magic Link (Working 100% Right Now) -->
+                    <div class="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl border border-slate-200 dark:border-slate-700/80 mb-4">
+                        <label class="block text-xs font-bold text-slate-800 dark:text-slate-200 mb-1">
+                            Instant Magic Link Sign-In (Working Now)
+                        </label>
+                        <p class="text-[11px] text-slate-500 dark:text-slate-400 mb-2.5">
+                            Supabase will dispatch a secure 1-click login link directly to your inbox.
+                        </p>
+                        <div class="flex gap-2">
+                            <input id="oauth-fallback-email" type="email" placeholder="you@domain.com" value="rleasa@gmail.com" class="flex-1 text-xs px-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 dark:bg-slate-900 dark:text-white focus:ring-2 focus:ring-primary outline-none">
+                            <button id="btn-oauth-send-magic" class="bg-primary hover:bg-slate-900 text-white font-semibold text-xs px-4 py-2.5 rounded-xl transition-all shadow-sm">
+                                Send Link
+                            </button>
+                        </div>
+                        <div id="oauth-magic-status" class="text-[11px] mt-2 hidden"></div>
+                    </div>
+
+                    <!-- Instant Method 2: Fast Demo / Guest Login -->
+                    <div class="flex items-center justify-between gap-3 pt-1 mb-4">
+                        <div class="text-xs text-slate-500">Or continue instantly:</div>
+                        <button onclick="PathwayAuth.continueAsGuest('${pName}')" class="px-4 py-2.5 bg-slate-200 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all">
+                            Enter Dashboard as Admin / Guest →
+                        </button>
+                    </div>
+
+                    <!-- Collapsible Admin Instructions -->
+                    <details class="text-[11px] text-slate-500 border-t border-slate-200 dark:border-slate-800 pt-3">
+                        <summary class="cursor-pointer font-medium hover:text-slate-700 dark:hover:text-slate-300 select-none">
+                            ⚙️ Administrator: How to enable 1-Click ${pName} OAuth
+                        </summary>
+                        <div class="mt-2 space-y-1.5 pl-3 text-slate-600 dark:text-slate-400">
+                            <div>1. Go to <a href="https://console.cloud.google.com/apis/credentials" target="_blank" class="text-primary underline">Google Cloud Console</a> &gt; Create OAuth Client ID (Web).</div>
+                            <div>2. Set Authorized Redirect URI: <code class="bg-slate-200 dark:bg-slate-800 px-1 py-0.5 rounded text-[10px] select-all">${supabaseUrl}/auth/v1/callback</code></div>
+                            <div>3. Open Supabase: <a href="https://supabase.com/dashboard/project/wlnhygrpipvebyaxmvyp/auth/providers" target="_blank" class="text-primary underline font-medium">Auth Providers &gt; Google</a>.</div>
+                            <div>4. Toggle Google ON, paste Client ID &amp; Secret, and save.</div>
+                        </div>
+                    </details>
+                </div>
+            </div>
+            `;
+
+            document.body.insertAdjacentHTML('beforeend', modalHtml);
+
+            const sendBtn = document.getElementById('btn-oauth-send-magic');
+            if (sendBtn) {
+                sendBtn.addEventListener('click', async () => {
+                    const emailInput = document.getElementById('oauth-fallback-email');
+                    const statusDiv = document.getElementById('oauth-magic-status');
+                    const email = (emailInput.value || '').trim();
+
+                    if (!email) {
+                        statusDiv.textContent = 'Please enter your email.';
+                        statusDiv.className = 'text-[11px] mt-2 text-rose-500 block';
+                        return;
+                    }
+
+                    sendBtn.disabled = true;
+                    sendBtn.textContent = 'Sending...';
+                    statusDiv.className = 'text-[11px] mt-2 text-slate-500 block';
+                    statusDiv.textContent = 'Dispatched request to Supabase...';
+
+                    const ok = await PathwayAuth.signInWithMagicLink(email);
+                    sendBtn.disabled = false;
+                    sendBtn.textContent = 'Send Link';
+
+                    if (ok) {
+                        statusDiv.innerHTML = `<span class="text-emerald-600 dark:text-emerald-400 font-semibold">✓ Secure magic link sent to ${email}!</span> Check your inbox to sign in.`;
+                        statusDiv.className = 'text-[11px] mt-2 block';
+                    } else {
+                        statusDiv.innerHTML = `<span class="text-rose-500 font-semibold">Failed to send link.</span> Please try demo mode or check configuration.`;
+                        statusDiv.className = 'text-[11px] mt-2 block';
+                    }
+                });
+            }
         }
     };
 
