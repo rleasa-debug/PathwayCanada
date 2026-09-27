@@ -789,9 +789,6 @@
                         <span class="text-xs text-slate-500 font-medium font-lexend">Calculations occur locally and securely.</span>
                     </div>
 
-                    <!-- Premium Inline Banner -->
-                    <div data-sponsor-slot="hero" class="mb-2"></div>
-                    
                     <div id="matches-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-6 min-h-[600px] content-start">
                         <!-- Dynamically loaded cards (matches >= 75%) -->
                     </div>
@@ -1028,7 +1025,7 @@
                     </p>
                     <div class="flex gap-4">
                         <span class="flex items-center gap-1.5 text-xs text-primary font-bold font-lexend">
-                            <span class="material-symbols-outlined text-sm">verified_user</span> ISO/IEC 27001
+                            <span class="material-symbols-outlined text-sm">verified_user</span> PIPEDA / Bill C-27 Compliant
                         </span>
                         <span class="flex items-center gap-1.5 text-xs text-secondary font-bold font-lexend">
                             <span class="material-symbols-outlined text-sm">shield</span> PCI Compliant
@@ -1417,6 +1414,9 @@
     window.toggleLegendView = toggleLegendView;
 
     function getQualitativeBadge(match) {
+        if (match === null || match === undefined || isNaN(match)) {
+            return `<span class="px-2.5 py-1 border border-slate-300 dark:border-slate-700 text-slate-650 dark:text-slate-350 bg-slate-100 dark:bg-slate-800 rounded-full text-[9px] font-black uppercase tracking-wider font-lexend shadow-sm">📝 Enter Marks to See Odds</span>`;
+        }
         if (match > 90) {
             return `<span class="px-2.5 py-1 border border-emerald-300 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-950/60 rounded-full text-[9px] font-black uppercase tracking-wider font-lexend shadow-sm badge-high-match-pulse">🎯 Safety (Locked In)</span>`;
         } else if (match >= 75) {
@@ -1429,6 +1429,9 @@
     }
 
     function getMatchDotIndicator(match) {
+        if (match === null || match === undefined || isNaN(match)) {
+            return `<span class="text-slate-400 select-none flex-shrink-0">○</span>`;
+        }
         let colorClass = "text-rose-500";
         if (match > 90) {
             colorClass = "text-emerald-500";
@@ -1491,10 +1494,13 @@
                 'NU': 'Nunavut'
             };
             const activeProvinceName = provNames[homeProv] || 'Ontario';
-            if (state.isPro) {
+            const isZeroCourses = !state.courses || state.courses.length === 0 || parseFloat(state.average) === 0;
+            if (isZeroCourses) {
+                subheaderEl.textContent = `Grade 12 Profile | Enter your first course to see your odds. Add your senior coursework in My Portfolio to calculate your Top 6 admission average and unlock custom university & college match analytics.`;
+            } else if (state.isPro) {
                 subheaderEl.textContent = `Grade 12 Student | Your academic average of ${state.average}% is unlocked. Deep-dive analytics, prerequisite compatibility, and predictive grade coaching are active for all top-tier programs.`;
             } else {
-                subheaderEl.textContent = `Grade 12 Student | Your academic average of ${state.average}% is competitive, but exact prerequisite compatibility and admission probability calculations for top-tier programs are locked. Upgrade to your deep-dive analytics dashboard for predictive grade coaching.`;
+                subheaderEl.textContent = `Grade 12 Student | Your academic average of ${state.average}% has been evaluated against published cutoffs. Prerequisite compatibility and admission probabilities for top-tier programs are ready.`;
             }
         }
 
@@ -1512,9 +1518,10 @@
         }
         
         // Show/hide no-courses CTA banner
+        const isZeroCourses = !state.courses || state.courses.length === 0 || parseFloat(state.average) === 0;
         const noCoursesBanner = document.getElementById('no-courses-banner');
         if (noCoursesBanner) {
-            if (!state.courses || state.courses.length === 0) {
+            if (isZeroCourses) {
                 noCoursesBanner.classList.remove('hidden');
             } else {
                 noCoursesBanner.classList.add('hidden');
@@ -1522,48 +1529,46 @@
         }
 
         // Render Academic Average
-        if (shouldAnimate) {
-            const avgVal = parseFloat(state.average);
-            const avgEl = document.getElementById('student-average');
-            if (avgEl) {
-                animateValueFloat(avgEl, 0, avgVal, 1500);
-            }
-        } else {
-            const avgEl = document.getElementById('student-average');
-            if (avgEl) {
-                avgEl.textContent = state.average + '%';
-            }
-        }
-        
+        const avgEl = document.getElementById('student-average');
         const avgBar = document.getElementById('average-bar');
-        if (avgBar) {
-            avgBar.style.width = state.average + '%';
+        if (isZeroCourses) {
+            if (avgEl) avgEl.textContent = '--%';
+            if (avgBar) avgBar.style.width = '0%';
+        } else if (shouldAnimate) {
+            const avgVal = parseFloat(state.average);
+            if (avgEl) animateValueFloat(avgEl, 0, avgVal, 1500);
+            if (avgBar) avgBar.style.width = state.average + '%';
+        } else {
+            if (avgEl) avgEl.textContent = state.average + '%';
+            if (avgBar) avgBar.style.width = state.average + '%';
         }
 
         // Dynamic: Count programs student qualifies for
         const studentAvg = parseFloat(state.average);
-        const eligibleCount = state.matches.filter(m => studentAvg >= m.cutoff).length;
         const eligibleEl = document.getElementById('eligible-programs-count');
-        if (eligibleEl) eligibleEl.textContent = `${eligibleCount} Programs`;
         const tierEl = document.getElementById('eligible-tier-label');
-        if (tierEl) {
-            if (studentAvg >= 90) tierEl.textContent = 'Elite Tier — Excellent Standing';
-            else if (studentAvg >= 80) tierEl.textContent = 'Strong Standing';
-            else tierEl.textContent = 'Building Eligibility';
+        if (isZeroCourses) {
+            if (eligibleEl) eligibleEl.textContent = '-- Programs';
+            if (tierEl) tierEl.textContent = 'Enter marks to see tier';
+        } else {
+            const eligibleCount = (state.matches || []).filter(m => m.match && studentAvg >= m.cutoff).length;
+            if (eligibleEl) eligibleEl.textContent = `${eligibleCount} Programs`;
+            if (tierEl) {
+                if (studentAvg >= 90) tierEl.textContent = 'Elite Tier — Excellent Standing';
+                else if (studentAvg >= 80) tierEl.textContent = 'Strong Standing';
+                else tierEl.textContent = 'Building Eligibility';
+            }
         }
 
         // Dynamic: Calculate realistic fee savings
-        // Canadian applicants submit 3-6 applications ($150 avg fee + supplementals).
-        // Precision matching prevents 1-3 low-probability "lottery" applications.
         let avoidedCount = 0;
-        if (state.courses && state.courses.length > 0 && studentAvg > 0) {
+        if (!isZeroCourses) {
             const favIds = state.favorites || [];
-            const lowProbFavorites = state.matches.filter(m => favIds.includes(m.id) && (m.cutoff > studentAvg + 2 || m.match < 70)).length;
+            const lowProbFavorites = (state.matches || []).filter(m => favIds.includes(m.id) && (m.cutoff > studentAvg + 2 || (m.match && m.match < 70))).length;
             
             if (lowProbFavorites > 0) {
                 avoidedCount = Math.min(lowProbFavorites, 3);
             } else {
-                // Realistic benchmark: students typically avoid 1-3 reach applications based on competitive standing
                 if (studentAvg >= 92) {
                     avoidedCount = 1;
                 } else if (studentAvg >= 82) {
@@ -1577,14 +1582,17 @@
         const feePerApp = 150; // Average Canadian application + supplemental fee
         const savingsAmount = avoidedCount * feePerApp;
         const savingsEl = document.getElementById('savings-amount');
-        if (savingsEl) {
-            savingsEl.textContent = `$${savingsAmount.toLocaleString()} Saved`;
-        }
         const savingsSubEl = document.getElementById('savings-subtitle');
-        if (savingsSubEl) {
-            savingsSubEl.textContent = avoidedCount > 0 
-                ? `${avoidedCount} Low-Prob. App${avoidedCount > 1 ? 's' : ''} Avoided ($${feePerApp}/ea)`
-                : `0 Low-Prob. Apps Avoided`;
+        if (isZeroCourses) {
+            if (savingsEl) savingsEl.textContent = '$— Saved';
+            if (savingsSubEl) savingsSubEl.textContent = 'Enter marks to calculate';
+        } else {
+            if (savingsEl) savingsEl.textContent = `$${savingsAmount.toLocaleString()} Saved`;
+            if (savingsSubEl) {
+                savingsSubEl.textContent = avoidedCount > 0 
+                    ? `${avoidedCount} Low-Prob. App${avoidedCount > 1 ? 's' : ''} Avoided ($${feePerApp}/ea)`
+                    : `0 Low-Prob. Apps Avoided`;
+            }
         }
         
         // Sync checkboxes in dropdown with state.provinces (100% free discovery)
@@ -1770,7 +1778,14 @@
                 
                 // 1. Badge Zone: Qualitative status is 100% free for all programs!
                 let badgeHTML = '';
-                if (isUnlocked) {
+                if (item.match === null || item.match === undefined) {
+                    badgeHTML = `
+                        <div class="flex flex-col gap-1 items-start">
+                            ${getQualitativeBadge(null)}
+                            <span class="text-[9px] text-slate-500 dark:text-slate-400 font-lexend font-medium">Cutoff Benchmark: ${item.cutoff}%</span>
+                        </div>
+                    `;
+                } else if (isUnlocked) {
                     const pulseClass = item.match > 90 ? 'badge-high-match-pulse' : '';
                     badgeHTML = `
                         <div class="flex flex-col gap-1 items-start">
@@ -1792,7 +1807,20 @@
 
                 // 2. Diagnostics Section:
                 let proSectionHTML = '';
-                if (isUnlocked) {
+                if (item.match === null || item.match === undefined) {
+                    proSectionHTML = `
+                        <div class="mt-3 p-3.5 bg-slate-100 dark:bg-slate-800/60 rounded-2xl border border-slate-200 dark:border-slate-700 text-left space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[9px] font-black uppercase text-slate-700 dark:text-slate-300 tracking-wider font-lexend flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-[13px]">school</span>
+                                    Cutoff: ${item.cutoff}%
+                                </span>
+                                <a href="academic-records.html" class="text-[9px] font-bold text-primary dark:text-blue-400 hover:underline font-lexend">Enter Marks →</a>
+                            </div>
+                            <p class="text-[10px] text-slate-500 dark:text-slate-400 font-body">Input your coursework in My Portfolio to view personalized prerequisite clearance and admission odds.</p>
+                        </div>
+                    `;
+                } else if (isUnlocked) {
                     const studentAvgNum = parseFloat(state.average);
                     const avgGap = (studentAvgNum - item.cutoff).toFixed(1);
                     const gapColor = avgGap >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400';
@@ -1812,7 +1840,7 @@
                                 <div class="flex items-start gap-1.5">
                                     <span class="font-bold text-slate-900 dark:text-white shrink-0">Prerequisites:</span>
                                     <span class="${item.diagnostic.prereqsMet ? 'text-emerald-600 dark:text-emerald-400 font-semibold' : 'text-rose-600 dark:text-rose-400 font-bold'}">
-                                        ${item.diagnostic.prereqsMet ? '✅ Mandatory Grade 12 prerequisites met' : '⚠️ ' + item.diagnostic.missing}
+                                        ${item.diagnostic.prereqsMet ? '✅ Mandatory prerequisites met' : '⚠️ ' + item.diagnostic.missing}
                                     </span>
                                 </div>
                                 <div class="flex items-start gap-1.5">
@@ -2239,7 +2267,14 @@
                 
                 // 1. Badge Zone: Qualitative status is 100% free for all programs!
                 let badgeHTML = '';
-                if (isUnlocked) {
+                if (item.match === null || item.match === undefined) {
+                    badgeHTML = `
+                        <div class="flex flex-col gap-1 items-end">
+                            ${getQualitativeBadge(null)}
+                            <span class="text-[9px] text-slate-500 dark:text-slate-400 font-lexend font-medium">Cutoff: ${item.cutoff}%</span>
+                        </div>
+                    `;
+                } else if (isUnlocked) {
                     const pulseClass = item.match > 90 ? 'badge-high-match-pulse' : '';
                     badgeHTML = `
                         <div class="flex flex-col gap-1 items-end">
@@ -2261,7 +2296,20 @@
 
                 // 2. Diagnostics Section:
                 let proSectionHTML = '';
-                if (isUnlocked) {
+                if (item.match === null || item.match === undefined) {
+                    proSectionHTML = `
+                        <div class="mt-3 p-3.5 bg-slate-100 dark:bg-slate-800/60 rounded-2xl border border-slate-200 dark:border-slate-700 text-left space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[9px] font-black uppercase text-slate-700 dark:text-slate-300 tracking-wider font-lexend flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-[13px]">school</span>
+                                    Cutoff: ${item.cutoff}%
+                                </span>
+                                <a href="academic-records.html" class="text-[9px] font-bold text-primary dark:text-blue-400 hover:underline font-lexend">Enter Marks →</a>
+                            </div>
+                            <p class="text-[10px] text-slate-500 dark:text-slate-400 font-body">Input your coursework in My Portfolio to calculate admission probability and prerequisite clearance.</p>
+                        </div>
+                    `;
+                } else if (isUnlocked) {
                     const studentAvgNum = parseFloat(state.average);
                     const avgGap = (studentAvgNum - item.cutoff).toFixed(1);
                     const gapColor = avgGap >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400';
@@ -2281,7 +2329,7 @@
                                 <div class="flex items-start gap-1.5">
                                     <span class="font-bold text-slate-900 dark:text-white shrink-0">Prerequisites:</span>
                                     <span class="${item.diagnostic.prereqsMet ? 'text-emerald-600 dark:text-emerald-400 font-semibold' : 'text-rose-600 dark:text-rose-400 font-bold'}">
-                                        ${item.diagnostic.prereqsMet ? '✅ Mandatory Grade 12 prerequisites met' : '⚠️ ' + item.diagnostic.missing}
+                                        ${item.diagnostic.prereqsMet ? '✅ Mandatory prerequisites met' : '⚠️ ' + item.diagnostic.missing}
                                     </span>
                                 </div>
                                 <div class="flex items-start gap-1.5">
@@ -2900,8 +2948,17 @@
         const empty = document.getElementById('near-miss-empty');
         if (!list) return;
 
+        if (!state.courses || state.courses.length === 0 || studentAvg === 0) {
+            list.innerHTML = '';
+            if (empty) {
+                empty.textContent = 'Enter your coursework in My Portfolio to view programs within reach of your current marks.';
+                empty.classList.remove('hidden');
+            }
+            return;
+        }
+
         // Find programs where student is 0.1–5% below the cutoff
-        const nearMissItems = state.matches
+        const nearMissItems = (state.matches || [])
             .filter(m => m.cutoff > studentAvg && m.cutoff - studentAvg <= 5)
             .sort((a, b) => (a.cutoff - studentAvg) - (b.cutoff - studentAvg))
             .slice(0, 5);

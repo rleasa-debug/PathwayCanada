@@ -322,7 +322,7 @@ const URL_BASE = 'http://localhost:5173';
 
     // Wait for the download event
     const downloadPromise = page.waitForEvent('download');
-    await page.locator('button:has-text("Download Certified Portfolio")').click();
+    await page.locator('button:has-text("Download Academic Portfolio"), button:has-text("Download Certified Portfolio")').click();
     const download = await downloadPromise;
     console.log(`Download completed! Filename: ${download.suggestedFilename()}`);
     const isExportOk = download.suggestedFilename() === 'pathway_canada_portfolio.txt';

@@ -140,12 +140,12 @@ import { chromium } from 'playwright';
 
     // Confirm that the download button is enabled (clicking it should trigger a download instead of modal)
     console.log('Locating download button...');
-    const downloadButton = page.locator('button:has-text("Download Certified Portfolio")');
+    const downloadButton = page.locator('button:has-text("Download Academic Portfolio"), button:has-text("Download Certified Portfolio")');
     
     // Set up download listener
     const downloadPromise = page.waitForEvent('download');
     
-    console.log('Clicking "Download Certified Portfolio" button...');
+    console.log('Clicking download portfolio button...');
     await downloadButton.click();
     
     const download = await downloadPromise;

@@ -162,8 +162,10 @@ function decryptState(storedStr) {
   return null;
 }
 
-window.encryptState = encryptState;
-window.decryptState = decryptState;
+if (typeof window !== 'undefined') {
+  window.encryptState = encryptState;
+  window.decryptState = decryptState;
+}
 
 // Local audit event logger (Zero-Knowledge verification tool)
 const auditLogs = [];
@@ -176,10 +178,14 @@ function logLocalAuditEvent(source, action, bytesSent = 0) {
   };
   auditLogs.push(event);
   if (auditLogs.length > 50) auditLogs.shift();
-  window.dispatchEvent(new CustomEvent('pathway-audit-log', { detail: event }));
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent('pathway-audit-log', { detail: event }));
+  }
 }
-window.logLocalAuditEvent = logLocalAuditEvent;
-window.getAuditLogs = () => auditLogs;
+if (typeof window !== 'undefined') {
+  window.logLocalAuditEvent = logLocalAuditEvent;
+  window.getAuditLogs = () => auditLogs;
+}
 
 // Configure your real Stripe Payment Link below to accept live payments!
 // 1. Go to your Stripe Dashboard -> Payments -> Payment Links.
@@ -799,98 +805,191 @@ function handleLogoError(imgElement, crestSvg) {
 
 
 
-function findCourseBySubject(courses, subject) {
-  return courses.find(c => {
-    const name = (c.name || '').toLowerCase();
-    const code = (c.code || '').toUpperCase().trim();
-    const id = (c.id || '').toUpperCase().trim();
-    
-    if (subject === 'MATH') {
-      if (code === 'MHF4U' || code === 'MCV4U' || code === 'MDM4U' || id === 'MHF4U' || id === 'MCV4U') return true;
-      if (name.includes('calculus') || name.includes('vectors') || name.includes('pre-calc') || name.includes('precalc') || name.includes('functions') || name.includes('algebra')) return true;
-      if (name.includes('math') && (name.includes('12') || name.includes('30') || name.includes('31') || name.includes('40s') || name.includes('621') || name.includes('3200') || name.includes('536') || name.includes('sn 5') || name.includes('ts 5'))) return true;
-      if (code.includes('MHF') || code.includes('MCV') || code.includes('MATH') || code.includes('PRE-CALC') || code.includes('CALC')) return true;
-    }
-    
-    if (subject === 'SCIENCE') {
-      if (code === 'SBI4U' || code === 'SCH4U' || code === 'SPH4U' || id === 'SBI4U' || id === 'SCH4U' || id === 'SPH4U') return true;
-      if (name.includes('biology') || name.includes('chemistry') || name.includes('physics') || name.includes('anatomy') || name.includes('physiology')) return true;
-      if (code.includes('SBI') || code.includes('SCH') || code.includes('SPH') || code.includes('BIO') || code.includes('CHEM') || code.includes('PHYS')) return true;
-    }
-    
-    if (subject === 'ENGLISH') {
-      if (code === 'ENG4U' || code === 'ENG3U' || id === 'ENG3U' || id === 'ENG4U') return true;
-      if (name.includes('english') || name.includes('language arts') || name.includes('literature') || name.includes('writing') || name.includes('esl') || name.includes('second language') || code.includes('ELA') || code.includes('ESL')) return true;
-      if (code.includes('ENG') || code.includes('EWC') || code.includes('ELA') || code.includes('ESL')) return true;
-    }
-    
-    return false;
-  });
+function isUniversityStream(course) {
+  if (!course) return false;
+  const code = (course.code || course.id || '').toUpperCase().trim();
+  const name = (course.name || '').toLowerCase();
+
+  // Ontario 4U / 4M / 3U / 3M
+  if (code.endsWith('4U') || code.endsWith('4M') || code.endsWith('3U') || code.endsWith('3M')) return true;
+  // Ontario College / Workplace / Open stream rejection for university degree requirements
+  if (code.endsWith('4C') || code.endsWith('3C') || code.endsWith('4E') || code.endsWith('3E') || code.endsWith('4O') || code.endsWith('3O')) return false;
+
+  // Out-of-province academic streams (Alberta -1 / 31, BC Academic 12, Manitoba 40S, Maritimes 621/121, Quebec Sec 5 Enriched 536/SN5/TS5)
+  if (/\b(30-1|31|40s|621|621a|121|536|sn 5|ts 5)\b/i.test(code) || /\b(30-1|31|40s|621|621a|121|536|sn 5|ts 5)\b/i.test(name)) return true;
+  // Out-of-province non-university streams (Alberta -2, Manitoba 40G, Maritimes 631, General/Workplace)
+  if (/\b(30-2|30-3|40g|631)\b/i.test(code) || /\b(30-2|30-3|40g|631)\b/i.test(name)) return false;
+
+  // Explicit keywords
+  if (name.includes('university') || name.includes('pre-calc') || name.includes('calculus') || name.includes('advanced functions') || name.includes('vectors')) return true;
+  if (name.includes('college') || name.includes('workplace') || name.includes('foundations') || name.includes('applied math')) return false;
+
+  // Default: if code ends with U or M
+  if (code.endsWith('U') || code.endsWith('M')) return true;
+  if (code.endsWith('C') || code.endsWith('E') || code.endsWith('O')) return false;
+
+  return true;
+}
+
+function isCollegeStream(course) {
+  if (!course) return false;
+  // Ontario colleges accept C (College), M (Mixed), and U (University) stream courses!
+  const code = (course.code || course.id || '').toUpperCase().trim();
+  const name = (course.name || '').toLowerCase();
+  
+  // Exclude workplace-only or open physical/civics courses from academic prerequisites
+  if (code.endsWith('4E') || code.endsWith('3E') || code.endsWith('4O') || code.endsWith('3O') || name.includes('workplace')) return false;
+  return true;
+}
+
+function getCourseMark(course) {
+  if (!course) return 0;
+  const val = course.grade !== undefined ? course.grade : course.mark;
+  return Number(val) || 0;
 }
 
 function isGrade12(course) {
-  if (course.level !== undefined) {
-    return course.level === '12' || course.level === 12;
-  }
-  const code = (course.code || '').toUpperCase().trim();
+  if (!course) return false;
+  const code = (course.code || course.id || '').toUpperCase().trim();
   const name = (course.name || '').toLowerCase();
-  
-  if (code.endsWith('4U') || code.endsWith('4M') || code.endsWith('4O') || code.endsWith('4C') || code.endsWith('4E')) return true;
-  if (/\b12\b/.test(code) || /\b12\b/.test(name)) return true;
-  if (/\b30\b/.test(code) || /\b31\b/.test(code) || /\b30\b/.test(name) || /\b31\b/.test(name)) return true;
-  if (code.endsWith('40S') || code.endsWith('40S/40G') || /\b40\b/.test(code)) return true;
-  if (code.includes('621') || code.includes('611')) return true;
-  if (name.includes('secondary v') || name.includes('cegep') || code.includes('SEC 5') || code.includes('536') || code.includes('SN 5') || code.includes('TS 5')) return true;
-  
-  if (code.includes('4') && !code.includes('1') && !code.includes('2') && !code.includes('3')) return true;
-  
+  const level = String(course.level || course.gradeLevel || '').toLowerCase();
+
+  if (level.includes('12') || level.includes('grade 12')) return true;
+  // Ontario 4U / 4M / 4C / 4E / 4O
+  if (code.length >= 4 && (code.includes('4U') || code.includes('4M') || code.includes('4C') || code.includes('4E') || code.includes('4O'))) return true;
+  if (/^[A-Z]{3}4[UMCEO]/i.test(code)) return true;
+  // Out of province: 30-1, 30-2, 31, 12, 40S, 621, 536
+  if (/\b(30-1|30-2|31|12|40s|40g|621|121|536)\b/i.test(code) || /\b(grade 12|gr 12|senior)\b/i.test(name)) return true;
   return false;
 }
 
 function isGrade11(course) {
-  if (course.level !== undefined) {
-    return course.level === '11' || course.level === 11;
-  }
-  const code = (course.code || '').toUpperCase().trim();
+  if (!course) return false;
+  const code = (course.code || course.id || '').toUpperCase().trim();
   const name = (course.name || '').toLowerCase();
-  
-  if (code.endsWith('3U') || code.endsWith('3M') || code.endsWith('3O') || code.endsWith('3C') || code.endsWith('3E')) return true;
-  if (/\b11\b/.test(code) || /\b11\b/.test(name)) return true;
-  if (/\b20\b/.test(code) || /\b20\b/.test(name)) return true;
-  if (code.endsWith('30S') || /\b30\b/.test(code)) return true;
-  if (code.includes('521') || code.includes('511')) return true;
-  if (name.includes('secondary iv') || code.includes('SEC 4') || code.includes('436')) return true;
-  
-  if (code.includes('3') && !code.includes('4')) return true;
-  
+  const level = String(course.level || course.gradeLevel || '').toLowerCase();
+
+  if (level.includes('11') || level.includes('grade 11')) return true;
+  // Ontario 3U / 3M / 3C / 3E / 3O
+  if (code.length >= 4 && (code.includes('3U') || code.includes('3M') || code.includes('3C') || code.includes('3E') || code.includes('3O'))) return true;
+  if (/^[A-Z]{3}3[UMCEO]/i.test(code)) return true;
+  // Out of province: 20-1, 20-2, 11, 30S, 521
+  if (/\b(20-1|20-2|11|30s|30g|521|111)\b/i.test(code) || /\b(grade 11|gr 11|junior)\b/i.test(name)) return true;
   return false;
 }
 
+function findSubjectCourse(courses, subject, streamRequirement = 'ANY') {
+  if (!courses || courses.length === 0) return [];
+  return courses.filter(c => {
+    const code = (c.code || c.id || '').toUpperCase().trim();
+    const name = (c.name || '').toLowerCase();
+
+    let matchesSubject = false;
+    if (subject === 'MATH') {
+      if (code.startsWith('MHF') || code.startsWith('MCV') || code.startsWith('MDM') || code.startsWith('MCR') || code.startsWith('MCF') || code.startsWith('MAP') || code.startsWith('MCT') || code.startsWith('MBF')) matchesSubject = true;
+      else if (name.includes('calculus') || name.includes('vectors') || name.includes('pre-calc') || name.includes('precalc') || name.includes('functions') || name.includes('algebra') || name.includes('math')) matchesSubject = true;
+      else if (code.includes('MATH') || code.includes('CALC') || code.includes('ALG') || code.includes('FUNC')) matchesSubject = true;
+    } else if (subject === 'SCIENCE') {
+      if (code.startsWith('SBI') || code.startsWith('SCH') || code.startsWith('SPH') || code.startsWith('SNC') || code.startsWith('SES')) matchesSubject = true;
+      else if (name.includes('biology') || name.includes('chemistry') || name.includes('physics') || name.includes('anatomy') || name.includes('physiology') || name.includes('science')) matchesSubject = true;
+      else if (code.includes('BIO') || code.includes('CHEM') || code.includes('PHYS') || code.includes('SCI')) matchesSubject = true;
+    } else if (subject === 'ENGLISH') {
+      if (code.startsWith('ENG') || code.startsWith('EWC') || code.startsWith('ETS') || code.startsWith('EAE') || code.startsWith('ELA')) matchesSubject = true;
+      else if (name.includes('english') || name.includes('language arts') || name.includes('literature') || name.includes('writing')) matchesSubject = true;
+    }
+
+    if (!matchesSubject) return false;
+
+    if (streamRequirement === 'UNIVERSITY') {
+      return isUniversityStream(c);
+    } else if (streamRequirement === 'COLLEGE') {
+      return isCollegeStream(c);
+    }
+    return true;
+  });
+}
+
+function findCourseBySubject(courses, subject) {
+  const matches = findSubjectCourse(courses, subject, 'ANY');
+  return matches.length > 0 ? matches[0] : null;
+}
+
 function checkPrerequisites(courses, item) {
-  const isUni = item.type === 'University';
-  const progType = item.prog_type;
+  const isUni = item.type === 'University' || item.institutionType === 'University';
+  const progType = item.prog_type || item.programType;
   
-  if (!courses || courses.length === 0) return { met: true, missing: [] };
-  
-  const hasMath = courses.some(c => findCourseBySubject([c], 'MATH') && (isGrade12(c) || isGrade11(c)));
-  const hasScience = courses.some(c => findCourseBySubject([c], 'SCIENCE') && (isGrade12(c) || isGrade11(c)));
-  const hasEnglish = courses.some(c => findCourseBySubject([c], 'ENGLISH') && (isGrade12(c) || isGrade11(c)));
-  
+  if (!courses || courses.length === 0) {
+    return {
+      met: false,
+      missing: ['Course marks pending entry (add courses in My Portfolio)']
+    };
+  }
+
   const missing = [];
-  
-  if (progType === 'STEM') {
-    if (!hasMath) missing.push(isUni ? 'Grade 12 Math (e.g. Advanced Functions / Calculus)' : 'Senior Math');
-    if (!hasScience) missing.push(isUni ? 'Grade 12 Science (e.g. Physics / Chemistry)' : 'Senior Science');
-  } else if (progType === 'Health') {
-    if (!hasScience) missing.push(isUni ? 'Grade 12 Biology / Chemistry' : 'Senior Science');
-  } else if (progType === 'Business') {
-    if (!hasMath) missing.push(isUni ? 'Grade 12 Math (e.g. Advanced Functions)' : 'Senior Math');
+
+  if (isUni) {
+    // University degree requirements (OUAC): Strictly requires Grade 12 U/M courses
+    // English requirement: ENG4U (or Grade 11 ENG3U interim)
+    const uniEnglish = findSubjectCourse(courses, 'ENGLISH', 'UNIVERSITY').filter(c => isGrade12(c) || isGrade11(c));
+    const anyEnglish = findSubjectCourse(courses, 'ENGLISH', 'ANY').filter(c => isGrade12(c) || isGrade11(c));
+
+    if (uniEnglish.length === 0) {
+      if (anyEnglish.length > 0) {
+        missing.push('Grade 12 University English (ENG4U required; ENG4C college-stream does not qualify for university degrees)');
+      } else {
+        missing.push('Grade 12 University English (e.g. ENG4U)');
+      }
+    }
+
+    // Math requirement for STEM & Business
+    if (progType === 'STEM' || progType === 'Business') {
+      const uniMath = findSubjectCourse(courses, 'MATH', 'UNIVERSITY').filter(c => isGrade12(c) || isGrade11(c));
+      const anyMath = findSubjectCourse(courses, 'MATH', 'ANY').filter(c => isGrade12(c) || isGrade11(c));
+
+      if (uniMath.length === 0) {
+        if (anyMath.length > 0) {
+          missing.push('Grade 12 University Math (MHF4U/MCV4U required; MAP4C/MCT4C college-stream does not qualify for university degrees)');
+        } else {
+          missing.push('Grade 12 University Math (e.g. Advanced Functions / Calculus)');
+        }
+      }
+    }
+
+    // Science requirement for STEM & Health
+    if (progType === 'STEM' || progType === 'Health') {
+      const uniScience = findSubjectCourse(courses, 'SCIENCE', 'UNIVERSITY').filter(c => isGrade12(c) || isGrade11(c));
+      const anyScience = findSubjectCourse(courses, 'SCIENCE', 'ANY').filter(c => isGrade12(c) || isGrade11(c));
+
+      if (uniScience.length === 0) {
+        if (anyScience.length > 0) {
+          missing.push('Grade 12 University Science (SPH4U/SCH4U/SBI4U required; college-stream science does not qualify for university degrees)');
+        } else {
+          missing.push('Grade 12 University Science (e.g. Physics, Chemistry, or Biology)');
+        }
+      }
+    }
+  } else {
+    // College diploma requirements (OCAS): Accepts both C (College), M, and U (University) stream credits!
+    const colEnglish = findSubjectCourse(courses, 'ENGLISH', 'COLLEGE').filter(c => isGrade12(c) || isGrade11(c));
+    if (colEnglish.length === 0) {
+      missing.push('Grade 12 English (ENG4C or ENG4U)');
+    }
+
+    if (progType === 'STEM' || progType === 'Business') {
+      const colMath = findSubjectCourse(courses, 'MATH', 'COLLEGE').filter(c => isGrade12(c) || isGrade11(c));
+      if (colMath.length === 0) {
+        missing.push('Senior Math (MAP4C, MCT4C, or 4U Math)');
+      }
+    }
+
+    if (progType === 'STEM' || progType === 'Health') {
+      const colScience = findSubjectCourse(courses, 'SCIENCE', 'COLLEGE').filter(c => isGrade12(c) || isGrade11(c));
+      if (colScience.length === 0) {
+        missing.push('Senior Science (College or University stream)');
+      }
+    }
   }
-  
-  if (!hasEnglish) {
-    missing.push(isUni ? 'Grade 12 English (e.g. ENG4U)' : 'Senior English');
-  }
-  
+
   return {
     met: missing.length === 0,
     missing: missing
@@ -1160,7 +1259,6 @@ const ARTICULATION_MAP = {
 
 function calculateMatches(courses) {
   const averageResult = calculateAverage(courses);
-  const average = parseFloat(averageResult.average);
   
   let isPro = false;
   let freeAuditProgramId = null;
@@ -1183,67 +1281,145 @@ function calculateMatches(courses) {
   
   const extraBoost = Math.min(6, activities.length * 2);
   if (typeof logLocalAuditEvent !== 'undefined') {
-    logLocalAuditEvent('ALGORITHM', `Recalculating admissions compatibility matches for ${postSecondaryData.length - 2} programs...`, 0);
+    logLocalAuditEvent('ALGORITHM', `Evaluating admissions compatibility matches across Canadian post-secondary institutions...`, 0);
   }
   
+  // Zero-State Handling: If no courses are entered, return clean prompt state rather than evaluating 0.0% as competitive
+  if (!courses || courses.length === 0) {
+    return postSecondaryData
+      .filter(item => item.id !== 'full-time' && item.id !== 'undergrad.')
+      .map(item => {
+        const geo = normalizeGeographicData(item);
+        const image = getCampusImage(item.id, item.name);
+        const logoStyle = BRAND_OVERLYS[item.id] || getLogoStyle(item.name);
+        const cutoff = getProgramCutoff(item);
+        const domain = getUniversityDomain(item.id);
+        const logoUrl = `https://logo.clearbit.com/${domain}`;
+        const crestSvg = getUniversityCrestSvg(item.name, logoStyle);
+        const applyUrl = getApplyUrl(geo.province, item.type, domain);
+        const websiteUrl = `https://www.${domain}`;
+        const environment = getCampusEnvironment(geo.city);
+        const size = getCampusSize(item.name);
+        const pathways = getProgramPathways(item);
+        const outlook = getFutureOutlook(item.program);
+        const articulation = ARTICULATION_MAP[item.id] || null;
+
+        return {
+          id: item.id,
+          program: item.program,
+          university: item.name,
+          domain: domain,
+          logoUrl: logoUrl,
+          crestSvg: crestSvg,
+          city: geo.city,
+          province: geo.province,
+          type: item.type,
+          image: image,
+          logoStyle: logoStyle,
+          match: null, // Explicit null: unentered profile has no calculated percentage
+          qualitativeTier: 'Pending Marks',
+          isUnlocked: true,
+          isFreeAudit: false,
+          proLocked: false,
+          diagnostic: {
+            prereqsMet: false,
+            missing: 'Enter your coursework in My Portfolio to evaluate prerequisite clearance.',
+            missingCourses: ['Course entry pending'],
+            examTarget: `Historical cutoff benchmark: ${cutoff}%. Enter marks to view personalized target.`
+          },
+          articulation: articulation,
+          isCompetitive: false,
+          breakdown: {
+            grades: 'Enter your coursework in My Portfolio to evaluate compatibility with admission cutoffs.',
+            extracurriculars: 'Extracurricular assessment unlocks once courses are recorded.',
+            recommendation: 'Enter your first course to see your admission odds.'
+          },
+          cutoff: cutoff,
+          isPartTime: geo.isPartTime,
+          isUndergrad: geo.isUndergrad,
+          isGraduate: geo.isGraduate,
+          applyUrl: applyUrl,
+          websiteUrl: websiteUrl,
+          ranking: MACLEANS_RANKINGS[item.id] || null,
+          environment: environment,
+          size: size,
+          pathways: pathways,
+          outlook: outlook
+        };
+      });
+  }
+
   const matches = postSecondaryData
     .filter(item => item.id !== 'full-time' && item.id !== 'undergrad.')
     .map(item => {
-    // Normalize data properties
     const geo = normalizeGeographicData(item);
-    
-    // Right to Explanation (CPPA / C-27 Compliance):
-    // 1. Check prerequisites eligibility (Hard Gate: Missing courses cap match rating at 50%).
-    const prereqs = checkPrerequisites(courses, item);
-    
-    // 2. Lookup program admission average cutoff.
+    const isUni = item.type === 'University';
     const cutoff = getProgramCutoff(item);
     
-    // 3. Weighting calculation (2026 regulations compliant):
-    // GPA (60%): Compare Top 6 admission average vs historical program cutoff
-    const diff = average - cutoff;
+    // Evaluate based on domain-specific logic:
+    // Universities use Ontario Top 6 4U/M average (excluding C/O/E streams).
+    // Colleges use prerequisite courses (C, M, or U accepted) + senior coursework average.
+    const evalAverage = isUni 
+      ? parseFloat(averageResult.universityAverage) 
+      : parseFloat(averageResult.collegeAverage);
+
+    const prereqs = checkPrerequisites(courses, item);
+    
+    // Check if university applicant has zero qualifying 4U/M courses
+    const hasQualifyingStream = isUni 
+      ? (parseFloat(averageResult.universityAverage) > 0) 
+      : (parseFloat(averageResult.collegeAverage) > 0);
+
+    if (isUni && !hasQualifyingStream && courses.length > 0) {
+      prereqs.met = false;
+      prereqs.missing.unshift('Requires 6 Grade 12 U/M credits (entered courses do not meet university stream standards)');
+    }
+
+    // Weighting calculation:
+    const diff = evalAverage - cutoff;
     let gpaScore = 80;
     if (diff < 0) {
-      gpaScore = Math.max(30, 80 + diff * 6.0);
+      gpaScore = Math.max(25, 80 + diff * 5.0);
     } else {
       gpaScore = Math.min(100, 80 + diff * 3.5);
     }
     
-    // Prerequisites (30%): 100% if met, 0% if any prerequisite is missing
     const prereqScore = prereqs.met ? 100 : 0;
-    
-    // Regional Factors (10%): 100% if regional institution matching native home province standard, else 70%
     const isLocal = geo.province === homeProvince;
     const regionalScore = isLocal ? 100 : 70;
     
     let match = Math.round((0.60 * gpaScore) + (0.30 * prereqScore) + (0.10 * regionalScore));
     
-    // Prevent deviation: GPA > 90% must NOT be labeled as "High Climb" (<60% Match) if prerequisites are met
-    if (average > 90 && prereqs.met && match < 60) {
+    // Hard Gate: Missing prerequisites or missing mandatory stream caps match at 52%
+    if (!prereqs.met || !hasQualifyingStream) {
+      match = Math.min(52, match);
+    } else if (evalAverage > 90 && prereqs.met && match < 60) {
       match = 60;
     }
     
-    // Apply extracurriculars likeness boost
     match += extraBoost;
-    
-    // Cap match score between 50% and 99%
-    match = Math.min(99, Math.max(50, match));
+    match = Math.min(99, Math.max(30, match));
     
     const image = getCampusImage(item.id, item.name);
     const logoStyle = BRAND_OVERLYS[item.id] || getLogoStyle(item.name);
     
-    // Detailed Breakdown Info
     let gradeExplainer = "";
     let recExplainer = "";
     
     if (!prereqs.met) {
-      gradeExplainer = `Admission average of ${average}% matches, but prerequisite courses are missing: ${prereqs.missing.join(', ')}.`;
+      gradeExplainer = isUni
+        ? `Admission average of ${evalAverage}% calculated, but mandatory 4U/M university prerequisites are missing: ${prereqs.missing.join(', ')}.`
+        : `Admission average of ${evalAverage}% calculated, but college diploma prerequisites are missing: ${prereqs.missing.join(', ')}.`;
       recExplainer = `Enroll in ${prereqs.missing.join(' and ')} to become eligible for this program.`;
     } else {
-      const isAbove = average >= cutoff;
-      gradeExplainer = isAbove
-        ? `Your Top 6 admission average of ${average}% meets the target cutoff of ${cutoff}%.`
-        : `Your Top 6 admission average of ${average}% is currently below the target cutoff of ${cutoff}%.`;
+      const isAbove = evalAverage >= cutoff;
+      gradeExplainer = isUni
+        ? (isAbove
+            ? `Your Top 6 4U/M admission average of ${evalAverage}% meets the target cutoff of ${cutoff}%.`
+            : `Your Top 6 4U/M admission average of ${evalAverage}% is currently below the target cutoff of ${cutoff}%.`)
+        : (isAbove
+            ? `Your College admission average of ${evalAverage}% meets the diploma cutoff of ${cutoff}%.`
+            : `Your College admission average of ${evalAverage}% is currently below the diploma cutoff of ${cutoff}%.`);
       
       recExplainer = isAbove
         ? `This program is a strong fit. Maintain your average above ${cutoff}% to remain competitive.`
@@ -1261,12 +1437,10 @@ function calculateMatches(courses) {
       recommendation: recExplainer
     };
     
-    // Freemium Teaser & 1 Free Program Deep Audit Logic:
-    // Free: Qualitative status (Safety, Match, Reach, Unlikely) is 100% free for all programs.
-    // Pro: Reveals specific reasons why and how to fix it for all programs.
-    // 1 Free Deep Audit: Unlocks complete diagnostics & numerical probability for 1 dream program!
     let qualitativeTier = 'Unlikely (Longshot)';
-    if (match > 90) {
+    if (!prereqs.met) {
+      qualitativeTier = 'Prerequisite Deficit';
+    } else if (match > 90) {
       qualitativeTier = 'Safety (Locked In)';
     } else if (match >= 75) {
       qualitativeTier = 'Solid Match';
@@ -1278,7 +1452,6 @@ function calculateMatches(courses) {
     const isFreeAudit = !isPro && freeAuditProgramId === item.id;
     const proLocked = !isUnlocked;
 
-    // Granular Diagnostic Action Plan
     const prereqsMet = prereqs.met;
     let missingDetail = "";
     if (!prereqsMet) {
@@ -1286,20 +1459,17 @@ function calculateMatches(courses) {
     }
 
     let examTarget = "";
-    if (average < cutoff) {
-      const neededExam = Math.min(99, Math.round(cutoff + (cutoff - average) * 1.5));
+    if (evalAverage < cutoff) {
+      const neededExam = Math.min(99, Math.round(cutoff + (cutoff - evalAverage) * 1.5));
       examTarget = `Need an ${neededExam}% on your final exams/remaining senior courses to cross the ${cutoff}% cutoff.`;
     } else {
-      examTarget = `Top 6 average is +${(average - cutoff).toFixed(1)}% above cutoff. Maintain an 82%+ on remaining coursework to secure early admission.`;
+      examTarget = `${isUni ? 'Top 6' : 'College'} average is +${(evalAverage - cutoff).toFixed(1)}% above cutoff. Maintain an 82%+ on remaining coursework to secure early admission.`;
     }
 
     const articulation = ARTICULATION_MAP[item.id] || null;
-    
     const domain = getUniversityDomain(item.id);
-    // Use clearbit for higher quality, consistent logos
     const logoUrl = `https://logo.clearbit.com/${domain}`;
     const crestSvg = getUniversityCrestSvg(item.name, logoStyle);
-    
     const applyUrl = getApplyUrl(geo.province, item.type, domain);
     const websiteUrl = `https://www.${domain}`;
     
@@ -1327,7 +1497,7 @@ function calculateMatches(courses) {
         examTarget: examTarget
       },
       articulation: articulation,
-      isCompetitive: item.id === 'university-of-waterloo' || item.id === 'university-of-toronto' || item.id === 'mcgill-university' || item.id === 'mcmaster-university',
+      isCompetitive: (item.id === 'university-of-waterloo' || item.id === 'university-of-toronto' || item.id === 'mcgill-university' || item.id === 'mcmaster-university') && prereqsMet,
       breakdown: breakdown,
       cutoff: cutoff,
       isPartTime: geo.isPartTime,
@@ -1343,51 +1513,77 @@ function calculateMatches(courses) {
     };
   });
 
-  // Compliance Audit telemetry dispatch: separates PII from academic records.
   sendAnonymizedMatchTelemetry(courses, matches);
-
   return matches;
 }
 
 function calculateAverage(courses) {
-  if (!courses || courses.length === 0) return { average: "0.0", overall: "0.0" };
+  if (!courses || courses.length === 0) {
+    return {
+      average: "0.0",
+      universityAverage: "0.0",
+      collegeAverage: "0.0",
+      overall: "0.0",
+      hasCourses: false
+    };
+  }
   
-  // 1. Calculate overall average
-  const allGrades = courses.map(c => c.grade);
+  // 1. Overall average across all entered courses
+  const allGrades = courses.map(c => getCourseMark(c));
   const allSum = allGrades.reduce((a, b) => a + b, 0);
   const overallAvg = (allSum / courses.length).toFixed(1);
   
-  // 2. Calculate Top 6 Admission Average
-  const gr12 = courses.filter(c => isGrade12(c));
-  const gr11 = courses.filter(c => isGrade11(c));
-  const other = courses.filter(c => !isGrade12(c) && !isGrade11(c));
+  // 2. University Top 6 4U/M Formula (Ontario OUAC standard):
+  // Strictly requires 4U and 4M courses (or interim 3U/M for Grade 11 early estimation).
+  // Excludes C (College), O (Open), and E (Workplace) courses!
+  const uniCourses = courses.filter(c => isUniversityStream(c));
+  const gr12Uni = uniCourses.filter(c => isGrade12(c)).sort((a, b) => getCourseMark(b) - getCourseMark(a));
+  const gr11Uni = uniCourses.filter(c => isGrade11(c)).sort((a, b) => getCourseMark(b) - getCourseMark(a));
   
-  gr12.sort((a, b) => b.grade - a.grade);
-  gr11.sort((a, b) => b.grade - a.grade);
-  other.sort((a, b) => b.grade - a.grade);
-  
-  const selected = [];
-  
-  // Try to fill with Grade 12 first
-  for (let i = 0; i < gr12.length && selected.length < 6; i++) {
-    selected.push(gr12[i]);
+  const selectedUni = [];
+  for (let i = 0; i < gr12Uni.length && selectedUni.length < 6; i++) {
+    selectedUni.push(gr12Uni[i]);
   }
-  // Then Grade 11
-  for (let i = 0; i < gr11.length && selected.length < 6; i++) {
-    selected.push(gr11[i]);
-  }
-  // Then any others
-  for (let i = 0; i < other.length && selected.length < 6; i++) {
-    selected.push(other[i]);
+  for (let i = 0; i < gr11Uni.length && selectedUni.length < 6; i++) {
+    selectedUni.push(gr11Uni[i]);
   }
   
-  const selectedGrades = selected.map(c => c.grade);
-  const selectedSum = selectedGrades.reduce((a, b) => a + b, 0);
-  const admissionAvg = (selectedSum / selected.length).toFixed(1);
+  let uniAvg = "0.0";
+  if (selectedUni.length > 0) {
+    const uniSum = selectedUni.reduce((sum, c) => sum + getCourseMark(c), 0);
+    uniAvg = (uniSum / selectedUni.length).toFixed(1);
+  }
+
+  // 3. College Admission Formula (Ontario OCAS standard):
+  // Ontario colleges evaluate applicants based on required senior prerequisite courses
+  // (Grade 12 English C/U, Grade 11/12 Math C/U, Sciences C/U) plus highest senior coursework.
+  // Colleges accept C, M, and U courses equally.
+  const collegeEligible = courses.filter(c => isCollegeStream(c));
+  const gr12Col = collegeEligible.filter(c => isGrade12(c)).sort((a, b) => getCourseMark(b) - getCourseMark(a));
+  const gr11Col = collegeEligible.filter(c => isGrade11(c)).sort((a, b) => getCourseMark(b) - getCourseMark(a));
+
+  const selectedCol = [];
+  for (let i = 0; i < gr12Col.length && selectedCol.length < 4; i++) {
+    selectedCol.push(gr12Col[i]);
+  }
+  for (let i = 0; i < gr11Col.length && selectedCol.length < 4; i++) {
+    selectedCol.push(gr11Col[i]);
+  }
+
+  let colAvg = "0.0";
+  if (selectedCol.length > 0) {
+    const colSum = selectedCol.reduce((sum, c) => sum + getCourseMark(c), 0);
+    colAvg = (colSum / selectedCol.length).toFixed(1);
+  } else if (courses.length > 0) {
+    colAvg = overallAvg;
+  }
   
   return {
-    average: admissionAvg,
-    overall: overallAvg
+    average: uniAvg !== "0.0" ? uniAvg : colAvg,
+    universityAverage: uniAvg,
+    collegeAverage: colAvg,
+    overall: overallAvg,
+    hasCourses: true
   };
 }
 
@@ -1473,28 +1669,45 @@ function setAccountRole(role) {
   return state.userRole;
 }
 
-window.getAppState = getAppState;
-window.saveAppState = saveAppState;
-window.calculateMatches = calculateMatches;
-window.calculateAverage = calculateAverage;
-window.getUnsplashFallback = getUnsplashFallback;
-window.handleImageError = handleImageError;
-window.handleLogoError = handleLogoError;
-window.getUniversityDomain = getUniversityDomain;
-window.resetAppState = resetAppState;
-window.STRIPE_PAYMENT_LINK = STRIPE_PAYMENT_LINK;
-window.claimFreeAudit = claimFreeAudit;
-window.assignOuacSlot = assignOuacSlot;
-window.removeOuacSlot = removeOuacSlot;
-window.setAccountRole = setAccountRole;
+if (typeof window !== 'undefined') {
+  window.getAppState = getAppState;
+  window.saveAppState = saveAppState;
+  window.calculateMatches = calculateMatches;
+  window.calculateAverage = calculateAverage;
+  window.getUnsplashFallback = getUnsplashFallback;
+  window.handleImageError = handleImageError;
+  window.handleLogoError = handleLogoError;
+  window.getUniversityDomain = getUniversityDomain;
+  window.resetAppState = resetAppState;
+  window.STRIPE_PAYMENT_LINK = STRIPE_PAYMENT_LINK;
+  window.claimFreeAudit = claimFreeAudit;
+  window.assignOuacSlot = assignOuacSlot;
+  window.removeOuacSlot = removeOuacSlot;
+  window.setAccountRole = setAccountRole;
 
-// Initialize payment detection after all dependencies have initialized
-detectPaymentCallback();
+  // Initialize payment detection after all dependencies have initialized
+  detectPaymentCallback();
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', setupUpgradeButtons);
-} else {
-  setupUpgradeButtons();
+  if (typeof document !== 'undefined') {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', setupUpgradeButtons);
+    } else {
+      setupUpgradeButtons();
+    }
+  }
 }
+
+export {
+  calculateMatches,
+  calculateAverage,
+  checkPrerequisites,
+  isUniversityStream,
+  isCollegeStream,
+  getAppState,
+  saveAppState,
+  resetAppState,
+  encryptState,
+  decryptState
+};
 
 

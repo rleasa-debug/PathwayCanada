@@ -248,15 +248,16 @@
 </div>
 </header>
 <main>
-    <!-- Seamless Sponsor Injector for Homepage -->
-    <div data-sponsor-slot="hero" class="mt-4 max-w-[1400px] mx-auto px-4 md:px-8"></div>
 <!-- Hero Section -->
 <section class="relative overflow-hidden pt-16 pb-32">
 <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
 <div class="lg:col-span-7 relative z-[2] text-left">
-<div class="inline-flex items-center space-x-2 bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full mb-6 opacity-0 animate-fade-in-up">
-<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">verified</span>
-<span class="text-xs font-bold tracking-wider uppercase">Official 2025–2026 Admissions Data</span>
+<div class="inline-flex flex-wrap items-center gap-2.5 mb-6 opacity-0 animate-fade-in-up">
+    <div class="inline-flex items-center space-x-1.5 bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full">
+        <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">verified</span>
+        <span class="text-xs font-bold tracking-wider uppercase font-lexend">Published 2026–2027 Admissions Benchmarks</span>
+    </div>
+    <span class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 font-lexend">Independent Planning Tool • Not Affiliated with OUAC or OCAS</span>
 </div>
 <h1 class="text-5xl md:text-7xl font-black tracking-tight text-primary leading-[1.1] mb-6 opacity-0 animate-fade-in-up delay-100">
                         Find the Programs You Qualify For Safely, Securely, and Instantly
@@ -270,11 +271,11 @@
                         Input your marks to discover university and college programs matched against published prerequisites and historical admission cutoffs—completely private, instant, and free.
                     </p>
 <div class="flex flex-col sm:flex-row gap-4 opacity-0 animate-fade-in-up delay-500">
-<a class="click-compress inline-block text-center academic-gradient text-on-primary px-8 py-4 rounded-lg font-lexend font-bold text-lg shadow-xl shadow-primary/10 hover:opacity-90 active:scale-95 transition-all" href="student-dashboard.html">
-                            Calculate My Admission Odds
+<a class="click-compress inline-block text-center academic-gradient text-on-primary px-8 py-4 rounded-xl font-lexend font-bold text-lg shadow-xl shadow-primary/10 hover:opacity-90 active:scale-95 transition-all" href="student-dashboard.html">
+                            Calculate My Odds
                         </a>
-<a class="click-compress inline-block text-center bg-surface-container-highest text-primary px-8 py-4 rounded-lg font-lexend font-bold text-lg hover:bg-surface-dim transition-all" href="student-dashboard.html#discovery">
-                            Browse All Programs
+<a class="click-compress inline-block text-center bg-surface-container-highest text-primary px-8 py-4 rounded-xl font-lexend font-bold text-lg hover:bg-surface-dim transition-all" href="student-dashboard.html#discovery">
+                            Explore Programs
                         </a>
 </div>
 <!-- Privacy & Trust Promise Card sits prominently below Hero CTAs -->
@@ -577,7 +578,7 @@
                         </div>
                         <div>
                             <h3 class="font-lexend font-bold text-xl text-white">Pathway Canada Engine</h3>
-                            <p class="text-[10px] text-emerald-400 font-bold uppercase tracking-wider">Zero Risk / Deterministic</p>
+                            <p class="text-[10px] text-emerald-400 font-bold uppercase tracking-wider">Accurate / Rule-Based</p>
                         </div>
                     </div>
 
@@ -585,24 +586,24 @@
                         <div class="flex gap-3">
                             <span class="material-symbols-outlined text-emerald-450 text-sm mt-0.5">check_circle</span>
                             <div>
-                                <h4 class="font-bold text-white mb-1">100% Deterministic Matchmaking</h4>
-                                <p class="leading-relaxed">Our engine uses strict mathematical algorithms to process your Top 6 average against verified admission databases. Outcomes are audited and transparent under CPPA guidelines.</p>
+                                <h4 class="font-bold text-white mb-1">Rule-Based Admissions Prerequisite Matching</h4>
+                                <p class="leading-relaxed">Our engine uses strict mathematical algorithms to process your Top 6 average against verified admission databases. Outcomes are transparent and audited under Canadian standards.</p>
                             </div>
                         </div>
 
                         <div class="flex gap-3">
                             <span class="material-symbols-outlined text-emerald-450 text-sm mt-0.5">lock</span>
                             <div>
-                                <h4 class="font-bold text-white mb-1">Zero-Knowledge Client-Side Encryption</h4>
-                                <p class="leading-relaxed">All operations are executed locally. All state files are encrypted using device-unique keys before storage. Your data remains strictly yours—even the site owner cannot read your grades.</p>
+                                <h4 class="font-bold text-white mb-1">Client-Side Data Isolation</h4>
+                                <p class="leading-relaxed">All matching computations execute locally in your browser session. Your academic metrics remain isolated on secure Canadian servers compliant with PIPEDA.</p>
                             </div>
                         </div>
 
                         <div class="flex gap-3">
                             <span class="material-symbols-outlined text-emerald-450 text-sm mt-0.5">menu_book</span>
                             <div>
-                                <h4 class="font-bold text-white mb-1">1,769 Verified Canadian Programs</h4>
-                                <p class="leading-relaxed">Our dataset is curated and mapped with provincial prerequisites and equivalent courses across Canada, preventing code mismatches or data hallucinations.</p>
+                                <h4 class="font-bold text-white mb-1">1,700+ Verified Canadian Programs</h4>
+                                <p class="leading-relaxed">Our dataset is curated and mapped with provincial prerequisites and equivalent courses across Canada, preventing code mismatches or stream confusion.</p>
                             </div>
                         </div>
                     </div>
@@ -678,7 +679,7 @@
                         
                         <!-- Pathway Canada Output -->
                         <div class="p-5 bg-emerald-500/5 border border-emerald-500/25 rounded-2xl flex flex-col justify-between min-h-[160px] relative">
-                            <span class="absolute top-3 right-3 text-[9px] bg-emerald-500/20 text-emerald-350 font-bold uppercase px-1.5 py-0.5 rounded font-lexend">100% Deterministic</span>
+                            <span class="absolute top-3 right-3 text-[9px] bg-emerald-500/20 text-emerald-350 font-bold uppercase px-1.5 py-0.5 rounded font-lexend">Rule-Based Matching</span>
                             <div>
                                 <h4 class="text-[10px] text-slate-400 font-bold uppercase tracking-wider font-lexend">Pathway Canada (Top 6)</h4>
                                 <div class="flex items-baseline gap-2 mt-2">
@@ -935,7 +936,7 @@
         <div class="bg-white/65 p-6 rounded-2xl border border-slate-200/50 shadow-sm text-left">
             <h4 class="font-bold text-primary font-lexend text-base mb-2">How secure is my teenager's academic data?</h4>
             <p class="text-xs md:text-sm text-slate-650 font-body leading-relaxed">
-                Pathway Canada enforces a <strong>Zero-Password Architecture</strong>. We do not store passwords; logins are managed through secure enterprise social auth providers. Additionally, we isolate Personally Identifiable Information (PII) from academic metrics, hosting all records on secure Canadian servers compliant with <strong>PIPEDA</strong> and <strong>Bill C-27</strong>.
+                Pathway Canada uses a <strong>Passwordless & Social Sign-In Architecture</strong>. We do not store passwords; logins are managed through secure OAuth providers and direct magic links. Additionally, we isolate Personally Identifiable Information (PII) from academic metrics, hosting all records on secure Canadian servers compliant with <strong>PIPEDA</strong> and <strong>Bill C-27</strong>.
             </p>
         </div>
         <!-- Q2 -->
@@ -987,7 +988,7 @@
 <p class="text-blue-200/50 dark:text-slate-500 text-sm max-w-sm mb-6">Canada's premier high-fidelity admission matching engine. Designed to reduce application costs and increase success rates for domestic students.</p>
 <div class="flex items-center space-x-4 text-blue-200/40 text-xs">
 <span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs">security</span> Data Encryption Active</span>
-<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs">verified_user</span> ISO/IEC 27001 Certified</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs">verified_user</span> PIPEDA / Bill C-27 Compliant</span>
 </div>
 </div>
 <div>
