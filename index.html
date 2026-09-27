@@ -696,6 +696,83 @@
                         </div>
                     </div>
                 </div>
+
+                <script>
+                (function initSimulator() {
+                    function updateSim() {
+                        const s1 = document.getElementById('grade-slide-1');
+                        const s2 = document.getElementById('grade-slide-2');
+                        const s3 = document.getElementById('grade-slide-3');
+                        if (!s1 || !s2 || !s3) return;
+
+                        const g1 = parseInt(s1.value) || 0;
+                        const g2 = parseInt(s2.value) || 0;
+                        const g3 = parseInt(s3.value) || 0;
+
+                        const v1 = document.getElementById('grade-val-1');
+                        const v2 = document.getElementById('grade-val-2');
+                        const v3 = document.getElementById('grade-val-3');
+                        if (v1) v1.textContent = g1 + '%';
+                        if (v2) v2.textContent = g2 + '%';
+                        if (v3) v3.textContent = g3 + '%';
+
+                        const exactAvg = (g1 + g2 + g3) / 3;
+                        const pathEl = document.getElementById('sim-pathway-avg');
+                        if (pathEl) pathEl.textContent = exactAvg.toFixed(1) + '%';
+
+                        let odds = 50;
+                        let riskText = "Competitive Match";
+                        let riskClass = "px-2 py-0.5 rounded text-[10px] font-bold font-lexend bg-blue-500/20 text-blue-300 border border-blue-500/30";
+
+                        if (exactAvg >= 92) {
+                            odds = Math.min(99, Math.round(85 + (exactAvg - 92) * 2));
+                            riskText = "Safety / High Likelihood";
+                            riskClass = "px-2 py-0.5 rounded text-[10px] font-bold font-lexend bg-emerald-500/20 text-emerald-350 border border-emerald-500/30";
+                        } else if (exactAvg >= 86) {
+                            odds = Math.round(65 + (exactAvg - 86) * 3.3);
+                            riskText = "Competitive Match";
+                            riskClass = "px-2 py-0.5 rounded text-[10px] font-bold font-lexend bg-blue-500/20 text-blue-300 border border-blue-500/30";
+                        } else if (exactAvg >= 80) {
+                            odds = Math.round(35 + (exactAvg - 80) * 5);
+                            riskText = "Reach Program";
+                            riskClass = "px-2 py-0.5 rounded text-[10px] font-bold font-lexend bg-amber-500/20 text-amber-300 border border-amber-500/30";
+                        } else {
+                            odds = Math.max(8, Math.round(10 + (exactAvg - 50) * 0.8));
+                            riskText = "High Risk / Gap Alert";
+                            riskClass = "px-2 py-0.5 rounded text-[10px] font-bold font-lexend bg-rose-500/20 text-rose-300 border border-rose-500/30";
+                        }
+
+                        const oddsEl = document.getElementById('sim-odds-pct');
+                        if (oddsEl) oddsEl.textContent = odds + '% Odds';
+
+                        const badgeEl = document.getElementById('sim-risk-badge');
+                        if (badgeEl) {
+                            badgeEl.textContent = riskText;
+                            badgeEl.className = riskClass;
+                        }
+
+                        const seed = parseFloat((((g1 * 1.37 + g2 * 0.73 + g3 * 1.91) % 3.2) - 1.6).toFixed(1));
+                        const devAvg = Math.max(50, Math.min(100, exactAvg + (seed === 0 ? 0.8 : seed)));
+                        const aiAvgEl = document.getElementById('sim-ai-avg');
+                        if (aiAvgEl) aiAvgEl.textContent = devAvg.toFixed(1) + '%';
+
+                        const aiErrEl = document.getElementById('sim-ai-error');
+                        if (aiErrEl) aiErrEl.textContent = (seed >= 0 ? '+' : '') + seed.toFixed(1) + '% Deviancy';
+                    }
+
+                    window.updateSimulatorAverage = updateSim;
+
+                    ['grade-slide-1', 'grade-slide-2', 'grade-slide-3'].forEach(function(id) {
+                        const el = document.getElementById(id);
+                        if (el) {
+                            el.addEventListener('input', updateSim);
+                            el.addEventListener('change', updateSim);
+                        }
+                    });
+
+                    updateSim();
+                })();
+                </script>
             </div>
 
         </div>
@@ -1730,95 +1807,10 @@
         }
     });
     // ── AI Math Risk Simulator Widget ─────────────────────────────────────────
-    const gradeSlide1 = document.getElementById('grade-slide-1');
-    const gradeSlide2 = document.getElementById('grade-slide-2');
-    const gradeSlide3 = document.getElementById('grade-slide-3');
-    const gradeVal1 = document.getElementById('grade-val-1');
-    const gradeVal2 = document.getElementById('grade-val-2');
-    const gradeVal3 = document.getElementById('grade-val-3');
-    const simPathwayAvg = document.getElementById('sim-pathway-avg');
-    const simAiAvg = document.getElementById('sim-ai-avg');
-    const simAiError = document.getElementById('sim-ai-error');
-    const simOddsPct = document.getElementById('sim-odds-pct');
-    const simRiskBadge = document.getElementById('sim-risk-badge');
-
-    function updateSimulatorAverage() {
-        const s1 = document.getElementById('grade-slide-1') || gradeSlide1;
-        const s2 = document.getElementById('grade-slide-2') || gradeSlide2;
-        const s3 = document.getElementById('grade-slide-3') || gradeSlide3;
-        if (!s1 || !s2 || !s3) return;
-
-        const g1 = parseInt(s1.value) || 0;
-        const g2 = parseInt(s2.value) || 0;
-        const g3 = parseInt(s3.value) || 0;
-
-        const v1 = document.getElementById('grade-val-1') || gradeVal1;
-        const v2 = document.getElementById('grade-val-2') || gradeVal2;
-        const v3 = document.getElementById('grade-val-3') || gradeVal3;
-        if (v1) v1.textContent = `${g1}%`;
-        if (v2) v2.textContent = `${g2}%`;
-        if (v3) v3.textContent = `${g3}%`;
-
-        // Pathway Canada strict float arithmetic (prerequisite average)
-        const exactAvg = (g1 + g2 + g3) / 3;
-        const pathEl = document.getElementById('sim-pathway-avg') || simPathwayAvg;
-        if (pathEl) pathEl.textContent = `${exactAvg.toFixed(1)}%`;
-
-        // Live Admission Probability and Risk Badge calculation
-        let odds = 50;
-        let riskText = "Competitive Match";
-        let riskClass = "px-2 py-0.5 rounded text-[10px] font-bold font-lexend bg-blue-500/20 text-blue-300 border border-blue-500/30";
-
-        if (exactAvg >= 92) {
-            odds = Math.min(99, Math.round(85 + (exactAvg - 92) * 2));
-            riskText = "Safety / High Likelihood";
-            riskClass = "px-2 py-0.5 rounded text-[10px] font-bold font-lexend bg-emerald-500/20 text-emerald-350 border border-emerald-500/30";
-        } else if (exactAvg >= 86) {
-            odds = Math.round(65 + (exactAvg - 86) * 3.3);
-            riskText = "Competitive Match";
-            riskClass = "px-2 py-0.5 rounded text-[10px] font-bold font-lexend bg-blue-500/20 text-blue-300 border border-blue-500/30";
-        } else if (exactAvg >= 80) {
-            odds = Math.round(35 + (exactAvg - 80) * 5);
-            riskText = "Reach Program";
-            riskClass = "px-2 py-0.5 rounded text-[10px] font-bold font-lexend bg-amber-500/20 text-amber-300 border border-amber-500/30";
-        } else {
-            odds = Math.max(8, Math.round(10 + (exactAvg - 50) * 0.8));
-            riskText = "High Risk / Gap Alert";
-            riskClass = "px-2 py-0.5 rounded text-[10px] font-bold font-lexend bg-rose-500/20 text-rose-300 border border-rose-500/30";
-        }
-
-        const oddsEl = document.getElementById('sim-odds-pct') || simOddsPct;
-        if (oddsEl) oddsEl.textContent = `${odds}% Odds`;
-
-        const badgeEl = document.getElementById('sim-risk-badge') || simRiskBadge;
-        if (badgeEl) {
-            badgeEl.textContent = riskText;
-            badgeEl.className = riskClass;
-        }
-
-        // General AI simulation (deterministic deviance showing floating point hallucination)
-        const seed = parseFloat((((g1 * 1.37 + g2 * 0.73 + g3 * 1.91) % 3.2) - 1.6).toFixed(1));
-        const devAvg = Math.max(50, Math.min(100, exactAvg + (seed === 0 ? 0.8 : seed)));
-        const aiAvgEl = document.getElementById('sim-ai-avg') || simAiAvg;
-        if (aiAvgEl) aiAvgEl.textContent = `${devAvg.toFixed(1)}%`;
-
-        const aiErrEl = document.getElementById('sim-ai-error') || simAiError;
-        if (aiErrEl) aiErrEl.textContent = `${seed >= 0 ? '+' : ''}${seed.toFixed(1)}% Deviancy`;
+    // Initialized immediately inside widget markup for instant reactivity.
+    if (window.updateSimulatorAverage) {
+        window.updateSimulatorAverage();
     }
-
-    window.updateSimulatorAverage = updateSimulatorAverage;
-
-    const simSliders = [
-        document.getElementById('grade-slide-1'),
-        document.getElementById('grade-slide-2'),
-        document.getElementById('grade-slide-3')
-    ].filter(Boolean);
-
-    simSliders.forEach(slide => {
-        slide.addEventListener('input', updateSimulatorAverage);
-        slide.addEventListener('change', updateSimulatorAverage);
-    });
-    updateSimulatorAverage();
 
     // ── Data Sovereignty Audit Ledger Drawer ──────────────────────────────────
     function toggleAuditDrawer(show) {
