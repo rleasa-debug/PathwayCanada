@@ -590,7 +590,7 @@
                     <div>
                         <div class="flex items-center justify-between mb-2">
                             <span class="text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-lexend">Choice 1 • Safety</span>
-                            <span class="text-[10px] font-bold text-slate-400">&gt;90% Odds</span>
+                            <span class="text-[10px] font-bold text-slate-400">&gt;90% Match</span>
                         </div>
                         <div id="ouac-slot-safety-content">
                             <p class="text-xs text-slate-300 font-medium">Select a <strong>Safety (Locked In)</strong> program to guarantee your backup offer.</p>
@@ -606,7 +606,7 @@
                     <div>
                         <div class="flex items-center justify-between mb-2">
                             <span class="text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 font-lexend">Choice 2 • Solid Match</span>
-                            <span class="text-[10px] font-bold text-slate-400">75–90% Odds</span>
+                            <span class="text-[10px] font-bold text-slate-400">75–90% Match</span>
                         </div>
                         <div id="ouac-slot-match-content">
                             <p class="text-xs text-slate-300 font-medium">Select a <strong>Solid Match</strong> program where your Top 6 matches cutoff.</p>
@@ -622,7 +622,7 @@
                     <div>
                         <div class="flex items-center justify-between mb-2">
                             <span class="text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 font-lexend">Choice 3 • Realistic Reach</span>
-                            <span class="text-[10px] font-bold text-slate-400">60–74% Odds</span>
+                            <span class="text-[10px] font-bold text-slate-400">60–74% Match</span>
                         </div>
                         <div id="ouac-slot-reach-content">
                             <p class="text-xs text-slate-300 font-medium">Select a <strong>Realistic Reach</strong> dream program to aim high with confidence.</p>
@@ -1415,7 +1415,7 @@
 
     function getQualitativeBadge(match) {
         if (match === null || match === undefined || isNaN(match)) {
-            return `<span class="px-2.5 py-1 border border-slate-300 dark:border-slate-700 text-slate-650 dark:text-slate-350 bg-slate-100 dark:bg-slate-800 rounded-full text-[9px] font-black uppercase tracking-wider font-lexend shadow-sm">📝 Enter Marks to See Odds</span>`;
+            return `<span class="px-2.5 py-1 border border-slate-300 dark:border-slate-700 text-slate-650 dark:text-slate-350 bg-slate-100 dark:bg-slate-800 rounded-full text-[9px] font-black uppercase tracking-wider font-lexend shadow-sm">📝 Enter Marks to See Matches</span>`;
         }
         if (match > 90) {
             return `<span class="px-2.5 py-1 border border-emerald-300 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-950/60 rounded-full text-[9px] font-black uppercase tracking-wider font-lexend shadow-sm badge-high-match-pulse">🎯 Safety (Locked In)</span>`;
@@ -1496,7 +1496,7 @@
             const activeProvinceName = provNames[homeProv] || 'Ontario';
             const isZeroCourses = !state.courses || state.courses.length === 0 || parseFloat(state.average) === 0;
             if (isZeroCourses) {
-                subheaderEl.textContent = `Grade 12 Profile | Enter your first course to see your odds. Add your senior coursework in My Portfolio to calculate your Top 6 admission average and unlock custom university & college match analytics.`;
+                subheaderEl.textContent = `Grade 12 Profile | Enter your first course to see your matches. Add your senior coursework in My Portfolio to calculate your Top 6 admission average and unlock custom university & college match analytics.`;
             } else if (state.isPro) {
                 subheaderEl.textContent = `Grade 12 Student | Your academic average of ${state.average}% is unlocked. Deep-dive analytics, prerequisite compatibility, and predictive grade coaching are active for all top-tier programs.`;
             } else {
@@ -1817,7 +1817,7 @@
                                 </span>
                                 <a href="academic-records.html" class="text-[9px] font-bold text-primary dark:text-blue-400 hover:underline font-lexend">Enter Marks →</a>
                             </div>
-                            <p class="text-[10px] text-slate-500 dark:text-slate-400 font-body">Input your coursework in My Portfolio to view personalized prerequisite clearance and admission odds.</p>
+                            <p class="text-[10px] text-slate-500 dark:text-slate-400 font-body">Input your coursework in My Portfolio to view personalized prerequisite clearance and match potential.</p>
                         </div>
                     `;
                 } else if (isUnlocked) {

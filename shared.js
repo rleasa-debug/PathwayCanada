@@ -1332,7 +1332,7 @@ function calculateMatches(courses) {
           breakdown: {
             grades: 'Enter your coursework in My Portfolio to evaluate compatibility with admission cutoffs.',
             extracurriculars: 'Extracurricular assessment unlocks once courses are recorded.',
-            recommendation: 'Enter your first course to see your admission odds.'
+            recommendation: 'Enter your first course to see your program matches.'
           },
           cutoff: cutoff,
           isPartTime: geo.isPartTime,
