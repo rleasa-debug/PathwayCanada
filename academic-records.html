@@ -287,11 +287,11 @@
         </a>
         
         <!-- Notifications -->
-        <a href="#" class="flex items-center justify-center lg:justify-start gap-3.5 px-3 lg:px-4 py-3 lg:py-2.5 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all rounded-lg relative">
+        <button type="button" onclick="openNotificationsDrawer(event)" class="w-full flex items-center justify-center lg:justify-start gap-3.5 px-3 lg:px-4 py-3 lg:py-2.5 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all rounded-lg relative cursor-pointer border-none bg-transparent">
             <span class="material-symbols-outlined text-xl flex-shrink-0">notifications</span>
-            <span class="absolute top-3.5 left-7.5 lg:left-8 w-2 h-2 bg-red-500 rounded-full"></span>
+            <span class="absolute top-3.5 left-7.5 lg:left-8 w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
             <span class="hidden lg:block text-sm font-lexend">Notifications</span>
-        </a>
+        </button>
     </nav>
     
     <!-- Bottom Profile & Actions -->
@@ -301,7 +301,7 @@
             <div class="w-8 h-8 rounded-full bg-primary-fixed-dim flex items-center justify-center text-primary font-bold text-xs shadow-sm user-initials-display flex-shrink-0" id="sidebar-profile-avatar">ST</div>
             <div class="hidden lg:block overflow-hidden">
                 <p class="text-xs font-bold text-primary dark:text-white truncate sidebar-name-display" id="sidebar-name">Student</p>
-                <p class="text-[9px] text-slate-500 truncate" id="sidebar-plan-badge">Basic Explorer</p>
+                <p class="text-[9px] text-slate-500 truncate" id="sidebar-plan-badge">Basic Explorer (Free)</p>
             </div>
         </div>
         
@@ -365,19 +365,23 @@
 
     <!-- Insights Bento Grid -->
     <section class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12 items-stretch">
-        <!-- Peer Matching Card -->
-        <div class="md:col-span-1 glass-bento p-6 rounded-2xl flex flex-col justify-between relative overflow-hidden group">
+        <!-- Application Savings ROI Card (quantifying ROI for parents) -->
+        <div class="md:col-span-1 glass-bento p-6 rounded-2xl flex flex-col justify-between relative overflow-hidden group border border-emerald-500/20 bg-gradient-to-br from-emerald-500/5 to-slate-900">
             <div class="z-10">
-                <span class="text-slate-400 dark:text-slate-500 text-xs font-bold uppercase tracking-widest font-lexend">Cohort Standing</span>
-                <div id="peer-count" class="text-5xl font-extrabold font-headline mt-2 text-primary dark:text-white italic">--</div>
-                <div class="text-xs text-on-surface-variant mt-1 font-body">Active Peer Matches</div>
+                <span class="text-emerald-400 text-xs font-bold uppercase tracking-widest font-lexend flex items-center gap-1">
+                    <span class="material-symbols-outlined text-sm">savings</span> Application Savings
+                </span>
+                <div id="savings-amount" class="text-3xl lg:text-4xl font-black font-headline mt-2 text-emerald-400 tracking-tight">$150–$250</div>
+                <div class="text-xs text-slate-300 mt-1 font-body font-medium">Est. Fee Savings for Families</div>
             </div>
-            <div class="mt-6 z-10 flex flex-col gap-1">
-                <span id="competition-badge" class="inline-flex w-fit items-center gap-1 bg-emerald-500/20 text-emerald-300 text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider">Analyzing</span>
-                <p id="peer-desc" class="text-[11px] opacity-75 mt-1 font-body leading-snug">Analyzing matching cohort data...</p>
+            <div class="mt-4 z-10 flex flex-col gap-1">
+                <span class="inline-flex w-fit items-center gap-1 bg-emerald-500/20 text-emerald-300 text-[9px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">Prerequisite Clearance</span>
+                <p class="text-[11px] text-slate-400 mt-1 font-body leading-relaxed">
+                    The average Ontario family applies to 5–6 programs ($300–$450+ in OUAC fees). Pathway Canada eliminates applications where prerequisites are missing, saving an average of $150–$250 in non-refundable fees.
+                </p>
             </div>
             <div class="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform duration-500">
-                <span class="material-symbols-outlined text-9xl">groups</span>
+                <span class="material-symbols-outlined text-9xl text-emerald-400">price_check</span>
             </div>
         </div>
         <!-- Credits Card -->
@@ -566,6 +570,17 @@
                             <option value="NT">Northwest Territories (NT)</option>
                             <option value="NU">Nunavut (NU)</option>
                         </select>
+                    </div>
+                    <div>
+                        <label class="text-[10px] font-bold uppercase tracking-widest text-slate-500 block mb-1.5 font-lexend">Account Role</label>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button type="button" id="role-btn-student" onclick="setRole('student')" class="px-3 py-2 rounded-lg border text-xs font-bold font-lexend transition-all flex items-center justify-center gap-1.5 cursor-pointer">
+                                <span class="material-symbols-outlined text-sm">school</span> Student
+                            </button>
+                            <button type="button" id="role-btn-parent" onclick="setRole('parent')" class="px-3 py-2 rounded-lg border text-xs font-bold font-lexend transition-all flex items-center justify-center gap-1.5 cursor-pointer">
+                                <span class="material-symbols-outlined text-sm">family_restroom</span> Parent
+                            </button>
+                        </div>
                     </div>
                 </div>
                 
@@ -918,6 +933,127 @@
     </div>
 </div>
 
+<!-- Notifications Slide-Over Drawer -->
+<div id="notifications-drawer" role="dialog" aria-modal="true" aria-labelledby="notifications-drawer-title" class="fixed inset-0 z-[120] overflow-hidden hidden">
+    <!-- Backdrop -->
+    <div id="notifications-backdrop" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm opacity-0 transition-opacity duration-300" onclick="closeNotificationsDrawer()"></div>
+    
+    <div class="fixed inset-y-0 right-0 max-w-full flex pl-10">
+        <div id="notifications-panel" class="w-screen max-w-md bg-white dark:bg-slate-900 shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300 border-l border-slate-200 dark:border-slate-800">
+            <!-- Header -->
+            <div class="p-6 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50/75 dark:bg-slate-800/40">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
+                        <span class="material-symbols-outlined text-2xl">notifications_active</span>
+                    </div>
+                    <div>
+                        <h3 id="notifications-drawer-title" class="text-lg font-black text-primary dark:text-white font-lexend">Admissions Alerts</h3>
+                        <p class="text-xs text-slate-500 font-medium">2026–2027 Key Provincial Milestones</p>
+                    </div>
+                </div>
+                <button type="button" onclick="closeNotificationsDrawer()" class="w-9 h-9 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 flex items-center justify-center transition-colors cursor-pointer" aria-label="Close notifications">
+                    <span class="material-symbols-outlined text-xl">close</span>
+                </button>
+            </div>
+            
+            <!-- Body content -->
+            <div class="flex-1 overflow-y-auto p-6 space-y-4">
+                <!-- Banner -->
+                <div class="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex gap-3 items-start">
+                    <span class="material-symbols-outlined text-amber-600 dark:text-amber-400 text-xl flex-shrink-0 mt-0.5">event</span>
+                    <div class="text-xs text-amber-900 dark:text-amber-200">
+                        <strong class="font-bold block mb-0.5">2026–2027 Application Deadlines:</strong>
+                        All Ontario secondary school applicants (OUAC 101) & college applicants (OCAS) must adhere to the standard deadlines below.
+                    </div>
+                </div>
+
+                <!-- Timeline Items -->
+                <div class="space-y-3 font-sans">
+                    <!-- Deadline 1 -->
+                    <div class="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-850 shadow-xs hover:border-primary/40 transition-all">
+                        <div class="flex items-center justify-between mb-1.5">
+                            <span class="px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wider rounded bg-primary/10 text-primary font-lexend">OUAC Primary</span>
+                            <span class="text-xs font-bold text-slate-700 dark:text-slate-300 font-mono">Jan 14, 2027</span>
+                        </div>
+                        <h4 class="text-sm font-bold text-slate-900 dark:text-white font-lexend">OUAC 101 Application Deadline</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                            Official deadline for Ontario high school students to submit university applications to OUAC for Fall 2027 admission.
+                        </p>
+                    </div>
+
+                    <!-- Deadline 2 -->
+                    <div class="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-850 shadow-xs hover:border-emerald-500/40 transition-all">
+                        <div class="flex items-center justify-between mb-1.5">
+                            <span class="px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wider rounded bg-emerald-500/10 text-emerald-600 font-lexend">OCAS Priority</span>
+                            <span class="text-xs font-bold text-slate-700 dark:text-slate-300 font-mono">Feb 1, 2027</span>
+                        </div>
+                        <h4 class="text-sm font-bold text-slate-900 dark:text-white font-lexend">Ontario Colleges Equal Consideration</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                            Applications received on or before this date receive equal consideration for highly competitive college diploma programs.
+                        </p>
+                    </div>
+
+                    <!-- Deadline 3 -->
+                    <div class="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-850 shadow-xs hover:border-blue-500/40 transition-all">
+                        <div class="flex items-center justify-between mb-1.5">
+                            <span class="px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wider rounded bg-blue-500/10 text-blue-600 font-lexend">Grades Transmit</span>
+                            <span class="text-xs font-bold text-slate-700 dark:text-slate-300 font-mono">Feb 12, 2027</span>
+                        </div>
+                        <h4 class="text-sm font-bold text-slate-900 dark:text-white font-lexend">Semester 1 Final Grades to OUAC</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                            Target date for high schools to submit first-semester 4U/4M final grades for university admissions consideration.
+                        </p>
+                    </div>
+
+                    <!-- Deadline 4 -->
+                    <div class="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-850 shadow-xs hover:border-purple-500/40 transition-all">
+                        <div class="flex items-center justify-between mb-1.5">
+                            <span class="px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wider rounded bg-purple-500/10 text-purple-600 font-lexend">OCAS Confirm</span>
+                            <span class="text-xs font-bold text-slate-700 dark:text-slate-300 font-mono">May 1, 2027</span>
+                        </div>
+                        <h4 class="text-sm font-bold text-slate-900 dark:text-white font-lexend">College Offer Acceptance Deadline</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                            Deadline for applicants to confirm their acceptance of an offer of admission via ontariocolleges.ca.
+                        </p>
+                    </div>
+
+                    <!-- Deadline 5 -->
+                    <div class="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-850 shadow-xs hover:border-rose-500/40 transition-all">
+                        <div class="flex items-center justify-between mb-1.5">
+                            <span class="px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wider rounded bg-rose-500/10 text-rose-600 font-lexend">Decisions</span>
+                            <span class="text-xs font-bold text-slate-700 dark:text-slate-300 font-mono">May 27, 2027</span>
+                        </div>
+                        <h4 class="text-sm font-bold text-slate-900 dark:text-white font-lexend">University Admissions Decisions Complete</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                            Latest date all high school applicants receive an admission decision (offer, refusal, or deferral) from Ontario universities.
+                        </p>
+                    </div>
+
+                    <!-- Deadline 6 -->
+                    <div class="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-850 shadow-xs hover:border-emerald-500/40 transition-all">
+                        <div class="flex items-center justify-between mb-1.5">
+                            <span class="px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wider rounded bg-emerald-500/10 text-emerald-600 font-lexend">Response</span>
+                            <span class="text-xs font-bold text-slate-700 dark:text-slate-300 font-mono">Jun 1, 2027</span>
+                        </div>
+                        <h4 class="text-sm font-bold text-slate-900 dark:text-white font-lexend">OUAC Offer Acceptance & Deposit Due</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                            Earliest date Ontario universities may require a response to an offer and initial financial commitment/deposit.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="p-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-850 text-center">
+                <a href="https://www.ouac.on.ca" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-primary dark:text-blue-400 hover:underline inline-flex items-center gap-1 font-lexend">
+                    <span>Visit OUAC Portal</span>
+                    <span class="material-symbols-outlined text-sm">open_in_new</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script type="module" src="shared.js"></script>
 <script type="module">
     let state = getAppState();
@@ -985,6 +1121,26 @@
                         <span class="material-symbols-outlined text-[9px]">edit</span> Editable
                     </span>
                 `;
+            }
+        }
+        
+        // Update sidebar plan badge dynamically
+        const sidebarPlanBadge = document.getElementById('sidebar-plan-badge');
+        if (sidebarPlanBadge) {
+            sidebarPlanBadge.textContent = state.isPro ? '⭐ Smart Match Pro' : 'Basic Explorer (Free)';
+        }
+
+        // Update role button styling
+        const roleBtnStudent = document.getElementById('role-btn-student');
+        const roleBtnParent = document.getElementById('role-btn-parent');
+        const userRole = state.userRole || 'student';
+        if (roleBtnStudent && roleBtnParent) {
+            if (userRole === 'parent') {
+                roleBtnParent.className = "px-3 py-2 rounded-lg border-2 border-primary bg-primary text-white text-xs font-bold font-lexend transition-all flex items-center justify-center gap-1.5 shadow-sm cursor-pointer";
+                roleBtnStudent.className = "px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-xs font-bold font-lexend transition-all flex items-center justify-center gap-1.5 hover:bg-slate-100 cursor-pointer";
+            } else {
+                roleBtnStudent.className = "px-3 py-2 rounded-lg border-2 border-primary bg-primary text-white text-xs font-bold font-lexend transition-all flex items-center justify-center gap-1.5 shadow-sm cursor-pointer";
+                roleBtnParent.className = "px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-xs font-bold font-lexend transition-all flex items-center justify-center gap-1.5 hover:bg-slate-100 cursor-pointer";
             }
         }
         
@@ -1944,6 +2100,9 @@
     window.deleteActivity = deleteActivity;
     window.handleVolunteerFileUpload = handleVolunteerFileUpload;
     window.removeVolunteerFile = removeVolunteerFile;
+    window.openNotificationsDrawer = openNotificationsDrawer;
+    window.closeNotificationsDrawer = closeNotificationsDrawer;
+    window.setRole = setRole;
 
     // Global keyboard handler for closing modals on Escape key
     window.addEventListener('keydown', (e) => {
@@ -1952,8 +2111,50 @@
             closeAddModal();
             closeUpgradeModal();
             closeActivityModal();
+            closeNotificationsDrawer();
         }
     });
+
+    function openNotificationsDrawer(event) {
+        if (event) event.stopPropagation();
+        const drawer = document.getElementById('notifications-drawer');
+        const backdrop = document.getElementById('notifications-backdrop');
+        const panel = document.getElementById('notifications-panel');
+        if (drawer && backdrop && panel) {
+            drawer.classList.remove('hidden');
+            setTimeout(() => {
+                backdrop.classList.remove('opacity-0');
+                backdrop.classList.add('opacity-100');
+                panel.classList.remove('translate-x-full');
+                panel.classList.add('translate-x-0');
+            }, 10);
+        }
+    }
+
+    function closeNotificationsDrawer() {
+        const drawer = document.getElementById('notifications-drawer');
+        const backdrop = document.getElementById('notifications-backdrop');
+        const panel = document.getElementById('notifications-panel');
+        if (drawer && backdrop && panel) {
+            backdrop.classList.remove('opacity-100');
+            backdrop.classList.add('opacity-0');
+            panel.classList.remove('translate-x-0');
+            panel.classList.add('translate-x-full');
+            setTimeout(() => {
+                drawer.classList.add('hidden');
+            }, 300);
+        }
+    }
+
+    function setRole(role) {
+        if (window.setAccountRole) {
+            window.setAccountRole(role);
+        } else {
+            state.userRole = role;
+            saveAppState(state);
+        }
+        renderPage();
+    }
 
     function openUpgradeModal(event) {
         if (event) event.stopPropagation();
@@ -2008,30 +2209,33 @@
 
     function handleDownloadPortfolio(event) {
         if (event) event.stopPropagation();
-        if (!state.isPro) {
-            openUpgradeModal(event);
-        } else {
-            // Populate print template details dynamically before calling print
-            const dateStr = new Date().toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' });
-            document.getElementById('print-date').textContent = dateStr;
-            
-            const studentName = state.userName || "Student";
-            document.getElementById('print-student-name').textContent = studentName;
-            document.getElementById('print-student-dob').textContent = state.userDob || "2008-05-24";
-            document.getElementById('print-student-average').textContent = `${state.average}%`;
-            
-            // Simple deterministic verification hash based on name and average
-            let hashVal = 0;
-            const seed = studentName + state.average;
-            for (let i = 0; i < seed.length; i++) {
-                hashVal = seed.charCodeAt(i) + ((hashVal << 5) - hashVal);
-            }
-            const verifyId = `PC-2026-${Math.abs(hashVal).toString(16).toUpperCase().substring(0, 8)}`;
-            document.getElementById('print-verify-id').textContent = verifyId;
-            
-            const printRows = document.getElementById('print-course-rows');
+        // Populate print template details dynamically before calling print
+        const dateStr = new Date().toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' });
+        const dateEl = document.getElementById('print-date');
+        if (dateEl) dateEl.textContent = dateStr;
+        
+        const studentName = state.userName || "Student";
+        const nameEl = document.getElementById('print-student-name');
+        if (nameEl) nameEl.textContent = studentName;
+        const dobEl = document.getElementById('print-student-dob');
+        if (dobEl) dobEl.textContent = state.userDob || "2008-05-24";
+        const avgEl = document.getElementById('print-student-average');
+        if (avgEl) avgEl.textContent = `${state.average}%`;
+        
+        // Simple deterministic verification hash based on name and average
+        let hashVal = 0;
+        const seed = studentName + state.average;
+        for (let i = 0; i < seed.length; i++) {
+            hashVal = seed.charCodeAt(i) + ((hashVal << 5) - hashVal);
+        }
+        const verifyId = `PC-2026-${Math.abs(hashVal).toString(16).toUpperCase().substring(0, 8)}`;
+        const verifyEl = document.getElementById('print-verify-id');
+        if (verifyEl) verifyEl.textContent = verifyId;
+        
+        const printRows = document.getElementById('print-course-rows');
+        if (printRows) {
             printRows.innerHTML = '';
-            state.courses.forEach(c => {
+            (state.courses || []).forEach(c => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
                     <td class="py-3 font-semibold text-slate-800">${c.name}</td>
@@ -2041,21 +2245,21 @@
                 `;
                 printRows.appendChild(tr);
             });
-            
-            // Trigger a file download for E2E validation script compatibility
-            const blob = new Blob(["Pathway Canada Certified Academic Portfolio"], { type: 'text/plain' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'pathway_canada_portfolio.txt';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-
-            // Trigger actual browser print layout (which formats as a clean certificate/PDF)
-            window.print();
         }
+        
+        // Trigger a file download for E2E validation script compatibility
+        const blob = new Blob(["Pathway Canada Certified Academic Portfolio"], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'pathway_canada_portfolio.txt';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+
+        // Trigger actual browser print layout (which formats as a clean certificate/PDF)
+        window.print();
     }
 
     function handleProfileChange() {

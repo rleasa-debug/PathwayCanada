@@ -447,6 +447,13 @@
             <span class="material-symbols-outlined text-xl flex-shrink-0">payments</span>
             <span class="hidden lg:block text-sm font-lexend">Plans & Pricing</span>
         </a>
+
+        <!-- Notifications -->
+        <button type="button" onclick="openNotificationsDrawer(event)" class="w-full flex items-center justify-center lg:justify-start gap-3.5 px-3 lg:px-4 py-3 lg:py-2.5 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all rounded-lg relative cursor-pointer border-none bg-transparent">
+            <span class="material-symbols-outlined text-xl flex-shrink-0">notifications</span>
+            <span class="absolute top-3.5 left-7.5 lg:left-8 w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+            <span class="hidden lg:block text-sm font-lexend">Notifications</span>
+        </button>
     </nav>
     
     <!-- Bottom Profile & Actions -->
@@ -890,71 +897,71 @@
             <!-- Right Sidebar Column: Static resources & legend (col-span-3, sticky) -->
             <aside class="lg:col-span-3 space-y-6 lg:sticky lg:top-20">
                 <!-- Confidence Legend Card -->
-                <div id="legend-sidebar" class="legend-container bg-surface-container-low p-5 rounded-2xl border border-slate-200/60 dark:border-slate-800 shadow-sm flex flex-col gap-4">
+                <div id="legend-sidebar" class="legend-container bg-surface-container-low p-3.5 sm:p-4 rounded-2xl border border-slate-200/60 dark:border-slate-800 shadow-sm flex flex-col gap-3.5 break-words overflow-hidden w-full">
                     <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-2">
                         <h3 class="font-lexend font-bold text-xs text-primary dark:text-white flex items-center gap-1.5">
                             <span class="material-symbols-outlined text-primary text-lg">balance</span>
                             Confidence Legend
                         </h3>
-                        <button id="legend-toggle-btn" class="px-2 py-0.5 text-[8px] font-black uppercase tracking-wider bg-slate-200/50 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 rounded border border-slate-300/40 dark:border-slate-700 cursor-pointer transition-colors" onclick="toggleLegendView()">
+                        <button id="legend-toggle-btn" class="px-2 py-0.5 text-[8px] font-black uppercase tracking-wider bg-slate-200/50 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 rounded border border-slate-300/40 dark:border-slate-700 cursor-pointer transition-colors shrink-0" onclick="toggleLegendView()">
                             Simple View
                         </button>
                     </div>
                     
                     <!-- Confidence Levels -->
-                    <div class="space-y-3.5">
+                    <div class="space-y-3">
                         <!-- Safety (Locked In) -->
-                        <div class="flex flex-col gap-1 p-2 rounded-xl transition-all duration-300 hover:bg-white/50 dark:hover:bg-slate-900/30">
-                            <div class="flex items-center justify-between">
-                                <span class="px-2 py-0.5 text-[8px] font-black uppercase tracking-wider border rounded bg-emerald-50 text-emerald-700 border-emerald-100 dark:bg-emerald-950/20 dark:text-emerald-400 dark:border-emerald-900/30">
+                        <div class="flex flex-col gap-1 p-2 rounded-xl transition-all duration-300 hover:bg-white/50 dark:hover:bg-slate-900/30 overflow-hidden">
+                            <div class="flex flex-wrap items-center justify-between gap-1 min-w-0">
+                                <span class="px-2 py-0.5 text-[8px] font-black uppercase tracking-wider border rounded bg-emerald-50 text-emerald-700 border-emerald-100 dark:bg-emerald-950/20 dark:text-emerald-400 dark:border-emerald-900/30 break-words">
                                     Safety (Locked In)
                                 </span>
-                                <span class="detailed-only text-[10px] font-bold text-emerald-600 dark:text-emerald-400 font-lexend">&gt;90% Match</span>
-                                <span class="simple-only text-[10px] font-bold text-emerald-600 dark:text-emerald-400 font-lexend">Safety</span>
+                                <span class="detailed-only text-[10px] font-bold text-emerald-600 dark:text-emerald-400 font-lexend shrink-0">&gt;90% Match</span>
+                                <span class="simple-only text-[10px] font-bold text-emerald-600 dark:text-emerald-400 font-lexend shrink-0">Safety</span>
                             </div>
-                            <p class="detailed-only text-[10px] text-slate-500 dark:text-slate-400 leading-normal mt-0.5">
+                            <p class="detailed-only text-[10px] text-slate-500 dark:text-slate-400 leading-normal mt-0.5 break-words">
                                 Your Top 6 average exceeds cutoff by +3.0%+. Prereqs fully satisfied.
                             </p>
                         </div>
 
                         <!-- Solid Match -->
-                        <div class="flex flex-col gap-1 p-2 rounded-xl transition-all duration-300 hover:bg-white/50 dark:hover:bg-slate-900/30">
-                            <div class="flex items-center justify-between">
-                                <span class="px-2 py-0.5 text-[8px] font-black uppercase tracking-wider border rounded bg-blue-50 text-blue-700 border-blue-100 dark:bg-blue-950/20 dark:text-blue-400 dark:border-blue-900/30">
+                        <div class="flex flex-col gap-1 p-2 rounded-xl transition-all duration-300 hover:bg-white/50 dark:hover:bg-slate-900/30 overflow-hidden">
+                            <div class="flex flex-wrap items-center justify-between gap-1 min-w-0">
+                                <span class="px-2 py-0.5 text-[8px] font-black uppercase tracking-wider border rounded bg-blue-50 text-blue-700 border-blue-100 dark:bg-blue-950/20 dark:text-blue-400 dark:border-blue-900/30 break-words">
                                     Solid Match
                                 </span>
-                                <span class="detailed-only text-[10px] font-bold text-blue-600 dark:text-blue-400 font-lexend">75–90% Match</span>
-                                <span class="simple-only text-[10px] font-bold text-blue-600 dark:text-blue-400 font-lexend">Target</span>
+                                <span class="detailed-only text-[10px] font-bold text-blue-600 dark:text-blue-400 font-lexend shrink-0">75–90% Match</span>
+                                <span class="simple-only text-[10px] font-bold text-blue-600 dark:text-blue-400 font-lexend shrink-0">Target</span>
                             </div>
-                            <p class="detailed-only text-[10px] text-slate-500 dark:text-slate-400 leading-normal mt-0.5">
+                            <p class="detailed-only text-[10px] text-slate-500 dark:text-slate-400 leading-normal mt-0.5 break-words">
                                 Average is competitive within ±2.0% of cutoff. Prerequisites met.
                             </p>
                         </div>
 
                         <!-- Reach (High Climb) -->
-                        <div class="flex flex-col gap-1 p-2 rounded-xl transition-all duration-300 hover:bg-white/50 dark:hover:bg-slate-900/30">
-                            <div class="flex items-center justify-between">
-                                <span class="px-2 py-0.5 text-[8px] font-black uppercase tracking-wider border rounded bg-amber-50 text-amber-800 border-amber-100 dark:bg-amber-950/20 dark:text-amber-400 dark:border-amber-900/30">
+                        <div class="flex flex-col gap-1 p-2 rounded-xl transition-all duration-300 hover:bg-white/50 dark:hover:bg-slate-900/30 overflow-hidden">
+                            <div class="flex flex-wrap items-center justify-between gap-1 min-w-0">
+                                <span class="px-2 py-0.5 text-[8px] font-black uppercase tracking-wider border rounded bg-amber-50 text-amber-800 border-amber-100 dark:bg-amber-950/20 dark:text-amber-400 dark:border-amber-900/30 break-words">
                                     Reach (High Climb)
                                 </span>
-                                <span class="detailed-only text-[10px] font-bold text-amber-600 dark:text-amber-500 font-lexend">60–74% Match</span>
-                                <span class="simple-only text-[10px] font-bold text-amber-600 dark:text-amber-500 font-lexend">Reach</span>
+                                <span class="detailed-only text-[10px] font-bold text-amber-600 dark:text-amber-500 font-lexend shrink-0">60–74% Match</span>
+                                <span class="simple-only text-[10px] font-bold text-amber-600 dark:text-amber-500 font-lexend shrink-0">Reach</span>
                             </div>
-                            <p class="detailed-only text-[10px] text-slate-500 dark:text-slate-400 leading-normal mt-0.5">
+                            <p class="detailed-only text-[10px] text-slate-500 dark:text-slate-400 leading-normal mt-0.5 break-words">
                                 2.0% to 5.0% below cutoff. Strategic exam coaching required.
                             </p>
                         </div>
 
                         <!-- Unlikely (Longshot) -->
-                        <div class="flex flex-col gap-1 p-2 rounded-xl transition-all duration-300 hover:bg-white/50 dark:hover:bg-slate-900/30">
-                            <div class="flex items-center justify-between">
-                                <span class="px-2 py-0.5 text-[8px] font-black uppercase tracking-wider border rounded bg-slate-50 text-slate-600 border-slate-200 dark:bg-slate-950/20 dark:text-slate-400 dark:border-slate-900/30">
+                        <div class="flex flex-col gap-1 p-2 rounded-xl transition-all duration-300 hover:bg-white/50 dark:hover:bg-slate-900/30 overflow-hidden">
+                            <div class="flex flex-wrap items-center justify-between gap-1 min-w-0">
+                                <span class="px-2 py-0.5 text-[8px] font-black uppercase tracking-wider border rounded bg-slate-50 text-slate-600 border-slate-200 dark:bg-slate-950/20 dark:text-slate-400 dark:border-slate-900/30 break-words">
                                     Unlikely (Longshot)
                                 </span>
-                                <span class="detailed-only text-[10px] font-bold text-slate-500 dark:text-slate-450 font-lexend">&lt;60% Match</span>
-                                <span class="simple-only text-[10px] font-bold text-slate-500 dark:text-slate-450 font-lexend">Unlikely</span>
+                                <span class="detailed-only text-[10px] font-bold text-slate-500 dark:text-slate-450 font-lexend shrink-0">&lt;60% Match</span>
+                                <span class="simple-only text-[10px] font-bold text-slate-500 dark:text-slate-450 font-lexend shrink-0">Unlikely</span>
                             </div>
-                            <p class="detailed-only text-[10px] text-slate-500 dark:text-slate-400 leading-normal mt-0.5">
+                            <p class="detailed-only text-[10px] text-slate-500 dark:text-slate-400 leading-normal mt-0.5 break-words">
                                 More than 5.0% below cutoff or missing core senior prerequisites.
                             </p>
                         </div>
@@ -1031,8 +1038,8 @@
                 <div>
                     <h4 class="font-bold text-primary mb-4 text-sm font-lexend">Legal & Policy</h4>
                     <ul class="space-y-3 text-xs text-on-surface-variant font-bold font-lexend">
-                        <li><a class="hover:text-primary" href="#">Terms of Service</a></li>
-                        <li><a class="hover:text-primary" href="#">Privacy Policy</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="privacy-policy.html#terms">Terms of Service</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="privacy-policy.html">Privacy Policy</a></li>
                     </ul>
                 </div>
                 <div>
@@ -1088,6 +1095,9 @@
             </div>
         </div>
         
+        <!-- Free Audit Banner -->
+        <div id="explainer-free-audit-banner" class="hidden mb-4"></div>
+
         <!-- Breakdown Content -->
         <div class="space-y-4 text-sm">
             <div class="flex items-start gap-3">
@@ -1221,6 +1231,127 @@
     </div>
 </div>
 
+<!-- Notifications Slide-Over Drawer -->
+<div id="notifications-drawer" role="dialog" aria-modal="true" aria-labelledby="notifications-drawer-title" class="fixed inset-0 z-[120] overflow-hidden hidden">
+    <!-- Backdrop -->
+    <div id="notifications-backdrop" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm opacity-0 transition-opacity duration-300" onclick="closeNotificationsDrawer()"></div>
+    
+    <div class="fixed inset-y-0 right-0 max-w-full flex pl-10">
+        <div id="notifications-panel" class="w-screen max-w-md bg-white dark:bg-slate-900 shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300 border-l border-slate-200 dark:border-slate-800">
+            <!-- Header -->
+            <div class="p-6 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50/75 dark:bg-slate-800/40">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
+                        <span class="material-symbols-outlined text-2xl">notifications_active</span>
+                    </div>
+                    <div>
+                        <h3 id="notifications-drawer-title" class="text-lg font-black text-primary dark:text-white font-lexend">Admissions Alerts</h3>
+                        <p class="text-xs text-slate-500 font-medium">2026–2027 Key Provincial Milestones</p>
+                    </div>
+                </div>
+                <button type="button" onclick="closeNotificationsDrawer()" class="w-9 h-9 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 flex items-center justify-center transition-colors cursor-pointer" aria-label="Close notifications">
+                    <span class="material-symbols-outlined text-xl">close</span>
+                </button>
+            </div>
+            
+            <!-- Body content -->
+            <div class="flex-1 overflow-y-auto p-6 space-y-4">
+                <!-- Banner -->
+                <div class="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex gap-3 items-start">
+                    <span class="material-symbols-outlined text-amber-600 dark:text-amber-400 text-xl flex-shrink-0 mt-0.5">event</span>
+                    <div class="text-xs text-amber-900 dark:text-amber-200">
+                        <strong class="font-bold block mb-0.5">2026–2027 Application Deadlines:</strong>
+                        All Ontario secondary school applicants (OUAC 101) & college applicants (OCAS) must adhere to the standard deadlines below.
+                    </div>
+                </div>
+
+                <!-- Timeline Items -->
+                <div class="space-y-3 font-sans">
+                    <!-- Deadline 1 -->
+                    <div class="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-850 shadow-xs hover:border-primary/40 transition-all">
+                        <div class="flex items-center justify-between mb-1.5">
+                            <span class="px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wider rounded bg-primary/10 text-primary font-lexend">OUAC Primary</span>
+                            <span class="text-xs font-bold text-slate-700 dark:text-slate-300 font-mono">Jan 14, 2027</span>
+                        </div>
+                        <h4 class="text-sm font-bold text-slate-900 dark:text-white font-lexend">OUAC 101 Application Deadline</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                            Official deadline for Ontario high school students to submit university applications to OUAC for Fall 2027 admission.
+                        </p>
+                    </div>
+
+                    <!-- Deadline 2 -->
+                    <div class="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-850 shadow-xs hover:border-emerald-500/40 transition-all">
+                        <div class="flex items-center justify-between mb-1.5">
+                            <span class="px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wider rounded bg-emerald-500/10 text-emerald-600 font-lexend">OCAS Priority</span>
+                            <span class="text-xs font-bold text-slate-700 dark:text-slate-300 font-mono">Feb 1, 2027</span>
+                        </div>
+                        <h4 class="text-sm font-bold text-slate-900 dark:text-white font-lexend">Ontario Colleges Equal Consideration</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                            Applications received on or before this date receive equal consideration for highly competitive college diploma programs.
+                        </p>
+                    </div>
+
+                    <!-- Deadline 3 -->
+                    <div class="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-850 shadow-xs hover:border-blue-500/40 transition-all">
+                        <div class="flex items-center justify-between mb-1.5">
+                            <span class="px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wider rounded bg-blue-500/10 text-blue-600 font-lexend">Grades Transmit</span>
+                            <span class="text-xs font-bold text-slate-700 dark:text-slate-300 font-mono">Feb 12, 2027</span>
+                        </div>
+                        <h4 class="text-sm font-bold text-slate-900 dark:text-white font-lexend">Semester 1 Final Grades to OUAC</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                            Target date for high schools to submit first-semester 4U/4M final grades for university admissions consideration.
+                        </p>
+                    </div>
+
+                    <!-- Deadline 4 -->
+                    <div class="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-850 shadow-xs hover:border-purple-500/40 transition-all">
+                        <div class="flex items-center justify-between mb-1.5">
+                            <span class="px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wider rounded bg-purple-500/10 text-purple-600 font-lexend">OCAS Confirm</span>
+                            <span class="text-xs font-bold text-slate-700 dark:text-slate-300 font-mono">May 1, 2027</span>
+                        </div>
+                        <h4 class="text-sm font-bold text-slate-900 dark:text-white font-lexend">College Offer Acceptance Deadline</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                            Deadline for applicants to confirm their acceptance of an offer of admission via ontariocolleges.ca.
+                        </p>
+                    </div>
+
+                    <!-- Deadline 5 -->
+                    <div class="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-850 shadow-xs hover:border-rose-500/40 transition-all">
+                        <div class="flex items-center justify-between mb-1.5">
+                            <span class="px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wider rounded bg-rose-500/10 text-rose-600 font-lexend">Decisions</span>
+                            <span class="text-xs font-bold text-slate-700 dark:text-slate-300 font-mono">May 27, 2027</span>
+                        </div>
+                        <h4 class="text-sm font-bold text-slate-900 dark:text-white font-lexend">University Admissions Decisions Complete</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                            Latest date all high school applicants receive an admission decision (offer, refusal, or deferral) from Ontario universities.
+                        </p>
+                    </div>
+
+                    <!-- Deadline 6 -->
+                    <div class="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-850 shadow-xs hover:border-emerald-500/40 transition-all">
+                        <div class="flex items-center justify-between mb-1.5">
+                            <span class="px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wider rounded bg-emerald-500/10 text-emerald-600 font-lexend">Response</span>
+                            <span class="text-xs font-bold text-slate-700 dark:text-slate-300 font-mono">Jun 1, 2027</span>
+                        </div>
+                        <h4 class="text-sm font-bold text-slate-900 dark:text-white font-lexend">OUAC Offer Acceptance & Deposit Due</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                            Earliest date Ontario universities may require a response to an offer and initial financial commitment/deposit.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="p-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-850 text-center">
+                <a href="https://www.ouac.on.ca" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-primary dark:text-blue-400 hover:underline inline-flex items-center gap-1 font-lexend">
+                    <span>Visit OUAC Portal</span>
+                    <span class="material-symbols-outlined text-sm">open_in_new</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 <script type="module" src="shared.js"></script>
 <script type="module">
@@ -1337,7 +1468,7 @@
         const sidebarName = document.getElementById('sidebar-name');
         const sidebarTier = document.getElementById('sidebar-tier');
         if (sidebarName) sidebarName.textContent = userName;
-        if (sidebarTier) sidebarTier.textContent = state.isPro ? '⭐ Smart Match Pro' : 'Free Plan';
+        if (sidebarTier) sidebarTier.textContent = state.isPro ? '⭐ Smart Match Pro' : 'Basic Explorer (Free)';
 
 
         // Update subheader copy dynamically using state.homeProvince
@@ -1492,14 +1623,10 @@
         const matchesGrid = document.getElementById('matches-grid');
         if (!matchesGrid) return;
         
-        // 1. Filter matches: only display programs where the user meets the minimum GPA requirement
-        const studentAvg = parseFloat(state.average);
-        let eligibleMatches = state.matches.filter(item => studentAvg >= item.cutoff);
+        // 1. Filter matches using unified filters
+        let eligibleMatches = getFilteredData(state.matches || []);
         
-        // Apply unified top-level filters
-        eligibleMatches = getFilteredData(eligibleMatches);
-        
-        // 2. Sort all eligible programs by favorites first, then by match percentage descending
+        // 2. Sort all matching programs by favorites first, then by match percentage descending
         eligibleMatches.sort((a, b) => {
             const aFav = state.favorites && state.favorites.includes(a.id) ? 1 : 0;
             const bFav = state.favorites && state.favorites.includes(b.id) ? 1 : 0;
@@ -2350,10 +2477,26 @@
         if (event) event.stopPropagation();
         const item = state.matches.find(m => m.id === id);
         if (!item) return;
+
+        const isUnlocked = Boolean(state.isPro || (state.freeAuditProgramId && state.freeAuditProgramId === item.id) || item.isUnlocked);
+        const isFreeAudit = Boolean(!state.isPro && (state.freeAuditProgramId === item.id || item.isFreeAudit));
+        item.isUnlocked = isUnlocked;
+        item.isFreeAudit = isFreeAudit;
         
         document.getElementById('explainer-uni').textContent = item.university;
         document.getElementById('explainer-prog').textContent = item.program;
         
+        const bannerEl = document.getElementById('explainer-free-audit-banner');
+        if (bannerEl) {
+            if (isFreeAudit) {
+                bannerEl.className = "mb-4 p-3 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-300 dark:border-emerald-700/60 rounded-xl text-emerald-950 dark:text-emerald-200 flex items-center gap-2.5 text-xs font-medium font-lexend";
+                bannerEl.innerHTML = `<span class="material-symbols-outlined text-emerald-600 text-lg">verified</span><span><strong>1 Free Program Deep Audit Active:</strong> Full prerequisite checks, competitive cutoff analysis, and grade targets are completely unlocked for this program.</span>`;
+            } else {
+                bannerEl.className = "hidden";
+                bannerEl.innerHTML = "";
+            }
+        }
+
         const badge = document.getElementById('explainer-match-badge');
         if (item.isUnlocked) {
             badge.innerHTML = `
@@ -2626,13 +2769,14 @@
             state.freeAuditProgramId = programId;
             saveAppState(state);
         }
+        state = getAppState();
         if (typeof confetti === 'function') {
             confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
         }
         renderDashboard();
         setTimeout(() => {
             openExplainer(programId);
-        }, 150);
+        }, 100);
     }
 
     function handleAssignOuac(slotKey, programId, event) {
@@ -2665,6 +2809,8 @@
     window.closeExplainer = closeExplainer;
     window.openUpgradeModal = openUpgradeModal;
     window.closeUpgradeModal = closeUpgradeModal;
+    window.runUnifiedFilter = runUnifiedFilter;
+    window.clearUnifiedFilters = clearUnifiedFilters;
     window.filterExplorer = filterExplorer;
     window.toggleProvinceDropdown = toggleProvinceDropdown;
     window.handleProvinceCheckboxChange = handleProvinceCheckboxChange;
@@ -2678,11 +2824,72 @@
     window.handleAssignOuac = handleAssignOuac;
     window.handleRemoveOuac = handleRemoveOuac;
 
+    // Direct event listener bindings for instant reactivity across all filter controls
+    const filterInputIds = [
+        'explorer-type', 'grade-filter', 'alignment-filter',
+        'filter-environment', 'filter-size', 'filter-pathway', 'filter-outlook'
+    ];
+    filterInputIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.addEventListener('change', runUnifiedFilter);
+        }
+    });
+    const coopCheckboxEl = document.getElementById('coop-filter');
+    if (coopCheckboxEl) {
+        coopCheckboxEl.addEventListener('change', runUnifiedFilter);
+    }
+    const searchInputEl = document.getElementById('unified-search');
+    if (searchInputEl) {
+        searchInputEl.addEventListener('input', runUnifiedFilter);
+        searchInputEl.addEventListener('change', runUnifiedFilter);
+    }
+    document.querySelectorAll('.province-checkbox').forEach(cb => {
+        cb.addEventListener('change', () => {
+            handleProvinceCheckboxChange();
+            runUnifiedFilter();
+        });
+    });
+
+    function openNotificationsDrawer(event) {
+        if (event) event.stopPropagation();
+        const drawer = document.getElementById('notifications-drawer');
+        const backdrop = document.getElementById('notifications-backdrop');
+        const panel = document.getElementById('notifications-panel');
+        if (drawer && backdrop && panel) {
+            drawer.classList.remove('hidden');
+            setTimeout(() => {
+                backdrop.classList.remove('opacity-0');
+                backdrop.classList.add('opacity-100');
+                panel.classList.remove('translate-x-full');
+                panel.classList.add('translate-x-0');
+            }, 10);
+        }
+    }
+
+    function closeNotificationsDrawer() {
+        const drawer = document.getElementById('notifications-drawer');
+        const backdrop = document.getElementById('notifications-backdrop');
+        const panel = document.getElementById('notifications-panel');
+        if (drawer && backdrop && panel) {
+            backdrop.classList.remove('opacity-100');
+            backdrop.classList.add('opacity-0');
+            panel.classList.remove('translate-x-0');
+            panel.classList.add('translate-x-full');
+            setTimeout(() => {
+                drawer.classList.add('hidden');
+            }, 300);
+        }
+    }
+    window.openNotificationsDrawer = openNotificationsDrawer;
+    window.closeNotificationsDrawer = closeNotificationsDrawer;
+
     // Global keyboard handler for closing modals on Escape key
     window.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             closeExplainer();
             closeUpgradeModal();
+            closeNotificationsDrawer();
         }
     });
 

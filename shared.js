@@ -284,6 +284,10 @@ function getAppState() {
         state.ouacSlots = { safety: null, match: null, reach: null };
         needsSave = true;
       }
+      if (state.userRole === undefined) {
+        state.userRole = "student";
+        needsSave = true;
+      }
       if (state.activities === undefined) {
         state.activities = [];
         needsSave = true;
@@ -317,6 +321,7 @@ function getAppState() {
     userDob: "",
     profileLocked: false,
     homeProvince: "ON",
+    userRole: "student",
     activities: []
   };
   
@@ -1436,7 +1441,7 @@ function setupUpgradeButtons() {
 
 function claimFreeAudit(programId) {
   const state = getAppState();
-  if (!state.isPro && !state.freeAuditProgramId) {
+  if (!state.isPro) {
     state.freeAuditProgramId = programId;
     saveAppState(state);
     return true;
@@ -1461,6 +1466,13 @@ function removeOuacSlot(slotType) {
   }
 }
 
+function setAccountRole(role) {
+  const state = getAppState();
+  state.userRole = role === 'parent' ? 'parent' : 'student';
+  saveAppState(state);
+  return state.userRole;
+}
+
 window.getAppState = getAppState;
 window.saveAppState = saveAppState;
 window.calculateMatches = calculateMatches;
@@ -1474,6 +1486,7 @@ window.STRIPE_PAYMENT_LINK = STRIPE_PAYMENT_LINK;
 window.claimFreeAudit = claimFreeAudit;
 window.assignOuacSlot = assignOuacSlot;
 window.removeOuacSlot = removeOuacSlot;
+window.setAccountRole = setAccountRole;
 
 // Initialize payment detection after all dependencies have initialized
 detectPaymentCallback();
