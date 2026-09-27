@@ -260,7 +260,9 @@
     <span class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 font-lexend">Independent Planning Tool • Not Affiliated with OUAC or OCAS</span>
 </div>
 <h1 class="text-5xl md:text-7xl font-black tracking-tight text-primary leading-[1.1] mb-6 opacity-0 animate-fade-in-up delay-100">
-                        No Guessing. Find your Program. Safely, Securely, and Instantly.
+                        No Guessing.<br/>
+                        Find Your Program.<br/>
+                        <span class="text-secondary">Safely, Securily and Instantly.</span>
                     </h1>
 <!-- Financial Pain Point Callout -->
 <div class="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-300/80 dark:border-amber-700/60 text-amber-900 dark:text-amber-200 text-xs sm:text-sm font-bold mb-6 shadow-sm opacity-0 animate-fade-in-up delay-200">
@@ -1734,24 +1736,33 @@
     const gradeVal1 = document.getElementById('grade-val-1');
     const gradeVal2 = document.getElementById('grade-val-2');
     const gradeVal3 = document.getElementById('grade-val-3');
+    const simPathwayAvg = document.getElementById('sim-pathway-avg');
     const simAiAvg = document.getElementById('sim-ai-avg');
     const simAiError = document.getElementById('sim-ai-error');
     const simOddsPct = document.getElementById('sim-odds-pct');
     const simRiskBadge = document.getElementById('sim-risk-badge');
 
     function updateSimulatorAverage() {
-        if (!gradeSlide1 || !gradeSlide2 || !gradeSlide3) return;
-        const g1 = parseInt(gradeSlide1.value);
-        const g2 = parseInt(gradeSlide2.value);
-        const g3 = parseInt(gradeSlide3.value);
+        const s1 = document.getElementById('grade-slide-1') || gradeSlide1;
+        const s2 = document.getElementById('grade-slide-2') || gradeSlide2;
+        const s3 = document.getElementById('grade-slide-3') || gradeSlide3;
+        if (!s1 || !s2 || !s3) return;
 
-        if (gradeVal1) gradeVal1.textContent = `${g1}%`;
-        if (gradeVal2) gradeVal2.textContent = `${g2}%`;
-        if (gradeVal3) gradeVal3.textContent = `${g3}%`;
+        const g1 = parseInt(s1.value) || 0;
+        const g2 = parseInt(s2.value) || 0;
+        const g3 = parseInt(s3.value) || 0;
 
-        // Pathway Canada strict float arithmetic (Top 6 prerequisite average)
+        const v1 = document.getElementById('grade-val-1') || gradeVal1;
+        const v2 = document.getElementById('grade-val-2') || gradeVal2;
+        const v3 = document.getElementById('grade-val-3') || gradeVal3;
+        if (v1) v1.textContent = `${g1}%`;
+        if (v2) v2.textContent = `${g2}%`;
+        if (v3) v3.textContent = `${g3}%`;
+
+        // Pathway Canada strict float arithmetic (prerequisite average)
         const exactAvg = (g1 + g2 + g3) / 3;
-        if (simPathwayAvg) simPathwayAvg.textContent = `${exactAvg.toFixed(1)}%`;
+        const pathEl = document.getElementById('sim-pathway-avg') || simPathwayAvg;
+        if (pathEl) pathEl.textContent = `${exactAvg.toFixed(1)}%`;
 
         // Live Admission Probability and Risk Badge calculation
         let odds = 50;
@@ -1776,27 +1787,38 @@
             riskClass = "px-2 py-0.5 rounded text-[10px] font-bold font-lexend bg-rose-500/20 text-rose-300 border border-rose-500/30";
         }
 
-        if (simOddsPct) simOddsPct.textContent = `${odds}% Odds`;
-        if (simRiskBadge) {
-            simRiskBadge.textContent = riskText;
-            simRiskBadge.className = riskClass;
+        const oddsEl = document.getElementById('sim-odds-pct') || simOddsPct;
+        if (oddsEl) oddsEl.textContent = `${odds}% Odds`;
+
+        const badgeEl = document.getElementById('sim-risk-badge') || simRiskBadge;
+        if (badgeEl) {
+            badgeEl.textContent = riskText;
+            badgeEl.className = riskClass;
         }
 
         // General AI simulation (deterministic deviance showing floating point hallucination)
         const seed = parseFloat((((g1 * 1.37 + g2 * 0.73 + g3 * 1.91) % 3.2) - 1.6).toFixed(1));
         const devAvg = Math.max(50, Math.min(100, exactAvg + (seed === 0 ? 0.8 : seed)));
-        if (simAiAvg) simAiAvg.textContent = `${devAvg.toFixed(1)}%`;
-        if (simAiError) simAiError.textContent = `${seed >= 0 ? '+' : ''}${seed.toFixed(1)}% Deviancy`;
+        const aiAvgEl = document.getElementById('sim-ai-avg') || simAiAvg;
+        if (aiAvgEl) aiAvgEl.textContent = `${devAvg.toFixed(1)}%`;
+
+        const aiErrEl = document.getElementById('sim-ai-error') || simAiError;
+        if (aiErrEl) aiErrEl.textContent = `${seed >= 0 ? '+' : ''}${seed.toFixed(1)}% Deviancy`;
     }
 
     window.updateSimulatorAverage = updateSimulatorAverage;
 
-    if (gradeSlide1 && gradeSlide2 && gradeSlide3) {
-        [gradeSlide1, gradeSlide2, gradeSlide3].forEach(slide => {
-            slide.addEventListener('input', updateSimulatorAverage);
-        });
-        updateSimulatorAverage();
-    }
+    const simSliders = [
+        document.getElementById('grade-slide-1'),
+        document.getElementById('grade-slide-2'),
+        document.getElementById('grade-slide-3')
+    ].filter(Boolean);
+
+    simSliders.forEach(slide => {
+        slide.addEventListener('input', updateSimulatorAverage);
+        slide.addEventListener('change', updateSimulatorAverage);
+    });
+    updateSimulatorAverage();
 
     // ── Data Sovereignty Audit Ledger Drawer ──────────────────────────────────
     function toggleAuditDrawer(show) {
