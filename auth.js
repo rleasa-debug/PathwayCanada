@@ -1,8 +1,9 @@
 
+(function() {
 // Supabase Client Initialization (replace with your actual Supabase URL and Anon Key)
 const SUPABASE_URL = typeof process !== 'undefined' && process.env?.SUPABASE_URL ? process.env.SUPABASE_URL : 'YOUR_SUPABASE_URL';
 const SUPABASE_ANON_KEY = typeof process !== 'undefined' && process.env?.SUPABASE_ANON_KEY ? process.env.SUPABASE_ANON_KEY : 'YOUR_SUPABASE_ANON_KEY';
-const supabase = (typeof Supabase !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL')
+const legacySupabase = (typeof Supabase !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL')
     ? Supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
     : null;
 
@@ -91,7 +92,8 @@ async function getSession() {
 
 // Helper to get current user
 async function getUser() {
-    if (!supabase) return null;
-    const { data: { user } } = await supabase.auth.getUser();
+    if (!legacySupabase) return null;
+    const { data: { user } } = await legacySupabase.auth.getUser();
     return user;
 }
+})();

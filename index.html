@@ -240,10 +240,10 @@
 <input class="bg-surface-container-low border border-outline-variant/50 rounded-full py-1.5 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-on-surface-variant/50 w-64" aria-label="Search programs" placeholder="Search programs..." type="text"/>
 </div>
 <div class="h-8 w-px bg-outline-variant/30 mx-2 hidden lg:block"></div>
-<a class="flex items-center space-x-2 text-primary active:scale-95 duration-150 ease-in-out bg-white px-4 py-2 rounded-lg border border-primary font-bold shadow-sm hover:bg-surface-container-lowest transition-all" href="student-dashboard.html">
+<button onclick="openSignInModal()" class="flex items-center space-x-2 text-primary active:scale-95 duration-150 ease-in-out bg-white px-4 py-2 rounded-lg border border-primary font-bold shadow-sm hover:bg-surface-container-lowest transition-all cursor-pointer">
 <span class="material-symbols-outlined text-xl">account_circle</span>
 <span class="text-sm">Secure Sign In</span>
-</a>
+</button>
 </div>
 </div>
 </header>
@@ -1369,6 +1369,10 @@
         setTimeout(() => modal.classList.add('hidden'), 250);
     }
 
+    if (window.location.hash === '#signin' || window.location.search.includes('signin=true')) {
+        setTimeout(() => openSignInModal(), 300);
+    }
+
     function setLandingRole(role) {
         const normalizedRole = role === 'parent' ? 'parent' : 'student';
         if (window.setAccountRole) {
@@ -1706,6 +1710,5 @@
     })();
 </script>
 <div id="sponsor-slot"></div>
-<script src="/auth.js"></script>
 <script src="/adManager.js"></script>
 </body></html>

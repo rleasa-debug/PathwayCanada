@@ -472,6 +472,12 @@
 
         </div>
         
+        <!-- Auth Action Button (Sign In / Sign Out) -->
+        <button id="sidebar-auth-btn" onclick="handleDashboardAuthAction()" class="w-full flex items-center justify-center lg:justify-start gap-3.5 px-2 py-2 text-slate-600 dark:text-slate-300 hover:bg-slate-200/60 dark:hover:bg-slate-800 rounded-lg text-xs font-bold transition-all cursor-pointer" title="Sign In">
+            <span class="material-symbols-outlined text-xl flex-shrink-0" id="sidebar-auth-icon">login</span>
+            <span class="hidden lg:block font-lexend" id="sidebar-auth-label">Sign In</span>
+        </button>
+
         <!-- Reset Button -->
         <button onclick="resetAppState()" class="w-full flex items-center justify-center lg:justify-start gap-3.5 px-2 py-2 text-rose-600 dark:text-rose-400 hover:bg-rose-500/10 rounded-lg text-xs font-bold transition-all cursor-pointer" title="Reset Course Transcript">
             <span class="material-symbols-outlined text-xl flex-shrink-0">restart_alt</span>
@@ -3001,13 +3007,65 @@
     }
     window.renderNearMiss = renderNearMiss;
 
+    // Update auth button UI based on user session
+    async function updateDashboardAuthUI() {
+        const authBtn = document.getElementById('sidebar-auth-btn');
+        const authIcon = document.getElementById('sidebar-auth-icon');
+        const authLabel = document.getElementById('sidebar-auth-label');
+        if (!authBtn || !authIcon || !authLabel) return;
+
+        let user = null;
+        if (window.PathwayAuth && PathwayAuth.isConfigured()) {
+            try {
+                user = await PathwayAuth.getCurrentUser();
+            } catch(e) {}
+        }
+
+        if (user) {
+            authIcon.textContent = 'logout';
+            authLabel.textContent = 'Sign Out';
+            authBtn.title = 'Sign Out (' + (user.email || 'user') + ')';
+            authBtn.classList.remove('text-slate-600', 'dark:text-slate-300');
+            authBtn.classList.add('text-rose-600', 'dark:text-rose-400');
+        } else {
+            authIcon.textContent = 'login';
+            authLabel.textContent = 'Sign In';
+            authBtn.title = 'Sign In';
+            authBtn.classList.remove('text-rose-600', 'dark:text-rose-400');
+            authBtn.classList.add('text-slate-600', 'dark:text-slate-300');
+        }
+    }
+    window.updateDashboardAuthUI = updateDashboardAuthUI;
+
+    async function handleDashboardAuthAction() {
+        if (!window.PathwayAuth) {
+            window.location.href = '/index.html#signin';
+            return;
+        }
+        let user = null;
+        try {
+            user = await PathwayAuth.getCurrentUser();
+        } catch(e) {}
+
+        if (user) {
+            if (confirm('Sign out of your Pathway Canada account?')) {
+                await PathwayAuth.signOut();
+            }
+        } else {
+            window.location.href = '/index.html#signin';
+        }
+    }
+    window.handleDashboardAuthAction = handleDashboardAuthAction;
+
     // Load initial views
     renderDashboard();
     renderNearMiss();
+    updateDashboardAuthUI();
     
     // Check for active Supabase session and load cloud records if available
     if (window.PathwayAuth && PathwayAuth.isConfigured()) {
         PathwayAuth.getCurrentUser().then(user => {
+            updateDashboardAuthUI();
             if (user) {
                 const sidebarName = document.getElementById('sidebar-name');
                 if (sidebarName && user.user_metadata?.full_name) {
@@ -3030,9 +3088,12 @@
     window.addEventListener('storage', () => {
         renderDashboard();
         renderNearMiss();
+        updateDashboardAuthUI();
+    });
+    window.addEventListener('pathway-auth-state', () => {
+        updateDashboardAuthUI();
     });
 </script>
-<script src="/auth.js"></script>
 <script src="/adManager.js"></script>
 </body>
 </html>
